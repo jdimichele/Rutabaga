@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
-//import { RouteRecordRaw } from 'vue-router';
 import HomePage from '../HomePage.vue'
 
 const routes = [
@@ -21,11 +20,11 @@ const routes = [
       },
       {
         path: 'tab2',
-        component: () => import('@/pages/Tab2Page.vue')
+        component: () => import('@/pages/FavoritesPage.vue')
       },
       {
         path: 'tab3',
-        component: () => import('@/pages/Tab3Page.vue')
+        component: () => import('@/pages/CreateRecipePage.vue')
       },
       {
         path: 'tab4',
