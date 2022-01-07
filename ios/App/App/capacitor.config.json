@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "RutabagaTabs",
+	"webDir": "dist",
+	"bundledWebRuntime": false
+}

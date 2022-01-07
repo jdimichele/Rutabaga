@@ -17,7 +17,7 @@ const routes = [
       },
       {
         path: 'arecipes',
-        component: () => import('@/pages/AllRecipes.vue')
+        component: () => import('@/pages/AllRecipesPage.vue')
       },
       {
         path: 'tab2',
