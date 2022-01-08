@@ -8,17 +8,17 @@
           <ion-label>All Recipes</ion-label>
         </ion-tab-button>
           
-        <ion-tab-button tab="tab2" href="/home/tab2">
+        <ion-tab-button tab="favorites" href="/home/favorites">
           <ion-icon :icon="star" />
           <ion-label>Favorites</ion-label>
         </ion-tab-button>
         
-        <ion-tab-button tab="tab3" href="/home/tab3">
+        <ion-tab-button tab="createrecipe" href="/home/createrecipe">
           <ion-icon :icon="addCircle" />
           <ion-label>Create Recipe</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="tab4" href="/home/tab3">
+        <ion-tab-button tab="search" href="/home/search">
           <ion-icon :icon="search" />
           <ion-label>Search</ion-label>
         </ion-tab-button>

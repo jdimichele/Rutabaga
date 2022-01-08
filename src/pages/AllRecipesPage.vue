@@ -11,16 +11,29 @@
           <ion-title size="large">All Recipes</ion-title>
         </ion-toolbar>
       </ion-header>
-    
-    
+
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Recently Viewed:</ion-card-title>
+          <ion-card-content>
+            
+          </ion-card-content>
+        </ion-card-header>
+      </ion-card>
     </ion-content>
   </ion-page>
 </template>
 
 <script>
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
+import {
+  IonPage,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+} from "@ionic/vue";
 
-export default  {
-  components: { IonHeader, IonToolbar, IonTitle, IonContent, IonPage }
-}
+export default {
+  components: { IonHeader, IonToolbar, IonTitle, IonContent, IonPage },
+};
 </script>

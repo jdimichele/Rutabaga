@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
-import HomePage from '../HomePage.vue'
+import HomePage from '../pages/HomePage.vue'
 
 const routes = [
   {
     path: '/',
-    redirect: '/home/arecipes'
+    redirect: '/home/'
   },
   {
     path: '/home/',
@@ -19,15 +19,15 @@ const routes = [
         component: () => import('@/pages/AllRecipesPage.vue')
       },
       {
-        path: 'tab2',
+        path: 'favorites',
         component: () => import('@/pages/FavoritesPage.vue')
       },
       {
-        path: 'tab3',
+        path: 'createrecipe',
         component: () => import('@/pages/CreateRecipePage.vue')
       },
       {
-        path: 'tab4',
+        path: 'search',
         component: () => import('@/pages/SearchPage.vue')
       }
     ]
