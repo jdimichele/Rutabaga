@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'RutabagaTabs',
+  appId: 'com.justindimichele',
+  appName: 'Rutabaga',
   webDir: 'dist',
   bundledWebRuntime: false
 };
