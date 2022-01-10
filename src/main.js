@@ -1,6 +1,9 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore';
 
 /* Custom Components */
 // import CategoryCardListLayout from './components/categorylayout'
@@ -25,6 +28,23 @@ import '@ionic/vue/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+
+/* Firebase Config for Auth, Storage, and more. */
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBz3H85u8RbIBCp3ZJikkat1OpVt5MsYkk",
+  authDomain: "rutabaga-d932a.firebaseapp.com",
+  databaseURL: "https://rutabaga-d932a-default-rtdb.firebaseio.com",
+  projectId: "rutabaga-d932a",
+  storageBucket: "rutabaga-d932a.appspot.com",
+  messagingSenderId: "896572573197",
+  appId: "1:896572573197:web:d5999971af785dbe07b744",
+  measurementId: "G-6WDBGQY8TY"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 
 const app = createApp(App)
   .use(IonicVue)
