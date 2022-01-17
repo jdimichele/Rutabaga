@@ -1,1 +1,12 @@
-{}
+{
+    "appId": "com.justindimichele",
+    "appName": "Rutabaga",
+    "bundleWebRuntime": false,
+    "npmClient": "npm",
+    "webDir": "dist",
+    "plugins": {
+        "SplashScreen": {
+            "launchShowDuration": 1
+        }
+    }
+}

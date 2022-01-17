@@ -1,9 +1,9 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router';
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/firestore';
+import { initializeApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
+import { getFirestore} from 'firebase/firestore';
 
 /* Custom Components */
 // import CategoryCardListLayout from './components/categorylayout'
@@ -43,8 +43,9 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+export const appFB = initializeApp(firebaseConfig);
+export const auth = getAuth(appFB);
+export const db = getFirestore(appFB);
 
 const app = createApp(App)
   .use(IonicVue)
