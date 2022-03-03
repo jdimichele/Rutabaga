@@ -13,10 +13,10 @@ const routes = [
     children: [
       {
         path: '',
-        redirect: '/home/arecipes'
+        redirect: '/home/recipes'
       },
       {
-        path: 'arecipes',
+        path: 'recipes',
         component: () => import('@/pages/AllRecipesPage.vue')
       },
       {

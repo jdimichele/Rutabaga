@@ -3,7 +3,7 @@
     <ion-tabs>
       <ion-router-outlet></ion-router-outlet>
       <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="arecipes" href="/home/arecipes">
+        <ion-tab-button tab="arecipes" href="/home/recipes">
           <ion-icon :icon="library" />
           <ion-label>All Recipes</ion-label>
         </ion-tab-button>
