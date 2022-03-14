@@ -8,14 +8,14 @@ import firebaseui from "firebaseui";
 import "firebaseui/dist/firebaseui.css";
 
 export default {
+  data() {
+    return {};
+  },
   mounted() {
-    var ui = firebaseui.auth.AuthUI.getInstance();
-    if (!ui) {
-      ui = firebaseui.auth.AuthUI(firebase.auth());
-    }
+    var ui = new firebaseui.auth.AuthUI(firebase.auth());
     var uiConfig = {
-      signInSuccessUrl: "/home",
-      signInOptions: [firebase.auth.EmailAuthProvider.PROVIDER_ID],
+      signInSucessfulUrl: "/recipes",
+      signInOptions: [firebase.auth.EmailAuthProvider.PROVIDED_ID],
     };
     ui.start("#firebase-auth-container", uiConfig);
   },
