@@ -9,11 +9,11 @@ import "firebaseui/dist/firebaseui.css";
 
 export default {
   mounted() {
-    var ui = firebaseui.auth.AuthUI.getInstance();
+    let ui = firebaseui.auth.AuthUI.getInstance();
     if (!ui) {
       ui = firebaseui.auth.AuthUI(firebase.auth());
     }
-    var uiConfig = {
+    const uiConfig = {
       signInSuccessUrl: "/home",
       signInOptions: [firebase.auth.EmailAuthProvider.PROVIDER_ID],
     };

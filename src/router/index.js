@@ -5,15 +5,15 @@ import HomePage from '../pages/HomePage.vue';
 const routes = [
   {
     path: '/',
-    redirect: '/home/'
-  },
-  {
-    path: '/home/',
     component: HomePage,
     children: [
       {
         path: '',
-        redirect: '/home/recipes'
+        redirect: '/recipes'
+      },
+      {
+        path: 'login',
+        component: () => import('@/pages/LoginPage2.vue')
       },
       {
         path: 'recipes',
