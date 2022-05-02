@@ -1,6 +1,5 @@
 <template>
   <ion-page>
-    <ion-router-link to="/login"></ion-router-link>
     <ion-tabs>
       <ion-router-outlet></ion-router-outlet>
       <ion-tab-bar slot="bottom">

@@ -42,6 +42,8 @@ const firebaseConfig = {
   measurementId: "G-6WDBGQY8TY"
 };
 
+
+
 // Initialize Firebase
 export const appFB = initializeApp(firebaseConfig);
 export const auth = getAuth(appFB);
@@ -50,6 +52,7 @@ export const db = getFirestore(appFB);
 const app = createApp(App)
   .use(IonicVue)
   .use(router);
+  
   
 router.isReady().then(() => {
   app.mount('#app');
