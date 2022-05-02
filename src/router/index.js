@@ -13,7 +13,7 @@ const routes = [
       },
       {
         path: 'login',
-        component: () => import('@/pages/LoginPage2.vue')
+        component: () => import('@/pages/LoginPage.vue')
       },
       {
         path: 'recipes',

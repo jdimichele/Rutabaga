@@ -1,7 +1,7 @@
 <template>
   <ion-page>
+    <ion-router-link to="/login"></ion-router-link>
     <ion-tabs>
-      <ion-router-link to="/login"></ion-router-link>
       <ion-router-outlet></ion-router-outlet>
       <ion-tab-bar slot="bottom">
         <ion-tab-button tab="arecipes" href="/recipes">

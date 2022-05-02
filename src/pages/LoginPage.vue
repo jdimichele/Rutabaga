@@ -70,10 +70,10 @@ import {
   IonItem,
 } from "@ionic/vue";
 
-import { auth } from "./main"; //db
+import { auth } from '../main.js';
 import { reactive, toRefs } from "vue";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "@firebase/auth";
-import router from './router';
+import router from '../router';
 
 export default {
   components: {
