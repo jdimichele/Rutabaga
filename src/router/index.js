@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import HomePage from '../pages/HomePage.vue';
 
+
 const routes = [
   {
     path: '/',
@@ -11,24 +12,52 @@ const routes = [
         redirect: '/recipes'
       },
       {
-        path: 'login',
-        component: () => import('@/pages/LoginPage.vue')
+        path: '/login',
+        name: 'login',
+        component: () => import('@/pages/LoginPage.vue'),
+        meta: {
+          requiresAuth: false
+        }
       },
       {
-        path: 'recipes',
-        component: () => import('@/pages/AllRecipesPage.vue')
+        path: '/register',
+        name: 'register',
+        component: () => import('@/pages/RegisterPage.vue'),
+        meta: {
+          requiresAuth: false
+        }
       },
       {
-        path: 'favorites',
-        component: () => import('@/pages/FavoritesPage.vue')
+        path: '/recipes',
+        name: 'recipes',
+        component: () => import('@/pages/AllRecipesPage.vue'),
+        meta: {
+          requiresAuth: false
+        }
       },
       {
-        path: 'createrecipe',
-        component: () => import('@/pages/CreateRecipePage.vue')
+        path: '/favorites',
+        name: 'favorites',
+        component: () => import('@/pages/FavoritesPage.vue'),
+        meta: {
+          requiresAuth: false
+        }
       },
       {
-        path: 'search',
-        component: () => import('@/pages/SearchPage.vue')
+        path: '/addrecipe',
+        name: 'addrecipe',
+        component: () => import('@/pages/AddRecipePage.vue'),
+        meta: {
+          requiresAuth: false
+        }
+      },
+      {
+        path: '/search',
+        name: 'search',
+        component: () => import('@/pages/SearchPage.vue'),
+        meta: {
+          requiresAuth: false
+        }
       }
     ]
   }
@@ -38,5 +67,20 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+
+// router.beforeEach((to, from, next) => {
+//   if (to.matched.some(record => record.meta.authRequired)) {
+//       if (firebase.auth().currentUser) {
+//           next();
+//       } else {
+//           alert('You must be logged in to see this page');
+//           next({
+//               path: '/',
+//           });
+//       }
+//   } else {
+//       next();
+//   }
+// });
 
 export default router

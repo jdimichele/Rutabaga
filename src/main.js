@@ -1,11 +1,8 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router';
-import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
-import { getFirestore} from 'firebase/firestore';
 
-/* Custom Components */
+/* Custom Global Components */
 // import CategoryCardListLayout from './components/categorylayout'
 
 import { IonicVue } from '@ionic/vue';
@@ -29,7 +26,8 @@ import '@ionic/vue/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
-/* Firebase Config for Auth, Storage, and more. */
+// Firebase Imports
+import * as firebase from "@firebase/app";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBz3H85u8RbIBCp3ZJikkat1OpVt5MsYkk",
@@ -39,15 +37,49 @@ const firebaseConfig = {
   storageBucket: "rutabaga-d932a.appspot.com",
   messagingSenderId: "896572573197",
   appId: "1:896572573197:web:d5999971af785dbe07b744",
-  measurementId: "G-6WDBGQY8TY"
+  measurementId: "G-6WDBGQY8TY",
 };
 
-
-
 // Initialize Firebase
-export const appFB = initializeApp(firebaseConfig);
-export const auth = getAuth(appFB);
-export const db = getFirestore(appFB);
+firebase.initializeApp(firebaseConfig);
+
+// const db = getFirestore(firebase);
+// const storage = getStorage(firebase);
+// const provider = new GoogleAuthProvider();
+
+// /* Firebase Functions */
+
+// onAuthStateChanged(auth, (user) => {
+//   if (user != null) {
+//     console.log("User logged in.");
+//   } else {
+//     console.log("No user.");
+//   }
+// });
+
+// createUserWithEmailAndPassword(auth, email, password)
+//   .then((userCredential) => {
+//     // Signed in
+//     const user = userCredential.user;
+//     // ...
+//   })
+//   .catch((error) => {
+//     const errorCode = error.code;
+//     const errorMessage = error.message;
+//     // ..
+//   });
+
+// signInWithEmailAndPassword(auth, email, password)
+//   .then((userCredential) => {
+//     // Signed in
+//     const user = userCredential.user;
+//     // ...
+//   })
+//   .catch((error) => {
+//     const errorCode = error.code;
+//     const errorMessage = error.message;
+//   });
+
 
 const app = createApp(App)
   .use(IonicVue)

@@ -2,7 +2,7 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
-        <ion-title>Create Recipe</ion-title>
+        <ion-title>Add Recipe</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">

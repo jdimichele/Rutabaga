@@ -1,7 +1,7 @@
 <template>
   <ion-page>
     <ion-tabs>
-      <ion-router-outlet></ion-router-outlet>
+      <ion-router-outlet />
       <ion-tab-bar slot="bottom">
         <ion-tab-button tab="arecipes" href="/recipes">
           <ion-icon :icon="library" />
@@ -13,9 +13,9 @@
           <ion-label>Favorites</ion-label>
         </ion-tab-button>
         
-        <ion-tab-button tab="createrecipe" href="/createrecipe">
+        <ion-tab-button tab="addrecipe" href="/addrecipe">
           <ion-icon :icon="addCircle" />
-          <ion-label>Create Recipe</ion-label>
+          <ion-label>Add Recipe</ion-label>
         </ion-tab-button>
 
         <ion-tab-button tab="search" href="/search">
