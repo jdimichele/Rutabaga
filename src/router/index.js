@@ -1,86 +1,81 @@
-import { createRouter, createWebHistory } from '@ionic/vue-router';
-import HomePage from '../pages/HomePage.vue';
-
+import { createRouter, createWebHistory } from "@ionic/vue-router";
+import HomePage from "../pages/HomePage.vue";
+import LoginPage from "../pages/LoginPage.vue";
+import { auth } from "../data/firebase.js";
 
 const routes = [
   {
-    path: '/',
+    path: "/",
+    component: LoginPage,
+  },
+  /*     might make register and login the same page  {
+        path: "/register",
+        name: "register",
+        component: () => import("@/pages/RegisterPage.vue"),
+        meta: {
+          authRequired: false,
+        },
+      }, */
+  {
+    path: "/home",
     component: HomePage,
+    meta: {
+      authRequired: true,
+    },
     children: [
       {
-        path: '',
-        redirect: '/recipes'
+        path: "",
+        redirect: "/recipes",
       },
       {
-        path: '/login',
-        name: 'login',
-        component: () => import('@/pages/LoginPage.vue'),
+        path: "/recipes",
+        name: "recipes",
+        component: () => import("@/pages/AllRecipesPage.vue"),
         meta: {
-          requiresAuth: false
-        }
+          authRequired: true,
+        },
       },
       {
-        path: '/register',
-        name: 'register',
-        component: () => import('@/pages/RegisterPage.vue'),
+        path: "/favorites",
+        name: "favorites",
+        component: () => import("@/pages/FavoritesPage.vue"),
         meta: {
-          requiresAuth: false
-        }
+          authRequired: true,
+        },
       },
       {
-        path: '/recipes',
-        name: 'recipes',
-        component: () => import('@/pages/AllRecipesPage.vue'),
+        path: "/addrecipe",
+        name: "addrecipe",
+        component: () => import("@/pages/AddRecipePage.vue"),
         meta: {
-          requiresAuth: false
-        }
+          authRequired: true,
+        },
       },
       {
-        path: '/favorites',
-        name: 'favorites',
-        component: () => import('@/pages/FavoritesPage.vue'),
+        path: "/search",
+        name: "search",
+        component: () => import("@/pages/SearchPage.vue"),
         meta: {
-          requiresAuth: false
-        }
+          authRequired: true,
+        },
       },
-      {
-        path: '/addrecipe',
-        name: 'addrecipe',
-        component: () => import('@/pages/AddRecipePage.vue'),
-        meta: {
-          requiresAuth: false
-        }
-      },
-      {
-        path: '/search',
-        name: 'search',
-        component: () => import('@/pages/SearchPage.vue'),
-        meta: {
-          requiresAuth: false
-        }
-      }
-    ]
-  }
-]
+    ],
+  },
+];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
-})
+  routes,
+});
 
-// router.beforeEach((to, from, next) => {
-//   if (to.matched.some(record => record.meta.authRequired)) {
-//       if (firebase.auth().currentUser) {
-//           next();
-//       } else {
-//           alert('You must be logged in to see this page');
-//           next({
-//               path: '/',
-//           });
-//       }
-//   } else {
-//       next();
-//   }
-// });
+router.beforeEach(async (to, from, next) => {
+  if (to.matched.some((record) => record.meta.authRequired)) {
+    if (auth.currentUser) {
+      return next('/recipes');
+    } else {
+      alert("You must be logged in to see this page");
+    }
+  }
+});
 
-export default router
+export default router;
