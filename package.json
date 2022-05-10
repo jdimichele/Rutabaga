@@ -38,6 +38,7 @@
     "@vue/cli-plugin-eslint": "~5.0.4",
     "@vue/cli-plugin-router": "~5.0.4",
     "@vue/cli-plugin-unit-jest": "~5.0.4",
+    "@vue/cli-plugin-vuex": "^5.0.3",
     "@vue/cli-service": "~5.0.4",
     "@vue/test-utils": "^2.0.0-rc.16",
     "@vue/vue3-jest": "^27.0.0-alpha.3",
@@ -57,10 +58,10 @@
     "test": "tests"
   },
   "homepage": "https://github.com/jdimichele/Rutabaga#readme",
+  "keywords": [],
   "license": "ISC",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jdimichele/Rutabaga.git"
-  },
-  "keywords": []
+  }
 }
