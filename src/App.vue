@@ -1,6 +1,5 @@
 <template>
   <ion-app>
-    <ion-router-outlet name="login" />
     <ion-router-outlet />
   </ion-app>
 </template>
