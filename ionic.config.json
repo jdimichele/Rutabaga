@@ -1,0 +1,7 @@
+{
+  "name": "Rutabaga",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
