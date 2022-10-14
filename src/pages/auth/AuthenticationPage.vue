@@ -1,41 +1,49 @@
 <template>
   <ion-page>
     <base-card>
-      <ion-title class="title">Rutabaga</ion-title>
-      <ion-img src="../../assets/icon/icon.png" ref="rutabaga"></ion-img>
+      <ion-img class="logo" src="../../assets/icon/icon.png"></ion-img>
+      <ion-title size="large">Rutabaga</ion-title>
       <form @submit.prevent="submitForm">
         <div class="form-control">
-          <label class="font-bold" for="email">Email:</label>
-          <input type="email" id="email" v-model.trim="email" />
+          <ion-label for="email">Email:</ion-label>
+          <ion-input type="email" id="email" v-model.trim="email"></ion-input>
         </div>
         <div class="form-control">
-          <label for="password">Password:</label>
-          <input type="password" id="password" v-model.trim="password" />
+          <ion-label for="password">Password:</ion-label>
+          <ion-input
+            type="password"
+            id="password"
+            v-model.trim="password"
+          ></ion-input>
         </div>
         <p v-if="!formIsValid">Please enter a valid email and password.</p>
-        <button>{{ submitButton }}</button>
-        <button @click="switchAuthMode">{{ switchButtonCaption }}</button>
+        <ion-button class="ionButton" type="submit">{{ submitButton }}</ion-button>
+        <ion-button class="ionButton" @click="switchAuthMode">{{
+          switchButtonCaption
+        }}</ion-button>
       </form>
     </base-card>
   </ion-page>
 </template>
 
 <script>
-import { IonTitle, IonImg } from "@ionic/vue";
-import gsap from 'gsap';
-
-gsap.to("rutabaga", {
-    rotation: 360,
-    duration: 1,
-    repeat: 1,
-    repeatDelay: 1,
-});
-
+import {
+  IonTitle,
+  IonImg,
+  IonButton,
+  IonInput,
+  IonLabel,
+  IonPage,
+} from "@ionic/vue";
 
 export default {
   components: {
     IonTitle,
     IonImg,
+    IonButton,
+    IonInput,
+    IonLabel,
+    IonPage,
   },
   data() {
     return {
@@ -52,12 +60,12 @@ export default {
       if (this.mode === "login") {
         return "Login";
       } else {
-        return "Sign Up";
+        return "Create an Account";
       }
     },
     switchButtonCaption() {
       if (this.mode === "login") {
-        return "Sign Up";
+        return "Create an Account";
       } else {
         return "Login";
       }
@@ -126,13 +134,21 @@ form {
 .form-control {
   margin: 0.5rem 0;
 }
-
-label {
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  display: block;
+ion-title {
+  margin-top: 100px;
+  margin-bottom: 100px;
+  text-align: center;
+  --color: white;
 }
-.title {
-    justify-content: center;
+.logo {
+  height: 300px;
+  width: 300x;
+  margin-top: 100px;
+}
+
+.ionButton {
+  width: 200px;
+  justify-content: center;
+  align-items: center;
 }
 </style>

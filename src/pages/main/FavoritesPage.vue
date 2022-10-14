@@ -1,10 +1,6 @@
 <template>
   <ion-page>
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Favorites</ion-title>
-      </ion-toolbar>
-    </ion-header>
+    <base-header title="Favorites"></base-header>
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
@@ -26,7 +22,6 @@ import {
 } from "@ionic/vue";
 
 export default defineComponent({
-  name: "Tab2Page",
   components: { IonHeader, IonToolbar, IonTitle, IonContent, IonPage },
 });
 </script>

@@ -1,10 +1,6 @@
 <template>
   <ion-page>
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>All Recipes</ion-title>
-      </ion-toolbar>
-    </ion-header>
+    <base-header title="All Recipes"></base-header>
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
@@ -16,11 +12,24 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue';
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
+import { defineComponent } from "vue";
+import {
+  IonPage,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+} from "@ionic/vue";
+import BaseHeader from "../../components/ui/BaseHeader.vue";
 
-export default  defineComponent({
-  name: 'Tab1Page',
-  components: { IonHeader, IonToolbar, IonTitle, IonContent, IonPage }
+export default defineComponent({
+  components: {
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
+    IonPage,
+    BaseHeader,
+  },
 });
 </script>

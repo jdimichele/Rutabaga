@@ -59,10 +59,5 @@ export default defineComponent({
       search,
     };
   },
-  computed: {
-    isLoggedIn() {
-      return this.$store.getters.isAuthenticated;
-    },
-  },
 });
 </script>

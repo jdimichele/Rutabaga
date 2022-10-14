@@ -1,10 +1,6 @@
 <template>
     <ion-page>
-      <ion-header>
-        <ion-toolbar>
-          <ion-title>Search</ion-title>
-        </ion-toolbar>
-      </ion-header>
+      <base-header title="Search"></base-header>
       <ion-content :fullscreen="true">
         <ion-header collapse="condense">
           <ion-toolbar>
@@ -20,7 +16,6 @@
   import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
   
   export default defineComponent({
-    name: 'Tab3Page',
     components: { IonHeader, IonToolbar, IonTitle, IonContent, IonPage }
   });
   </script>

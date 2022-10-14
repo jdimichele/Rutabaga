@@ -31,10 +31,14 @@ import store from './store/index.js';
 
 /* Imports for global components. */
 import BaseCard from "./components/ui/BaseCard.vue";
+import BaseHeader from "./components/ui/BaseHeader.vue";
+import BaseSettings from "./components/ui/BaseSettings.vue";
 
 const app = createApp(App).use(IonicVue).use(router).use(store);
 
 app.component("base-card", BaseCard);
+app.component("base-header", BaseHeader);
+app.component("base-settings", BaseSettings);
 
 router.isReady().then(() => {
   app.mount("#app");

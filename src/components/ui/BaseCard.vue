@@ -4,6 +4,14 @@
   </ion-card>
 </template>
 
+<script>
+import { IonCard } from "@ionic/vue";
+
+export default {
+  components: { IonCard },
+};
+</script>
+
 <style scoped>
 .card {
   border-radius: 12px;
