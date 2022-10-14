@@ -3,25 +3,27 @@
     <base-card>
       <ion-img class="logo" src="../../assets/icon/icon.png"></ion-img>
       <ion-title size="large">Rutabaga</ion-title>
-      <form @submit.prevent="submitForm">
-        <div class="form-control">
-          <ion-label for="email">Email:</ion-label>
-          <ion-input type="email" id="email" v-model.trim="email"></ion-input>
-        </div>
-        <div class="form-control">
-          <ion-label for="password">Password:</ion-label>
-          <ion-input
-            type="password"
-            id="password"
-            v-model.trim="password"
-          ></ion-input>
-        </div>
-        <p v-if="!formIsValid">Please enter a valid email and password.</p>
-        <ion-button class="ionButton" type="submit">{{ submitButton }}</ion-button>
-        <ion-button class="ionButton" @click="switchAuthMode">{{
-          switchButtonCaption
-        }}</ion-button>
-      </form>
+      <div class="loginForm">
+        <form @submit.prevent="submitForm">
+          <div class="form-control">
+            <ion-label for="email">Email:</ion-label>
+            <ion-input type="email" id="email" v-model.trim="email"></ion-input>
+            <ion-label for="password">Password:</ion-label>
+            <ion-input
+              type="password"
+              id="password"
+              v-model.trim="password"
+            ></ion-input>
+          </div>
+          <p v-if="!formIsValid">Please enter a valid email and password.</p>
+          <ion-button type="submit">{{
+            submitButton
+          }}</ion-button>
+          <ion-button @click="switchAuthMode">{{
+            switchButtonCaption
+          }}</ion-button>
+        </form>
+      </div>
     </base-card>
   </ion-page>
 </template>
@@ -65,9 +67,9 @@ export default {
     },
     switchButtonCaption() {
       if (this.mode === "login") {
-        return "Create an Account";
+        return "Register";
       } else {
-        return "Login";
+        return "Login Instead";
       }
     },
   },
@@ -120,33 +122,35 @@ export default {
 </script>
 
 <style scoped>
-form {
-  margin: 1rem;
-  padding: 1rem;
-  border-radius: 10px;
+.loginForm {
+  padding: 70px 0;
   display: flex;
   justify-content: center;
   align-content: center;
-  flex-direction: row;
-  flex-direction: column;
 }
 
 .form-control {
   margin: 0.5rem 0;
+  text-align: left;
 }
 ion-title {
   margin-top: 100px;
   margin-bottom: 100px;
+  font-size: 50px;
   text-align: center;
   --color: white;
 }
 .logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   height: 300px;
-  width: 300x;
+  width: 300px;
   margin-top: 100px;
 }
 
-.ionButton {
+ion-button {
+  display: flex;
   width: 200px;
   justify-content: center;
   align-items: center;
