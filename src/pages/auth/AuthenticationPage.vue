@@ -4,7 +4,7 @@
       <ion-img class="logo" src="../../assets/icon/icon.png"></ion-img>
       <ion-title size="large">Rutabaga</ion-title>
       <div class="loginForm">
-        <form @submit.prevent="submitForm">
+        <form @submit.prevent="submitForm" v-on:keyup.enter="submitForm">
           <div class="form-control">
             <ion-label for="email">Email:</ion-label>
             <ion-input type="email" id="email" v-model.trim="email"></ion-input>
