@@ -1,10 +1,13 @@
-import { CapacitorConfig } from '@capacitor/cli';
+import { CapacitorConfig } from "@capacitor/cli";
 
 const config: CapacitorConfig = {
-  appId: 'com.justindimichele',
-  appName: 'Rutabaga',
-  webDir: 'public',
-  bundledWebRuntime: false
+  appId: "com.Rutabaga",
+  appName: "Rutabaga",
+  webDir: "dist",
+  bundledWebRuntime: false,
+  ios: {
+    scheme: "Rutabaga",
+  },
 };
 
 export default config;
