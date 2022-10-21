@@ -2,8 +2,13 @@
   <ion-header>
     <ion-toolbar class="toolbar">
       <ion-title>{{ title }}</ion-title>
+      <ion-button slot="start">
+        <ion-back-button defaultHref="/"></ion-back-button>
+      </ion-button>
       <ion-buttons slot="end">
-        <base-settings></base-settings>
+        <ion-button @click="openPopover">
+          <ion-icon slot="icon-only" :icon="settingsOutline"></ion-icon>
+        </ion-button>
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
@@ -13,17 +18,25 @@
 import {
   IonHeader,
   IonToolbar,
-  IonTitle,
   IonButtons,
+  IonButton,
+  IonIcon,
+  IonBackButton,
+  IonTitle,
+  popoverController,
 } from "@ionic/vue";
 import { settingsOutline } from "ionicons/icons";
+import BaseSettings from "../ui/BaseSettings.vue";
 
 export default {
   components: {
     IonHeader,
     IonToolbar,
     IonTitle,
-    IonButtons
+    IonButtons,
+    IonButton,
+    IonIcon,
+    IonBackButton,
   },
   props: ["title"],
 
@@ -31,6 +44,16 @@ export default {
     return {
       settingsOutline,
     };
+  },
+  methods: {
+    async openPopover(ev) {
+      const popover = await popoverController.create({
+        component: BaseSettings,
+        event: ev,
+        dismissOnSelect: true,
+      });
+      await popover.present();
+    },
   },
 };
 </script>

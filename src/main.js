@@ -7,12 +7,10 @@ import { IonicVue } from "@ionic/vue";
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/vue/css/core.css";
 
-
 /* Basic CSS for apps built with Ionic */
 import "@ionic/vue/css/normalize.css";
 import "@ionic/vue/css/structure.css";
 import "@ionic/vue/css/typography.css";
-
 
 /* Optional CSS utils that can be commented out */
 // import "@ionic/vue/css/padding.css";
@@ -22,23 +20,22 @@ import "@ionic/vue/css/typography.css";
 // import "@ionic/vue/css/flex-utils.css";
 // import "@ionic/vue/css/display.css";
 
-
 /* Theme variables */
 import "./theme/variables.css";
 
-
-import store from './store/index.js';
+import store from "./store/index.js";
 
 /* Imports for global components. */
 import BaseCard from "./components/ui/BaseCard.vue";
 import BaseHeader from "./components/ui/BaseHeader.vue";
-import BaseSettings from "./components/ui/BaseSettings.vue";
+
+import { defineCustomElements } from "@ionic/pwa-elements/loader";
+defineCustomElements(window);
 
 const app = createApp(App).use(IonicVue).use(router).use(store);
 
 app.component("base-card", BaseCard);
 app.component("base-header", BaseHeader);
-app.component("base-settings", BaseSettings);
 
 router.isReady().then(() => {
   app.mount("#app");

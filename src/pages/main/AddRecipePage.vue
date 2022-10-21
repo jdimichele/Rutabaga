@@ -2,12 +2,6 @@
   <ion-page>
     <base-header title="Add Recipe"></base-header>
     <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">Add Recipe</ion-title>
-        </ion-toolbar>
-      </ion-header>
-
       <add-recipe-form></add-recipe-form>
     </ion-content>
   </ion-page>
@@ -15,22 +9,15 @@
 
 <script>
 import { defineComponent } from "vue";
-import {
-  IonHeader,
-  IonToolbar,
-  IonTitle,
-  IonContent,
-  IonPage,
-} from "@ionic/vue";
+import { IonContent, IonPage } from "@ionic/vue";
+import BaseHeader from "../../components/ui/BaseHeader.vue";
 import AddRecipeForm from "@/components/recipes/AddRecipeForm.vue";
 
 export default defineComponent({
   components: {
-    IonHeader,
-    IonToolbar,
-    IonTitle,
     IonContent,
     IonPage,
+    BaseHeader,
     AddRecipeForm,
   },
 });
