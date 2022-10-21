@@ -1,15 +1,15 @@
 <template>
   <form>
     <ion-item>
-      <ion-label>Name:</ion-label>
+      <ion-label position="stacked">Name:</ion-label>
       <ion-input type="text" id="title"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Photo:</ion-label>
+      <ion-label position="stacked">Photo:</ion-label>
       <ion-input type="text" id="title"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Time:</ion-label>
+      <ion-label position="stacked">Time:</ion-label>
       <ion-input type="text" id="title"></ion-input>
     </ion-item>
 
@@ -24,12 +24,12 @@
         <ion-select-option value="6">6</ion-select-option>
       </ion-select>
     </ion-item>
-    <ion-label>Ingredients:</ion-label>
     <ion-item>
+      <ion-label position="stacked">Ingredients:</ion-label>
       <ion-input type="text" id="title"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Instructions:</ion-label>
+      <ion-label position="stacked">Instructions:</ion-label>
       <ion-textarea id="instructions"></ion-textarea>
     </ion-item>
   </form>
