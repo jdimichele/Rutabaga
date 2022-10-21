@@ -2,9 +2,7 @@
   <ion-header>
     <ion-toolbar class="toolbar">
       <ion-title>{{ title }}</ion-title>
-      <ion-button slot="start">
-        <ion-back-button defaultHref="/"></ion-back-button>
-      </ion-button>
+      <ion-back-button default-href="/" slot="start"></ion-back-button>
       <ion-buttons slot="end">
         <ion-button @click="openPopover">
           <ion-icon slot="icon-only" :icon="settingsOutline"></ion-icon>
@@ -66,5 +64,9 @@ export default {
 }
 .settings {
   margin-left: 10px;
+}
+
+ion-back-button {
+  padding-left: 2px;
 }
 </style>
