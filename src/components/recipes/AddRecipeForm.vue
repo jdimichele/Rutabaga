@@ -15,7 +15,7 @@
 
     <ion-item>
       <ion-label position="stacked">Servings:</ion-label>
-      <ion-select placeholder="How many servings?">
+      <ion-select placeholder="How many servings?" interface="action-sheet">
         <ion-select-option value="1">1</ion-select-option>
         <ion-select-option value="2">2</ion-select-option>
         <ion-select-option value="3">3</ion-select-option>
@@ -29,8 +29,8 @@
       <ion-input type="text" id="title"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="stacked">Instructions:</ion-label>
-      <ion-textarea id="instructions"></ion-textarea>
+      <ion-label position="floating">Instructions:</ion-label>
+      <ion-textarea type="text" id="instructions"></ion-textarea>
     </ion-item>
   </form>
 

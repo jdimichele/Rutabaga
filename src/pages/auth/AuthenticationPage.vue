@@ -5,20 +5,20 @@
       <ion-title size="large">Rutabaga</ion-title>
       <div class="loginForm">
         <form @submit.prevent="submitForm" v-on:keyup.enter="submitForm">
-          <div class="form-control">
-            <ion-label for="email">Email:</ion-label>
+          <ion-item>
+            <ion-label for="email" position="floating">Email:</ion-label>
             <ion-input type="email" id="email" v-model.trim="email"></ion-input>
-            <ion-label for="password">Password:</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label for="password" position="floating">Password:</ion-label>
             <ion-input
               type="password"
               id="password"
               v-model.trim="password"
             ></ion-input>
-          </div>
+          </ion-item>
           <p v-if="!formIsValid">Please enter a valid email and password.</p>
-          <ion-button type="submit">{{
-            submitButton
-          }}</ion-button>
+          <ion-button type="submit">{{ submitButton }}</ion-button>
           <ion-button @click="switchAuthMode">{{
             switchButtonCaption
           }}</ion-button>
@@ -79,7 +79,9 @@ export default {
       this.formIsValid = true;
       if (
         this.email === "" ||
-        !this.email.includes("@") ||
+        !this.email.match(
+          /^(?=.{1,254}$)(?=.{1,64}@)[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
+        ) ||
         this.password.length < 6
       ) {
         this.formIsValid = false;
@@ -129,10 +131,6 @@ export default {
   align-content: center;
 }
 
-.form-control {
-  margin: 0.5rem 0;
-  text-align: left;
-}
 ion-title {
   margin-top: 100px;
   margin-bottom: 100px;
@@ -154,5 +152,6 @@ ion-button {
   width: 200px;
   justify-content: center;
   align-items: center;
+  margin: 30px;
 }
 </style>
