@@ -5,9 +5,9 @@
         <ion-label position="stacked">Name:</ion-label>
         <ion-input
           type="text"
-          id="rname"
-          :value="rname.val"
-          @ionInput="rname.val = $event.target.value"
+          id="name"
+          :value="name.val"
+          @ionInput="name.val = $event.target.value"
         ></ion-input>
       </ion-item>
       <ion-item>
@@ -107,7 +107,7 @@ export default {
   emits: ["save-recipe"],
   data() {
     return {
-      rname: {
+      name: {
         val: "",
       },
       photo: {
@@ -135,7 +135,7 @@ export default {
   methods: {
     submitRecipe() {
       const recipeForm = {
-        rname: this.rname.val,
+        name: this.name.val,
         photo: this.photo.val,
         time: this.time.val,
         servings: this.servings.val,

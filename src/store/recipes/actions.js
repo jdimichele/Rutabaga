@@ -2,7 +2,7 @@ export default {
   async addRecipe(context, data) {
     const userId = context.rootGetters.userId;
     const recipeData = {
-      title: data.title,
+      name: data.name,
       photo: data.photo,
       time: data.time,
       servings: data.servings,
@@ -31,12 +31,16 @@ export default {
       id: userId,
     });
   },
+
   async loadRecipes(context, payload) {
     if (!payload.forceRefresh && !context.getters.shouldUpdate) {
       return;
     }
+    const userId = context.rootGetters.userId;
+    const token = context.rootGetters.token;
     const response = await fetch(
-      "https://rutabaga-d932a-default-rtdb.firebaseio.com/recipes.json"
+      `https://rutabaga-d932a-default-rtdb.firebaseio.com/recipes/${userId}.json?auth=` +
+        token
     );
 
     const responseData = await response.json();
@@ -45,7 +49,7 @@ export default {
     for (const key in responseData) {
       const recipe = {
         id: key,
-        title: responseData[key].title,
+        name: responseData[key].name,
         photo: responseData[key].photo,
         time: responseData[key].time,
         servings: responseData[key].servings,

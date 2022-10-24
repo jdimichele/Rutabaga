@@ -19,4 +19,18 @@ export default defineComponent({
     RecipesList,
   },
 });
+
+/* 
+At some point, will need to implement the refresher logic here, but for now, here's said logic:
+    setup() {
+      const doRefresh = (event) => {
+        this.loadRecipes();
+        setTimeout(() => {
+          console.log("Async operation has ended.");
+          event.target.complete();
+        }, 2000);
+      };
+      return { doRefresh };
+    },
+*/
 </script>

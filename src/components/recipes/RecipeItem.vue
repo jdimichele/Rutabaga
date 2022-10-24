@@ -3,7 +3,7 @@
     <ion-list>
       <ion-item>
         <ion-text>
-          <h6>{{ rname }}</h6>
+          <h6>{{ name }}</h6>
         </ion-text>
       </ion-item>
       <ion-item>
@@ -46,7 +46,7 @@ export default {
   },
   props: [
     "id",
-    "rname",
+    "name",
     "photo",
     "time",
     "servings",

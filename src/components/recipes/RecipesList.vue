@@ -1,41 +1,29 @@
 <template>
   <!-- TODO: Recently Added Page, Recently Viewed Page, ???-->
   <ion-card>
-    <ion-content>
-      <ion-title>Recently Added:</ion-title>
-      <ion-refresher slot="fixed" @ionRefresh="doRefresh($event)">
-        <ion-refresher-content>
-          <div v-if="isLoading">
-            <ion-loading></ion-loading>
-          </div>
-          <div v-else-if="hasRecipes">
-            <recipe-item
-              v-for="recipe in recipes"
-              :key="recipe.id"
-              :id="recipe.id"
-              :name="recipe.rname"
-              :photo="recipe.photo"
-              :time="recipe.time"
-              :servings="recipe.servings"
-              :ingredients="recipe.ingredients"
-              :instructions="recipe.instructions"
-            ></recipe-item>
-          </div>
-        </ion-refresher-content>
-      </ion-refresher>
-    </ion-content>
+    <ion-title>Recently Added:</ion-title>
+    <div v-if="isLoading">
+      <ion-loading></ion-loading>
+    </div>
+
+    <div v-else-if="hasRecipes">
+      <recipe-item
+        v-for="recipe in recipes"
+        :key="recipe.id"
+        :id="recipe.id"
+        :name="recipe.name"
+        :photo="recipe.photo"
+        :time="recipe.time"
+        :servings="recipe.servings"
+        :ingredients="recipe.ingredients"
+        :instructions="recipe.instructions"
+      ></recipe-item>
+    </div>
   </ion-card>
 </template>
 
 <script>
-import {
-  IonCard,
-  IonTitle,
-  IonLoading,
-  IonRefresher,
-  IonRefresherContent,
-  IonContent,
-} from "@ionic/vue";
+import { IonCard, IonTitle, IonLoading } from "@ionic/vue";
 import RecipeItem from "../recipes/RecipeItem.vue";
 
 export default {
@@ -43,20 +31,7 @@ export default {
     IonCard,
     IonTitle,
     IonLoading,
-    IonRefresher,
-    IonRefresherContent,
-    IonContent,
     RecipeItem,
-  },
-  setup() {
-    const doRefresh = (event) => {
-      this.loadRecipes();
-      setTimeout(() => {
-        console.log("Async operation has ended.");
-        event.target.complete();
-      }, 2000);
-    };
-    return { doRefresh };
   },
   data() {
     return {

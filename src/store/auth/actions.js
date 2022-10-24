@@ -16,8 +16,7 @@ export default {
   },
 
   async auth(context, payload) {
-    // First, we refactor login/signup!
-    const mode = payload.mode; // Let's us define whether or not the payload will be for the signup or login.
+    const mode = payload.mode;
     let url =
       "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBz3H85u8RbIBCp3ZJikkat1OpVt5MsYkk";
     if (mode === "signup") {
@@ -42,11 +41,10 @@ export default {
       throw error;
     }
 
-    const expiresIn = +responseData.expiresIn * 1000; // This grabs the 'expiresIn' property from Firebase and multiplies it by 1000 for milliseconds.
+    const expiresIn = +responseData.expiresIn * 1000;
     //const expiresIn = 5000; // Testing purposes of auto logout.
-    const expirationDate = new Date().getTime() + expiresIn; // This sets the current time plus the above duration.
+    const expirationDate = new Date().getTime() + expiresIn;
 
-    // Built in JS feature that allows you to access the 'userId' and 'token' from Firebase and stores it locally. This way, we can allow for autologin and we don't lose the state!
     localStorage.setItem("token", responseData.idToken);
     localStorage.setItem("userId", responseData.localId);
     localStorage.setItem("tokenExpiration", expirationDate);
