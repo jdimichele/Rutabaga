@@ -2,9 +2,9 @@
   <!-- TODO: Recently Added Page, Recently Viewed Page, ???-->
   <ion-card>
     <ion-content>
+      <ion-title>Recently Added:</ion-title>
       <ion-refresher slot="fixed" @ionRefresh="doRefresh($event)">
         <ion-refresher-content>
-          <ion-title>Recently Added:</ion-title>
           <div v-if="isLoading">
             <ion-loading></ion-loading>
           </div>
