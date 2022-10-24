@@ -2,7 +2,7 @@
   <ion-page>
     <base-header title="Add Recipe"></base-header>
     <ion-content :fullscreen="true">
-      <add-recipe-form></add-recipe-form>
+      <add-recipe-form @save-recipe="saveRecipe"></add-recipe-form>
     </ion-content>
   </ion-page>
 </template>
@@ -19,6 +19,12 @@ export default defineComponent({
     IonPage,
     BaseHeader,
     AddRecipeForm,
+  },
+  methods: {
+    saveRecipe(data) {
+      this.$store.dispatch("recipes/addRecipe", data);
+      this.$router.replace("/addrecipe");
+    },
   },
 });
 </script>

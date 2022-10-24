@@ -36,6 +36,7 @@ import {
   IonInput,
   IonLabel,
   IonPage,
+  IonItem
 } from "@ionic/vue";
 
 export default {
@@ -46,6 +47,7 @@ export default {
     IonInput,
     IonLabel,
     IonPage,
+    IonItem,
   },
   data() {
     return {

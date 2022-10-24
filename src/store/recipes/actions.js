@@ -1,6 +1,6 @@
 export default {
   async addRecipe(context, data) {
-    const recipeId = context.rootGetters.recipeId;
+    const userId = context.rootGetters.userId;
     const recipeData = {
       title: data.title,
       photo: data.photo,
@@ -10,8 +10,11 @@ export default {
       instructions: data.instructions,
     };
 
+    const token = context.rootGetters.token;
+
     const response = await fetch(
-      `https://rutabaga-d932a-default-rtdb.firebaseio.com/recipes/${recipeId}.json`,
+      `https://rutabaga-d932a-default-rtdb.firebaseio.com/recipes/${userId}.json?auth=` +
+        token,
       {
         method: "POST",
         body: JSON.stringify(recipeData),
@@ -25,10 +28,13 @@ export default {
     }
     context.commit("addRecipe", {
       ...recipeData,
-      id: recipeId,
+      id: userId,
     });
   },
   async loadRecipes(context, payload) {
+    if (!payload.forceRefresh && !context.getters.shouldUpdate) {
+      return;
+    }
     const response = await fetch(
       "https://rutabaga-d932a-default-rtdb.firebaseio.com/recipes.json"
     );
@@ -48,6 +54,6 @@ export default {
       };
       recipes.push(recipe);
     }
-    context.commit('setRecipes', recipes);
+    context.commit("setRecipes", recipes);
   },
 };
