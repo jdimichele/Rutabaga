@@ -35,7 +35,7 @@
           placeholder="How many servings?"
           interface="action-sheet"
           :value="servings.val"
-          @ionInput="servings.val = $event.target.value"
+          @ionChange="servings.val = $event.target.value"
         >
           <ion-select-option value="1">1</ion-select-option>
           <ion-select-option value="2">2</ion-select-option>
