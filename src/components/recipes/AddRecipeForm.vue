@@ -2,7 +2,7 @@
   <ion-content>
     <form @submit.prevent="submitRecipe">
       <ion-item>
-        <ion-label position="stacked">Name:</ion-label>
+        <ion-label position="floating">Name:</ion-label>
         <ion-input
           type="text"
           id="name"
@@ -11,7 +11,7 @@
         ></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="stacked">Photo:</ion-label>
+        <ion-label position="floating">Photo:</ion-label>
         <ion-input
           type="none"
           id="photo"
@@ -20,7 +20,7 @@
         ></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="stacked">Time:</ion-label>
+        <ion-label position="floating">Time:</ion-label>
         <ion-input
           type="numeric"
           id="time"
@@ -30,7 +30,7 @@
       </ion-item>
 
       <ion-item>
-        <ion-label position="stacked">Servings:</ion-label>
+        <ion-label position="floating">Servings:</ion-label>
         <ion-select
           placeholder="How many servings?"
           interface="action-sheet"
@@ -46,7 +46,7 @@
         </ion-select>
       </ion-item>
       <ion-item>
-        <ion-label position="stacked">Ingredients:</ion-label>
+        <ion-label position="floating">Ingredients:</ion-label>
         <ion-input
           type="text"
           id="ingredients"
@@ -63,13 +63,9 @@
           @ionInput="instructions.val = $event.target.value"
         ></ion-textarea>
       </ion-item>
-      <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-        <ion-fab-button>
-          <ion-button type="submit">
-            <ion-icon :icon="add"></ion-icon>
-          </ion-button>
-        </ion-fab-button>
-      </ion-fab>
+      <ion-button type="submit">
+        <ion-icon :icon="add"></ion-icon>
+      </ion-button>
     </form>
   </ion-content>
 </template>
@@ -80,8 +76,6 @@ import {
   IonLabel,
   IonTextarea,
   IonInput,
-  IonFab,
-  IonFabButton,
   IonIcon,
   IonSelect,
   IonSelectOption,
@@ -96,8 +90,6 @@ export default {
     IonLabel,
     IonTextarea,
     IonInput,
-    IonFab,
-    IonFabButton,
     IonIcon,
     IonSelect,
     IonSelectOption,
@@ -143,6 +135,7 @@ export default {
         instructions: this.instructions.val,
       };
       this.$emit("save-recipe", recipeForm);
+      this.$router.replace("/recipes");
     },
   },
 };
