@@ -2,7 +2,7 @@
   <ion-content>
     <form @submit.prevent="submitRecipe">
       <ion-item>
-        <ion-label position="floating">Name:</ion-label>
+        <ion-label position="stacked">Name:</ion-label>
         <ion-input
           type="text"
           id="name"
@@ -11,7 +11,7 @@
         ></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Photo:</ion-label>
+        <ion-label position="stacked">Photo:</ion-label>
         <ion-input
           type="none"
           id="photo"
@@ -20,7 +20,7 @@
         ></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Time:</ion-label>
+        <ion-label position="stacked">Time:</ion-label>
         <ion-input
           type="numeric"
           id="time"
@@ -30,7 +30,7 @@
       </ion-item>
 
       <ion-item>
-        <ion-label position="floating">Servings:</ion-label>
+        <ion-label position="stacked">Servings:</ion-label>
         <ion-select
           placeholder="How many servings?"
           interface="action-sheet"
@@ -46,7 +46,7 @@
         </ion-select>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Ingredients:</ion-label>
+        <ion-label position="stacked">Ingredients:</ion-label>
         <ion-input
           type="text"
           id="ingredients"
@@ -63,9 +63,11 @@
           @ionInput="instructions.val = $event.target.value"
         ></ion-textarea>
       </ion-item>
-      <ion-button type="submit">
-        <ion-icon :icon="add"></ion-icon>
-      </ion-button>
+      <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+        <ion-button type="submit">
+          <ion-icon :icon="add"></ion-icon>
+        </ion-button>
+      </ion-fab>
     </form>
   </ion-content>
 </template>
@@ -76,6 +78,7 @@ import {
   IonLabel,
   IonTextarea,
   IonInput,
+  IonFab,
   IonIcon,
   IonSelect,
   IonSelectOption,
@@ -90,6 +93,7 @@ export default {
     IonLabel,
     IonTextarea,
     IonInput,
+    IonFab,
     IonIcon,
     IonSelect,
     IonSelectOption,
@@ -140,3 +144,40 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+ion-button {
+  --transition: background-color, opacity 100ms linear;
+  --ripple-color: currentColor;
+  --border-radius: 50%;
+  --border-width: 0;
+  --border-style: none;
+  --border-color: initial;
+  --padding-top: 0;
+  --padding-end: 0;
+  --padding-bottom: 0;
+  --padding-start: 0;
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  display: block;
+  width: 56px;
+  height: 56px;
+  position: relative;
+  font-size: 14px;
+  text-align: center;
+  text-overflow: ellipsis;
+  text-transform: none;
+  white-space: nowrap;
+  -webkit-font-kerning: none;
+  font-kerning: none;
+}
+ion-icon {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+</style>
