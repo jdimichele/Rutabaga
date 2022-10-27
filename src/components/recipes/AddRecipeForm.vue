@@ -1,17 +1,18 @@
 <template>
   <ion-content>
-    <form @submit.prevent="submitRecipe">
-      <ion-item>
-        <ion-label position="stacked">Name:</ion-label>
+    <form class="recipeForm" @submit.prevent="submitRecipe">
+      <ion-item class="roundedTop">
+        <ion-label position="floating">Name:</ion-label>
         <ion-input
           type="text"
           id="name"
+          required
           :value="name.val"
           @ionInput="name.val = $event.target.value"
         ></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="stacked">Photo:</ion-label>
+        <ion-label position="floating">Photo:</ion-label>
         <ion-input
           type="none"
           id="photo"
@@ -20,20 +21,21 @@
         ></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="stacked">Time:</ion-label>
+        <ion-label position="floating">Time:</ion-label>
         <ion-input
           type="numeric"
           id="time"
+          required
           :value="time.val"
           @ionInput="time.val = $event.target.value"
         ></ion-input>
       </ion-item>
-
       <ion-item>
-        <ion-label position="stacked">Servings:</ion-label>
+        <ion-label position="floating">Servings:</ion-label>
         <ion-select
           placeholder="How many servings?"
           interface="action-sheet"
+          required
           :value="servings.val"
           @ionChange="servings.val = $event.target.value"
         >
@@ -46,19 +48,22 @@
         </ion-select>
       </ion-item>
       <ion-item>
-        <ion-label position="stacked">Ingredients:</ion-label>
+        <ion-label position="floating">Ingredients:</ion-label>
         <ion-input
           type="text"
           id="ingredients"
+          required
           :value="ingredients.val"
           @ionInput="ingredients.val = $event.target.value"
         ></ion-input>
       </ion-item>
-      <ion-item>
+      <ion-item class="roundedBottom">
         <ion-label position="floating">Instructions:</ion-label>
         <ion-textarea
           type="text"
           id="instructions"
+          :auto-grow="true"
+          required
           :value="instructions.val"
           @ionInput="instructions.val = $event.target.value"
         ></ion-textarea>
@@ -117,7 +122,7 @@ export default {
         val: "",
       },
       ingredients: {
-        val: "",
+        val: [],
       },
       instructions: {
         val: "",
@@ -156,6 +161,15 @@ export default {
 </script>
 
 <style scoped>
+  .roundedTop{
+    border-radius: 15px 15px 0px 0px;
+  }
+  .roundedBottom{
+    border-radius: 0px 0px 15px 15px;
+  }
+.recipeForm {
+  padding: 10px;
+}
 ion-button {
   --transition: background-color, opacity 100ms linear;
   --ripple-color: currentColor;

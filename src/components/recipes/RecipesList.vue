@@ -1,7 +1,6 @@
 <template>
   <!-- TODO: Recently Added Page, Recently Viewed Page, ???-->
   <ion-card>
-    <ion-title>Recently Added:</ion-title>
     <div v-if="isLoading">
       <ion-loading></ion-loading>
     </div>
@@ -23,13 +22,12 @@
 </template>
 
 <script>
-import { IonCard, IonTitle, IonLoading } from "@ionic/vue";
+import { IonCard, IonLoading } from "@ionic/vue";
 import RecipeItem from "../recipes/RecipeItem.vue";
 
 export default {
   components: {
     IonCard,
-    IonTitle,
     IonLoading,
     RecipeItem,
   },

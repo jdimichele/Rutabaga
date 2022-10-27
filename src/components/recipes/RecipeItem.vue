@@ -13,12 +13,12 @@
       </ion-item>
       <ion-item>
         <ion-text>
-          <h6>{{ time }}</h6>
+          <h6>{{ time }} minutes</h6>
         </ion-text>
       </ion-item>
       <ion-item>
         <ion-text>
-          <h6>{{ servings }}</h6>
+          <h6>{{ servings }} servings</h6>
         </ion-text>
       </ion-item>
       <ion-item>
