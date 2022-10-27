@@ -84,6 +84,7 @@ import {
   IonSelectOption,
   IonButton,
   IonContent,
+  toastController,
 } from "@ionic/vue";
 import { add } from "ionicons/icons";
 
@@ -129,7 +130,7 @@ export default {
     };
   },
   methods: {
-    submitRecipe() {
+    async submitRecipe() {
       const recipeForm = {
         name: this.name.val,
         photo: this.photo.val,
@@ -139,7 +140,16 @@ export default {
         instructions: this.instructions.val,
       };
       this.$emit("save-recipe", recipeForm);
-      this.$router.replace("/recipes");
+      this.presentToast("middle");
+      this.$router.push("/recipes");
+    },
+    async presentToast(position) {
+      const toast = await toastController.create({
+        message: "Recipe Added!",
+        duration: 1500,
+        position: position,
+      });
+      await toast.present();
     },
   },
 };
