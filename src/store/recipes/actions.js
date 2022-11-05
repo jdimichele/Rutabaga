@@ -13,7 +13,7 @@ export default {
     const token = context.rootGetters.token;
 
     const response = await fetch(
-      `https://rutabaga-d932a-default-rtdb.firebaseio.com/rutabaga/${userId}/recipes.json?auth=` +
+      `https://rutabaga-d932a-default-rtdb.firebaseio.com/recipes/${userId}.json?auth=` +
         token,
       {
         method: "POST",
@@ -39,7 +39,7 @@ export default {
     const userId = context.rootGetters.userId;
     const token = context.rootGetters.token;
     const response = await fetch(
-      `https://rutabaga-d932a-default-rtdb.firebaseio.com/rutabaga/${userId}/recipes.json?auth=` +
+      `https://rutabaga-d932a-default-rtdb.firebaseio.com/recipes/${userId}.json?auth=` +
         token
     );
 
@@ -60,18 +60,4 @@ export default {
     }
     context.commit("setRecipes", recipes);
   },
-
-//   async lastViewedRecipe(context, payload) {
-//     if (!payload.forceRefresh && !context.getters.shouldUpdate) {
-//       return;
-//     }
-//     const userId = context.rootGetters.userId;
-//     const token = context.rootGetters.token;
-//     const response = await fetch(
-//       `https://rutabaga-d932a-default-rtdb.firebaseio.com/${userId}/recipes.json?auth=` +
-//         token + '?orderBy="'
-//     );
-//     const responseData = await response.json();
-//     const recentRecipe = [];
-//   },
 };
