@@ -4,6 +4,7 @@
     <ion-grid :fixed="true">
       <ion-row>
         <ion-col>
+          <recent-recipe></recent-recipe>
           <recipes-list></recipes-list>
         </ion-col>
       </ion-row>
@@ -15,6 +16,7 @@
 import { defineComponent } from "vue";
 import { IonPage, IonGrid, IonRow, IonCol } from "@ionic/vue";
 import RecipesList from "@/components/recipes/RecipesList.vue";
+import RecentRecipe from "../../components/recipes/RecentRecipe.vue";
 
 export default defineComponent({
   components: {
@@ -23,6 +25,7 @@ export default defineComponent({
     IonRow,
     IonCol,
     RecipesList,
+    RecentRecipe,
   },
 });
 
@@ -41,13 +44,12 @@ At some point, will need to implement the refresher logic here, but for now, her
 */
 </script>
 
-
 <style scoped>
 ion-grid {
-  --ion-grid-width-xs: 50%;
-  --ion-grid-width-sm: 288px;
-  --ion-grid-width-md: 384px;
-  --ion-grid-width-lg: 480px;
-  --ion-grid-width-xl: 570px;
+  --ion-grid-width-xs: 100%;
+  --ion-grid-width-sm: 540px;
+  --ion-grid-width-md: 720px;
+  --ion-grid-width-lg: 960px;
+  --ion-grid-width-xl: 1140px;
 }
 </style>
