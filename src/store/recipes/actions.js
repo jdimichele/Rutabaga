@@ -6,6 +6,7 @@ export default {
       photo: data.photo,
       time: data.time,
       servings: data.servings,
+      category: data.category,
       ingredients: data.ingredients,
       instructions: data.instructions,
     };
@@ -48,11 +49,12 @@ export default {
 
     for (const key in responseData) {
       const recipe = {
+        id: key,
         name: responseData[key].name,
         photo: responseData[key].photo,
         time: responseData[key].time,
         servings: responseData[key].servings,
-        categories: responseData[key].categories,
+        category: responseData[key].category,
         ingredients: responseData[key].ingredients,
         instructions: responseData[key].instructions,
       };
