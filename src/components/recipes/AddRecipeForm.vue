@@ -174,6 +174,7 @@ export default {
         photo: this.photo.val,
         time: this.time.val,
         servings: this.servings.val,
+        category: this.category.val,
         ingredients: this.ingredients.val,
         instructions: this.instructions.val,
       };

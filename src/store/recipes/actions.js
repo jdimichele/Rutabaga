@@ -48,11 +48,11 @@ export default {
 
     for (const key in responseData) {
       const recipe = {
-        id: key,
         name: responseData[key].name,
         photo: responseData[key].photo,
         time: responseData[key].time,
         servings: responseData[key].servings,
+        categories: responseData[key].categories,
         ingredients: responseData[key].ingredients,
         instructions: responseData[key].instructions,
       };
