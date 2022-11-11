@@ -23,6 +23,11 @@
       </ion-item>
       <ion-item>
         <ion-text>
+          <h6>{{ category }}</h6>
+        </ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-text>
           <h6>{{ ingredients }}</h6>
         </ion-text>
       </ion-item>
@@ -50,6 +55,7 @@ export default {
     "photo",
     "time",
     "servings",
+    "category",
     "ingredients",
     "instructions",
   ],

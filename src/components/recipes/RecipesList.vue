@@ -13,6 +13,7 @@
         :name="recipe.name"
         :photo="recipe.photo"
         :time="recipe.time"
+        :category="recipe.category"
         :servings="recipe.servings"
         :ingredients="recipe.ingredients"
         :instructions="recipe.instructions"

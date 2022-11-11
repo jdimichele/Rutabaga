@@ -60,18 +60,18 @@
           :value="category.val"
           @ionChange="category.val = $event.target.value"
         >
-          <ion-select-option value="appetizers">Appetizers</ion-select-option>
-          <ion-select-option value="breakfast">Breakfast</ion-select-option>
-          <ion-select-option value="brunch">Brunch</ion-select-option>
-          <ion-select-option value="dessert">Dessert</ion-select-option>
-          <ion-select-option value="dinner">Dinner</ion-select-option>
-          <ion-select-option value="drinks">Drinks</ion-select-option>
-          <ion-select-option value="lunch">Lunch</ion-select-option>
-          <ion-select-option value="sides">Sides</ion-select-option>
-          <ion-select-option value="snacks">Snacks</ion-select-option>
-          <ion-select-option value="soups">Soups</ion-select-option>
-          <ion-select-option value="vegan">Vegan</ion-select-option>
-          <ion-select-option value="vegetarian">Vegetarian</ion-select-option>
+          <ion-select-option value="Appetizers">Appetizers</ion-select-option>
+          <ion-select-option value="Breakfast">Breakfast</ion-select-option>
+          <ion-select-option value="Brunch">Brunch</ion-select-option>
+          <ion-select-option value="Dessert">Dessert</ion-select-option>
+          <ion-select-option value="Dinner">Dinner</ion-select-option>
+          <ion-select-option value="Drinks">Drinks</ion-select-option>
+          <ion-select-option value="Lunch">Lunch</ion-select-option>
+          <ion-select-option value="Sides">Sides</ion-select-option>
+          <ion-select-option value="Snacks">Snacks</ion-select-option>
+          <ion-select-option value="Soups">Soups</ion-select-option>
+          <ion-select-option value="Vegan">Vegan</ion-select-option>
+          <ion-select-option value="Vegetarian">Vegetarian</ion-select-option>
         </ion-select>
       </ion-item>
 
