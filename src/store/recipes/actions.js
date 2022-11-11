@@ -13,7 +13,7 @@ export default {
     const token = context.rootGetters.token;
 
     const response = await fetch(
-      `https://rutabaga-d932a-default-rtdb.firebaseio.com/recipes/${userId}.json?auth=` +
+      `https://rutabaga-d932a-default-rtdb.firebaseio.com/rutabaga/${userId}/recipes.json?auth=` +
         token,
       {
         method: "POST",
@@ -39,7 +39,7 @@ export default {
     const userId = context.rootGetters.userId;
     const token = context.rootGetters.token;
     const response = await fetch(
-      `https://rutabaga-d932a-default-rtdb.firebaseio.com/recipes/${userId}.json?auth=` +
+      `https://rutabaga-d932a-default-rtdb.firebaseio.com/rutabaga/${userId}/recipes.json?auth=` +
         token
     );
 

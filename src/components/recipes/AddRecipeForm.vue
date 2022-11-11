@@ -11,6 +11,7 @@
           @ionInput="name.val = $event.target.value"
         ></ion-input>
       </ion-item>
+
       <ion-item>
         <ion-label position="floating">Photo:</ion-label>
         <ion-input
@@ -20,6 +21,7 @@
           @ionInput="photo.val = $event.target.value"
         ></ion-input>
       </ion-item>
+
       <ion-item>
         <ion-label position="floating">Time:</ion-label>
         <ion-input
@@ -30,6 +32,7 @@
           @ionInput="time.val = $event.target.value"
         ></ion-input>
       </ion-item>
+
       <ion-item>
         <ion-label position="floating">Servings:</ion-label>
         <ion-select
@@ -47,6 +50,31 @@
           <ion-select-option value="6">6</ion-select-option>
         </ion-select>
       </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Category:</ion-label>
+        <ion-select
+          placeholder="Which category does this recipe belong to?"
+          interface="action-sheet"
+          required
+          :value="category.val"
+          @ionChange="category.val = $event.target.value"
+        >
+          <ion-select-option value="appetizers">Appetizers</ion-select-option>
+          <ion-select-option value="breakfast">Breakfast</ion-select-option>
+          <ion-select-option value="brunch">Brunch</ion-select-option>
+          <ion-select-option value="dessert">Dessert</ion-select-option>
+          <ion-select-option value="dinner">Dinner</ion-select-option>
+          <ion-select-option value="drinks">Drinks</ion-select-option>
+          <ion-select-option value="lunch">Lunch</ion-select-option>
+          <ion-select-option value="sides">Sides</ion-select-option>
+          <ion-select-option value="snacks">Snacks</ion-select-option>
+          <ion-select-option value="soups">Soups</ion-select-option>
+          <ion-select-option value="vegan">Vegan</ion-select-option>
+          <ion-select-option value="vegetarian">Vegetarian</ion-select-option>
+        </ion-select>
+      </ion-item>
+
       <ion-item>
         <ion-label position="floating">Ingredients:</ion-label>
         <ion-input
@@ -57,6 +85,7 @@
           @ionInput="ingredients.val = $event.target.value"
         ></ion-input>
       </ion-item>
+
       <ion-item class="roundedBottom">
         <ion-label position="floating">Instructions:</ion-label>
         <ion-textarea
@@ -68,6 +97,7 @@
           @ionInput="instructions.val = $event.target.value"
         ></ion-textarea>
       </ion-item>
+
       <ion-fab vertical="bottom" horizontal="center" slot="fixed">
         <ion-button type="submit">
           <ion-icon :icon="add"></ion-icon>
@@ -121,6 +151,9 @@ export default {
       servings: {
         val: "",
       },
+      category: {
+        val: [],
+      },
       ingredients: {
         val: [],
       },
@@ -146,7 +179,6 @@ export default {
       };
       this.$emit("save-recipe", recipeForm);
       this.presentToast("middle");
-      this.$router.push("/recipes");
     },
     async presentToast(position) {
       const toast = await toastController.create({
@@ -161,12 +193,12 @@ export default {
 </script>
 
 <style scoped>
-  .roundedTop{
-    border-radius: 15px 15px 0px 0px;
-  }
-  .roundedBottom{
-    border-radius: 0px 0px 15px 15px;
-  }
+.roundedTop {
+  border-radius: 15px 15px 0px 0px;
+}
+.roundedBottom {
+  border-radius: 0px 0px 15px 15px;
+}
 .recipeForm {
   padding: 10px;
 }
