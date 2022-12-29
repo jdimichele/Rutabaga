@@ -62,4 +62,34 @@ export default {
     }
     context.commit("setRecipes", recipes);
   },
+
+  async loadLastRecipe(context, data) {
+    const userId = context.rootGetters.userId;
+    const token = context.rootGetters.token;
+
+    const recipeData = {
+      name: data.name,
+      photo: data.photo,
+      time: data.time,
+      servings: data.servings,
+      category: data.category,
+      ingredients: data.ingredients,
+      instructions: data.instructions,
+    };
+
+    const response = await fetch(
+      `https://rutabaga-d932a-default-rtdb.firebaseio.com/rutabaga/${userId}/recipes.json?auth=` +
+        token,
+      {
+        method: "GET",
+        body: JSON.stringify(recipeData),
+      }
+    );
+
+    const responseData = await response.json();
+    if (!response.ok) {
+      const error = new Error(responseData.message || "Failed to fetch.");
+      throw error;
+    }
+  },
 };

@@ -4,8 +4,8 @@
     <div v-if="isLoading">
       <ion-loading></ion-loading>
     </div>
-
     <div v-else-if="hasRecipes">
+      <recent-recipe></recent-recipe>
       <recipe-item
         v-for="recipe in recipes"
         :key="recipe.id"
@@ -25,12 +25,14 @@
 <script>
 import { IonCard, IonLoading } from "@ionic/vue";
 import RecipeItem from "../recipes/RecipeItem.vue";
+import RecentRecipe from "./RecentRecipe.vue";
 
 export default {
   components: {
     IonCard,
     IonLoading,
     RecipeItem,
+    RecentRecipe,
   },
   data() {
     return {

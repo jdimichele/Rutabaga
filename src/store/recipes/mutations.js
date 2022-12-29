@@ -5,4 +5,7 @@ export default {
   setRecipes(state, payload) {
     state.recipes = payload;
   },
+  setRecentRecipe(state, payload) {
+    state.lastRecipe = payload;
+  },
 };
