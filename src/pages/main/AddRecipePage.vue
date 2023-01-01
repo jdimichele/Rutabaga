@@ -22,7 +22,7 @@ export default defineComponent({
   },
   methods: {
     saveRecipe(data) {
-      this.$store.dispatch("recipes/addRecipe", data);
+      this.$store.dispatch("recipes/addFirestoreRecipe", data);
       this.$router.replace("/addrecipe");
     },
   },

@@ -2,29 +2,42 @@
   <ion-card>
     <!-- <div v-if="isLoading">
       <ion-loading></ion-loading>
-    </div>
-
-    <div v-else-if="hasRecipes">
-      <recipe-item
-        :key="recipes.id"
-        :id="recipes.id"
-        :name="recipes.name"
-        :photo="recipe.photo"
-        :time="recipe.time"
-        :category="recipe.category"
-        :servings="recipe.servings"
-        :ingredients="recipe.ingredients"
-        :instructions="recipe.instructions"
-      ></recipe-item>
     </div> -->
+
+    <div>
+      <button @click="recentlyAdded">Click pls</button>
+      <h2>{{ recipeName }}</h2>
+      <h3>{{ recipeTime }}</h3>
+    </div>
   </ion-card>
 </template>
 
 <script>
-// import { IonCard, IonLoading } from "@ionic/vue";
+import { IonCard } from "@ionic/vue";
 // import RecipeItem from "../recipes/RecipeItem.vue";
+import { useFirestore, useDocument } from "vuefire";
+import { doc } from "@firebase/firestore";
 
-// export default {
-//   components: { IonLoading, IonCard, RecipeItem },
-// };
+export default {
+  components: { IonCard },
+  setup() {
+    const db = useFirestore();
+
+    const recipeData = useDocument(
+      doc(db, "testrecipes", "C1QjNIgY5eGiGvD11zRn")
+    );
+    const recipeName = recipeData.data.value.name;
+    const recipeTime = recipeData.data.value.time;
+
+    function recentlyAdded() {
+      console.log(recipeName);
+    }
+
+    return {
+      recipeName,
+      recipeTime,
+      recentlyAdded,
+    };
+  },
+};
 </script>
