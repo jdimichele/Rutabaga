@@ -1,5 +1,6 @@
 /* Firebase */
-import { initializeApp } from "firebase/app";
+import firebase from "firebase/compat/app";
+import "firebase/compat/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBz3H85u8RbIBCp3ZJikkat1OpVt5MsYkk",
@@ -12,6 +13,8 @@ const firebaseConfig = {
   measurementId: "G-6WDBGQY8TY",
 };
 
-const fbApp = initializeApp(firebaseConfig);
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+const timestamp = firebase.firestore.FieldValue.serverTimestamp;
+const db = firebaseApp.firestore();
 
-export { fbApp };
+export { timestamp, db };

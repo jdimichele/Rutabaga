@@ -3,12 +3,12 @@
     <base-header title="All Recipes"></base-header>
     <ion-content>
       <ion-grid :fixed="true">
+        <ion-col>
+          <recent-recipe></recent-recipe>
+        </ion-col>
         <ion-row>
           <ion-col>
             <recipes-list></recipes-list>
-          </ion-col>
-          <ion-col>
-            <recent-recipe></recent-recipe>
           </ion-col>
         </ion-row>
       </ion-grid>

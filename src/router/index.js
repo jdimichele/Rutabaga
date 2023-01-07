@@ -46,8 +46,8 @@ const routes = [
     ],
   },
   {
-    path: "/auth",
-    component: () => import("@/pages/auth/AuthenticationPage.vue"),
+    path: "/login",
+    component: () => import("@/pages/auth/LoginPage.vue"),
     meta: { requiresUnauth: true },
   },
 ];
@@ -59,7 +59,7 @@ const router = createRouter({
 
 router.beforeEach(function (to, from, next) {
   if (to.meta.requiresAuth && !store.getters.isAuthenticated) {
-    next("/auth");
+    next("/login");
   } else if (to.meta.requiresUnauth && store.getters.isAuthenticated) {
     next("/recipes");
   } else {

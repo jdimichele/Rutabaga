@@ -31,7 +31,6 @@
     "ionicons": "^6.0.3",
     "vue": "3.2.45",
     "vue-router": "4.1.6",
-    "vuefire": "^3.0.0",
     "vuex": "^4.0.2"
   },
   "devDependencies": {

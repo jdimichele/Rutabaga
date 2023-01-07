@@ -2,8 +2,8 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store/index.js";
-import { VueFire } from "vuefire";
-import { fbApp } from "./firebase";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
 import { IonicVue } from "@ionic/vue";
 
 /* Core CSS required for Ionic components to work properly */
@@ -28,19 +28,23 @@ import "./theme/variables.css";
 /* Imports for global components. */
 import BaseCard from "./components/ui/BaseCard.vue";
 import BaseHeader from "./components/ui/BaseHeader.vue";
+import BaseLogo from "./components/ui/BaseLogo.vue";
 
 /* Ionic Loading component. */
 import { defineCustomElements } from "@ionic/pwa-elements/loader";
 defineCustomElements(window);
 
-const app = createApp(App).use(IonicVue).use(router).use(store).use(VueFire, {
-  fbApp,
-  // modules: [VueFireAuth()]
-});
+const app = createApp(App);
 
 app.component("base-card", BaseCard);
 app.component("base-header", BaseHeader);
-
-router.isReady().then(() => {
-  app.mount("#app");
+app.component("base-logo", BaseLogo);
+let appCheck;
+firebase.auth().onAuthStateChanged(() => {
+  if (!appCheck) {
+    app.use(router).use(store).use(IonicVue);
+  }
+  router.isReady().then(() => {
+    app.mount("#app");
+  });
 });
