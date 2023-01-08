@@ -17,26 +17,23 @@ export default {
   },
   created() {
     firebase.auth().onAuthStateChanged((user) => {
-      this.$store.commit("updateUser", user);
+      this.$store.commit("auth/updateUser", user);
       if (user) {
-        this.$store.dispatch("getCurrentUser");
+        this.$store.dispatch("auth/getCurrentUser");
       }
     });
   },
-  data() {
-    return {};
-  },
   computed: {
-    didAutoLogout() {
-      return this.$store.getters.didAutoLogout;
-    },
+    // didAutoLogout() {
+    //   return this.$store.getters.didAutoLogout;
+    // },
   },
   watch: {
-    didAutoLogout(curValue, oldValue) {
-      if (curValue && curValue !== oldValue) {
-        this.$router.replace("/login");
-      }
-    },
+    // didAutoLogout(curValue, oldValue) {
+    //   if (curValue && curValue !== oldValue) {
+    //     this.$router.replace("/login");
+    //   }
+    // },
   },
 };
 </script>

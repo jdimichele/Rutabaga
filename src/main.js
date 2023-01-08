@@ -34,17 +34,16 @@ import BaseLogo from "./components/ui/BaseLogo.vue";
 import { defineCustomElements } from "@ionic/pwa-elements/loader";
 defineCustomElements(window);
 
-const app = createApp(App);
-
-app.component("base-card", BaseCard);
-app.component("base-header", BaseHeader);
-app.component("base-logo", BaseLogo);
-let appCheck;
+let app;
 firebase.auth().onAuthStateChanged(() => {
-  if (!appCheck) {
-    app.use(router).use(store).use(IonicVue);
+  if (!app) {
+    app = createApp(App);
+    router.isReady().then(() => {
+      app.mount("#app");
+    });
   }
-  router.isReady().then(() => {
-    app.mount("#app");
-  });
+  app.component("base-card", BaseCard);
+  app.component("base-header", BaseHeader);
+  app.component("base-logo", BaseLogo);
+  app.use(router).use(store).use(IonicVue);
 });

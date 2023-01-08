@@ -1,5 +1,4 @@
 <template>
-  <base-card>
     <div>
       <ion-img
         :src="require('../../../public/assets/icon/icon.png')"
@@ -7,7 +6,6 @@
       ></ion-img>
       <ion-title size="large">Rutabaga</ion-title>
     </div>
-  </base-card>
 </template>
 
 <script>
