@@ -142,7 +142,7 @@ export default {
           email: this.email,
         });
 
-        this.$router.push('/recipes');
+        this.$router.push("/recipes");
 
         return;
       }

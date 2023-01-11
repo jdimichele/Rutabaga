@@ -20,6 +20,10 @@ export default {
       this.$store.commit("auth/updateUser", user);
       if (user) {
         this.$store.dispatch("auth/getCurrentUser");
+        console.log("After login: " + user.email);
+      } else if (!user) {
+        this.$router.replace("/login");
+        console.log("After logout: " + user.email);
       }
     });
   },

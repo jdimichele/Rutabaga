@@ -2,8 +2,6 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store/index.js";
-import firebase from "firebase/compat/app";
-import "firebase/compat/auth";
 import { IonicVue } from "@ionic/vue";
 
 /* Core CSS required for Ionic components to work properly */
@@ -34,16 +32,14 @@ import BaseLogo from "./components/ui/BaseLogo.vue";
 import { defineCustomElements } from "@ionic/pwa-elements/loader";
 defineCustomElements(window);
 
-let app;
-firebase.auth().onAuthStateChanged(() => {
-  if (!app) {
-    app = createApp(App);
-    router.isReady().then(() => {
-      app.mount("#app");
-    });
-  }
-  app.component("base-card", BaseCard);
-  app.component("base-header", BaseHeader);
-  app.component("base-logo", BaseLogo);
-  app.use(router).use(store).use(IonicVue);
+const app = createApp(App);
+
+app.component("base-card", BaseCard);
+app.component("base-header", BaseHeader);
+app.component("base-logo", BaseLogo);
+
+app.use(router).use(store).use(IonicVue);
+
+router.isReady().then(() => {
+  app.mount("#app");
 });

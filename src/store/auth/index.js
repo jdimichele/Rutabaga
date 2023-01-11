@@ -4,7 +4,7 @@ import { db } from "../../firebase.js";
 
 export default {
   namespaced: true,
-  modules:{},
+  modules: {},
   state() {
     return {
       user: null,
@@ -13,6 +13,7 @@ export default {
       profileLastName: null,
       profileUsername: null,
       profileId: null,
+      userId: null,
     };
   },
   mutations: {
@@ -35,9 +36,9 @@ export default {
       const dbResults = await dataBase.get();
       commit("setProfileInfo", dbResults);
     },
-    async logout(){
+    async logout() {
       firebase.auth().signOut;
-    }
+    },
   },
   getters: {},
 };

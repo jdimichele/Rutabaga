@@ -1,11 +1,13 @@
 import { createRouter, createWebHistory } from "@ionic/vue-router";
 import TabsPage from "../pages/main/TabsPage.vue";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
 
 // import store from "../store/index.js";
 
 const routes = [
   {
-    path: "/recipes",
+    path: "/",
     component: TabsPage,
 
     children: [
@@ -47,13 +49,15 @@ const routes = [
   },
   {
     path: "/login",
+    name: "login",
     component: () => import("@/pages/auth/LoginPage.vue"),
-    meta: { requiresUnauth: true },
+    meta: { requiresAuth: false },
   },
   {
     path: "/register",
+    name: "register",
     component: () => import("@/pages/auth/RegisterPage.vue"),
-    meta: { requiresUnauth: true },
+    meta: { requiresAuth: false },
   },
 ];
 
@@ -62,16 +66,15 @@ const router = createRouter({
   routes,
 });
 
-/* At some point, I'll need to rewrite this portion due to the changes from the previous use of FB to the current use case. */
-
-// router.beforeEach(function (to, from, next) {
-//   if (to.meta.requiresAuth && !store.getters.isAuthenticated) {
-//     next("/login");
-//   } else if (to.meta.requiresUnauth && store.getters.isAuthenticated) {
-//     next("/recipes");
-//   } else {
-//     next();
-//   }
-// });
+router.beforeEach(async (to, from, next) => {
+  let user = firebase.auth().currentUser;
+  if (to.matched.some((res) => res.meta.requiresAuth)) {
+    if (user) {
+      return next();
+    }
+    return next("/login");
+  }
+  return next();
+});
 
 export default router;
