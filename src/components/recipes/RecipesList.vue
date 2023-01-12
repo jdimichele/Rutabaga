@@ -38,30 +38,31 @@ export default {
     };
   },
   methods: {
-    async loadRecipes(refresh = false) {
-      this.isLoading = true;
-      try {
-        await this.$store.dispatch("recipes/loadRecipes", {
-          forceRefresh: refresh,
-        });
-      } catch (error) {
-        this.error = error.message || "Something exploded. :(";
-      }
-      this.isLoading = false;
-    },
+    // async loadRecipes() {
+    //   this.isLoading = true;
+    //   try {
+    //     await this.$store.dispatch(
+    //       "recipes/loadAllRecipes"
+    //       // {forceRefresh: refresh,}
+    //     );
+    //   } catch (error) {
+    //     this.error = error.message || "Something exploded. :(";
+    //   }
+    //   this.isLoading = false;
+    // },
   },
   computed: {
     recipes() {
-      const recipes = this.$store.getters["recipes/recipes"];
-      return recipes;
+      return this.$store.state.recipes;
     },
     hasRecipes() {
-      return !this.isLoading && this.$store.getters["recipes/hasRecipes"];
+      // !this.isLoading &&
+      return this.$store.getters["recipes/hasRecipes"];
     },
   },
 
   created() {
-    this.loadRecipes();
+    this.$store.dispatch("recipes/loadAllRecipes");
   },
 };
 </script>

@@ -19,12 +19,12 @@ export default {
     };
   },
   mutations: {
-    setProfileInfo(state, payload) {
-      state.profileId = payload.id;
-      state.profileEmail = payload.data().email;
-      state.profileFirstName = payload.data().firstName;
-      state.profileLastName = payload.data().lastName;
-      state.profileUsername = payload.data().username;
+    setProfileInfo(state, doc) {
+      state.profileId = doc.id;
+      state.profileEmail = doc.data().email;
+      state.profileFirstName = doc.data().firstName;
+      state.profileLastName = doc.data().lastName;
+      state.profileUsername = doc.data().username;
     },
     updateUser(state, payload) {
       state.user = payload;

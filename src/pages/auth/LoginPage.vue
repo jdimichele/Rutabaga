@@ -10,7 +10,7 @@
             <router-link to="/register">Register here.</router-link>
           </p>
           <div class="signin-form-wrapper">
-            <form class="signin-form" @submit.prevent="login">
+            <form class="signin-form" @submit.prevent="login" v-on:keyup.enter="login">
               <ion-item>
                 <ion-label for="email" position="floating">Email:</ion-label>
                 <ion-input
