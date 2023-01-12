@@ -4,10 +4,12 @@ import { db } from "../../firebase.js";
 
 export default {
   namespaced: true,
-  modules: {},
   state() {
     return {
-      user: null,
+      user: {
+        loggedIn: false,
+        data: null,
+      },
       profileEmail: null,
       profileFirstName: null,
       profileLastName: null,
@@ -27,8 +29,24 @@ export default {
     updateUser(state, payload) {
       state.user = payload;
     },
+    setLoggedIn(state, payload) {
+      state.user.loggedIn = payload;
+    },
+    setUser(state, data) {
+      state.user.data = data;
+    },
   },
   actions: {
+    async login(context, { email, password }) {
+      const response = await firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password);
+      if (response) {
+        context.commit("setUser", response.user);
+      } else {
+        throw new Error("Login Failed.");
+      }
+    },
     async getCurrentUser({ commit }) {
       const dataBase = await db
         .collection("users")
@@ -36,9 +54,14 @@ export default {
       const dbResults = await dataBase.get();
       commit("setProfileInfo", dbResults);
     },
-    async logout() {
+    async logout(context) {
       firebase.auth().signOut;
+      context.commit("setUser", null);
     },
   },
-  getters: {},
+  getters: {
+    user(state) {
+      return state.user;
+    },
+  },
 };

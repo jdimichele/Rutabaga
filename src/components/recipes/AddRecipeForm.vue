@@ -181,6 +181,7 @@ export default {
       this.$emit("save-recipe", recipeForm);
       this.presentToast("middle");
     },
+
     async presentToast(position) {
       const toast = await toastController.create({
         message: "Recipe Added!",

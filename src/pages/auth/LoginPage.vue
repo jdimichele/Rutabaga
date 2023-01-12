@@ -51,8 +51,6 @@ import {
   IonButton,
 } from "@ionic/vue";
 import BaseLogo from "../../components/ui/BaseLogo.vue";
-import firebase from "firebase/compat/app";
-import "firebase/compat/auth";
 
 export default {
   components: {
@@ -75,18 +73,11 @@ export default {
   },
   methods: {
     login() {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(this.email, this.password)
-        .then(() => {
-          this.$router.push("/recipes");
-          this.error = false;
-          this.errorMessage = "";
-        })
-        .catch((err) => {
-          this.error = true;
-          this.errorMessage = err.message;
-        });
+      this.$store.dispatch("auth/login", {
+        email: this.email,
+        password: this.password,
+      });
+      this.$router.push("/recipes");
     },
   },
 };
@@ -95,7 +86,7 @@ export default {
 <style scoped>
 .background {
   background-image: url(../../../public/assets/background.png);
-  height: 100vh;
+  height: 100%;
 }
 .signin-form {
   padding: 70px 0;
