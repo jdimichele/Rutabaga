@@ -6,16 +6,16 @@
     </div>
     <div v-else-if="hasRecipes">
       <recipe-item
-        v-for="recipe in recipes"
-        :key="recipe.id"
-        :id="recipe.id"
-        :name="recipe.name"
-        :photo="recipe.photo"
-        :time="recipe.time"
-        :category="recipe.category"
-        :servings="recipe.servings"
-        :ingredients="recipe.ingredients"
-        :instructions="recipe.instructions"
+        v-for="(recipe, index) in allRecipes"
+        :key="index"
+        :id="recipe.recipeID"
+        :name="recipe.recipeName"
+        :photo="recipe.recipePhoto"
+        :time="recipe.recipeTime"
+        :category="recipe.recipeCategory"
+        :servings="recipe.recipeServings"
+        :ingredients="recipe.recipeIngredients"
+        :instructions="recipe.recipeInstructions"
       ></recipe-item>
     </div>
   </ion-card>
@@ -38,31 +38,29 @@ export default {
     };
   },
   methods: {
-    // async loadRecipes() {
-    //   this.isLoading = true;
-    //   try {
-    //     await this.$store.dispatch(
-    //       "recipes/loadAllRecipes"
-    //       // {forceRefresh: refresh,}
-    //     );
-    //   } catch (error) {
-    //     this.error = error.message || "Something exploded. :(";
-    //   }
-    //   this.isLoading = false;
-    // },
+    async loadRecipes() {
+      this.isLoading = true;
+      try {
+        await this.$store.dispatch("recipes/loadAllRecipes");
+      } catch (error) {
+        this.error = error.message || "Something exploded. :(";
+      }
+      this.isLoading = false;
+    },
+    errorToast() {},
   },
   computed: {
-    recipes() {
-      return this.$store.state.recipes;
+    allRecipes() {
+      console.log(this.$store.getters["recipes/allRecipes"]);
+      return this.$store.getters["recipes/allRecipes"];
     },
     hasRecipes() {
-      // !this.isLoading &&
-      return this.$store.getters["recipes/hasRecipes"];
+      return !this.isLoading && this.$store.getters["recipes/hasRecipes"];
     },
   },
 
-  created() {
-    this.$store.dispatch("recipes/loadAllRecipes");
+  mounted() {
+    this.loadRecipes();
   },
 };
 </script>

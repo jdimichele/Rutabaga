@@ -1,6 +1,7 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import { db } from "../../firebase.js";
+import router from "../../router";
 
 export default {
   namespaced: true,
@@ -43,6 +44,7 @@ export default {
         .signInWithEmailAndPassword(email, password);
       if (response) {
         context.commit("setUser", response.user);
+        router.push("/recipes");
       } else {
         throw new Error("Login Failed.");
       }
