@@ -22,9 +22,8 @@ const routes = [
         meta: { requiresAuth: true },
       },
       {
-        path: "/recipes/:id",
+        path: "/recipes/:recipeid",
         component: () => import("@/pages/subpages/RecipeDetails.vue"),
-        props: true,
         meta: { requiresAuth: true },
       },
       {

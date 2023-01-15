@@ -30,7 +30,7 @@ export default {
     },
   },
   actions: {
-    async addRecipe(context, data) {
+    async addRecipe(data) {
       const userId = firebase.auth().currentUser.uid;
       const dataBase = await db
         .collection("users")
@@ -51,9 +51,7 @@ export default {
         ingredients: data.ingredients,
         instructions: data.instructions,
       };
-      // const uploadRecipe = 
       await dataBase.set(recipeData);
-      // context.commit("addRecipe", uploadRecipe);
     },
 
     async loadAllRecipes({ state }) {
@@ -81,7 +79,6 @@ export default {
     },
 
     async getRecipe() {},
-
     async loadRecentlyViewed() {},
   },
   getters: {

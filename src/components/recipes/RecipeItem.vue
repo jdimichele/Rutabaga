@@ -42,6 +42,7 @@
 
 <script>
 import { IonList, IonText, IonItem, IonCard } from "@ionic/vue";
+
 export default {
   components: {
     IonList,
@@ -58,6 +59,7 @@ export default {
     "category",
     "ingredients",
     "instructions",
+    "recipeID",
   ],
 };
 </script>

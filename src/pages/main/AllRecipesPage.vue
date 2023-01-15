@@ -4,7 +4,7 @@
     <ion-content>
       <ion-grid :fixed="true">
         <ion-col>
-          <view-recipe></view-recipe>
+          <!-- <recipe-details></recipe-details> -->
         </ion-col>
         <ion-row>
           <ion-col>
@@ -20,7 +20,7 @@
 import { defineComponent } from "vue";
 import { IonPage, IonGrid, IonRow, IonCol, IonContent } from "@ionic/vue";
 import RecipesList from "@/components/recipes/RecipesList.vue";
-import ViewRecipe from "../../components/recipes/ViewRecipe.vue";
+// import RecipeDetails from "../subpages/RecipeDetails.vue";
 
 export default defineComponent({
   components: {
@@ -30,7 +30,7 @@ export default defineComponent({
     IonCol,
     IonContent,
     RecipesList,
-    ViewRecipe,
+    // RecipeDetails,
   },
 });
 
