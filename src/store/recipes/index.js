@@ -91,11 +91,6 @@ export default {
     allRecipes(state) {
       return state.allRecipes;
     },
-    getRecipeRouteID(state, id) {
-      return state.allRecipes.filter(
-        (allRecipes) => allRecipes.recipeID === id
-      );
-    },
     hasRecipes(state) {
       return state.allRecipes && state.allRecipes.length > 0;
     },

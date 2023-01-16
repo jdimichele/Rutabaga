@@ -20,15 +20,13 @@ const routes = [
         name: "recipes",
         component: () => import("@/pages/main/AllRecipesPage.vue"),
         meta: { requiresAuth: true },
-        children: [
-          {
-            name: "RecipeDetails",
-            path: "/recipes/:id",
-            component: () => import("@/pages/subpages/RecipeDetails.vue"),
-            props: true,
-            meta: { requiresAuth: true },
-          },
-        ],
+      },
+      {
+        name: "RecipeDetails",
+        path: "/recipes/:id",
+        component: () => import("@/pages/subpages/RecipeDetails.vue"),
+        props: true,
+        meta: { requiresAuth: true },
       },
       {
         path: "/favorites",
