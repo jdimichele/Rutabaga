@@ -1,5 +1,5 @@
 <template>
-  <ion-card @click="openRecipeDetails(this.id)">
+  <ion-card @click="openRecipeDetails">
     <ion-list>
       <ion-item>
         <ion-text>
@@ -42,10 +42,10 @@ export default {
     };
   },
   methods: {
-    openRecipeDetails(id) {
+    openRecipeDetails() {
       this.targetRecipeID = this.id;
       console.log(this.targetRecipeID);
-      this.$router.push({ name: "RecipeDetails", params: { id: id } });
+      this.$router.push({ name: "RecipeDetails", params: { id: this.targetRecipeID } });
     },
   },
   computed: {},

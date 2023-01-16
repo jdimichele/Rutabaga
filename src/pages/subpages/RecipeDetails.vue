@@ -26,7 +26,7 @@ export default {
   methods: {},
   computed: {},
   async mounted() {
-    this.currentRecipe = await this.$store.state.allRecipes.filter((recipe) => {
+    this.currentRecipe = await this.$store.getters["recipes/allRecipes"].filter((recipe) => {
       return recipe.recipeID === this.$route.params.id;
     });
     console.log(this.currentRecipe);
