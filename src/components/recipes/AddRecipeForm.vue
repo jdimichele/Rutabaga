@@ -25,7 +25,7 @@
       <ion-item>
         <ion-label position="floating">Time:</ion-label>
         <ion-input
-          type="numeric"
+          type="text"
           id="time"
           required
           :value="time.val"
@@ -181,6 +181,7 @@ export default {
       this.$emit("save-recipe", recipeForm);
       this.presentToast("middle");
     },
+
     async presentToast(position) {
       const toast = await toastController.create({
         message: "Recipe Added!",

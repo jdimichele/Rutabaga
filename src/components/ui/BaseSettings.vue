@@ -30,8 +30,8 @@ export default {
   },
   methods: {
     logout() {
-      this.$store.dispatch("logout");
-      this.$router.replace("/auth");
+      this.$store.dispatch("auth/logout");
+      this.$router.replace("/login");
     },
     toggleDarkTheme(event) {
       if (event && this.themeToggle === "dark") {

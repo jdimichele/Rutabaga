@@ -1,5 +1,5 @@
 <template>
-  <ion-card>
+  <ion-card @click="openRecipeDetails">
     <ion-list>
       <ion-item>
         <ion-text>
@@ -13,11 +13,6 @@
       </ion-item>
       <ion-item>
         <ion-text>
-          <h6>{{ time }} minutes</h6>
-        </ion-text>
-      </ion-item>
-      <ion-item>
-        <ion-text>
           <h6>{{ servings }} servings</h6>
         </ion-text>
       </ion-item>
@@ -26,22 +21,13 @@
           <h6>{{ category }}</h6>
         </ion-text>
       </ion-item>
-      <ion-item>
-        <ion-text>
-          <h6>{{ ingredients }}</h6>
-        </ion-text>
-      </ion-item>
-      <ion-item>
-        <ion-text>
-          <h6>{{ instructions }}</h6>
-        </ion-text>
-      </ion-item>
     </ion-list>
   </ion-card>
 </template>
 
 <script>
 import { IonList, IonText, IonItem, IonCard } from "@ionic/vue";
+
 export default {
   components: {
     IonList,
@@ -49,15 +35,19 @@ export default {
     IonItem,
     IonCard,
   },
-  props: [
-    "id",
-    "name",
-    "photo",
-    "time",
-    "servings",
-    "category",
-    "ingredients",
-    "instructions",
-  ],
+  props: ["id", "name", "photo", "servings", "category"],
+  data() {
+    return {
+      targetRecipeID: null,
+    };
+  },
+  methods: {
+    openRecipeDetails() {
+      this.targetRecipeID = this.id;
+      console.log(this.targetRecipeID);
+      this.$router.push({ name: "RecipeDetails", params: { id: this.targetRecipeID } });
+    },
+  },
+  computed: {},
 };
 </script>

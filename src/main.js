@@ -1,6 +1,7 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
+import store from "./store/index.js";
 import { IonicVue } from "@ionic/vue";
 
 /* Core CSS required for Ionic components to work properly */
@@ -22,19 +23,22 @@ import "@ionic/vue/css/typography.css";
 /* Theme variables */
 import "./theme/variables.css";
 
-import store from "./store/index.js";
-
 /* Imports for global components. */
 import BaseCard from "./components/ui/BaseCard.vue";
 import BaseHeader from "./components/ui/BaseHeader.vue";
+import BaseLogo from "./components/ui/BaseLogo.vue";
 
+/* Ionic Loading component. */
 import { defineCustomElements } from "@ionic/pwa-elements/loader";
 defineCustomElements(window);
 
-const app = createApp(App).use(IonicVue).use(router).use(store);
+const app = createApp(App);
 
 app.component("base-card", BaseCard);
 app.component("base-header", BaseHeader);
+app.component("base-logo", BaseLogo);
+
+app.use(router).use(store).use(IonicVue);
 
 router.isReady().then(() => {
   app.mount("#app");

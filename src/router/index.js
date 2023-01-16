@@ -1,11 +1,13 @@
 import { createRouter, createWebHistory } from "@ionic/vue-router";
 import TabsPage from "../pages/main/TabsPage.vue";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
 
-import store from "../store/index.js";
+// import store from "../store/index.js";
 
 const routes = [
   {
-    path: "/recipes",
+    path: "/",
     component: TabsPage,
 
     children: [
@@ -20,6 +22,7 @@ const routes = [
         meta: { requiresAuth: true },
       },
       {
+        name: "RecipeDetails",
         path: "/recipes/:id",
         component: () => import("@/pages/subpages/RecipeDetails.vue"),
         props: true,
@@ -46,9 +49,16 @@ const routes = [
     ],
   },
   {
-    path: "/auth",
-    component: () => import("@/pages/auth/AuthenticationPage.vue"),
-    meta: { requiresUnauth: true },
+    path: "/login",
+    name: "login",
+    component: () => import("@/pages/auth/LoginPage.vue"),
+    meta: { requiresAuth: false },
+  },
+  {
+    path: "/register",
+    name: "register",
+    component: () => import("@/pages/auth/RegisterPage.vue"),
+    meta: { requiresAuth: false },
   },
 ];
 
@@ -57,14 +67,15 @@ const router = createRouter({
   routes,
 });
 
-router.beforeEach(function (to, from, next) {
-  if (to.meta.requiresAuth && !store.getters.isAuthenticated) {
-    next("/auth");
-  } else if (to.meta.requiresUnauth && store.getters.isAuthenticated) {
-    next("/recipes");
-  } else {
-    next();
+router.beforeEach(async (to, from, next) => {
+  let user = firebase.auth().currentUser;
+  if (to.matched.some((res) => res.meta.requiresAuth)) {
+    if (user) {
+      return next();
+    }
+    return next("/login");
   }
+  return next();
 });
 
 export default router;

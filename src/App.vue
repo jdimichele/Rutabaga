@@ -5,29 +5,35 @@
 </template>
 
 <script>
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
 import { IonApp, IonRouterOutlet } from "@ionic/vue";
-import { defineComponent } from "vue";
 
-export default defineComponent({
+export default {
   name: "App",
   components: {
     IonApp,
     IonRouterOutlet,
   },
-  computed: {
-    didAutoLogout() {
-      return this.$store.getters.didAutoLogout;
-    },
-  },
   created() {
-    this.$store.dispatch("tryLogin");
+    firebase.auth().onAuthStateChanged((user) => {
+      this.$store.commit("auth/updateUser", user);
+      if (user) {
+        this.$store.dispatch("auth/getCurrentUser");
+      }
+    });
+  },
+  computed: {
+    // didAutoLogout() {
+    //   return this.$store.getters.didAutoLogout;
+    // },
   },
   watch: {
-    didAutoLogout(curValue, oldValue) {
-      if (curValue && curValue !== oldValue) {
-        this.$router.replace("/auth");
-      }
-    },
+    // didAutoLogout(curValue, oldValue) {
+    //   if (curValue && curValue !== oldValue) {
+    //     this.$router.replace("/login");
+    //   }
+    // },
   },
-});
+};
 </script>
