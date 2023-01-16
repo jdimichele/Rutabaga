@@ -4,7 +4,6 @@
     <ion-content>
       <ion-grid :fixed="true">
         <ion-col>
-          <!-- <recipe-details></recipe-details> -->
         </ion-col>
         <ion-row>
           <ion-col>

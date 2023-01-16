@@ -19,11 +19,17 @@ export default {
     };
   },
   mutations: {
-    // addRecipe(state, payload) {
-    //   state.allRecipes.push(payload);
-    // },
+    setCurrentRecipeState(state, payload) {
+      state.recipeName = payload.recipeName;
+      state.recipePhoto = payload.recipePhoto;
+      state.recipeTime = payload.recipeTime;
+      state.recipeServings = payload.recipeServings;
+      state.recipeCategory = payload.recipeCategory;
+      state.recipeIngredients = payload.recipeIngredients;
+      state.recipeInstructions = payload.recipeInstructions;
+    },
     setRecipes(state, payload) {
-      state.recipes = payload;
+      state.allRecipes = payload;
     },
     setRecentRecipe(state, payload) {
       state.lastRecipe = payload;
@@ -84,6 +90,11 @@ export default {
   getters: {
     allRecipes(state) {
       return state.allRecipes;
+    },
+    getRecipeRouteID(state, id) {
+      return state.allRecipes.filter(
+        (allRecipes) => allRecipes.recipeID === id
+      );
     },
     hasRecipes(state) {
       return state.allRecipes && state.allRecipes.length > 0;

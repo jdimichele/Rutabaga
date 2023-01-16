@@ -6,7 +6,7 @@
       <ion-loading></ion-loading>
     </div>
     <div v-else-if="hasRecipes">
-      <recipe-item
+      <recipe-list-item
         v-for="(recipe, index) in allRecipes"
         :key="index"
         :id="recipe.recipeID"
@@ -17,7 +17,7 @@
         :servings="recipe.recipeServings"
         :ingredients="recipe.recipeIngredients"
         :instructions="recipe.recipeInstructions"
-      ></recipe-item>
+      ></recipe-list-item>
     </div>
     
   </ion-card>
@@ -25,14 +25,14 @@
 
 <script>
 import { IonCard, IonLoading, IonTitle } from "@ionic/vue";
-import RecipeItem from "../recipes/RecipeItem.vue";
+import RecipeListItem from "./RecipeListItem.vue";
 
 export default {
   components: {
     IonCard,
     IonLoading,
     IonTitle,
-    RecipeItem,
+    RecipeListItem,
   },
   data() {
     return {

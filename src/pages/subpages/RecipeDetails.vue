@@ -1,8 +1,8 @@
 <template>
   <ion-card>
-    <div v-if="isLoading">
+    <!-- <div v-if="isLoading">
       <ion-loading></ion-loading>
-    </div>
+    </div> -->
 
     <div>
       <h2>{{ this.currentRecipe.recipeName }}</h2>
@@ -12,50 +12,24 @@
 </template>
 
 <script>
-import { IonCard, IonLoading } from "@ionic/vue";
-import { mapState } from "vuex";
-import firebase from "firebase/compat/app";
-import { db } from "../../firebase.js";
+import { IonCard } from "@ionic/vue";
 
 export default {
   name: "RecipeDetails",
-  components: { IonCard, IonLoading },
+  components: { IonCard },
   data() {
     return {
       isLoading: false,
       currentRecipe: null,
-      currentRecipeID: null,
     };
   },
-  computed: {
-    ...mapState({ stateRecipes: "allRecipes" }),
-  },
+  methods: {},
+  computed: {},
   async mounted() {
-    this.currentRecipeID = this.$route.params.id;
-    this.currentRecipe = await this.$store.stateRecipes.filter((recipe) => {
-      return recipe.recipeID === this.routeID;
+    this.currentRecipe = await this.$store.state.allRecipes.filter((recipe) => {
+      return recipe.recipeID === this.$route.params.id;
     });
-
-
-
-    this.isLoading = true;
-    const userId = firebase().auth().currentUser.uid;
-    console.log(userId);
-    const recipeRef = db.collection("users").doc(userId).collection("recipes");
-    recipeRef
-      .get()
-      .then((doc) => {
-        if (doc.exists) {
-          this.currentRecipe = doc.data();
-        } else {
-          console.log("Something big lame.");
-        }
-      })
-      .catch((error) => {
-        console.log("Error getting document:", error);
-      });
-
-    this.isLoading = false;
+    console.log(this.currentRecipe);
   },
 };
 </script>

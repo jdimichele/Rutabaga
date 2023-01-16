@@ -25,7 +25,7 @@
       <ion-item>
         <ion-label position="floating">Time:</ion-label>
         <ion-input
-          type="numeric"
+          type="text"
           id="time"
           required
           :value="time.val"

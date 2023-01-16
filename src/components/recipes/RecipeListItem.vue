@@ -1,5 +1,5 @@
 <template>
-  <ion-card>
+  <ion-card @click="openRecipeDetails(this.id)">
     <ion-list>
       <ion-item>
         <ion-text>
@@ -13,27 +13,12 @@
       </ion-item>
       <ion-item>
         <ion-text>
-          <h6>{{ time }} minutes</h6>
-        </ion-text>
-      </ion-item>
-      <ion-item>
-        <ion-text>
           <h6>{{ servings }} servings</h6>
         </ion-text>
       </ion-item>
       <ion-item>
         <ion-text>
           <h6>{{ category }}</h6>
-        </ion-text>
-      </ion-item>
-      <ion-item>
-        <ion-text>
-          <h6>{{ ingredients }}</h6>
-        </ion-text>
-      </ion-item>
-      <ion-item>
-        <ion-text>
-          <h6>{{ instructions }}</h6>
         </ion-text>
       </ion-item>
     </ion-list>
@@ -50,16 +35,19 @@ export default {
     IonItem,
     IonCard,
   },
-  props: [
-    "id",
-    "name",
-    "photo",
-    "time",
-    "servings",
-    "category",
-    "ingredients",
-    "instructions",
-    "recipeID",
-  ],
+  props: ["id", "name", "photo", "servings", "category"],
+  data() {
+    return {
+      targetRecipeID: null,
+    };
+  },
+  methods: {
+    openRecipeDetails(id) {
+      this.targetRecipeID = this.id;
+      console.log(this.targetRecipeID);
+      this.$router.push({ name: "RecipeDetails", params: { id: id } });
+    },
+  },
+  computed: {},
 };
 </script>
