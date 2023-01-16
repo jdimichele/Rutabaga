@@ -36,7 +36,6 @@ export default {
     this.currentRecipe = await this.allRecipes.filter((recipe) => {
       return recipe.recipeID === this.$route.params.id;
     });
-    console.log(this.currentRecipe);
   },
 };
 </script>

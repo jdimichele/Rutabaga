@@ -19,7 +19,6 @@
 import { defineComponent } from "vue";
 import { IonPage, IonGrid, IonRow, IonCol, IonContent } from "@ionic/vue";
 import RecipesList from "@/components/recipes/RecipesList.vue";
-// import RecipeDetails from "../subpages/RecipeDetails.vue";
 
 export default defineComponent({
   components: {

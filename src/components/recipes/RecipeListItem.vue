@@ -44,7 +44,6 @@ export default {
   methods: {
     openRecipeDetails() {
       this.targetRecipeID = this.id;
-      console.log(this.targetRecipeID);
       this.$router.push({ name: "RecipeDetails", params: { id: this.targetRecipeID } });
     },
   },

@@ -54,7 +54,6 @@ export default {
   },
   computed: {
     allRecipes() {
-      console.log(this.$store.getters["recipes/allRecipes"]);
       return this.$store.getters["recipes/allRecipes"];
     },
     hasRecipes() {
