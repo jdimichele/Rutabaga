@@ -13,6 +13,11 @@ Thumbs.db
 UserInterfaceState.xcuserstate
 $RECYCLE.BIN/
 .env
+firebase.js
+.firebaserc
+firebase.json
+firestore.indexes.json
+firestore.rules
 
 
 *.log
@@ -31,6 +36,5 @@ npm-debug.log*
 /platforms
 /plugins
 /www
-/Rutabaga/src/firebase.js
 
 resources/ios/**/*
