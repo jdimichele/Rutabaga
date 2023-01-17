@@ -28,7 +28,6 @@ export default defineComponent({
     IonCol,
     IonContent,
     RecipesList,
-    // RecipeDetails,
   },
 });
 
