@@ -17,7 +17,6 @@
             <ion-item>
               <ion-label for="email" position="floating">Email:</ion-label>
               <ion-input
-                class="input"
                 type="email"
                 id="email"
                 v-model="email"
@@ -29,7 +28,6 @@
                 >Password:</ion-label
               >
               <ion-input
-                class="input"
                 type="password"
                 id="password"
                 v-model="password"
