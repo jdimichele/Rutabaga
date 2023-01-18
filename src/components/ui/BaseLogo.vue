@@ -1,11 +1,11 @@
 <template>
-    <div>
-      <ion-img
-        :src="require('../../../public/assets/icon/icon.png')"
-        class="logo"
-      ></ion-img>
-      <ion-title size="large">Rutabaga</ion-title>
-    </div>
+  <div>
+    <ion-img
+      :src="require('../../../public/assets/icon/icon.png')"
+      class="logo"
+    ></ion-img>
+    <ion-title size="large">Rutabaga</ion-title>
+  </div>
 </template>
 
 <script>
@@ -32,6 +32,6 @@ ion-title {
   margin-right: auto;
   height: 300px;
   width: 300px;
-  margin-top: 100px;
+  margin-top: 50px;
 }
 </style>

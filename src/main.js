@@ -4,8 +4,6 @@ import router from "./router";
 import store from "./store/index.js";
 import { IonicVue } from "@ionic/vue";
 
-import "./theme/tailwind.css";
-
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/vue/css/core.css";
 

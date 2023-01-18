@@ -1,6 +1,11 @@
 /* Ionic Variables and Theming. For more info, please see:
 http://ionicframework.com/docs/theming/ */
 
+/* Colors that I had in TailwindCSS that Ionic said no to:
+        "rut-generic-mauve": "#7a3750",
+        "rut-generic-green": "#6b932e",
+*/
+
 /** Ionic CSS Variables **/
 :root {
   /** primary **/

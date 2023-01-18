@@ -29,6 +29,7 @@
     "firebase": "^9.13.0",
     "gsap": "^3.11.3",
     "ionicons": "^6.0.3",
+    "postcss-loader": "^7.0.2",
     "vue": "^3.2.45",
     "vue-router": "4.1.6",
     "vuex": "^4.0.2"
