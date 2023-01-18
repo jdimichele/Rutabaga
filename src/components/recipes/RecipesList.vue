@@ -38,6 +38,7 @@ export default {
     return {
       isLoading: false,
       error: null,
+      errorMessage: "",
     };
   },
   methods: {
@@ -46,7 +47,8 @@ export default {
       try {
         await this.$store.dispatch("recipes/loadAllRecipes");
       } catch (error) {
-        this.error = error.message || "Something exploded. :(";
+        this.error = true;
+        this.errorMessage = error.message || "Something exploded and that's on me. :(";
       }
       this.isLoading = false;
     },

@@ -9,8 +9,8 @@
             Don't have an account?
             <router-link to="/register">Register here.</router-link>
           </p>
-          <div class="signin-form-wrapper">
-            <form class="signin-form" @submit.prevent="login" v-on:keyup.enter="login">
+          <div>
+            <form class="" @submit.prevent="login" v-on:keyup.enter="login">
               <ion-item>
                 <ion-label for="email" position="floating">Email:</ion-label>
                 <ion-input
@@ -87,17 +87,15 @@ export default {
   background-image: url(../../../public/assets/background.png);
   height: 100%;
 }
-.signin-form {
-  padding: 70px 0;
+ion-card {
   display: flex;
-  flex-flow: column;
+  justify-content: center;
 }
-
 ion-button {
   display: flex;
   width: 200px;
-  justify-content: center;
-  align-items: center;
+  align-self: center;
   margin: 30px;
+  --background: theme("colors.rut-generic-mauve");
 }
 </style>
