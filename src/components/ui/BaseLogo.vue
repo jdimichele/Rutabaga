@@ -20,8 +20,8 @@ export default {
 
 <style scoped>
 ion-title {
-  margin-top: 100px;
-  margin-bottom: 100px;
+  margin-top: 50px;
+  margin-bottom: 50px;
   font-size: 50px;
   text-align: center;
   --color: white;
