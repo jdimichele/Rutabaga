@@ -1,7 +1,7 @@
 <template>
   <!-- TODO: Recently Added Page, Recently Viewed Page, ???-->
   <ion-card>
-    <ion-title>Recently Added Recipes:</ion-title>
+    <ion-title class="title">Recently Added Recipes:</ion-title>
     <div v-if="isLoading">
       <ion-loading></ion-loading>
     </div>
@@ -19,7 +19,6 @@
         :instructions="recipe.recipeInstructions"
       ></recipe-list-item>
     </div>
-    
   </ion-card>
 </template>
 
@@ -48,7 +47,8 @@ export default {
         await this.$store.dispatch("recipes/loadAllRecipes");
       } catch (error) {
         this.error = true;
-        this.errorMessage = error.message || "Something exploded and that's on me. :(";
+        this.errorMessage =
+          error.message || "Something exploded and that's on me. :(";
       }
       this.isLoading = false;
     },
@@ -68,3 +68,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.title {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+</style>

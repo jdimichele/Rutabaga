@@ -150,20 +150,17 @@ export default {
 <style scoped>
 .registerPage {
   background-image: url(../../../public/assets/background.png);
-  height: 100vh;
+  height: 100%;
 }
 .registerContainer {
   display: grid;
   place-content: center;
 }
 .registerForm {
-  padding: 70px 0;
-  display: flex;
-  flex-flow: column;
+  padding: 10px 35px 0 35px;
 }
 .registerCard {
   justify-items: center;
-  padding: 3px 200px;
 }
 .registerText {
   text-align: center;

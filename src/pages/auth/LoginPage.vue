@@ -94,11 +94,12 @@ export default {
   place-content: center;
 }
 .loginForm {
-text-align: center;
+  text-align: center;
 }
 .loginCard {
   justify-items: center;
-  padding: 30px 200px;
+  padding: 30px;
+  margin: auto;
 }
 .loginText {
   text-align: center;
