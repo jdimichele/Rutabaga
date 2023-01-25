@@ -38,7 +38,9 @@ app.component("base-card", BaseCard);
 app.component("base-header", BaseHeader);
 app.component("base-logo", BaseLogo);
 
-app.use(router).use(store).use(IonicVue);
+app.use(router).use(store).use(IonicVue, {
+  mode: "md",
+});
 
 router.isReady().then(() => {
   app.mount("#app");
