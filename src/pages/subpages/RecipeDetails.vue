@@ -3,8 +3,8 @@
     <base-header title="Recipe Details"></base-header>
     <ion-content v-if="currentRecipe">
       <div>
-        <h2>{{ this.currentRecipe[0].recipeName }}</h2>
         <h2>{{ this.currentRecipe[0].recipePhoto }}</h2>
+        <h2>{{ this.currentRecipe[0].recipeName }}</h2>
         <h2>{{ this.currentRecipe[0].recipeTime }}</h2>
         <h2>{{ this.currentRecipe[0].recipeServings }}</h2>
         <h2>{{ this.currentRecipe[0].recipeCategory }}</h2>

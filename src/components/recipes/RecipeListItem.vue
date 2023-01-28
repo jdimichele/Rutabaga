@@ -1,29 +1,29 @@
 <template>
   <ion-card @click="openRecipeDetails">
+    <img
+      class="recipePhoto"
+      :src="require(`../../../resources/icon/icon@2x.png`)"
+    />
     <div class="recipeListCard">
-      <img
-        class="recipePhoto"
-        :src="require(`../../../resources/icon/icon@2x.png`)"
-      />
       <!-- Will need {{ photo }} interpolation here eventually. -->
       <ion-card-title class="recipeName">
         {{ name }}
       </ion-card-title>
       <ion-card-content>
-        {{ servings }} servings
-
-        <ion-badge slot="end">{{ category }}</ion-badge>
+        <span class="recipeServings">{{ servings }} servings</span>
+        <ion-badge class="recipeBadge">{{ category }}</ion-badge>
       </ion-card-content>
     </div>
   </ion-card>
 </template>
 
 <script>
-import { IonCard, IonCardTitle, IonCardContent } from "@ionic/vue";
+import { IonCard, IonCardTitle, IonCardContent, IonBadge } from "@ionic/vue";
 
 export default {
   components: {
     IonCard,
+    IonBadge,
     IonCardTitle,
     IonCardContent,
   },
@@ -42,7 +42,6 @@ export default {
       });
     },
   },
-  computed: {},
 };
 </script>
 
@@ -57,7 +56,10 @@ export default {
   border-radius: 0.5rem 0.5rem 0 0;
   height: 300px;
 }
-ion-badge {
-  --background: #7a3750;
+.recipeBadge {
+  background-color: #7a3750;
+  float: right;
+}
+.recipeName {
 }
 </style>
