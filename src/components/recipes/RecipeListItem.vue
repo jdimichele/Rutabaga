@@ -2,10 +2,11 @@
   <ion-card @click="openRecipeDetails">
     <img
       class="recipePhoto"
-      :src="require(`../../../resources/icon/icon@2x.png`)"
+      :src="require(`../../../resources/firstDin.jpg`)"
     />
+    <!-- Will need {{ photo }} interpolation here eventually. -->
     <div class="recipeListCard">
-      <!-- Will need {{ photo }} interpolation here eventually. -->
+      
       <ion-card-title class="recipeName">
         {{ name }}
       </ion-card-title>
@@ -48,18 +49,19 @@ export default {
 <style scoped>
 .recipeListCard {
   border-radius: 0.5rem;
-  padding-bottom: 1rem;
   overflow: hidden;
 }
 .recipePhoto {
-  width: 100%;
+  max-width: 100%;
   border-radius: 0.5rem 0.5rem 0 0;
-  height: 300px;
+  height: 200px;
 }
 .recipeBadge {
   background-color: #7a3750;
   float: right;
 }
 .recipeName {
+  padding-left: 16px;
+  padding-top: 4px;
 }
 </style>

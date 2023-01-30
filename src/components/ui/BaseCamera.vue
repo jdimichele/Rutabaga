@@ -1,39 +1,52 @@
-<template></template>
+<template>
+  <ion-item>
+    <ion-label position="floating">Photo:</ion-label>
+    <ion-input
+      type="none"
+      id="photo"
+      :value="this.photoUrl.val"
+      @ionInput="this.photoUrl.val = $event.target.value"
+      @click="takePicture"
+    ></ion-input>
+  </ion-item>
+  <!-- <ion-button @click="takePicture">Pls</ion-button> -->
+</template>
 
 <script>
-import { camera, trash, close } from "ionicons/icons";
-import {
-  Camera,
-  CameraResultType,
-  CameraSource,
-  Photo,
-} from "@capacitor/camera";
-import { Filesystem, Directory } from "@capacitor/filesystem";
-import { Preferences } from "@capacitor/preferences";
-
-export function usePhotoGallery() {
-  const takePhoto = async () => {
-    const photo = await Camera.getPhoto({
-      resultType: CameraResultType.Uri,
-      source: CameraSource.Camera,
-      quality: 100,
-    });
-  };
-  return {
-    takePhoto,
-  };
-}
+import { IonItem, IonLabel, IonInput } from "@ionic/vue";
+import { Camera, CameraResultType } from "@capacitor/camera";
 
 export default {
-  setup() {
+  components: { IonItem, IonLabel, IonInput },
+  props: ["photo"],
+  data() {
     return {
-      camera,
-      trash,
-      close,
-      takePhoto,
+      photoUrl: null,
     };
   },
-  methods: {},
+  methods: {
+    async takePicture() {
+      Camera.requestPermissions();
+      const image = await Camera.getPhoto({
+        quality: 100,
+        allowEditing: true,
+        resultType: CameraResultType.Base64,
+      });
+
+      if (image.base64String) {
+        this.photoUrl = image;
+      }
+      return this.photoUrl;
+      // image.webPath will contain a path that can be set as an image src.
+      // You can access the original file using image.path, which can be
+      // passed to the Filesystem API to read the raw data of the image,
+      // if desired (or pass resultType: CameraResultType.Base64 to getPhoto)
+      // var imageUrl = image.webPath;
+      // HTMLImageElement.src = imageUrl;
+      // this.photoUrl = imageUrl;
+      // console.log(imageUrl);
+      // console.log(this.photoUrl);
+    },
+  },
 };
 </script>
->

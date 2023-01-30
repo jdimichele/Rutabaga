@@ -3,11 +3,17 @@
     <base-header title="All Recipes"></base-header>
     <ion-content>
       <ion-grid :fixed="true">
-        <ion-col>
-        </ion-col>
+        <ion-row>
+          <ion-col>Last Viewed:</ion-col>
+        </ion-row>
         <ion-row>
           <ion-col>
             <recipes-list></recipes-list>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <recipe-categories></recipe-categories>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -19,6 +25,7 @@
 import { defineComponent } from "vue";
 import { IonPage, IonGrid, IonRow, IonCol, IonContent } from "@ionic/vue";
 import RecipesList from "@/components/recipes/RecipesList.vue";
+import RecipeCategories from "@/components/recipes/RecipeCategories.vue";
 
 export default defineComponent({
   components: {
@@ -28,6 +35,7 @@ export default defineComponent({
     IonCol,
     IonContent,
     RecipesList,
+    RecipeCategories,
   },
 });
 

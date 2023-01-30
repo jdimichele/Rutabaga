@@ -1,6 +1,5 @@
 <template>
-  <!-- TODO: Recently Added Page, Recently Viewed Page, ???-->
-  <ion-card>
+  <base-card>
     <ion-title class="title">Recently Added Recipes:</ion-title>
     <div v-if="isLoading">
       <ion-loading></ion-loading>
@@ -12,23 +11,19 @@
         :id="recipe.recipeID"
         :name="recipe.recipeName"
         :photo="recipe.recipePhoto"
-        :time="recipe.recipeTime"
         :category="recipe.recipeCategory"
         :servings="recipe.recipeServings"
-        :ingredients="recipe.recipeIngredients"
-        :instructions="recipe.recipeInstructions"
       ></recipe-list-item>
     </div>
-  </ion-card>
+  </base-card>
 </template>
 
 <script>
-import { IonCard, IonLoading, IonTitle } from "@ionic/vue";
+import { IonLoading, IonTitle } from "@ionic/vue";
 import RecipeListItem from "./RecipeListItem.vue";
 
 export default {
   components: {
-    IonCard,
     IonLoading,
     IonTitle,
     RecipeListItem,
@@ -56,7 +51,7 @@ export default {
   },
   computed: {
     allRecipes() {
-      return this.$store.getters["recipes/allRecipes"];
+      return this.$store.getters["recipes/allRecipes"].slice(0, 3);
     },
     hasRecipes() {
       return !this.isLoading && this.$store.getters["recipes/hasRecipes"];
@@ -73,5 +68,6 @@ export default {
 .title {
   margin-top: 10px;
   margin-bottom: 10px;
+  text-align: center;
 }
 </style>

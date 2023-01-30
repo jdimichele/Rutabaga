@@ -12,7 +12,7 @@
         ></ion-input>
       </ion-item>
 
-      <ion-item>
+      <!-- <ion-item>
         <ion-label position="floating">Photo:</ion-label>
         <ion-input
           type="none"
@@ -20,8 +20,11 @@
           :value="photo.val"
           @ionInput="photo.val = $event.target.value"
         ></ion-input>
-      </ion-item>
+      </ion-item> -->
 
+      <!-- Will need to re-write this soon, but currently for testing purposes: -->
+      <base-camera :value="photo.val"></base-camera>
+      <!-- End of photo testing code. -->
       <ion-item>
         <ion-label position="floating">Time:</ion-label>
         <ion-input
@@ -122,6 +125,7 @@ import {
   toastController,
 } from "@ionic/vue";
 import { add } from "ionicons/icons";
+import BaseCamera from "../ui/BaseCamera.vue";
 
 export default {
   components: {
@@ -135,6 +139,7 @@ export default {
     IonSelectOption,
     IonButton,
     IonContent,
+    BaseCamera,
   },
   emits: ["save-recipe"],
   data() {

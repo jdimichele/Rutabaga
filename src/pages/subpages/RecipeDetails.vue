@@ -1,27 +1,50 @@
 <template>
   <ion-page>
     <base-header title="Recipe Details"></base-header>
-    <ion-content v-if="currentRecipe">
-      <div>
-        <h2>{{ this.currentRecipe[0].recipePhoto }}</h2>
-        <h2>{{ this.currentRecipe[0].recipeName }}</h2>
-        <h2>{{ this.currentRecipe[0].recipeTime }}</h2>
-        <h2>{{ this.currentRecipe[0].recipeServings }}</h2>
-        <h2>{{ this.currentRecipe[0].recipeCategory }}</h2>
-        <h2>{{ this.currentRecipe[0].recipeIngredients }}</h2>
-        <h2>{{ this.currentRecipe[0].recipeInstructions }}</h2>
-      </div>
+    <ion-content>
+      <base-card v-if="currentRecipe">
+        <div class="recipeInfo">
+          <ion-list>
+            <ion-item lines="none">
+              <!-- Will need to re-enable image interpolation later.
+               <span>{{ this.currentRecipe[0].recipePhoto }}</span> -->
+              <img
+                class="recipePhoto"
+                :src="require(`../../../resources/firstDin.jpg`)"
+              />
+            </ion-item>
+            <ion-item lines="none">
+              <h1>{{ this.currentRecipe[0].recipeName }}</h1>
+            </ion-item>
+            <ion-item lines="none">
+              {{ this.currentRecipe[0].recipeTime }}
+            </ion-item>
+            <ion-item lines="none">
+              {{ this.currentRecipe[0].recipeServings }}
+            </ion-item>
+            <ion-item lines="none">
+              {{ this.currentRecipe[0].recipeCategory }}
+            </ion-item>
+            <ion-item lines="none">
+              {{ this.currentRecipe[0].recipeIngredients }}
+            </ion-item>
+            <ion-item lines="none">
+              {{ this.currentRecipe[0].recipeInstructions }}
+            </ion-item>
+          </ion-list>
+        </div>
+      </base-card>
     </ion-content>
   </ion-page>
 </template>
 
 <script>
-import { IonPage, IonContent } from "@ionic/vue";
+import { IonPage, IonContent, IonItem, IonList } from "@ionic/vue";
 import { mapGetters } from "vuex";
 
 export default {
   name: "RecipeDetails",
-  components: { IonPage, IonContent },
+  components: { IonPage, IonContent, IonItem, IonList },
   data() {
     return {
       isLoading: false,
@@ -39,3 +62,13 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.recipeInfo {
+}
+.recipePhoto {
+  width: 100%;
+  border-radius: 0.5rem 0.5rem 0 0;
+  max-height: fit-content;
+}
+</style>

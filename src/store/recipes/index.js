@@ -58,7 +58,6 @@ export default {
         instructions: data.instructions,
       };
       await dataBase.set(recipeData);
-      
     },
 
     async loadAllRecipes({ state }) {
@@ -92,6 +91,9 @@ export default {
   getters: {
     allRecipes(state) {
       return state.allRecipes;
+    },
+    recentlyAddedRecipes(state) {
+      return state.allRecipes.slice(0, 3);
     },
     hasRecipes(state) {
       return state.allRecipes && state.allRecipes.length > 0;
