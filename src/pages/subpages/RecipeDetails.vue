@@ -64,8 +64,8 @@ export default {
 </script>
 
 <style scoped>
-.recipeInfo {
-}
+/* .recipeInfo {
+} */
 .recipePhoto {
   width: 100%;
   border-radius: 0.5rem 0.5rem 0 0;
