@@ -22,12 +22,11 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
 import { IonPage, IonGrid, IonRow, IonCol, IonContent } from "@ionic/vue";
 import RecipesList from "@/components/recipes/RecipesList.vue";
 import RecipeCategories from "@/components/recipes/RecipeCategories.vue";
 
-export default defineComponent({
+export default {
   components: {
     IonPage,
     IonGrid,
@@ -37,21 +36,7 @@ export default defineComponent({
     RecipesList,
     RecipeCategories,
   },
-});
-
-/* 
-At some point, will need to implement the refresher logic here, but for now, here's said logic:
-    setup() {
-      const doRefresh = (event) => {
-        this.loadRecipes();
-        setTimeout(() => {
-          console.log("Async operation has ended.");
-          event.target.complete();
-        }, 2000);
-      };
-      return { doRefresh };
-    },
-*/
+};
 </script>
 
 <style scoped>

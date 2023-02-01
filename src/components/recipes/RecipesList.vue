@@ -61,6 +61,16 @@ export default {
   mounted() {
     this.loadRecipes();
   },
+  // setup() {
+  //   const doRefresh = (event) => {
+  //     this.loadRecipes();
+  //     setTimeout(() => {
+  //       console.log("Async operation has ended.");
+  //       event.target.complete();
+  //     }, 2000);
+  //   };
+  //   return { doRefresh };
+  // },
 };
 </script>
 

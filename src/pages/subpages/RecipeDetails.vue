@@ -6,12 +6,8 @@
         <div class="recipeInfo">
           <ion-list>
             <ion-item lines="none">
-              <!-- Will need to re-enable image interpolation later.
-               <span>{{ this.currentRecipe[0].recipePhoto }}</span> -->
-              <img
-                class="recipePhoto"
-                :src="require(`../../../resources/firstDin.jpg`)"
-              />
+              <!-- Will need to re-enable image interpolation later. -->
+              <span>{{ this.currentRecipe[0].recipePhoto }}</span>
             </ion-item>
             <ion-item lines="none">
               <h1>{{ this.currentRecipe[0].recipeName }}</h1>

@@ -12,19 +12,19 @@
         ></ion-input>
       </ion-item>
 
-      <!-- <ion-item>
+      <!-- Will need to re-write this soon, but currently for testing purposes: -->
+      <ion-item>
         <ion-label position="floating">Photo:</ion-label>
         <ion-input
           type="none"
           id="photo"
           :value="photo.val"
           @ionInput="photo.val = $event.target.value"
-        ></ion-input>
-      </ion-item> -->
-
-      <!-- Will need to re-write this soon, but currently for testing purposes: -->
-      <base-camera :value="photo.val"></base-camera>
+          ><button @click="takePicture">Test</button></ion-input
+        >
+      </ion-item>
       <!-- End of photo testing code. -->
+
       <ion-item>
         <ion-label position="floating">Time:</ion-label>
         <ion-input
@@ -125,7 +125,18 @@ import {
   toastController,
 } from "@ionic/vue";
 import { add } from "ionicons/icons";
-import BaseCamera from "../ui/BaseCamera.vue";
+import { Camera, CameraResultType, CameraSource } from "@capacitor/camera";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
+
+function uuidv4() {
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+    const r = (Math.random() * 16) | 0,
+      v = c == "x" ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
 
 export default {
   components: {
@@ -139,7 +150,6 @@ export default {
     IonSelectOption,
     IonButton,
     IonContent,
-    BaseCamera,
   },
   emits: ["save-recipe"],
   data() {
@@ -185,6 +195,25 @@ export default {
       };
       this.$emit("save-recipe", recipeForm);
       this.presentToast("middle");
+    },
+    async takePicture() {
+      const image = await Camera.getPhoto({
+        quality: 100,
+        allowEditing: true,
+        source: CameraSource.Camera,
+        resultType: CameraResultType.Base64,
+      });
+      if (image?.base64String) {
+        const userId = firebase.auth().currentUser.uid;
+        const guid = uuidv4();
+        const filePath = `${userId}/images/${guid}.${image.format}`;
+
+        const storageRef = firebase.storage().ref();
+        await storageRef
+          .child(filePath)
+          .putString(image.base64String, "base64");
+        this.photo.val = await storageRef.child(filePath).getDownloadURL();
+      }
     },
 
     async presentToast(position) {
