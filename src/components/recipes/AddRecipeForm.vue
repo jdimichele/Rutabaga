@@ -13,14 +13,14 @@
       </ion-item>
 
       <!-- Will need to re-write this soon, but currently for testing purposes: -->
-      <ion-item>
+      <ion-item class="photoBlock">
         <ion-label position="floating">Photo:</ion-label>
         <ion-input
           type="none"
           id="photo"
           :value="photo.val"
           @ionInput="photo.val = $event.target.value"
-          ><button @click="takePicture">Test</button></ion-input
+          ><button class="bigButton" @click="takePicture">Test</button></ion-input
         >
       </ion-item>
       <!-- End of photo testing code. -->
@@ -196,7 +196,7 @@ export default {
       this.$emit("save-recipe", recipeForm);
       this.presentToast("middle");
     },
-    
+
     async takePicture() {
       const image = await Camera.getPhoto({
         quality: 100,
@@ -236,8 +236,17 @@ export default {
 .roundedBottom {
   border-radius: 0px 0px 15px 15px;
 }
+.bigButton {
+  width: 200px;
+  height: 200px;
+}
 .recipeForm {
   padding: 10px;
+  display: grid;
+  grid-template-columns: auto;
+}
+.photoBlock {
+  grid-area: 1 / 3 / span 2 / span 2;
 }
 ion-button {
   --transition: background-color, opacity 100ms linear;
