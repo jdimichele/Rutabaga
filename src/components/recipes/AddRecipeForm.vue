@@ -196,6 +196,7 @@ export default {
       this.$emit("save-recipe", recipeForm);
       this.presentToast("middle");
     },
+    
     async takePicture() {
       const image = await Camera.getPhoto({
         quality: 100,

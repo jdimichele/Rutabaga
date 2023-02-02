@@ -7,7 +7,7 @@
           <ion-list>
             <ion-item lines="none">
               <!-- Will need to re-enable image interpolation later. -->
-              <span>{{ this.currentRecipe[0].recipePhoto }}</span>
+              <img :src="this.currentRecipe[0].recipePhoto" />
             </ion-item>
             <ion-item lines="none">
               <h1>{{ this.currentRecipe[0].recipeName }}</h1>
@@ -47,7 +47,6 @@ export default {
       currentRecipe: null,
     };
   },
-  methods: {},
   computed: {
     ...mapGetters("recipes", ["allRecipes"]),
   },

@@ -1,12 +1,7 @@
 <template>
   <ion-card @click="openRecipeDetails">
-    <img
-      class="recipePhoto"
-      :src="require(`../../../resources/firstDin.jpg`)"
-    />
-    <!-- Will need {{ photo }} interpolation here eventually. -->
+    <img class="recipePhoto" :src="photo" />
     <div class="recipeListCard">
-      
       <ion-card-title class="recipeName">
         {{ name }}
       </ion-card-title>
