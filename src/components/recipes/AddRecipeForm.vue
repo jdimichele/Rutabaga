@@ -20,7 +20,9 @@
           id="photo"
           :value="photo.val"
           @ionInput="photo.val = $event.target.value"
-          ><button class="bigButton" @click="takePicture">Test</button></ion-input
+          ><button class="bigButton" @click="takePicture">
+            Test
+          </button></ion-input
         >
       </ion-item>
       <!-- End of photo testing code. -->
@@ -79,14 +81,17 @@
       </ion-item>
 
       <ion-item>
-        <ion-label position="floating">Ingredients:</ion-label>
-        <ion-input
-          type="text"
-          id="ingredients"
-          required
-          :value="ingredients.val"
-          @ionInput="ingredients.val = $event.target.value"
-        ></ion-input>
+        <ion-label position="stacked">Ingredients:</ion-label>
+        <ion-list v-for="(ingredient, index) in ingredients" :key="index">
+          <ion-input
+            type="text"
+            id="ingredients"
+            required
+            :value="ingredient.val"
+            @ionInput="ingredient.val = $event.target.value"
+            ><button @click.prevent="addNewIngredient()">+</button></ion-input
+          >
+        </ion-list>
       </ion-item>
 
       <ion-item class="roundedBottom">
@@ -122,6 +127,7 @@ import {
   IonSelectOption,
   IonButton,
   IonContent,
+  IonList,
   toastController,
 } from "@ionic/vue";
 import { add } from "ionicons/icons";
@@ -150,6 +156,7 @@ export default {
     IonSelectOption,
     IonButton,
     IonContent,
+    IonList,
   },
   emits: ["save-recipe"],
   data() {
@@ -167,13 +174,13 @@ export default {
         val: "",
       },
       category: {
-        val: [],
-      },
-      ingredients: {
-        val: [],
-      },
-      instructions: {
         val: "",
+      },
+      ingredients: [
+        { val: "" }
+      ],
+      instructions: {
+        val: [],
       },
     };
   },
@@ -190,9 +197,10 @@ export default {
         time: this.time.val,
         servings: this.servings.val,
         category: this.category.val,
-        ingredients: this.ingredients.val,
+        ingredients: this.ingredients,
         instructions: this.instructions.val,
       };
+      console.log(this.ingredients);
       this.$emit("save-recipe", recipeForm);
       this.presentToast("middle");
     },
@@ -217,6 +225,10 @@ export default {
       }
     },
 
+    addNewIngredient() {
+      this.ingredients.push({ val: "" });
+    },
+
     async presentToast(position) {
       const toast = await toastController.create({
         message: "Recipe Added!",
@@ -236,10 +248,10 @@ export default {
 .roundedBottom {
   border-radius: 0px 0px 15px 15px;
 }
-.bigButton {
+/* .bigButton {
   width: 200px;
   height: 200px;
-}
+} */
 .recipeForm {
   padding: 10px;
   display: grid;
