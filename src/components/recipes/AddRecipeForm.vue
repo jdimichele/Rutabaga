@@ -3,39 +3,25 @@
     <form class="recipeForm" @submit.prevent="submitRecipe">
       <ion-item class="roundedTop">
         <ion-label position="floating">Name:</ion-label>
-        <ion-input
-          type="text"
-          id="name"
-          required
-          :value="name.val"
-          @ionInput="name.val = $event.target.value"
-        ></ion-input>
+        <ion-input type="text" id="name" required v-model="name"></ion-input>
       </ion-item>
 
       <!-- Will need to re-write this soon, but currently for testing purposes: -->
       <ion-item class="photoBlock">
         <ion-label position="floating">Photo:</ion-label>
-        <ion-input
-          type="none"
-          id="photo"
-          :value="photo.val"
-          @ionInput="photo.val = $event.target.value"
-          ><button class="bigButton" @click="takePicture">
-            Test
-          </button></ion-input
+        <ion-button
+          class="bigButton"
+          @click.prevent="takePicture"
+          v-model="photo"
         >
+          Test
+        </ion-button>
       </ion-item>
       <!-- End of photo testing code. -->
 
       <ion-item>
         <ion-label position="floating">Time:</ion-label>
-        <ion-input
-          type="text"
-          id="time"
-          required
-          :value="time.val"
-          @ionInput="time.val = $event.target.value"
-        ></ion-input>
+        <ion-input type="text" id="time" required v-model="time"></ion-input>
       </ion-item>
 
       <ion-item>
@@ -44,8 +30,7 @@
           placeholder="How many servings?"
           interface="action-sheet"
           required
-          :value="servings.val"
-          @ionChange="servings.val = $event.target.value"
+          v-model="servings"
         >
           <ion-select-option value="1">1</ion-select-option>
           <ion-select-option value="2">2</ion-select-option>
@@ -62,8 +47,7 @@
           placeholder="Which category does this recipe belong to?"
           interface="action-sheet"
           required
-          :value="category.val"
-          @ionChange="category.val = $event.target.value"
+          v-model="category"
         >
           <ion-select-option value="Appetizers">Appetizers</ion-select-option>
           <ion-select-option value="Breakfast">Breakfast</ion-select-option>
@@ -82,15 +66,18 @@
 
       <ion-item>
         <ion-label position="stacked">Ingredients:</ion-label>
-        <ion-list v-for="(ingredient, index) in ingredients" :key="index">
-          <ion-input
-            type="text"
-            id="ingredients"
-            required
-            :value="ingredient.val"
-            @ionInput="ingredient.val = $event.target.value"
-            ><button @click.prevent="addNewIngredient()">+</button></ion-input
-          >
+        <ion-list v-for="ingredient in ingredients" :key="ingredient">
+          <ion-item>
+            <ion-input
+              type="text"
+              id="ingredients"
+              required
+              v-model="ingredient.val"
+              ><button @click.prevent="addNewIngredient()">+</button></ion-input
+            >
+            <!--               :value="ingredient.val"
+              @ionInput="ingredient.val = $event.target.value" -->
+          </ion-item>
         </ion-list>
       </ion-item>
 
@@ -101,8 +88,7 @@
           id="instructions"
           :auto-grow="true"
           required
-          :value="instructions.val"
-          @ionInput="instructions.val = $event.target.value"
+          v-model="instructions"
         ></ion-textarea>
       </ion-item>
 
@@ -143,6 +129,7 @@ function uuidv4() {
     return v.toString(16);
   });
 }
+// let vm = this;
 
 export default {
   components: {
@@ -161,27 +148,13 @@ export default {
   emits: ["save-recipe"],
   data() {
     return {
-      name: {
-        val: "",
-      },
-      photo: {
-        val: "",
-      },
-      time: {
-        val: "",
-      },
-      servings: {
-        val: "",
-      },
-      category: {
-        val: "",
-      },
-      ingredients: [
-        { val: "" }
-      ],
-      instructions: {
-        val: [],
-      },
+      name: "",
+      photo: null,
+      time: "",
+      servings: "",
+      category: "",
+      ingredients: [{ val: "" }],
+      instructions: "",
     };
   },
   setup() {
@@ -192,13 +165,13 @@ export default {
   methods: {
     async submitRecipe() {
       const recipeForm = {
-        name: this.name.val,
-        photo: this.photo.val,
-        time: this.time.val,
-        servings: this.servings.val,
-        category: this.category.val,
+        name: this.name,
+        photo: this.photo,
+        time: this.time,
+        servings: this.servings,
+        category: this.category,
         ingredients: this.ingredients,
-        instructions: this.instructions.val,
+        instructions: this.instructions,
       };
       console.log(this.ingredients);
       this.$emit("save-recipe", recipeForm);
@@ -221,12 +194,12 @@ export default {
         await storageRef
           .child(filePath)
           .putString(image.base64String, "base64");
-        this.photo.val = await storageRef.child(filePath).getDownloadURL();
+        return (this.photo = await storageRef.child(filePath).getDownloadURL());
       }
     },
 
     addNewIngredient() {
-      this.ingredients.push({ val: "" });
+      this.ingredients.push({});
     },
 
     async presentToast(position) {
