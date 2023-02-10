@@ -66,17 +66,16 @@
 
       <ion-item>
         <ion-label position="stacked">Ingredients:</ion-label>
-        <ion-list v-for="ingredient in ingredients" :key="ingredient">
+        <ion-list v-for="(ingredient, index) in ingredients" :key="index">
           <ion-item>
             <ion-input
               type="text"
               id="ingredients"
               required
-              v-model="ingredient.val"
-              ><button @click.prevent="addNewIngredient()">+</button></ion-input
+              v-model="ingredients[index]"
             >
-            <!--               :value="ingredient.val"
-              @ionInput="ingredient.val = $event.target.value" -->
+            </ion-input>
+            <button @click.prevent="addNewIngredient(ingredient)">+</button>
           </ion-item>
         </ion-list>
       </ion-item>
@@ -129,7 +128,6 @@ function uuidv4() {
     return v.toString(16);
   });
 }
-// let vm = this;
 
 export default {
   components: {
@@ -153,13 +151,8 @@ export default {
       time: "",
       servings: "",
       category: "",
-      ingredients: [{ val: "" }],
+      ingredients: [""],
       instructions: "",
-    };
-  },
-  setup() {
-    return {
-      add,
     };
   },
   methods: {
@@ -173,7 +166,6 @@ export default {
         ingredients: this.ingredients,
         instructions: this.instructions,
       };
-      console.log(this.ingredients);
       this.$emit("save-recipe", recipeForm);
       this.presentToast("middle");
     },
@@ -198,8 +190,8 @@ export default {
       }
     },
 
-    addNewIngredient() {
-      this.ingredients.push({});
+    addNewIngredient(item) {
+      this.ingredients.push(item);
     },
 
     async presentToast(position) {
@@ -210,6 +202,11 @@ export default {
       });
       await toast.present();
     },
+  },
+  setup() {
+    return {
+      add,
+    };
   },
 };
 </script>
@@ -227,8 +224,8 @@ export default {
 } */
 .recipeForm {
   padding: 10px;
-  display: grid;
-  grid-template-columns: auto;
+  /* display: grid;
+  grid-template-columns: auto; */
 }
 .photoBlock {
   grid-area: 1 / 3 / span 2 / span 2;
