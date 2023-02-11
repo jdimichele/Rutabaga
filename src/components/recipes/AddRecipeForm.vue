@@ -72,7 +72,22 @@
               type="text"
               id="ingredients"
               required
-              v-model="ingredients[index]"
+              v-model="ingredient.qty"
+            >
+            </ion-input>
+            <ion-input
+              type="text"
+              id="ingredients"
+              required
+              v-model="ingredient.unit"
+            >
+            </ion-input>
+
+            <ion-input
+              type="text"
+              id="ingredients"
+              required
+              v-model="ingredient.name"
             >
             </ion-input>
             <button @click.prevent="addNewIngredient(ingredient)">+</button>
@@ -151,7 +166,13 @@ export default {
       time: "",
       servings: "",
       category: "",
-      ingredients: [""],
+      ingredients: [
+        {
+          qty: "",
+          unit: "",
+          name: "",
+        },
+      ],
       instructions: "",
     };
   },
@@ -190,8 +211,8 @@ export default {
       }
     },
 
-    addNewIngredient(item) {
-      this.ingredients.push(item);
+    addNewIngredient() {
+      this.ingredients.push({});
     },
 
     async presentToast(position) {

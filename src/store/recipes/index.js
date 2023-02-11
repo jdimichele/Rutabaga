@@ -14,7 +14,11 @@ export default {
       recipeTime: null,
       recipeServings: null,
       recipeCategory: null,
-      recipeIngredients: null,
+      recipeIngredients: {
+        qty: "",
+        unit: "",
+        name: "",
+      },
       recipeInstructions: null,
     };
   },
@@ -107,5 +111,9 @@ export default {
       const currentTimestamp = new Date().getTime();
       return (currentTimestamp - lastFetch) / 1000 > 60; // We subtract the current time from the lastFetch time, divide it by 1000 for milliseconds and see if it's been longer than 60 seconds.
     },
+    // May need to redo the below getters:
+    // getIngredientList(state, {ingredientName, ingredientQty, ingredientUnit}){
+    //   return state.allRecipes.filter()
+    // }
   },
 };

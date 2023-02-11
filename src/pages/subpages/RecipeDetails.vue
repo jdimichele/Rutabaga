@@ -13,17 +13,23 @@
               <h1>{{ this.currentRecipe[0].recipeName }}</h1>
             </ion-item>
             <ion-item lines="none">
-              {{ this.currentRecipe[0].recipeTime }}
+              {{ this.currentRecipe[0].recipeTime }} minutes
             </ion-item>
             <ion-item lines="none">
-              {{ this.currentRecipe[0].recipeServings }}
+              {{ this.currentRecipe[0].recipeServings }} servings
             </ion-item>
             <ion-item lines="none">
               {{ this.currentRecipe[0].recipeCategory }}
             </ion-item>
+            <!-- <ion-list v-for="(item, index) in ingredientList" :key="index"> -->
             <ion-item lines="none">
-              {{ this.currentRecipe[0].recipeIngredients }}
+              {{ this.ingredientList.ingredientName }}
+              <!-- quantity:
+              {{ this.currentRecipe[0].recipeIngredients[0].qty }} unit:
+              {{ this.currentRecipe[0].recipeIngredients[0].unit }} name:
+              {{ this.currentRecipe[0].recipeIngredients[0].name }} -->
             </ion-item>
+            <!-- </ion-list> -->
             <ion-item lines="none">
               {{ this.currentRecipe[0].recipeInstructions }}
             </ion-item>
@@ -49,11 +55,18 @@ export default {
   },
   computed: {
     ...mapGetters("recipes", ["allRecipes"]),
+    ingredientList() {
+      const ingredientName = this.currentRecipe[0];
+      const ingredientQty = this.currentRecipe.recipeIngredients.qty;
+      const ingredientUnit = this.currentRecipe.recipeIngredients.unit;
+      return ingredientName, ingredientQty, ingredientUnit;
+    },
   },
   async mounted() {
     this.currentRecipe = await this.allRecipes.filter((recipe) => {
       return recipe.recipeID === this.$route.params.id;
     });
+    console.log(this.currentRecipe);
   },
 };
 </script>
