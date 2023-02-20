@@ -96,14 +96,19 @@
       </ion-item>
 
       <ion-item class="roundedBottom">
-        <ion-label position="floating">Instructions:</ion-label>
-        <ion-textarea
-          type="text"
-          id="instructions"
-          :auto-grow="true"
-          required
-          v-model="instructions"
-        ></ion-textarea>
+        <ion-label position="stacked">Instructions:</ion-label>
+        <ion-list v-for="(step, index) in instructions" :key="index">
+          <ion-item>
+            <ion-input
+              type="text"
+              id="ingredients"
+              required
+              v-model="step.instruction"
+            >
+            </ion-input>
+            <button @click.prevent="addNewStep(step)">+</button>
+          </ion-item>
+        </ion-list>
       </ion-item>
 
       <ion-fab vertical="bottom" horizontal="center" slot="fixed">
@@ -119,7 +124,6 @@
 import {
   IonItem,
   IonLabel,
-  IonTextarea,
   IonInput,
   IonFab,
   IonIcon,
@@ -148,7 +152,6 @@ export default {
   components: {
     IonItem,
     IonLabel,
-    IonTextarea,
     IonInput,
     IonFab,
     IonIcon,
@@ -173,7 +176,11 @@ export default {
           name: "",
         },
       ],
-      instructions: "",
+      instructions: [
+        {
+          instruction: "",
+        },
+      ],
     };
   },
   methods: {
@@ -213,6 +220,9 @@ export default {
 
     addNewIngredient() {
       this.ingredients.push({});
+    },
+    addNewStep() {
+      this.instructions.push({});
     },
 
     async presentToast(position) {

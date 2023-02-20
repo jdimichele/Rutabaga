@@ -21,18 +21,22 @@
             <ion-item lines="none">
               {{ this.currentRecipe[0].recipeCategory }}
             </ion-item>
-            <!-- <ion-list v-for="(item, index) in ingredientList" :key="index"> -->
-            <ion-item lines="none">
-              {{ this.ingredientList.ingredientName }}
-              <!-- quantity:
-              {{ this.currentRecipe[0].recipeIngredients[0].qty }} unit:
-              {{ this.currentRecipe[0].recipeIngredients[0].unit }} name:
-              {{ this.currentRecipe[0].recipeIngredients[0].name }} -->
-            </ion-item>
-            <!-- </ion-list> -->
-            <ion-item lines="none">
-              {{ this.currentRecipe[0].recipeInstructions }}
-            </ion-item>
+            <ion-list v-for="(item, index) in currentIngredients" :key="index">
+              <ion-item lines="none">
+                quantity:
+                {{ this.currentRecipe[0].recipeIngredients[index].qty }}
+                unit:
+                {{ this.currentRecipe[0].recipeIngredients[index].unit }}
+                name:
+                {{ this.currentRecipe[0].recipeIngredients[index].name }}
+              </ion-item>
+            </ion-list>
+            <ion-list v-for="(item, index) in currentInstructions" :key="index">
+              <ion-item lines="none">
+                Steps:
+                {{ this.currentRecipe[0].recipeInstructions[index] }}
+              </ion-item>
+            </ion-list>
           </ion-list>
         </div>
       </base-card>
@@ -51,22 +55,19 @@ export default {
     return {
       isLoading: false,
       currentRecipe: null,
+      currentIngredients: null,
+      currentInstructions: null,
     };
   },
   computed: {
     ...mapGetters("recipes", ["allRecipes"]),
-    ingredientList() {
-      const ingredientName = this.currentRecipe[0];
-      const ingredientQty = this.currentRecipe.recipeIngredients.qty;
-      const ingredientUnit = this.currentRecipe.recipeIngredients.unit;
-      return ingredientName, ingredientQty, ingredientUnit;
-    },
   },
   async mounted() {
     this.currentRecipe = await this.allRecipes.filter((recipe) => {
       return recipe.recipeID === this.$route.params.id;
     });
-    console.log(this.currentRecipe);
+    this.currentIngredients = this.currentRecipe[0].recipeIngredients.length;
+    this.currentInstructions = this.currentRecipe[0].recipeInstructions.length;
   },
 };
 </script>
