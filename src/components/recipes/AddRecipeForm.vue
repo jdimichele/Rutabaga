@@ -80,13 +80,12 @@
               required
               v-model="ingredient.unit"
             >
-              <ion-select-option value="teaspoon(s)">Teaspoon(s)</ion-select-option>
-              <ion-select-option value="tablepoon(s)">Tablespoon(s)</ion-select-option>
-              <ion-select-option value="ounce(s)">Ounce(s)</ion-select-option>
-              <ion-select-option value="cup(s)">Cup(s)</ion-select-option>
-              <ion-select-option value="pint(s)">Pint(s)</ion-select-option>
-              <ion-select-option value="quart(s)">Quart(s)</ion-select-option>
-              <ion-select-option value="gallon(s)">Gallon(s)</ion-select-option>
+              <ion-select-option value="tsp">tsp</ion-select-option>
+              <ion-select-option value="Tbsp">Tbsp</ion-select-option>
+              <ion-select-option value="g">g</ion-select-option>
+              <ion-select-option value="oz">oz</ion-select-option>
+              <ion-select-option value="cup">cup</ion-select-option>
+              <ion-select-option value="gal">gal</ion-select-option>
             </ion-select>
 
             <ion-input
