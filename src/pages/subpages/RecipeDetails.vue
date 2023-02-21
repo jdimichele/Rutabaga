@@ -33,8 +33,8 @@
             </ion-list>
             <ion-list v-for="(item, index) in currentInstructions" :key="index">
               <ion-item lines="none">
-                Steps:
-                {{ this.currentRecipe[0].recipeInstructions[index] }}
+                Step {{ index + 1 }}:
+                {{ this.currentRecipe[0].recipeInstructions[index].instruction }}
               </ion-item>
             </ion-list>
           </ion-list>
@@ -56,6 +56,7 @@ export default {
       isLoading: false,
       currentRecipe: null,
       currentIngredients: null,
+      currentStepCounter: null,
       currentInstructions: null,
     };
   },

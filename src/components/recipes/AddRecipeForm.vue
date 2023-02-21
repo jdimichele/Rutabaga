@@ -6,18 +6,15 @@
         <ion-input type="text" id="name" required v-model="name"></ion-input>
       </ion-item>
 
-      <!-- Will need to re-write this soon, but currently for testing purposes: -->
       <ion-item class="photoBlock">
-        <ion-label position="floating">Photo:</ion-label>
         <ion-button
           class="bigButton"
           @click.prevent="takePicture"
           v-model="photo"
         >
-          Test
+          <ion-icon :icon="cameraOutline"></ion-icon>
         </ion-button>
       </ion-item>
-      <!-- End of photo testing code. -->
 
       <ion-item>
         <ion-label position="floating">Time:</ion-label>
@@ -69,19 +66,28 @@
         <ion-list v-for="(ingredient, index) in ingredients" :key="index">
           <ion-item>
             <ion-input
+              placeholder="Quantity"
               type="text"
               id="ingredients"
               required
               v-model="ingredient.qty"
             >
             </ion-input>
-            <ion-input
-              type="text"
-              id="ingredients"
+
+            <ion-select
+              placeholder="Unit of Measurement"
+              interface="action-sheet"
               required
               v-model="ingredient.unit"
             >
-            </ion-input>
+              <ion-select-option value="teaspoon(s)">Teaspoon(s)</ion-select-option>
+              <ion-select-option value="tablepoon(s)">Tablespoon(s)</ion-select-option>
+              <ion-select-option value="ounce(s)">Ounce(s)</ion-select-option>
+              <ion-select-option value="cup(s)">Cup(s)</ion-select-option>
+              <ion-select-option value="pint(s)">Pint(s)</ion-select-option>
+              <ion-select-option value="quart(s)">Quart(s)</ion-select-option>
+              <ion-select-option value="gallon(s)">Gallon(s)</ion-select-option>
+            </ion-select>
 
             <ion-input
               type="text"
@@ -134,7 +140,7 @@ import {
   IonList,
   toastController,
 } from "@ionic/vue";
-import { add } from "ionicons/icons";
+import { add, cameraOutline } from "ionicons/icons";
 import { Camera, CameraResultType, CameraSource } from "@capacitor/camera";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
@@ -237,6 +243,7 @@ export default {
   setup() {
     return {
       add,
+      cameraOutline,
     };
   },
 };
@@ -255,8 +262,8 @@ export default {
 } */
 .recipeForm {
   padding: 10px;
-  /* display: grid;
-  grid-template-columns: auto; */
+  display: grid;
+  grid-template-columns: auto;
 }
 .photoBlock {
   grid-area: 1 / 3 / span 2 / span 2;
@@ -287,6 +294,7 @@ ion-button {
   white-space: nowrap;
   -webkit-font-kerning: none;
   font-kerning: none;
+  --background: #7a3750;
 }
 ion-icon {
   margin: 0;
@@ -294,5 +302,6 @@ ion-icon {
   top: 50%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
+  --background: #7a3750;
 }
 </style>
