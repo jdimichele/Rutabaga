@@ -11,6 +11,9 @@
             </ion-item>
             <ion-item lines="none">
               <h1>{{ this.currentRecipe[0].recipeName }}</h1>
+              <ion-badge class="recipeBadge">{{
+                this.currentRecipe[0].recipeCategory
+              }}</ion-badge>
             </ion-item>
             <ion-item lines="none">
               {{ this.currentRecipe[0].recipeTime }} minutes
@@ -18,25 +21,33 @@
             <ion-item lines="none">
               {{ this.currentRecipe[0].recipeServings }} servings
             </ion-item>
-            <ion-item lines="none">
-              {{ this.currentRecipe[0].recipeCategory }}
-            </ion-item>
+            Ingredients:
             <ion-list v-for="(item, index) in currentIngredients" :key="index">
               <ion-item lines="none">
-                quantity:
-                {{ this.currentRecipe[0].recipeIngredients[index].qty }}
-                unit:
-                {{ this.currentRecipe[0].recipeIngredients[index].unit }}
-                name:
-                {{ this.currentRecipe[0].recipeIngredients[index].name }}
+                <li>
+                  {{ this.currentRecipe[0].recipeIngredients[index].qty }}
+                  {{ this.currentRecipe[0].recipeIngredients[index].unit }} of
+                  {{ this.currentRecipe[0].recipeIngredients[index].name }}
+                </li>
               </ion-item>
             </ion-list>
-            <ion-list v-for="(item, index) in currentInstructions" :key="index">
-              <ion-item lines="none">
-                Step {{ index + 1 }}:
-                {{ this.currentRecipe[0].recipeInstructions[index].instruction }}
-              </ion-item>
-            </ion-list>
+            <div>
+              <h6>Step-By-Step:</h6>
+              <ion-list
+                v-for="(item, index) in currentInstructions"
+                :key="index"
+              >
+                <ion-item lines="none">
+                  <h6>Step {{ index + 1 }}:</h6>
+                  <p>
+                    {{
+                      this.currentRecipe[0].recipeInstructions[index]
+                        .instruction
+                    }}
+                  </p>
+                </ion-item>
+              </ion-list>
+            </div>
           </ion-list>
         </div>
       </base-card>
@@ -45,12 +56,12 @@
 </template>
 
 <script>
-import { IonPage, IonContent, IonItem, IonList } from "@ionic/vue";
+import { IonPage, IonContent, IonItem, IonList, IonBadge } from "@ionic/vue";
 import { mapGetters } from "vuex";
 
 export default {
   name: "RecipeDetails",
-  components: { IonPage, IonContent, IonItem, IonList },
+  components: { IonPage, IonContent, IonItem, IonList, IonBadge },
   data() {
     return {
       isLoading: false,
@@ -76,6 +87,9 @@ export default {
 <style scoped>
 /* .recipeInfo {
 } */
+.recipeBadge {
+  background-color: #7a3750;
+}
 .recipePhoto {
   width: 100%;
   border-radius: 0.5rem 0.5rem 0 0;
