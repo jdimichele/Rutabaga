@@ -77,7 +77,6 @@
             <ion-select
               placeholder="Unit of Measurement"
               interface="action-sheet"
-              required
               v-model="ingredient.unit"
             >
               <ion-select-option value="tsp">tsp</ion-select-option>
@@ -86,6 +85,8 @@
               <ion-select-option value="oz">oz</ion-select-option>
               <ion-select-option value="cup">cup</ion-select-option>
               <ion-select-option value="gal">gal</ion-select-option>
+              <ion-select-option value="cloves">cloves</ion-select-option>
+              <ion-select-option value="lbs">lbs</ion-select-option>
             </ion-select>
 
             <ion-input

@@ -26,7 +26,7 @@
               <ion-item lines="none">
                 <li>
                   {{ this.currentRecipe[0].recipeIngredients[index].qty }}
-                  {{ this.currentRecipe[0].recipeIngredients[index].unit }} of
+                  {{ this.currentRecipe[0].recipeIngredients[index].unit }}
                   {{ this.currentRecipe[0].recipeIngredients[index].name }}
                 </li>
               </ion-item>

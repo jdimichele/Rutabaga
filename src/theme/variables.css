@@ -5,6 +5,9 @@ http://ionicframework.com/docs/theming/ */
         "rut-generic-mauve": "#7a3750",
         "rut-generic-green": "#6b932e",
 */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /** Ionic CSS Variables **/
 :root {

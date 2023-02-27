@@ -22,7 +22,6 @@ import "@ionic/vue/css/typography.css";
 
 /* Theme variables */
 import "./theme/variables.css";
-import "./theme/index.css";
 
 /* Imports for global components. */
 import BaseCard from "./components/ui/BaseCard.vue";
