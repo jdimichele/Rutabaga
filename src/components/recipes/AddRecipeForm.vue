@@ -85,7 +85,6 @@
               <ion-select-option value="oz">oz</ion-select-option>
               <ion-select-option value="cup">cup</ion-select-option>
               <ion-select-option value="gal">gal</ion-select-option>
-              <ion-select-option value="cloves">cloves</ion-select-option>
               <ion-select-option value="lbs">lbs</ion-select-option>
             </ion-select>
 
@@ -189,6 +188,7 @@ export default {
       ],
     };
   },
+  // Possible future idea: IF the quantity is more than 1, we add an 's' to the end of the unit.
   methods: {
     async submitRecipe() {
       const recipeForm = {
