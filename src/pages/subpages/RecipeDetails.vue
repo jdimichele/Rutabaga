@@ -12,28 +12,30 @@
             </ion-row>
             <div class="recipeTitle">
               <ion-row>
-                <ion-col>
+                <ion-col size-md="6" size-sm="1">
                   <ion-item lines="none">
                     <h1 class="recipeName">
                       {{ this.currentRecipe[0].recipeName }}
                     </h1>
                   </ion-item>
                 </ion-col>
-                <ion-col>
+                <ion-row>
+                  <ion-item lines="none" class="recipeTime">
+                    {{ this.currentRecipe[0].recipeTime }} minutes
+                  </ion-item>
+                  <ion-item lines="none" class="recipeServings">
+                    {{ this.currentRecipe[0].recipeServings }} servings
+                  </ion-item>
+                </ion-row>
+                <ion-col size-md="6" size-sm="1">
                   <ion-badge class="recipeBadge">
                     {{ this.currentRecipe[0].recipeCategory }}
                   </ion-badge>
                 </ion-col>
-                <ion-item lines="none" class="recipeTime">
-                  {{ this.currentRecipe[0].recipeTime }} minutes
-                </ion-item>
-                <ion-item lines="none" class="recipeServings">
-                  {{ this.currentRecipe[0].recipeServings }} servings
-                </ion-item>
               </ion-row>
             </div>
             <ion-row>
-              <ion-col>
+              <ion-col size-md="6" size-sm="1">
                 <div class="recipeIngredients">
                   <h6>Ingredients:</h6>
                   <ion-list
@@ -54,7 +56,7 @@
                   </ion-list>
                 </div>
               </ion-col>
-              <ion-col>
+              <ion-col size-md="6" size-sm="1">
                 <div class="recipeInstructions">
                   <h6>Step-By-Step:</h6>
                   <ion-list
@@ -63,7 +65,7 @@
                   >
                     <ion-item lines="none">
                       <h6 class="pr-2">Step {{ index + 1 }}:</h6>
-                      <p>
+                      <p class="">
                         {{
                           this.currentRecipe[0].recipeInstructions[index]
                             .instruction
@@ -136,6 +138,9 @@ export default {
 }
 .recipeTitle {
   display: inline-flex;
+}
+.recipeName {
+  font-size: 32px;
 }
 .recipeBadge {
   background-color: #7a3750;
