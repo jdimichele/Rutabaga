@@ -28,7 +28,7 @@
             </ion-badge>
           </ion-row>
           <ion-row>
-            <ion-col size-md="6" size-sm="1">
+            <ion-col size-md="6" size-sm="4">
               <div class="recipeIngredients">
                 <h6>Ingredients:</h6>
                 <ion-list
@@ -36,22 +36,18 @@
                   :key="index"
                 >
                   <ion-item lines="none">
-                    <ul class="iList">
-                      <li>
-                        {{ this.currentRecipe[0].recipeIngredients[index].qty }}
-                        {{
-                          this.currentRecipe[0].recipeIngredients[index].unit
-                        }}
-                        {{
-                          this.currentRecipe[0].recipeIngredients[index].name
-                        }}
-                      </li>
-                    </ul>
+                    <li>
+                      {{ this.currentRecipe[0].recipeIngredients[index].qty }}
+                      {{ this.currentRecipe[0].recipeIngredients[index].unit }}
+                      {{ this.currentRecipe[0].recipeIngredients[index].name }}
+                    </li>
                   </ion-item>
                 </ion-list>
               </div>
             </ion-col>
-            <ion-col size-md="6" size-sm="1">
+          </ion-row>
+          <ion-row>
+            <ion-col size-md="6" size-sm="4">
               <div class="recipeInstructions">
                 <h6>Step-By-Step:</h6>
                 <ion-list
@@ -59,11 +55,16 @@
                   :key="index"
                 >
                   <ion-item lines="none">
-                    <h6 class="pr-2">Step {{ index + 1 }}:</h6>
-                    {{
-                      this.currentRecipe[0].recipeInstructions[index]
-                        .instruction
-                    }}
+                    <ion-label class="ion-text-wrap">
+                      <h6 class="pr-2">Step {{ index + 1 }}:</h6>
+
+                      <p>
+                        {{
+                          this.currentRecipe[0].recipeInstructions[index]
+                            .instruction
+                        }}
+                      </p>
+                    </ion-label>
                   </ion-item>
                 </ion-list>
               </div>
@@ -85,6 +86,7 @@ import {
   IonGrid,
   IonRow,
   IonCol,
+  IonLabel,
 } from "@ionic/vue";
 import { mapGetters } from "vuex";
 
@@ -99,6 +101,7 @@ export default {
     IonGrid,
     IonRow,
     IonCol,
+    IonLabel,
   },
   data() {
     return {
@@ -139,7 +142,7 @@ export default {
   height: 23px;
   right: 0px;
 }
-ul {
-  list-style-type: circle;
+.recipeIngredients {
+  padding: none;
 }
 </style>
