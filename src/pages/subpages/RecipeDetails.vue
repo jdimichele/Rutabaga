@@ -57,7 +57,7 @@
                   <ion-item lines="none">
                     <ion-label class="ion-text-wrap">
                       <h6 class="pr-2">Step {{ index + 1 }}:</h6>
-
+                      <ion-icon :icon="star" slot="start"></ion-icon>
                       <p>
                         {{
                           this.currentRecipe[0].recipeInstructions[index]
