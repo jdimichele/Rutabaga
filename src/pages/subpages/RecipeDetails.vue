@@ -28,7 +28,7 @@
             </ion-badge>
           </ion-row>
           <ion-row>
-            <ion-col size-md="6" size-sm="4">
+            <ion-col size-md="7" size-sm="5">
               <div class="recipeIngredients">
                 <h6>Ingredients:</h6>
                 <ion-list
@@ -36,18 +36,24 @@
                   :key="index"
                 >
                   <ion-item lines="none">
-                    <li>
-                      {{ this.currentRecipe[0].recipeIngredients[index].qty }}
-                      {{ this.currentRecipe[0].recipeIngredients[index].unit }}
-                      {{ this.currentRecipe[0].recipeIngredients[index].name }}
-                    </li>
+                    <ion-label class="ion-text-wrap">
+                      <h5>
+                        {{ this.currentRecipe[0].recipeIngredients[index].qty }}
+                        {{
+                          this.currentRecipe[0].recipeIngredients[index].unit
+                        }}
+                        {{
+                          this.currentRecipe[0].recipeIngredients[index].name
+                        }}
+                      </h5>
+                    </ion-label>
                   </ion-item>
                 </ion-list>
               </div>
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-col size-md="6" size-sm="4">
+            <ion-col size-md="7" size-sm="5">
               <div class="recipeInstructions">
                 <h6>Step-By-Step:</h6>
                 <ion-list
@@ -56,8 +62,7 @@
                 >
                   <ion-item lines="none">
                     <ion-label class="ion-text-wrap">
-                      <h6 class="pr-2">Step {{ index + 1 }}:</h6>
-                      <ion-icon :icon="star" slot="start"></ion-icon>
+                      <h5 class="">Step {{ index + 1 }}:</h5>
                       <p>
                         {{
                           this.currentRecipe[0].recipeInstructions[index]
@@ -128,7 +133,7 @@ export default {
 <style scoped>
 .recipePhoto {
   width: 100%;
-  max-height: fit-content;
+  max-height: 100%;
 }
 .recipeTitle {
   display: inline-flex;
