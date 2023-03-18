@@ -4,15 +4,15 @@
     <ion-content>
       <ion-grid :fixed="true">
         <ion-row>
-          <ion-col>Last Viewed:</ion-col>
+          <ion-col size-md="7" size-sm="5">Last Viewed:</ion-col>
         </ion-row>
         <ion-row>
-          <ion-col>
+          <ion-col size-md="7" size-sm="5">
             <recipes-list></recipes-list>
           </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col>
+          <ion-col size-md="7" size-sm="5">
             <recipe-categories></recipe-categories>
           </ion-col>
         </ion-row>
@@ -40,11 +40,5 @@ export default {
 </script>
 
 <style scoped>
-ion-grid {
-  --ion-grid-width-xs: 50%;
-  --ion-grid-width-sm: 288px;
-  --ion-grid-width-md: 384px;
-  --ion-grid-width-lg: 480px;
-  --ion-grid-width-xl: 570px;
-}
+
 </style>

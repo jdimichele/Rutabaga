@@ -5,8 +5,11 @@
       <base-card v-if="currentRecipe">
         <ion-grid>
           <ion-row>
-            <ion-item lines="none" class="recipePhoto">
-              <img :src="this.currentRecipe[0].recipePhoto" />
+            <ion-item lines="none">
+              <img
+                class="recipePhoto"
+                :src="this.currentRecipe[0].recipePhoto"
+              />
             </ion-item>
           </ion-row>
           <ion-row class="ion-justify-content-start">
@@ -15,64 +18,54 @@
                 {{ this.currentRecipe[0].recipeName }}
               </h1>
             </ion-item>
+            <ion-badge class="recipeBadge">
+              {{ this.currentRecipe[0].recipeCategory }}
+            </ion-badge>
           </ion-row>
-          <ion-row>
+          <ion-row class="timeAndServings">
             <ion-item lines="none" class="recipeTime">
               {{ this.currentRecipe[0].recipeTime }} minutes
             </ion-item>
             <ion-item lines="none" class="recipeServings">
               {{ this.currentRecipe[0].recipeServings }} servings
             </ion-item>
-            <ion-badge class="recipeBadge">
-              {{ this.currentRecipe[0].recipeCategory }}
-            </ion-badge>
           </ion-row>
           <ion-row>
             <ion-col size-md="7" size-sm="5">
-              <div class="recipeIngredients">
-                <h6>Ingredients:</h6>
-                <ion-list
-                  v-for="(item, index) in currentIngredients"
-                  :key="index"
-                >
-                  <ion-item lines="none">
-                    <ion-label class="ion-text-wrap">
-                      <h5>
-                        {{ this.currentRecipe[0].recipeIngredients[index].qty }}
-                        {{
-                          this.currentRecipe[0].recipeIngredients[index].unit
-                        }}
-                        {{
-                          this.currentRecipe[0].recipeIngredients[index].name
-                        }}
-                      </h5>
-                    </ion-label>
-                  </ion-item>
-                </ion-list>
-              </div>
+              <h6>Ingredients:</h6>
+              <ion-list
+                v-for="(item, index) in currentIngredients"
+                :key="index"
+              >
+                <ion-item lines="none">
+                  <ion-label class="ingredientsList">
+                    {{ this.currentRecipe[0].recipeIngredients[index].qty }}
+                    {{ this.currentRecipe[0].recipeIngredients[index].unit }}
+                    {{ this.currentRecipe[0].recipeIngredients[index].name }}
+                  </ion-label>
+                </ion-item>
+              </ion-list>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col size-md="7" size-sm="5">
-              <div class="recipeInstructions">
-                <h6>Step-By-Step:</h6>
-                <ion-list
-                  v-for="(item, index) in currentInstructions"
-                  :key="index"
-                >
-                  <ion-item lines="none">
-                    <ion-label class="ion-text-wrap">
-                      <h5 class="">Step {{ index + 1 }}:</h5>
-                      <p>
-                        {{
-                          this.currentRecipe[0].recipeInstructions[index]
-                            .instruction
-                        }}
-                      </p>
-                    </ion-label>
-                  </ion-item>
-                </ion-list>
-              </div>
+              <h6>Step-By-Step:</h6>
+              <ion-list
+                v-for="(item, index) in currentInstructions"
+                :key="index"
+              >
+                <ion-item lines="none">
+                  <ion-label class="ion-text-wrap">
+                    <h5 class="">Step {{ index + 1 }}:</h5>
+                    <p>
+                      {{
+                        this.currentRecipe[0].recipeInstructions[index]
+                          .instruction
+                      }}
+                    </p>
+                  </ion-label>
+                </ion-item>
+              </ion-list>
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -132,11 +125,18 @@ export default {
 
 <style scoped>
 .recipePhoto {
-  width: 100%;
+  /* width: 100%; */
+  width: max-content;
   max-height: 100%;
 }
-.recipeTitle {
+.timeAndServings {
   display: inline-flex;
+}
+.recipeTime {
+  font-size: 15px;
+}
+.recipeServings {
+  font-size: 15px;
 }
 .recipeName {
   font-size: 32px;
@@ -144,10 +144,8 @@ export default {
 .recipeBadge {
   background-color: #7a3750;
   position: absolute;
-  height: 23px;
   right: 0px;
-}
-.recipeIngredients {
-  padding: none;
+  padding: 5px;
+  margin: 15px;
 }
 </style>
