@@ -6,10 +6,7 @@
         <ion-grid>
           <ion-row>
             <ion-item lines="none">
-              <img
-                class="recipePhoto"
-                :src="this.currentRecipe[0].recipePhoto"
-              />
+              <img :src="this.currentRecipe[0].recipePhoto" />
             </ion-item>
           </ion-row>
           <ion-row class="ion-justify-content-start">
@@ -32,16 +29,20 @@
           </ion-row>
           <ion-row>
             <ion-col size-md="7" size-sm="5">
-              <h6>Ingredients:</h6>
+              <h6 class="underline font-bold text-md text-white">
+                Ingredients:
+              </h6>
               <ion-list
                 v-for="(item, index) in currentIngredients"
                 :key="index"
               >
                 <ion-item lines="none">
-                  <ion-label class="ingredientsList">
-                    {{ this.currentRecipe[0].recipeIngredients[index].qty }}
-                    {{ this.currentRecipe[0].recipeIngredients[index].unit }}
-                    {{ this.currentRecipe[0].recipeIngredients[index].name }}
+                  <ion-label class="ion-text-wrap">
+                    <p>
+                      {{ this.currentRecipe[0].recipeIngredients[index].qty }}
+                      {{ this.currentRecipe[0].recipeIngredients[index].unit }}
+                      {{ this.currentRecipe[0].recipeIngredients[index].name }}
+                    </p>
                   </ion-label>
                 </ion-item>
               </ion-list>
@@ -49,14 +50,16 @@
           </ion-row>
           <ion-row>
             <ion-col size-md="7" size-sm="5">
-              <h6>Step-By-Step:</h6>
+              <h5 class="underline font-bold text-md text-white">
+                Step-By-Step:
+              </h5>
               <ion-list
                 v-for="(item, index) in currentInstructions"
                 :key="index"
               >
                 <ion-item lines="none">
                   <ion-label class="ion-text-wrap">
-                    <h5 class="">Step {{ index + 1 }}:</h5>
+                    <h5>Step {{ index + 1 }}:</h5>
                     <p>
                       {{
                         this.currentRecipe[0].recipeInstructions[index]

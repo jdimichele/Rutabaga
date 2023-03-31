@@ -12,21 +12,17 @@
               v-model="name"
             ></ion-input>
           </ion-item>
-        </ion-row>
 
-        <ion-col>
-          <ion-row>
-            <ion-item class="photoBlock">
-              <ion-button
-                class="bigButton"
-                @click.prevent="takePicture"
-                v-model="photo"
-              >
-                <ion-icon :icon="cameraOutline"></ion-icon>
-              </ion-button>
-            </ion-item>
-          </ion-row>
-        </ion-col>
+          <ion-item class="photoBlock">
+            <ion-button
+              class="bigButton"
+              @click.prevent="takePicture"
+              v-model="photo"
+            >
+              <ion-icon :icon="cameraOutline"></ion-icon>
+            </ion-button>
+          </ion-item>
+        </ion-row>
 
         <ion-item>
           <ion-label position="floating">Time:</ion-label>
@@ -277,12 +273,12 @@ export default {
 </script>
 
 <style scoped>
-.roundedTop {
+/* .roundedTop {
   border-radius: 15px 15px 0px 0px;
 }
 .roundedBottom {
   border-radius: 0px 0px 15px 15px;
-}
+} */
 /* .bigButton {
   width: 200px;
   height: 200px;
