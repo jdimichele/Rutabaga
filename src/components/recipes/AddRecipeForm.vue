@@ -94,7 +94,7 @@
                 <ion-list
                   v-for="(ingredient, index) in ingredients"
                   :key="index"
-                  class="flex items-stretch"
+                  class="flex lg:items-stretch"
                 >
                   <ion-item class="mx-2">
                     <ion-input
@@ -147,21 +147,32 @@
         <ion-row>
           <ion-col>
             <ion-item class="rounded-b-lg">
-              <ion-label position="stacked">Instructions:</ion-label>
-              <ion-list v-for="(step, index) in instructions" :key="index">
-                <ion-item>
-                  <ion-input
-                    type="text"
-                    id="ingredients"
-                    required
-                    v-model="step.instruction"
-                  >
-                  </ion-input>
-                  <button @click.prevent="addNewStep(step)">
-                    <ion-icon :icon="addCircleOutline"></ion-icon>
-                  </button>
-                </ion-item>
-              </ion-list>
+              <ion-label position="stacked" class="py-1"
+                >Instructions:</ion-label
+              >
+              <div class="py-1">
+                <ion-list
+                  class="flex sm:items-stretch"
+                  v-for="(step, index) in instructions"
+                  :key="index"
+                >
+                  <ion-item class="mx-2">
+                    <ion-input
+                      class="px-1"
+                      type="text"
+                      id="ingredients"
+                      required
+                      v-model="step.instruction"
+                    >
+                    </ion-input>
+                  </ion-item>
+                  <ion-item lines="none">
+                    <button @click.prevent="addNewStep(step)">
+                      <ion-icon :icon="addCircleOutline"></ion-icon>
+                    </button>
+                  </ion-item>
+                </ion-list>
+              </div>
             </ion-item>
           </ion-col>
         </ion-row>
