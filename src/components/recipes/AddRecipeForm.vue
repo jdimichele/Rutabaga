@@ -86,52 +86,67 @@
 
         <ion-row>
           <ion-col>
-            <ion-item>
-              <ion-label position="stacked">Ingredients:</ion-label>
-              <ion-list v-for="(ingredient, index) in ingredients" :key="index">
-                <ion-item>
-                  <ion-input
-                    placeholder="Quantity"
-                    type="text"
-                    id="ingredients"
-                    required
-                    v-model="ingredient.qty"
-                  >
-                  </ion-input>
+            <ion-item lines="none">
+              <ion-label position="stacked" class="py-1"
+                >Ingredients:</ion-label
+              >
+              <div class="py-3">
+                <ion-list
+                  v-for="(ingredient, index) in ingredients"
+                  :key="index"
+                  class="flex items-stretch"
+                >
+                  <ion-item class="mx-2">
+                    <ion-input
+                      placeholder="Quantity"
+                      type="text"
+                      id="ingredients"
+                      required
+                      v-model="ingredient.qty"
+                    >
+                    </ion-input>
+                  </ion-item>
 
-                  <ion-select
-                    placeholder="Unit of Measurement"
-                    interface="action-sheet"
-                    v-model="ingredient.unit"
-                  >
-                    <ion-select-option value="tsp">tsp</ion-select-option>
-                    <ion-select-option value="Tbsp">Tbsp</ion-select-option>
-                    <ion-select-option value="g">g</ion-select-option>
-                    <ion-select-option value="oz">oz</ion-select-option>
-                    <ion-select-option value="cup">cup</ion-select-option>
-                    <ion-select-option value="gal">gal</ion-select-option>
-                    <ion-select-option value="lbs">lbs</ion-select-option>
-                  </ion-select>
+                  <ion-item class="mx-2">
+                    <ion-select
+                      placeholder="Unit of Measurement"
+                      interface="action-sheet"
+                      v-model="ingredient.unit"
+                    >
+                      <ion-select-option value="tsp">tsp</ion-select-option>
+                      <ion-select-option value="Tbsp">Tbsp</ion-select-option>
+                      <ion-select-option value="g">g</ion-select-option>
+                      <ion-select-option value="oz">oz</ion-select-option>
+                      <ion-select-option value="cup">cup</ion-select-option>
+                      <ion-select-option value="gal">gal</ion-select-option>
+                      <ion-select-option value="lbs">lbs</ion-select-option>
+                    </ion-select>
+                  </ion-item>
 
-                  <ion-input
-                    type="text"
-                    id="ingredients"
-                    required
-                    v-model="ingredient.name"
-                  >
-                  </ion-input>
-                  <button @click.prevent="addNewIngredient(ingredient)">
-                    +
-                  </button>
-                </ion-item>
-              </ion-list>
+                  <ion-item class="mx-2">
+                    <ion-input
+                      placeholder="Name"
+                      type="text"
+                      id="ingredients"
+                      required
+                      v-model="ingredient.name"
+                    >
+                    </ion-input>
+                  </ion-item>
+                  <ion-item lines="none">
+                    <button @click.prevent="addNewIngredient(ingredient)">
+                      <ion-icon :icon="addCircleOutline"></ion-icon>
+                    </button>
+                  </ion-item>
+                </ion-list>
+              </div>
             </ion-item>
           </ion-col>
         </ion-row>
 
         <ion-row>
           <ion-col>
-            <ion-item class="roundedBottom">
+            <ion-item class="rounded-b-lg">
               <ion-label position="stacked">Instructions:</ion-label>
               <ion-list v-for="(step, index) in instructions" :key="index">
                 <ion-item>
@@ -142,7 +157,9 @@
                     v-model="step.instruction"
                   >
                   </ion-input>
-                  <button @click.prevent="addNewStep(step)">+</button>
+                  <button @click.prevent="addNewStep(step)">
+                    <ion-icon :icon="addCircleOutline"></ion-icon>
+                  </button>
                 </ion-item>
               </ion-list>
             </ion-item>
@@ -177,7 +194,7 @@ import {
   IonCol,
   toastController,
 } from "@ionic/vue";
-import { add, cameraOutline } from "ionicons/icons";
+import { add, addCircleOutline, cameraOutline } from "ionicons/icons";
 import { Camera, CameraResultType, CameraSource } from "@capacitor/camera";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
@@ -285,18 +302,13 @@ export default {
     return {
       add,
       cameraOutline,
+      addCircleOutline,
     };
   },
 };
 </script>
 
 <style scoped>
-.roundedTop {
-  border-radius: 15px 15px 0px 0px;
-}
-.roundedBottom {
-  border-radius: 0px 0px 15px 15px;
-}
 .photoBlock {
   width: 200px;
   height: 200px;
