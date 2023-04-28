@@ -1,0 +1,64 @@
+PODS:
+  - Capacitor (5.0.0-beta.3):
+    - CapacitorCordova
+  - CapacitorApp (5.0.0-beta.1):
+    - Capacitor
+  - CapacitorCamera (5.0.0-beta.1):
+    - Capacitor
+  - CapacitorCordova (5.0.0-beta.3)
+  - CapacitorFilesystem (5.0.0-beta.1):
+    - Capacitor
+  - CapacitorHaptics (5.0.0-beta.1):
+    - Capacitor
+  - CapacitorKeyboard (5.0.0-beta.1):
+    - Capacitor
+  - CapacitorPreferences (5.0.0-beta.1):
+    - Capacitor
+  - CapacitorStatusBar (5.0.0-beta.1):
+    - Capacitor
+
+DEPENDENCIES:
+  - "Capacitor (from `../../node_modules/@capacitor/ios`)"
+  - "CapacitorApp (from `../../node_modules/@capacitor/app`)"
+  - "CapacitorCamera (from `../../node_modules/@capacitor/camera`)"
+  - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
+  - "CapacitorFilesystem (from `../../node_modules/@capacitor/filesystem`)"
+  - "CapacitorHaptics (from `../../node_modules/@capacitor/haptics`)"
+  - "CapacitorKeyboard (from `../../node_modules/@capacitor/keyboard`)"
+  - "CapacitorPreferences (from `../../node_modules/@capacitor/preferences`)"
+  - "CapacitorStatusBar (from `../../node_modules/@capacitor/status-bar`)"
+
+EXTERNAL SOURCES:
+  Capacitor:
+    :path: "../../node_modules/@capacitor/ios"
+  CapacitorApp:
+    :path: "../../node_modules/@capacitor/app"
+  CapacitorCamera:
+    :path: "../../node_modules/@capacitor/camera"
+  CapacitorCordova:
+    :path: "../../node_modules/@capacitor/ios"
+  CapacitorFilesystem:
+    :path: "../../node_modules/@capacitor/filesystem"
+  CapacitorHaptics:
+    :path: "../../node_modules/@capacitor/haptics"
+  CapacitorKeyboard:
+    :path: "../../node_modules/@capacitor/keyboard"
+  CapacitorPreferences:
+    :path: "../../node_modules/@capacitor/preferences"
+  CapacitorStatusBar:
+    :path: "../../node_modules/@capacitor/status-bar"
+
+SPEC CHECKSUMS:
+  Capacitor: 3801fc65346973d21b82355907d10bae04d04e67
+  CapacitorApp: 9bbb287cd157e0e644f8bd6b0e25874eb662095e
+  CapacitorCamera: 8a0717ea989cecf41e5ee7d06264c03feda2b7be
+  CapacitorCordova: 2fc6e8fab08da1c0e86b6323dbef268add6914f9
+  CapacitorFilesystem: 13ef3fa7f41e838451964af683f2941fe89a446c
+  CapacitorHaptics: f4a2364168f6eae1ab76989355cb7ad8db386c18
+  CapacitorKeyboard: 68e28b61f8a23bf37ec0fad9a0849b1272218bba
+  CapacitorPreferences: b84da08b32c80e5550100d908782ed73611b4945
+  CapacitorStatusBar: 5ad9e785f46259df52f96cc4efbe2907ae43b019
+
+PODFILE CHECKSUM: 73ef55de76db89be7a631b1f953536714304a1c6
+
+COCOAPODS: 1.12.1

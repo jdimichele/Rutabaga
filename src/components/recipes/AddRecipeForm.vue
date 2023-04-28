@@ -177,7 +177,7 @@
           </ion-col>
         </ion-row>
 
-        <!-- If possible, I should move this out of the grid content page. -->
+        <!-- I should move this out of the grid content page. -->
         <ion-fab vertical="bottom" horizontal="center" slot="fixed">
           <ion-button type="submit">
             <ion-icon :icon="add"></ion-icon>
