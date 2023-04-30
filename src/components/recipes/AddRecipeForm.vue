@@ -4,18 +4,7 @@
       <form class="p-10" @submit.prevent="submitRecipe">
         <ion-row>
           <ion-col>
-            <ion-item class="rounded-tl-lg">
-              <ion-label position="floating">Name:</ion-label>
-              <ion-input
-                type="text"
-                id="name"
-                required
-                v-model="name"
-              ></ion-input>
-            </ion-item>
-          </ion-col>
-          <ion-col>
-            <ion-item class="rounded-tr-lg">
+            <ion-item>
               <ion-button @click.prevent="takePicture" v-model="photo">
                 <ion-icon :icon="cameraOutline"></ion-icon>
               </ion-button>
@@ -26,6 +15,16 @@
         <ion-row>
           <ion-col>
             <ion-item>
+              <ion-label position="floating">Name:</ion-label>
+              <ion-input
+                type="text"
+                id="name"
+                required
+                v-model="name"
+              ></ion-input>
+            </ion-item>
+
+            <ion-item>
               <ion-label position="floating">Time:</ion-label>
               <ion-input
                 placeholder="25 minutes"
@@ -35,7 +34,11 @@
                 v-model="time"
               ></ion-input>
             </ion-item>
+          </ion-col>
+        </ion-row>
 
+        <ion-row>
+          <ion-col>
             <ion-item>
               <ion-label position="floating">Servings:</ion-label>
               <ion-select
@@ -90,13 +93,13 @@
               <ion-label position="stacked" class="py-1"
                 >Ingredients:</ion-label
               >
-              <div class="py-3">
+              <div class="py-2 md:py-3">
                 <ion-list
                   v-for="(ingredient, index) in ingredients"
                   :key="index"
-                  class="flex lg:items-stretch"
+                  class="flex md:items-stretch"
                 >
-                  <ion-item class="mx-2">
+                  <ion-item class="md:mx-2">
                     <ion-input
                       placeholder="Quantity"
                       type="text"
@@ -107,7 +110,7 @@
                     </ion-input>
                   </ion-item>
 
-                  <ion-item class="mx-2">
+                  <ion-item class="md:mx-2">
                     <ion-select
                       placeholder="Unit of Measurement"
                       interface="action-sheet"
@@ -123,7 +126,7 @@
                     </ion-select>
                   </ion-item>
 
-                  <ion-item class="mx-2">
+                  <ion-item class="md:mx-2">
                     <ion-input
                       placeholder="Name"
                       type="text"
@@ -176,15 +179,14 @@
             </ion-item>
           </ion-col>
         </ion-row>
-
-        <!-- I should move this out of the grid content page. -->
-        <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-          <ion-button type="submit">
-            <ion-icon :icon="add"></ion-icon>
-          </ion-button>
-        </ion-fab>
       </form>
     </ion-grid>
+    
+    <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+      <ion-button type="submit">
+        <ion-icon :icon="add"></ion-icon>
+      </ion-button>
+    </ion-fab>
   </ion-content>
 </template>
 
