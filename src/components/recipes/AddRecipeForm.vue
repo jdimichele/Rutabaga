@@ -1,10 +1,10 @@
 <template>
   <ion-content>
     <ion-grid>
-      <form class="p-10" @submit.prevent="submitRecipe">
+      <form class="md:p-10" @submit.prevent="submitRecipe">
         <ion-row>
           <ion-col>
-            <ion-item>
+            <ion-item class="rounded-t-lg">
               <ion-button @click.prevent="takePicture" v-model="photo">
                 <ion-icon :icon="cameraOutline"></ion-icon>
               </ion-button>
@@ -97,7 +97,7 @@
                 <ion-list
                   v-for="(ingredient, index) in ingredients"
                   :key="index"
-                  class="flex md:items-stretch"
+                  class="md:flex md:items-stretch"
                 >
                   <ion-item class="md:mx-2">
                     <ion-input
@@ -181,7 +181,7 @@
         </ion-row>
       </form>
     </ion-grid>
-    
+
     <ion-fab vertical="bottom" horizontal="center" slot="fixed">
       <ion-button type="submit">
         <ion-icon :icon="add"></ion-icon>
@@ -322,10 +322,6 @@ export default {
 </script>
 
 <style scoped>
-.photoBlock {
-  width: 200px;
-  height: 200px;
-}
 ion-grid {
   --ion-grid-column-padding: 0px;
 }
