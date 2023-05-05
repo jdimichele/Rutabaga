@@ -5,7 +5,11 @@
         <ion-row>
           <ion-col>
             <ion-item class="rounded-t-lg">
-              <ion-button @click.prevent="takePicture" v-model="photo">
+              <ion-button
+                class="photoButton"
+                @click.prevent="takePicture"
+                v-model="photo"
+              >
                 <ion-icon :icon="cameraOutline"></ion-icon>
               </ion-button>
             </ion-item>
@@ -179,14 +183,14 @@
             </ion-item>
           </ion-col>
         </ion-row>
+
+        <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+          <ion-button class="submitButton" type="submit">
+            <ion-icon :icon="add"></ion-icon>
+          </ion-button>
+        </ion-fab>
       </form>
     </ion-grid>
-
-    <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-      <ion-button type="submit">
-        <ion-icon :icon="add"></ion-icon>
-      </ion-button>
-    </ion-fab>
   </ion-content>
 </template>
 
@@ -326,7 +330,7 @@ ion-grid {
   --ion-grid-column-padding: 0px;
 }
 
-ion-button {
+.submitButton {
   --transition: background-color, opacity 100ms linear;
   --ripple-color: currentColor;
   --border-radius: 50%;
@@ -354,6 +358,33 @@ ion-button {
   font-kerning: none;
   --background: #7a3750;
 }
+.photoButton {
+  --transition: background-color, opacity 100ms linear;
+  --ripple-color: currentColor;
+  --border-radius: 50%;
+  --border-width: 0;
+  --border-style: none;
+  --border-color: initial;
+  --padding-top: 0;
+  --padding-end: 0;
+  --padding-bottom: 0;
+  --padding-start: 0;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  width: 56px;
+  height: 56px;
+  position: relative;
+  font-size: 14px;
+  text-align: center;
+  text-overflow: ellipsis;
+  text-transform: none;
+  white-space: nowrap;
+  -webkit-font-kerning: none;
+  font-kerning: none;
+  --background: #7a3750;
+}
+
 ion-icon {
   margin: 0;
   position: absolute;

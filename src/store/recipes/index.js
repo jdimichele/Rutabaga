@@ -85,12 +85,16 @@ export default {
       // Possible security rule for Firestore: allow read, write: if request.auth != null && request.auth.uid == resource.data.author;
     },
 
-    async getRecipe() {},
     async loadRecentlyViewed() {},
   },
   getters: {
     allRecipes(state) {
       return state.allRecipes;
+    },
+    allRecipesByCategory: (state) => (category) => {
+      return state.allRecipes.filter(
+        (recipe) => recipe.recipeCategory === category
+      );
     },
     recentlyAddedRecipes(state) {
       return state.allRecipes.slice(0, 3);
