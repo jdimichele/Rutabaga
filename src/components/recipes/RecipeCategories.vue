@@ -1,71 +1,68 @@
 <template>
   <base-card>
     <ion-title class="my-2.5 text-center">Categories:</ion-title>
-    <ion-accordion-group :multiple="true">
-      <ion-accordion @click.prevent="">
-        <ion-item slot="header">
-          <ion-label>Appetizers</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">Popcorn</div>
+    <ion-accordion-group>
+      <!-- Removing :multiple="true" for the time being until the PM says otherwise. -->
+      <ion-accordion>
+        <recipe-category-item
+          :categoryName="'Appetizers'"
+        ></recipe-category-item>
       </ion-accordion>
       <ion-accordion>
-        <ion-item slot="header">
-          <ion-label>Breakfast</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">More Popcorn!</div>
+        <recipe-category-item
+          :categoryName="'Breakfast'"
+        ></recipe-category-item>
       </ion-accordion>
       <ion-accordion>
-        <ion-item slot="header">
-          <ion-label>Brunch</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">EVEN MORE Popcorn!</div>
+        <recipe-category-item :categoryName="'Brunch'"></recipe-category-item>
       </ion-accordion>
       <ion-accordion>
-        <ion-item slot="header">
-          <ion-label>Dinner</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">
-          <!-- <ul>
-            <li v-for="recipe in recipes" :key="recipe.recipeID">
-              {{ recipe.recipeName }}
-            </li> -->
-          <recipe-list-item
-            v-for="(recipe, index) in recipes"
-            :key="index"
-            :id="recipe.recipeID"
-            :name="recipe.recipeName"
-            :category="recipe.recipeCategory"
-          ></recipe-list-item>
-          <!-- </ul> -->
-        </div>
+        <recipe-category-item :categoryName="'Dessert'"></recipe-category-item>
+      </ion-accordion>
+      <ion-accordion>
+        <recipe-category-item :categoryName="'Dinner'"></recipe-category-item>
+      </ion-accordion>
+      <ion-accordion>
+        <recipe-category-item :categoryName="'Drinks'"></recipe-category-item>
+      </ion-accordion>
+      <ion-accordion>
+        <recipe-category-item :categoryName="'Lunch'"></recipe-category-item>
+      </ion-accordion>
+      <ion-accordion>
+        <recipe-category-item :categoryName="'Sides'"></recipe-category-item>
+      </ion-accordion>
+      <ion-accordion>
+        <recipe-category-item :categoryName="'Snacks'"></recipe-category-item>
+      </ion-accordion>
+      <ion-accordion>
+        <recipe-category-item :categoryName="'Soups'"></recipe-category-item>
+      </ion-accordion>
+      <ion-accordion>
+        <recipe-category-item :categoryName="'Vegan'"></recipe-category-item>
+      </ion-accordion>
+      <ion-accordion>
+        <recipe-category-item
+          :categoryName="'Vegetarian'"
+        ></recipe-category-item>
       </ion-accordion>
     </ion-accordion-group>
   </base-card>
 </template>
 
 <script>
-import {
-  IonAccordion,
-  IonAccordionGroup,
-  IonItem,
-  IonLabel,
-  IonTitle,
-} from "@ionic/vue";
-import RecipeListItem from "./RecipeListItem.vue";
+import { IonAccordion, IonAccordionGroup, IonTitle } from "@ionic/vue";
+import RecipeCategoryItem from "./RecipeCategoryItem.vue";
 
 export default {
   components: {
     IonAccordion,
     IonAccordionGroup,
-    IonItem,
-    IonLabel,
     IonTitle,
-    RecipeListItem,
+    RecipeCategoryItem,
   },
-
   computed: {
     recipes() {
-      return this.$store.getters["recipes/allRecipesByCategory"]("Dinner");
+      return this.$store.getters["recipes/allRecipesByCategory"](this.category);
     },
   },
 };
