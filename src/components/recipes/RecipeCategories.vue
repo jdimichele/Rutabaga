@@ -1,6 +1,6 @@
 <template>
   <base-card>
-    <ion-title class="title">Categories:</ion-title>
+    <ion-title class="my-2.5 text-center">Categories:</ion-title>
     <ion-accordion-group :multiple="true">
       <ion-accordion @click.prevent="">
         <ion-item slot="header">
@@ -65,18 +65,8 @@ export default {
 
   computed: {
     recipes() {
-      const pog = this.$store.getters["recipes/allRecipesByCategory"]("Dinner");
-      console.log(pog);
-      return pog;
+      return this.$store.getters["recipes/allRecipesByCategory"]("Dinner");
     },
   },
 };
 </script>
-
-<style scoped>
-.title {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  text-align: center;
-}
-</style>
