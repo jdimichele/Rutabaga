@@ -106,6 +106,9 @@ export default {
         (recipe) => recipe.recipeCategory === category
       );
     },
+    getSearchedRecipe: (state) => (name) => {
+      return state.allRecipes.filter((recipe) => recipe.recipeName === name);
+    },
     recentlyAddedRecipes(state) {
       return state.allRecipes.slice(0, 3);
     },

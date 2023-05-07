@@ -71,10 +71,5 @@ export default {
     IonTitle,
     RecipeCategoryItem,
   },
-  computed: {
-    recipes() {
-      return this.$store.getters["recipes/allRecipesByCategory"](this.category);
-    },
-  },
 };
 </script>
