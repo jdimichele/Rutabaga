@@ -31,13 +31,8 @@ export default {
       state.recipeIngredients = payload.recipeIngredients;
       state.recipeInstructions = payload.recipeInstructions;
     },
-    setRecipes(state, payload) {
-      state.allRecipes = payload;
-    },
-    setRecentRecipe(state, payload) {
-      state.lastRecipe = payload;
-    },
   },
+
   actions: {
     async addRecipe(context, data) {
       const userId = firebase.auth().currentUser.uid;
