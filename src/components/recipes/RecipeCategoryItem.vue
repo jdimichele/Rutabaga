@@ -2,7 +2,7 @@
   <ion-item slot="header" @click.prevent="getRecipesByCategory(categoryName)">
     <ion-label>{{ categoryName }}</ion-label>
   </ion-item>
-  <div class="ion-padding" slot="content">
+  <div class="" slot="content">
     <ul>
       <li
         v-for="recipe in recipes"
@@ -29,7 +29,7 @@ export default {
       category: null,
     };
   },
-  
+
   methods: {
     getRecipesByCategory(categoryName) {
       this.category = categoryName;

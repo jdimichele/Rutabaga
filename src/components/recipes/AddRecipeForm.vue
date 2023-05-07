@@ -12,6 +12,11 @@
               >
                 <ion-icon :icon="cameraOutline"></ion-icon>
               </ion-button>
+              <!-- <div v-else>
+                {{ this.newImage }}
+              </div> 
+            
+                            v-if="!photo"-->
             </ion-item>
           </ion-col>
         </ion-row>
@@ -277,6 +282,7 @@ export default {
       };
       this.$emit("save-recipe", recipeForm);
       this.presentToast("middle");
+      setTimeout(() => this.$router.push("/recipes"), 1700);
     },
 
     async takePicture() {

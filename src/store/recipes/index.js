@@ -19,6 +19,9 @@ export default {
     };
   },
   mutations: {
+    addRecipeToAllRecipes(state, newRecipe) {
+      state.allRecipes.push(newRecipe);
+    },
     setCurrentRecipeState(state, payload) {
       state.recipeName = payload.recipeName;
       state.recipePhoto = payload.recipePhoto;
@@ -58,6 +61,18 @@ export default {
         instructions: data.instructions,
       };
       await dataBase.set(recipeData);
+
+      const newRecipe = {
+        recipeID: recipeData.recipeID,
+        recipeName: recipeData.name,
+        recipePhoto: recipeData.photo,
+        recipeTime: recipeData.time,
+        recipeServings: recipeData.servings,
+        recipeCategory: recipeData.category,
+        recipeIngredients: recipeData.ingredients,
+        recipeInstructions: recipeData.instructions,
+      };
+      context.commit("addRecipeToAllRecipes", newRecipe);
     },
 
     async loadAllRecipes({ state }) {
