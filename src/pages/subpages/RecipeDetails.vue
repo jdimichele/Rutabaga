@@ -6,24 +6,27 @@
         <ion-grid>
           <ion-row>
             <ion-item lines="none">
-              <img :src="this.currentRecipe[0].recipePhoto" />
+              <img
+                class="max-w-full rounded-t-lg"
+                :src="this.currentRecipe[0].recipePhoto"
+              />
             </ion-item>
           </ion-row>
           <ion-row class="ion-justify-content-start">
             <ion-item lines="none">
-              <h1 class="recipeName">
+              <h1 class="text-4xl">
                 {{ this.currentRecipe[0].recipeName }}
               </h1>
             </ion-item>
-            <ion-badge class="recipeBadge">
+            <ion-badge class="bg-rut-generic-mauve absolute right-0 p-1 m-4">
               {{ this.currentRecipe[0].recipeCategory }}
             </ion-badge>
           </ion-row>
-          <ion-row class="timeAndServings">
-            <ion-item lines="none" class="recipeTime">
+          <ion-row class="inline-flex">
+            <ion-item lines="none">
               {{ this.currentRecipe[0].recipeTime }} minutes
             </ion-item>
-            <ion-item lines="none" class="recipeServings">
+            <ion-item lines="none">
               {{ this.currentRecipe[0].recipeServings }} servings
             </ion-item>
           </ion-row>
@@ -125,30 +128,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.recipePhoto {
-  /* width: 100%; */
-  width: max-content;
-  max-height: 100%;
-}
-.timeAndServings {
-  display: inline-flex;
-}
-.recipeTime {
-  font-size: 15px;
-}
-.recipeServings {
-  font-size: 15px;
-}
-.recipeName {
-  font-size: 32px;
-}
-.recipeBadge {
-  background-color: #7a3750;
-  position: absolute;
-  right: 0px;
-  padding: 5px;
-  margin: 15px;
-}
-</style>

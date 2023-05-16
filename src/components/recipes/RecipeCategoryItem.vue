@@ -2,14 +2,19 @@
   <ion-item slot="header" @click.prevent="getRecipesByCategory(categoryName)">
     <ion-label>{{ categoryName }}</ion-label>
   </ion-item>
-  <div class="" slot="content">
+  <div slot="content">
     <ul>
       <li
+        class="py-1"
         v-for="recipe in recipes"
         :key="recipe.recipeID"
         @click="openRecipeDetails(recipe.recipeID)"
       >
-        {{ recipe.recipeName }}
+        <p class="text-center">
+          <span class="ml-1 float-left">{{ recipe.recipeName }}</span>
+          <span class="inline-block">{{ recipe.recipeServings }} servings</span>
+          <span class="mr-1 float-right">{{ recipe.recipeTime }} minutes</span>
+        </p>
       </li>
     </ul>
   </div>
