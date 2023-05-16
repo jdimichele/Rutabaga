@@ -1,13 +1,13 @@
 <template>
   <ion-card @click="openRecipeDetails">
-    <img class="recipePhoto" :src="photo" />
-    <div class="recipeListCard">
-      <ion-card-title class="recipeName">
+    <img class="max-w-full rounded-t-lg h-50" :src="photo" />
+    <div class="rounded-b-lg overflow-hidden">
+      <ion-card-title class="pl-4 pt-1">
         {{ name }}
       </ion-card-title>
       <ion-card-content>
         <span class="recipeServings">{{ servings }} servings</span>
-        <ion-badge class="recipeBadge">{{ category }}</ion-badge>
+        <ion-badge class="bg-rut-generic-mauve float-right">{{ category }}</ion-badge>
       </ion-card-content>
     </div>
   </ion-card>
@@ -40,23 +40,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.recipeListCard {
-  border-radius: 0.5rem;
-  overflow: hidden;
-}
-.recipePhoto {
-  max-width: 100%;
-  border-radius: 0.5rem 0.5rem 0 0;
-  height: 200px;
-}
-.recipeBadge {
-  background-color: #7a3750;
-  float: right;
-}
-.recipeName {
-  padding-left: 16px;
-  padding-top: 4px;
-}
-</style>
