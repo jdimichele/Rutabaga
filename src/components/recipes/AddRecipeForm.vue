@@ -147,12 +147,18 @@
                   </ion-item>
                   <ion-item lines="none">
                     <button @click.prevent="addNewIngredient(ingredient)">
-                      <ion-icon :icon="addCircleOutline"></ion-icon>
+                      <ion-icon
+                        color="success"
+                        :icon="addCircleOutline"
+                      ></ion-icon>
                     </button>
                   </ion-item>
                   <ion-item lines="none">
                     <button @click.prevent="removeLastIngredient(ingredient)">
-                      <ion-icon :icon="removeCircleOutline"></ion-icon>
+                      <ion-icon
+                        color="danger"
+                        :icon="removeCircleOutline"
+                      ></ion-icon>
                     </button>
                   </ion-item>
                 </ion-list>
@@ -185,12 +191,18 @@
                   </ion-item>
                   <ion-item lines="none">
                     <button @click.prevent="addNewStep(step)">
-                      <ion-icon :icon="addCircleOutline"></ion-icon>
+                      <ion-icon
+                        color="success"
+                        :icon="addCircleOutline"
+                      ></ion-icon>
                     </button>
                   </ion-item>
                   <ion-item lines="none">
                     <button @click.prevent="removeLastStep(step)">
-                      <ion-icon :icon="removeCircleOutline"></ion-icon>
+                      <ion-icon
+                        color="danger"
+                        :icon="removeCircleOutline"
+                      ></ion-icon>
                     </button>
                   </ion-item>
                 </ion-list>
