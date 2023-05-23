@@ -32,7 +32,8 @@
     "postcss-loader": "^7.0.2",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6",
-    "vuex": "^4.0.2"
+    "vuex": "^4.0.2",
+    "wakelock-lazy-polyfill": "^1.0.0"
   },
   "devDependencies": {
     "@capacitor/cli": "next",

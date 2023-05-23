@@ -1,19 +1,25 @@
 <template>
   <ion-content>
     <ion-item>
-      <ion-label>Toggle Theme</ion-label>
+      <ion-toggle v-model="themeToggle" @click="toggleDarkTheme"
+        >Toggle Theme</ion-toggle
+      >
+    </ion-item>
+    <ion-item>
       <ion-toggle
-        v-model="themeToggle"
-        slot="end"
-        @click="toggleDarkTheme"
-      ></ion-toggle>
+        :enable-on-off-labels="true"
+        v-model="wakeLockEnabled"
+        @ionChange="toggleWakeLock"
+      >
+        Screen Lock</ion-toggle
+      >
     </ion-item>
     <ion-item button :detail="false" @click="logout">Logout</ion-item>
   </ion-content>
 </template>
 
 <script>
-import { IonContent, IonItem, IonToggle, IonLabel } from "@ionic/vue";
+import { IonContent, IonItem, IonToggle } from "@ionic/vue";
 
 export default {
   name: "BaseSettings",
@@ -21,11 +27,12 @@ export default {
     IonContent,
     IonItem,
     IonToggle,
-    IonLabel,
   },
   data() {
     return {
       themeToggle: "dark",
+      wakeLockEnabled: false,
+      wakeLock: null,
     };
   },
   methods: {
@@ -40,6 +47,43 @@ export default {
         document.body.classList.toggle(toggle, event.detail.checked);
       }
       return this.themeToggle;
+    },
+    toggleWakeLock() {
+      if (this.wakeLockEnabled) {
+        this.activateWakeLock();
+      } else {
+        this.releaseWakeLock();
+      }
+    },
+    activateWakeLock() {
+      if ("wakeLock" in navigator) {
+        navigator.wakeLock
+          .request("screen")
+          .then((wakeLock) => {
+            console.log("Wake Lock active");
+            // You can store the wake lock in a component data property or Vuex store for later release.
+            this.wakeLock = wakeLock;
+          })
+          .catch((error) => {
+            console.error("Unable to acquire wake lock:", error);
+          });
+      } else {
+        console.warn("Wake Lock API not supported");
+      }
+    },
+    releaseWakeLock() {
+      if (this.wakeLock) {
+        this.wakeLock
+          .release()
+          .then(() => {
+            console.log("Wake Lock released");
+            // Reset the wake lock property to null or perform any additional cleanup.
+            this.wakeLock = null;
+          })
+          .catch((error) => {
+            console.error("Unable to release wake lock:", error);
+          });
+      }
     },
   },
 };
