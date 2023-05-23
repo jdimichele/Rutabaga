@@ -151,7 +151,7 @@
                     </button>
                   </ion-item>
                   <ion-item lines="none">
-                    <button @click.prevent="removeLastIngredient()">
+                    <button @click.prevent="removeLastIngredient(ingredient)">
                       <ion-icon :icon="removeCircleOutline"></ion-icon>
                     </button>
                   </ion-item>
@@ -189,7 +189,7 @@
                     </button>
                   </ion-item>
                   <ion-item lines="none">
-                    <button @click.prevent="removeLastStep()">
+                    <button @click.prevent="removeLastStep(step)">
                       <ion-icon :icon="removeCircleOutline"></ion-icon>
                     </button>
                   </ion-item>
@@ -326,11 +326,17 @@ export default {
     addNewStep() {
       this.instructions.push({});
     },
-    removeLastIngredient() {
-      this.ingredients.pop({});
+    removeLastIngredient(ingredient) {
+      const index = this.ingredients.indexOf(ingredient);
+      if (index > -1) {
+        this.ingredients.splice(index, 1);
+      }
     },
-    removeLastStep() {
-      this.instructions.pop({});
+    removeLastStep(step) {
+      const index = this.instructions.indexOf(step);
+      if (index > -1) {
+        this.instructions.splice(index, 1);
+      }
     },
 
     async presentToast(position) {
