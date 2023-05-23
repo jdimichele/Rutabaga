@@ -150,6 +150,11 @@
                       <ion-icon :icon="addCircleOutline"></ion-icon>
                     </button>
                   </ion-item>
+                  <ion-item lines="none">
+                    <button @click.prevent="removeLastIngredient()">
+                      <ion-icon :icon="removeCircleOutline"></ion-icon>
+                    </button>
+                  </ion-item>
                 </ion-list>
               </div>
             </ion-item>
@@ -181,6 +186,11 @@
                   <ion-item lines="none">
                     <button @click.prevent="addNewStep(step)">
                       <ion-icon :icon="addCircleOutline"></ion-icon>
+                    </button>
+                  </ion-item>
+                  <ion-item lines="none">
+                    <button @click.prevent="removeLastStep()">
+                      <ion-icon :icon="removeCircleOutline"></ion-icon>
                     </button>
                   </ion-item>
                 </ion-list>
@@ -216,7 +226,12 @@ import {
   IonCol,
   toastController,
 } from "@ionic/vue";
-import { add, addCircleOutline, cameraOutline } from "ionicons/icons";
+import {
+  add,
+  addCircleOutline,
+  cameraOutline,
+  removeCircleOutline,
+} from "ionicons/icons";
 import { Camera, CameraResultType, CameraSource } from "@capacitor/camera";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
@@ -311,6 +326,12 @@ export default {
     addNewStep() {
       this.instructions.push({});
     },
+    removeLastIngredient() {
+      this.ingredients.pop({});
+    },
+    removeLastStep() {
+      this.instructions.pop({});
+    },
 
     async presentToast(position) {
       const toast = await toastController.create({
@@ -326,6 +347,7 @@ export default {
       add,
       cameraOutline,
       addCircleOutline,
+      removeCircleOutline,
     };
   },
 };
