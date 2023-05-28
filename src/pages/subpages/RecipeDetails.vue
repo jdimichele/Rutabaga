@@ -15,7 +15,9 @@
                   {{ this.currentRecipe[0].recipeName }}
                 </h1>
               </div>
-              <div class="inline-flex absolute bottom-3 left-5 text-white text-sm">
+              <div
+                class="inline-flex absolute bottom-3 left-5 text-white text-sm"
+              >
                 {{ this.currentRecipe[0].recipeTime }} minutes
                 {{ this.currentRecipe[0].recipeServings }} servings
               </div>
@@ -26,14 +28,6 @@
               {{ this.currentRecipe[0].recipeCategory }}
             </ion-badge>
           </ion-row>
-          <!-- <ion-row class="inline-flex">
-            <ion-item lines="none">
-              {{ this.currentRecipe[0].recipeTime }} minutes
-            </ion-item>
-            <ion-item lines="none">
-              {{ this.currentRecipe[0].recipeServings }} servings
-            </ion-item>
-          </ion-row> -->
           <ion-row>
             <ion-col size-md="7" size-sm="5">
               <h6 class="underline font-bold text-md text-white">
@@ -100,6 +94,7 @@ import {
   IonLabel,
 } from "@ionic/vue";
 import { mapGetters } from "vuex";
+//mapActions
 
 export default {
   name: "RecipeDetails",
@@ -123,6 +118,16 @@ export default {
       currentInstructions: null,
     };
   },
+  // methods: {
+  //   ...mapActions("recipes", ["updateRecipe"]),
+  //   async submitForm(updatedRecipe) {
+  //     try {
+  //       await this.updateRecipe(updatedRecipe);
+  //     } catch (error) {
+  //       console.log("Failed to submit update form:", error);
+  //     }
+  //   },
+  // },
   computed: {
     ...mapGetters("recipes", ["allRecipes"]),
   },

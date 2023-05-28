@@ -95,6 +95,32 @@ export default {
       // Possible security rule for Firestore: allow read, write: if request.auth != null && request.auth.uid == resource.data.author;
     },
 
+    async updateRecipe({ commit }, updatedRecipe) {
+      try {
+        const userId = firebase.auth().currentUser.uid;
+        const recipeRef = db
+          .collection("users")
+          .doc(userId)
+          .collection("recipes")
+          .doc(updatedRecipe.recipeID);
+
+        await recipeRef.update({
+          name: updatedRecipe.name,
+          photo: updatedRecipe.photo,
+          time: updatedRecipe.time,
+          servings: updatedRecipe.servings,
+          category: updatedRecipe.category,
+          ingredients: updatedRecipe.ingredients,
+          instructions: updatedRecipe.instructions,
+        });
+        commit("setCurrentRecipeState", updatedRecipe);
+        this.loadAllRecipes();
+        
+      } catch (error) {
+        console.error("Failed to update recipes:", error);
+      }
+    },
+
     async loadRecentlyViewed() {},
   },
   getters: {
