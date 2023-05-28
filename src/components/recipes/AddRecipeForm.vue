@@ -276,6 +276,10 @@ export default {
   emits: ["save-recipe"],
   data() {
     return {
+      add,
+      cameraOutline,
+      addCircleOutline,
+      removeCircleOutline,
       name: "",
       photo: null,
       time: "",
@@ -359,14 +363,6 @@ export default {
       });
       await toast.present();
     },
-  },
-  setup() {
-    return {
-      add,
-      cameraOutline,
-      addCircleOutline,
-      removeCircleOutline,
-    };
   },
 };
 </script>

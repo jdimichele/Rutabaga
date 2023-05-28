@@ -10,6 +10,22 @@
                 class="max-w-full rounded-t-lg"
                 :src="this.currentRecipe[0].recipePhoto"
               />
+              <div class="absolute top-2 right-4">
+                <button class="">
+                  <ion-icon
+                    class="text-white mr-2 hover:text-yellow-500"
+                    size="large"
+                    :icon="sparklesOutline"
+                  ></ion-icon>
+                </button>
+                <button class="">
+                  <ion-icon
+                    class="text-white"
+                    size="large"
+                    :icon="createOutline"
+                  ></ion-icon>
+                </button>
+              </div>
               <div class="absolute bottom-2 left-4 pb-5">
                 <h1 class="text-4xl text-white">
                   {{ this.currentRecipe[0].recipeName }}
@@ -92,7 +108,9 @@ import {
   IonRow,
   IonCol,
   IonLabel,
+  IonIcon,
 } from "@ionic/vue";
+import { createOutline, sparklesOutline } from "ionicons/icons";
 import { mapGetters } from "vuex";
 //mapActions
 
@@ -108,9 +126,12 @@ export default {
     IonRow,
     IonCol,
     IonLabel,
+    IonIcon,
   },
   data() {
     return {
+      createOutline,
+      sparklesOutline,
       isLoading: false,
       currentRecipe: null,
       currentIngredients: null,
