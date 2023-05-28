@@ -5,31 +5,35 @@
       <base-card v-if="currentRecipe">
         <ion-grid>
           <ion-row>
-            <ion-item lines="none">
+            <div class="relative">
               <img
                 class="max-w-full rounded-t-lg"
                 :src="this.currentRecipe[0].recipePhoto"
               />
-            </ion-item>
+              <div class="absolute bottom-2 left-4 pb-5">
+                <h1 class="text-4xl text-white">
+                  {{ this.currentRecipe[0].recipeName }}
+                </h1>
+              </div>
+              <div class="inline-flex absolute bottom-3 left-5 text-white text-sm">
+                {{ this.currentRecipe[0].recipeTime }} minutes
+                {{ this.currentRecipe[0].recipeServings }} servings
+              </div>
+            </div>
           </ion-row>
           <ion-row class="ion-justify-content-start">
-            <ion-item lines="none">
-              <h1 class="text-4xl">
-                {{ this.currentRecipe[0].recipeName }}
-              </h1>
-            </ion-item>
             <ion-badge class="bg-rut-generic-mauve absolute right-0 p-1 m-4">
               {{ this.currentRecipe[0].recipeCategory }}
             </ion-badge>
           </ion-row>
-          <ion-row class="inline-flex">
+          <!-- <ion-row class="inline-flex">
             <ion-item lines="none">
               {{ this.currentRecipe[0].recipeTime }} minutes
             </ion-item>
             <ion-item lines="none">
               {{ this.currentRecipe[0].recipeServings }} servings
             </ion-item>
-          </ion-row>
+          </ion-row> -->
           <ion-row>
             <ion-col size-md="7" size-sm="5">
               <h6 class="underline font-bold text-md text-white">
@@ -76,6 +80,9 @@
           </ion-row>
         </ion-grid>
       </base-card>
+      <div v-else>
+        <p>Hm... Something went wrong...</p>
+      </div>
     </ion-content>
   </ion-page>
 </template>
