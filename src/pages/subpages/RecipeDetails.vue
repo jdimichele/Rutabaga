@@ -18,7 +18,7 @@
                     :icon="sparklesOutline"
                   ></ion-icon>
                 </button>
-                <button class="">
+                <button class="" @click="editRecipeDetails">
                   <ion-icon
                     class="text-white"
                     size="large"
@@ -128,27 +128,36 @@ export default {
     IonLabel,
     IonIcon,
   },
+  props: ["id"],
   data() {
     return {
       createOutline,
       sparklesOutline,
       isLoading: false,
+      currentRecipeID: null,
       currentRecipe: null,
       currentIngredients: null,
       currentStepCounter: null,
       currentInstructions: null,
     };
   },
-  // methods: {
-  //   ...mapActions("recipes", ["updateRecipe"]),
-  //   async submitForm(updatedRecipe) {
-  //     try {
-  //       await this.updateRecipe(updatedRecipe);
-  //     } catch (error) {
-  //       console.log("Failed to submit update form:", error);
-  //     }
-  //   },
-  // },
+  methods: {
+    // ...mapActions("recipes", ["updateRecipe"]),
+    // async submitForm(updatedRecipe) {
+    //   try {
+    //     await this.updateRecipe(updatedRecipe);
+    //   } catch (error) {
+    //     console.log("Failed to submit update form:", error);
+    //   }
+    // },
+    editRecipeDetails() {
+      this.currentRecipeID = this.id;
+      this.$router.push({
+        name: "EditRecipe",
+        params: { id: this.currentRecipeID },
+      });
+    },
+  },
   computed: {
     ...mapGetters("recipes", ["allRecipes"]),
   },

@@ -29,6 +29,13 @@ const routes = [
         meta: { requiresAuth: true },
       },
       {
+        name: "EditRecipe",
+        path: "/recipes/:id/edit",
+        component: () => import("@/pages/subpages/EditRecipe.vue"),
+        props: true,
+        meta: { requiresAuth: true },
+      },
+      {
         path: "/favorites",
         name: "favorites",
         component: () => import("@/pages/main/FavoritesPage.vue"),
