@@ -22,15 +22,18 @@ export default {
     addRecipeToAllRecipes(state, newRecipe) {
       state.allRecipes.push(newRecipe);
     },
-    setCurrentRecipeState(state, payload) {
-      state.recipeName = payload.recipeName;
-      state.recipePhoto = payload.recipePhoto;
-      state.recipeTime = payload.recipeTime;
-      state.recipeServings = payload.recipeServings;
-      state.recipeCategory = payload.recipeCategory;
-      state.recipeIngredients = payload.recipeIngredients;
-      state.recipeInstructions = payload.recipeInstructions;
+    setCurrentRecipeState(state, recipeData) {
+      state.recipeName = recipeData.recipeName;
+      state.recipePhoto = recipeData.recipePhoto;
+      state.recipeTime = recipeData.recipeTime;
+      state.recipeServings = recipeData.recipeServings;
+      state.recipeCategory = recipeData.recipeCategory;
+      state.recipeIngredients = recipeData.recipeIngredients;
+      state.recipeInstructions = recipeData.recipeInstructions;
     },
+    // setCurrentRecipe(state, recipeData) {
+    //   state.currentRecipe = recipeData;
+    // },
   },
 
   actions: {
@@ -94,6 +97,26 @@ export default {
       });
       // Possible security rule for Firestore: allow read, write: if request.auth != null && request.auth.uid == resource.data.author;
     },
+    async fetchRecipe({ commit }, recipeID) {
+      try {
+        const userId = firebase.auth().currentUser.uid;
+        const recipeRef = db
+          .collection("users")
+          .doc(userId)
+          .collection("recipes")
+          .doc(recipeID);
+        const recipeDoc = await recipeRef.get();
+
+        if (recipeDoc.exists) {
+          const recipeData = recipeDoc.data();
+          commit("setCurrentRecipeState", recipeData);
+        } else {
+          console.log("Recipe not found.");
+        }
+      } catch (error) {
+        console.error("Failed to fetch recipe data: ", error);
+      }
+    },
 
     async updateRecipe({ commit }, updatedRecipe) {
       try {
@@ -115,7 +138,6 @@ export default {
         });
         commit("setCurrentRecipeState", updatedRecipe);
         this.loadAllRecipes();
-        
       } catch (error) {
         console.error("Failed to update recipes:", error);
       }
@@ -136,6 +158,9 @@ export default {
       return state.allRecipes.filter((recipe) =>
         recipe.recipeName.toLowerCase().includes(name.toLowerCase())
       );
+    },
+    getRecipeByID: (state) => (id) => {
+      return state.allRecipes.filter((recipe) => recipe.recipeId === id);
     },
     recentlyAddedRecipes(state) {
       return state.allRecipes.slice(0, 3);

@@ -7,7 +7,9 @@
       </ion-card-title>
       <ion-card-content>
         <span>{{ servings }} servings</span>
-        <ion-badge class="bg-rut-generic-mauve float-right">{{ category }}</ion-badge>
+        <ion-badge class="bg-rut-generic-mauve float-right">{{
+          category
+        }}</ion-badge>
       </ion-card-content>
     </div>
   </ion-card>

@@ -18,7 +18,7 @@
                     :icon="sparklesOutline"
                   ></ion-icon>
                 </button>
-                <button class="" @click="editRecipeDetails">
+                <button @click="editRecipeDetails">
                   <ion-icon
                     class="text-white"
                     size="large"
@@ -112,7 +112,6 @@ import {
 } from "@ionic/vue";
 import { createOutline, sparklesOutline } from "ionicons/icons";
 import { mapGetters } from "vuex";
-//mapActions
 
 export default {
   name: "RecipeDetails",
@@ -141,25 +140,17 @@ export default {
       currentInstructions: null,
     };
   },
-  methods: {
-    // ...mapActions("recipes", ["updateRecipe"]),
-    // async submitForm(updatedRecipe) {
-    //   try {
-    //     await this.updateRecipe(updatedRecipe);
-    //   } catch (error) {
-    //     console.log("Failed to submit update form:", error);
-    //   }
-    // },
-    editRecipeDetails() {
-      this.currentRecipeID = this.id;
-      this.$router.push({
-        name: "EditRecipe",
-        params: { id: this.currentRecipeID },
-      });
-    },
-  },
   computed: {
     ...mapGetters("recipes", ["allRecipes"]),
+  },
+  methods: {
+    editRecipeDetails() {
+      this.$router.push({
+        name: "EditRecipe",
+        params: { id: this.$route.params.id },
+
+      });
+    },
   },
   async mounted() {
     this.currentRecipe = await this.allRecipes.filter((recipe) => {
