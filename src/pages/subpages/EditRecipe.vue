@@ -2,10 +2,10 @@
   <ion-page>
     <base-header title="Edit Recipe"></base-header>
     <ion-content>
-      <base-card>
+      <base-card v-if="editedRecipe">
         <form>
-          <img :src="this.editedRecipe.recipePhoto" />
-          <input v-model="this.editedRecipe.recipeName" type="text" />
+          <img :src="editedRecipe.recipePhoto" />
+          <input v-model="editedRecipe.recipeName" type="text" />
         </form>
       </base-card>
     </ion-content>
@@ -20,13 +20,35 @@ export default {
   components: { IonPage, IonContent },
   data() {
     return {
-      editedRecipe: {},
+      editedRecipe: {
+        name: "",
+        photo: null,
+        time: "",
+        servings: "",
+        category: "",
+        ingredients: [
+          {
+            qty: "",
+            unit: "",
+            name: "",
+          },
+        ],
+        instructions: [
+          {
+            instruction: "",
+          },
+        ],
+      },
     };
   },
   computed: {
     ...mapGetters("recipes", ["getRecipeByID"]),
   },
-  methods: {},
+  methods: {
+    async updateRecipe(){
+      
+    },
+  },
   async mounted() {
     const recipeID = this.$route.params.id;
     const currentRecipe = await this.getRecipeByID(recipeID);
