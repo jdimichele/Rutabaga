@@ -127,13 +127,11 @@ export default {
     IonLabel,
     IonIcon,
   },
-  props: ["id"],
   data() {
     return {
       createOutline,
       sparklesOutline,
       isLoading: false,
-      currentRecipeID: null,
       currentRecipe: null,
       currentIngredients: null,
       currentStepCounter: null,
@@ -148,7 +146,6 @@ export default {
       this.$router.push({
         name: "EditRecipe",
         params: { id: this.$route.params.id },
-
       });
     },
   },

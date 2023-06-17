@@ -22,18 +22,15 @@ export default {
     addRecipeToAllRecipes(state, newRecipe) {
       state.allRecipes.push(newRecipe);
     },
-    setCurrentRecipeState(state, recipeData) {
-      state.recipeName = recipeData.recipeName;
-      state.recipePhoto = recipeData.recipePhoto;
-      state.recipeTime = recipeData.recipeTime;
-      state.recipeServings = recipeData.recipeServings;
-      state.recipeCategory = recipeData.recipeCategory;
-      state.recipeIngredients = recipeData.recipeIngredients;
-      state.recipeInstructions = recipeData.recipeInstructions;
+    setCurrentRecipeState(state, payload) {
+      state.recipeName = payload.recipeName;
+      state.recipePhoto = payload.recipePhoto;
+      state.recipeTime = payload.recipeTime;
+      state.recipeServings = payload.recipeServings;
+      state.recipeCategory = payload.recipeCategory;
+      state.recipeIngredients = payload.recipeIngredients;
+      state.recipeInstructions = payload.recipeInstructions;
     },
-    // setCurrentRecipe(state, recipeData) {
-    //   state.currentRecipe = recipeData;
-    // },
   },
 
   actions: {
@@ -160,7 +157,7 @@ export default {
       );
     },
     getRecipeByID: (state) => (id) => {
-      return state.allRecipes.filter((recipe) => recipe.recipeId === id);
+      return state.allRecipes.find((recipe) => recipe.recipeId === id);
     },
     recentlyAddedRecipes(state) {
       return state.allRecipes.slice(0, 3);

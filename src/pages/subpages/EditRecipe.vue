@@ -4,7 +4,7 @@
     <ion-content>
       <base-card>
         <form>
-          <h1>{{ this.editedRecipe.recipeName }}</h1>
+          <img :src="this.editedRecipe.recipePhoto"/>
           <input v-model="editedRecipe.recipeName" type="text" />
         </form>
       </base-card>
@@ -18,7 +18,6 @@ import { mapGetters } from "vuex";
 
 export default {
   components: { IonPage, IonContent },
-  props: ["id"],
   data() {
     return {
       editedRecipe: {},
@@ -31,6 +30,7 @@ export default {
   mounted() {
     const currentRecipe = this.$store.getters["recipes/getRecipeByID"](this.id);
     this.editedRecipe = { ...currentRecipe };
+    this.$store.commit("recipes/setCurrentRecipeState", this.editedRecipe[0]);
   },
 };
 </script>
