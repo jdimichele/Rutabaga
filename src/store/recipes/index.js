@@ -157,7 +157,7 @@ export default {
       );
     },
     getRecipeByID: (state) => (id) => {
-      return state.allRecipes.find((recipe) => recipe.recipeId === id);
+      return state.allRecipes.find((recipe) => recipe.recipeID === id);
     },
     recentlyAddedRecipes(state) {
       return state.allRecipes.slice(0, 3);

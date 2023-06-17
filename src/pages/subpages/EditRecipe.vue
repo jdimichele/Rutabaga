@@ -4,8 +4,8 @@
     <ion-content>
       <base-card>
         <form>
-          <img :src="this.editedRecipe.recipePhoto"/>
-          <input v-model="editedRecipe.recipeName" type="text" />
+          <img :src="this.editedRecipe.recipePhoto" />
+          <input v-model="this.editedRecipe.recipeName" type="text" />
         </form>
       </base-card>
     </ion-content>
@@ -27,10 +27,11 @@ export default {
     ...mapGetters("recipes", ["getRecipeByID"]),
   },
   methods: {},
-  mounted() {
-    const currentRecipe = this.$store.getters["recipes/getRecipeByID"](this.id);
+  async mounted() {
+    const recipeID = this.$route.params.id;
+    const currentRecipe = await this.getRecipeByID(recipeID);
     this.editedRecipe = { ...currentRecipe };
-    this.$store.commit("recipes/setCurrentRecipeState", this.editedRecipe[0]);
+    // this.$store.commit("recipes/setCurrentRecipeState", this.editedRecipe[0]);
   },
 };
 </script>
