@@ -6,6 +6,16 @@
         <form>
           <img :src="editedRecipe.recipePhoto" />
           <input v-model="editedRecipe.recipeName" type="text" />
+          <br />
+          <input v-model="editedRecipe.recipeTime" type="text" />
+          <br />
+          <input v-model="editedRecipe.recipeServings" type="text" />
+          <br />
+          <input v-model="editedRecipe.recipeCategory" type="text" />
+          <br />
+
+          <br />
+          <input v-model="editedRecipe.recipeTime" type="text" />
         </form>
       </base-card>
     </ion-content>
@@ -45,9 +55,7 @@ export default {
     ...mapGetters("recipes", ["getRecipeByID"]),
   },
   methods: {
-    async updateRecipe(){
-      
-    },
+    async updateRecipe() {},
   },
   async mounted() {
     const recipeID = this.$route.params.id;

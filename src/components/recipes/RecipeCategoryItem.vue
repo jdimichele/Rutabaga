@@ -2,7 +2,7 @@
   <ion-item slot="header" @click.prevent="getRecipesByCategory(categoryName)">
     <ion-label>{{ categoryName }}</ion-label>
   </ion-item>
-  <div slot="content">
+  <div class="" slot="content">
     <ul>
       <li
         class="py-1"
