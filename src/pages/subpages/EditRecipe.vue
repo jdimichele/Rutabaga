@@ -1,69 +1,50 @@
 <template>
   <ion-page>
-    <base-header title="Edit Recipe"></base-header>
+    <base-header title="Edit Recipe">, IonRow</base-header>
     <ion-content>
-      <base-card v-if="targetRecipe">
-        <form>
-          <img :src="targetRecipe.recipePhoto" />
-          <input
-            v-model="editedRecipe.name"
-            type="text"
-            :placeholder="targetRecipe.recipeName"
-          />
-          <br />
-          <input
-            v-model="editedRecipe.time"
-            type="text"
-            :placeholder="targetRecipe.recipeTime"
-          />
-          <br />
-          <input
-            v-model="editedRecipe.servings"
-            type="text"
-            :placeholder="targetRecipe.recipeServings"
-          />
-          <br />
-          <input
-            v-model="editedRecipe.category"
-            :placeholder="targetRecipe.recipeCategory"
-            type="text"
-          />
-          <br />
-          <div v-for="(item, index) in targetIngredients" :key="index">
-            <input
-              v-model="editedRecipe.ingredients.qty"
-              :placeholder="this.targetRecipe.recipeIngredients[index].qty"
-            />
-            <input
-              v-model="editedRecipe.ingredients.unit"
-              :placeholder="this.targetRecipe.recipeIngredients[index].unit"
-            />
-            <input
-              v-model="editedRecipe.ingredients.name"
-              :placeholder="this.targetRecipe.recipeIngredients[index].name"
-            />
-          </div>
-          <br />
-          <div v-for="(step, index) in targetInstructions" :key="index">
-            <input
-              v-model="step.instruction"
-              :placeholder="
-                this.targetRecipe.recipeInstructions[index].instruction
-              "
-            />
-          </div>
-        </form>
+      <base-card v-if="editedRecipe">
+        <ion-grid>
+          <form @submit.prevent="submitUpdatedRecipe">
+            <img :src="editedRecipe.recipePhoto" />
+
+            <ion-row>
+              <ion-col>
+                <input v-model="editedRecipe.recipeName" type="text" />
+              </ion-col>
+            </ion-row>
+            <br />
+            <input v-model="editedRecipe.recipeTime" type="text" />
+            <br />
+            <input v-model="editedRecipe.servings" type="text" />
+            <br />
+            <input v-model="editedRecipe.recipeCategory" type="text" />
+            <br />
+            <div v-for="(item, index) in editedIngredients" :key="index">
+              <input v-model="editedRecipe.recipeIngredients[index].qty" />
+              <input v-model="editedRecipe.recipeIngredients[index].unit" />
+              <input v-model="editedRecipe.recipeIngredients[index].name" />
+            </div>
+            <br />
+            <div v-for="(step, index) in editedInstructions" :key="index">
+              <input
+                v-model="
+                  this.editedRecipe.recipeInstructions[index].instruction
+                "
+              />
+            </div>
+          </form>
+        </ion-grid>
       </base-card>
     </ion-content>
   </ion-page>
 </template>
 
 <script>
-import { IonPage, IonContent } from "@ionic/vue";
+import { IonPage, IonContent, IonGrid, IonRow, IonCol } from "@ionic/vue";
 import { mapGetters } from "vuex";
 
 export default {
-  components: { IonPage, IonContent },
+  components: { IonPage, IonContent, IonGrid, IonRow, IonCol },
   data() {
     return {
       targetRecipe: {},
@@ -99,9 +80,9 @@ export default {
   async mounted() {
     const recipeID = this.$route.params.id;
     const currentRecipe = await this.getRecipeByID(recipeID);
-    this.targetRecipe = { ...currentRecipe };
-    this.targetIngredients = this.targetRecipe.recipeIngredients.length;
-    this.targetInstructions = this.targetRecipe.recipeInstructions.length;
+    this.editedRecipe = { ...currentRecipe };
+    this.editedIngredients = this.editedRecipe.recipeIngredients.length;
+    this.editedInstructions = this.editedRecipe.recipeInstructions.length;
     // this.$store.commit("recipes/setCurrentRecipeState", this.editedRecipe[0]);
   },
 };
