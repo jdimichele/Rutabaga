@@ -2,20 +2,56 @@
   <ion-page>
     <base-header title="Edit Recipe"></base-header>
     <ion-content>
-      <base-card v-if="editedRecipe">
+      <base-card v-if="targetRecipe">
         <form>
-          <img :src="editedRecipe.recipePhoto" />
-          <input v-model="editedRecipe.recipeName" type="text" />
+          <img :src="targetRecipe.recipePhoto" />
+          <input
+            v-model="editedRecipe.name"
+            type="text"
+            :placeholder="targetRecipe.recipeName"
+          />
           <br />
-          <input v-model="editedRecipe.recipeTime" type="text" />
+          <input
+            v-model="editedRecipe.time"
+            type="text"
+            :placeholder="targetRecipe.recipeTime"
+          />
           <br />
-          <input v-model="editedRecipe.recipeServings" type="text" />
+          <input
+            v-model="editedRecipe.servings"
+            type="text"
+            :placeholder="targetRecipe.recipeServings"
+          />
           <br />
-          <input v-model="editedRecipe.recipeCategory" type="text" />
+          <input
+            v-model="editedRecipe.category"
+            :placeholder="targetRecipe.recipeCategory"
+            type="text"
+          />
           <br />
-
+          <div v-for="(item, index) in targetIngredients" :key="index">
+            <input
+              v-model="editedRecipe.ingredients.qty"
+              :placeholder="this.targetRecipe.recipeIngredients[index].qty"
+            />
+            <input
+              v-model="editedRecipe.ingredients.unit"
+              :placeholder="this.targetRecipe.recipeIngredients[index].unit"
+            />
+            <input
+              v-model="editedRecipe.ingredients.name"
+              :placeholder="this.targetRecipe.recipeIngredients[index].name"
+            />
+          </div>
           <br />
-          <input v-model="editedRecipe.recipeTime" type="text" />
+          <div v-for="(step, index) in targetInstructions" :key="index">
+            <input
+              v-model="step.instruction"
+              :placeholder="
+                this.targetRecipe.recipeInstructions[index].instruction
+              "
+            />
+          </div>
         </form>
       </base-card>
     </ion-content>
@@ -30,6 +66,9 @@ export default {
   components: { IonPage, IonContent },
   data() {
     return {
+      targetRecipe: {},
+      targetInstructions: null,
+      targetIngredients: null,
       editedRecipe: {
         name: "",
         photo: null,
@@ -60,7 +99,9 @@ export default {
   async mounted() {
     const recipeID = this.$route.params.id;
     const currentRecipe = await this.getRecipeByID(recipeID);
-    this.editedRecipe = { ...currentRecipe };
+    this.targetRecipe = { ...currentRecipe };
+    this.targetIngredients = this.targetRecipe.recipeIngredients.length;
+    this.targetInstructions = this.targetRecipe.recipeInstructions.length;
     // this.$store.commit("recipes/setCurrentRecipeState", this.editedRecipe[0]);
   },
 };
