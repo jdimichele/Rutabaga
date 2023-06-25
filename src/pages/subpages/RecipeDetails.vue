@@ -27,7 +27,7 @@
                 </button>
               </div>
               <div class="absolute bottom-2 left-4 pb-5">
-                <h1 class="text-4xl text-white">
+                <h1 class="md:text-4xl text-2xl text-white">
                   {{ this.currentRecipe[0].recipeName }}
                 </h1>
               </div>
@@ -39,11 +39,13 @@
               </div>
             </div>
           </ion-row>
+
           <ion-row class="ion-justify-content-start">
             <ion-badge class="bg-rut-generic-mauve absolute right-0 p-1 m-4">
               {{ this.currentRecipe[0].recipeCategory }}
             </ion-badge>
           </ion-row>
+
           <ion-row>
             <ion-col size-md="7" size-sm="5">
               <h6 class="underline font-bold text-md text-white">

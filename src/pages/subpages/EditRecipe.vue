@@ -47,9 +47,6 @@ export default {
   components: { IonPage, IonContent, IonGrid, IonRow, IonCol },
   data() {
     return {
-      targetRecipe: {},
-      targetInstructions: null,
-      targetIngredients: null,
       editedRecipe: {
         name: "",
         photo: null,
