@@ -124,17 +124,27 @@ export default {
           .collection("recipes")
           .doc(updatedRecipe.recipeID);
 
-        await recipeRef.update({
-          name: updatedRecipe.name,
-          photo: updatedRecipe.photo,
-          time: updatedRecipe.time,
-          servings: updatedRecipe.servings,
-          category: updatedRecipe.category,
-          ingredients: updatedRecipe.ingredients,
-          instructions: updatedRecipe.instructions,
-        });
-        commit("setCurrentRecipeState", updatedRecipe);
-        this.loadAllRecipes();
+        const originalRecipeSnapshot = await recipeRef.get();
+
+        if (originalRecipeSnapshot.exists) {
+          const originalRecipe = originalRecipeSnapshot.data();
+
+          const updateFields = {};
+          for (const key in updatedRecipe) {
+            if (
+              Object.prototype.hasOwnProperty.call(updatedRecipe, key) &&
+              updatedRecipe[key] !== originalRecipe[key]
+            ) {
+              updateFields[key] = updatedRecipe[key];
+            }
+          }
+
+          await recipeRef.update(updateFields);
+
+          commit("setCurrentRecipeState", updatedRecipe);
+          commit("recipes/loadAllRecipes");
+          console.log("Recipe updated successfully!");
+        }
       } catch (error) {
         console.error("Failed to update recipes:", error);
       }
