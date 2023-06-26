@@ -2,6 +2,7 @@
   <ion-page>
     <base-header title="Edit Recipe">, IonRow</base-header>
     <ion-content>
+      <base-loading v-if="isLoading"></base-loading>
       <base-card v-if="editedRecipe">
         <ion-grid>
           <form @submit.prevent="submitUpdatedRecipe">
@@ -32,7 +33,7 @@
                 "
               />
             </div>
-            <button @click="submitUpdatedRecipe">test</button>
+            <button @click="submitUpdatedRecipe">Update</button>
           </form>
         </ion-grid>
       </base-card>
@@ -75,6 +76,7 @@ export default {
   },
   methods: {
     async submitUpdatedRecipe() {
+      this.isLoading = true;
       const updatedRecipe = {
         recipeID: this.editedRecipe.recipeID,
         name: this.editedRecipe.recipeName,
@@ -86,6 +88,7 @@ export default {
         instructions: this.editedRecipe.recipeInstructions,
       };
       this.$store.dispatch("recipes/updateRecipe", updatedRecipe);
+      this.isLoading = false;
     },
 
     // async takePicture() {

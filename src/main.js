@@ -28,6 +28,7 @@ import "./theme/variables.css";
 import BaseCard from "./components/ui/BaseCard.vue";
 import BaseHeader from "./components/ui/BaseHeader.vue";
 import BaseLogo from "./components/ui/BaseLogo.vue";
+import BaseLoading from "./components/ui/BaseLoading.vue";
 
 /* Ionic Loading component. */
 import { defineCustomElements } from "@ionic/pwa-elements/loader";
@@ -35,9 +36,11 @@ defineCustomElements(window);
 
 const app = createApp(App);
 
-app.component("base-card", BaseCard);
-app.component("base-header", BaseHeader);
-app.component("base-logo", BaseLogo);
+app
+  .component("base-card", BaseCard)
+  .component("base-header", BaseHeader)
+  .component("base-logo", BaseLogo)
+  .component("base-loading", BaseLoading);
 
 app.use(router).use(store).use(IonicVue, {
   mode: "md",
