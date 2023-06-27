@@ -115,7 +115,7 @@ export default {
       }
     },
 
-    async updateRecipe({ commit }, updatedRecipe) {
+    async updateRecipe({ commit, dispatch }, updatedRecipe) {
       try {
         const userId = firebase.auth().currentUser.uid;
         const recipeRef = db
@@ -142,7 +142,7 @@ export default {
           await recipeRef.update(updateFields);
 
           commit("setCurrentRecipeState", updatedRecipe);
-          commit("recipes/loadAllRecipes");
+          dispatch("loadAllRecipes");
           console.log("Recipe updated successfully!");
         }
       } catch (error) {

@@ -33,7 +33,7 @@
                 "
               />
             </div>
-            <button @click="submitUpdatedRecipe">Update</button>
+            <button>Update</button>
           </form>
         </ion-grid>
       </base-card>
@@ -117,7 +117,6 @@ export default {
     this.editedRecipe = { ...currentRecipe };
     this.editedIngredients = this.editedRecipe.recipeIngredients.length;
     this.editedInstructions = this.editedRecipe.recipeInstructions.length;
-    // this.$store.commit("recipes/setCurrentRecipeState", this.editedRecipe[0]);
   },
 };
 </script>
