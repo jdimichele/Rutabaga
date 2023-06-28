@@ -42,13 +42,22 @@
 </template>
 
 <script>
-import { IonPage, IonContent, IonGrid, IonRow, IonCol } from "@ionic/vue";
+import {
+  IonPage,
+  IonContent,
+  IonGrid,
+  IonRow,
+  IonCol,
+  toastController,
+} from "@ionic/vue";
 import { mapGetters } from "vuex";
 
 export default {
   components: { IonPage, IonContent, IonGrid, IonRow, IonCol },
   data() {
     return {
+      editedIngredients: null,
+      editedInstructions: null,
       isLoading: false,
       editedRecipe: {
         name: "",
@@ -89,6 +98,20 @@ export default {
       };
       this.$store.dispatch("recipes/updateRecipe", updatedRecipe);
       this.isLoading = false;
+      this.presentToast("middle");
+      setTimeout(
+        () => this.$router.push("/recipes/" + this.$route.params.id),
+        1700
+      );
+    },
+
+    async presentToast(position) {
+      const toast = await toastController.create({
+        message: "Recipe updated!",
+        duration: 1500,
+        position: position,
+      });
+      await toast.present();
     },
 
     // async takePicture() {
