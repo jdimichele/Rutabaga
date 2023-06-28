@@ -1,6 +1,6 @@
 <template>
   <ion-page>
-    <base-header title="Edit Recipe">, IonRow</base-header>
+    <base-header title="Edit Recipe"></base-header>
     <ion-content>
       <base-loading v-if="isLoading"></base-loading>
       <base-card v-if="editedRecipe">
@@ -99,10 +99,7 @@ export default {
       this.$store.dispatch("recipes/updateRecipe", updatedRecipe);
       this.isLoading = false;
       this.presentToast("middle");
-      setTimeout(
-        () => this.$router.push("/recipes/" + this.$route.params.id),
-        1700
-      );
+      setTimeout(() => this.$router.push("/recipes/"+this.$route.params.id), 1700);
     },
 
     async presentToast(position) {

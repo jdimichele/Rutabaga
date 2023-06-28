@@ -435,4 +435,7 @@ ion-icon {
   transform: translateY(-50%);
   --background: #7a3750;
 }
+ion-item {
+  --highlight-color-focused: #7a3750;
+}
 </style>
