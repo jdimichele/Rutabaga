@@ -10,18 +10,16 @@
                 class="max-w-full rounded-t-lg"
                 :src="this.currentRecipe[0].recipePhoto"
               />
-              <div class="absolute top-2 right-4">
+              <div class="absolute top-2 right-3">
                 <button class="">
                   <ion-icon
-                    class="text-white mr-2 hover:text-yellow-500"
-                    size="large"
+                    class="text-white mr-2 hover:text-yellow-500 text-2xl md:text-4xl"
                     :icon="sparklesOutline"
                   ></ion-icon>
                 </button>
                 <button @click="editRecipeDetails">
                   <ion-icon
-                    class="text-white"
-                    size="large"
+                    class="text-white text-2xl md:text-4xl"
                     :icon="createOutline"
                   ></ion-icon>
                 </button>
@@ -40,30 +38,26 @@
             </div>
           </ion-row>
 
-          <ion-row class="ion-justify-content-start">
-            <ion-badge class="bg-rut-generic-mauve absolute right-0 p-1 m-4">
+          <ion-row class="flex justify-between m-2">
+            <h6 class="underline font-bold text-md text-white">Ingredients:</h6>
+            <ion-badge class="bg-rut-generic-mauve p-1">
               {{ this.currentRecipe[0].recipeCategory }}
             </ion-badge>
           </ion-row>
 
           <ion-row>
             <ion-col size-md="7" size-sm="5">
-              <h6 class="underline font-bold text-md text-white">
-                Ingredients:
-              </h6>
               <ion-list
                 v-for="(item, index) in currentIngredients"
                 :key="index"
               >
-                <ion-item lines="none">
-                  <ion-label class="ion-text-wrap">
-                    <p>
-                      {{ this.currentRecipe[0].recipeIngredients[index].qty }}
-                      {{ this.currentRecipe[0].recipeIngredients[index].unit }}
-                      {{ this.currentRecipe[0].recipeIngredients[index].name }}
-                    </p>
-                  </ion-label>
-                </ion-item>
+                <div class="break-words ml-2">
+                  <p>
+                    {{ this.currentRecipe[0].recipeIngredients[index].qty }}
+                    {{ this.currentRecipe[0].recipeIngredients[index].unit }}
+                    {{ this.currentRecipe[0].recipeIngredients[index].name }}
+                  </p>
+                </div>
               </ion-list>
             </ion-col>
           </ion-row>
@@ -76,17 +70,15 @@
                 v-for="(item, index) in currentInstructions"
                 :key="index"
               >
-                <ion-item lines="none">
-                  <ion-label class="ion-text-wrap">
-                    <h5>Step {{ index + 1 }}:</h5>
-                    <p>
-                      {{
-                        this.currentRecipe[0].recipeInstructions[index]
-                          .instruction
-                      }}
-                    </p>
-                  </ion-label>
-                </ion-item>
+                <div class="break-words ml-2">
+                  <h5 class="pb-1 text-white">Step {{ index + 1 }}:</h5>
+                  <p class="ml-1">
+                    {{
+                      this.currentRecipe[0].recipeInstructions[index]
+                        .instruction
+                    }}
+                  </p>
+                </div>
               </ion-list>
             </ion-col>
           </ion-row>
@@ -103,13 +95,11 @@
 import {
   IonPage,
   IonContent,
-  IonItem,
   IonList,
   IonBadge,
   IonGrid,
   IonRow,
   IonCol,
-  IonLabel,
   IonIcon,
 } from "@ionic/vue";
 import { createOutline, sparklesOutline } from "ionicons/icons";
@@ -120,13 +110,11 @@ export default {
   components: {
     IonPage,
     IonContent,
-    IonItem,
     IonList,
     IonBadge,
     IonGrid,
     IonRow,
     IonCol,
-    IonLabel,
     IonIcon,
   },
   data() {
