@@ -63,7 +63,7 @@
           </ion-row>
           <ion-row>
             <ion-col size-md="7" size-sm="5">
-              <h5 class="underline font-bold text-md text-white">
+              <h5 class="underline font-bold text-md text-white mb-2">
                 Step-By-Step:
               </h5>
               <ion-list
