@@ -10,7 +10,10 @@
 
             <ion-row>
               <ion-col>
-                <input v-model="editedRecipe.recipeName" type="text" />
+                <div>
+                  <h1>Name:</h1>
+                  <input v-model="editedRecipe.recipeName" type="text" />
+                </div>
               </ion-col>
             </ion-row>
             <br />
@@ -33,6 +36,16 @@
                 "
               />
             </div>
+            <ion-item lines="none">
+              <button @click.prevent="addNewStep(step)">
+                <ion-icon color="success" :icon="addCircleOutline"></ion-icon>
+              </button>
+            </ion-item>
+            <ion-item lines="none">
+              <button @click.prevent="removeLastStep(step)">
+                <ion-icon color="danger" :icon="removeCircleOutline"></ion-icon>
+              </button>
+            </ion-item>
             <button>Update</button>
           </form>
         </ion-grid>
@@ -48,17 +61,32 @@ import {
   IonGrid,
   IonRow,
   IonCol,
+  IonItem,
+  IonIcon,
   toastController,
 } from "@ionic/vue";
+import { addCircleOutline, removeCircleOutline } from "ionicons/icons";
 import { mapGetters } from "vuex";
 
 export default {
-  components: { IonPage, IonContent, IonGrid, IonRow, IonCol },
+  components: {
+    IonPage,
+    IonContent,
+    IonGrid,
+    IonRow,
+    IonCol,
+    IonItem,
+    IonIcon,
+  },
+
   data() {
     return {
-      editedIngredients: null,
-      editedInstructions: null,
+      addCircleOutline,
+      removeCircleOutline,
+      editedIngredients: 0,
+      editedInstructions: 0,
       isLoading: false,
+      currentRecipe: {},
       editedRecipe: {
         name: "",
         photo: null,
@@ -96,10 +124,15 @@ export default {
         ingredients: this.editedRecipe.recipeIngredients,
         instructions: this.editedRecipe.recipeInstructions,
       };
-      this.$store.dispatch("recipes/updateRecipe", updatedRecipe);
+
+      await this.$store.dispatch("recipes/updateRecipe", updatedRecipe);
+
       this.isLoading = false;
       this.presentToast("middle");
-      setTimeout(() => this.$router.push("/recipes/"+this.$route.params.id), 1700);
+      setTimeout(
+        () => this.$router.push("/recipes/" + this.$route.params.id),
+        1700
+      );
     },
 
     async presentToast(position) {
@@ -109,6 +142,25 @@ export default {
         position: position,
       });
       await toast.present();
+    },
+
+    addNewIngredient() {
+      this.editedRecipe.recipeIngredients.push({});
+    },
+    addNewStep() {
+      this.editedRecipe.recipeInstructions.push({});
+    },
+    removeLastIngredient(ingredient) {
+      const index = this.editedRecipe.recipeIngredients.indexOf(ingredient);
+      if (index > -1) {
+        this.editedRecipe.recipeIngredients.splice(index, 1);
+      }
+    },
+    removeLastStep(step) {
+      const index = this.editedRecipe.recipeInstructions.indexOf(step);
+      if (index > -1) {
+        this.editedRecipe.recipeInstructions.splice(index, 1);
+      }
     },
 
     // async takePicture() {
