@@ -6,46 +6,127 @@
       <base-card v-if="editedRecipe">
         <ion-grid>
           <form @submit.prevent="submitUpdatedRecipe">
-            <img :src="editedRecipe.recipePhoto" />
+            <ion-row>
+              <ion-col>
+                <img class="rounded-t-lg" :src="editedRecipe.recipePhoto" />
+              </ion-col>
+            </ion-row>
 
             <ion-row>
               <ion-col>
-                <div>
-                  <h1>Name:</h1>
-                  <input v-model="editedRecipe.recipeName" type="text" />
-                </div>
+                <ion-item>
+                  <ion-input
+                    label="Name:"
+                    label-placement="stacked"
+                    v-model="editedRecipe.recipeName"
+                    type="text"
+                  ></ion-input>
+                </ion-item>
+              </ion-col>
+
+              <ion-col>
+                <ion-item>
+                  <ion-input
+                    label="Category:"
+                    label-placement="stacked"
+                    v-model="editedRecipe.recipeCategory"
+                    type="text"
+                  ></ion-input>
+                </ion-item>
               </ion-col>
             </ion-row>
-            <br />
-            <input v-model="editedRecipe.recipeTime" type="text" />
-            <br />
-            <input v-model="editedRecipe.recipeServings" />
-            <br />
-            <input v-model="editedRecipe.recipeCategory" type="text" />
-            <br />
-            <div v-for="(item, index) in editedIngredients" :key="index">
-              <input v-model="editedRecipe.recipeIngredients[index].qty" />
-              <input v-model="editedRecipe.recipeIngredients[index].unit" />
-              <input v-model="editedRecipe.recipeIngredients[index].name" />
-            </div>
-            <br />
-            <div v-for="(step, index) in editedInstructions" :key="index">
-              <input
-                v-model="
-                  this.editedRecipe.recipeInstructions[index].instruction
-                "
-              />
-            </div>
-            <ion-item lines="none">
-              <button @click.prevent="addNewStep(step)">
-                <ion-icon color="success" :icon="addCircleOutline"></ion-icon>
-              </button>
-            </ion-item>
-            <ion-item lines="none">
-              <button @click.prevent="removeLastStep(step)">
-                <ion-icon color="danger" :icon="removeCircleOutline"></ion-icon>
-              </button>
-            </ion-item>
+
+            <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-input
+                    label="Time:"
+                    label-placement="stacked"
+                    v-model="editedRecipe.recipeTime"
+                    type="text"
+                  >
+                  </ion-input>
+                </ion-item>
+              </ion-col>
+
+              <ion-col>
+                <ion-item>
+                  <ion-input
+                    label="Servings:"
+                    label-placement="stacked"
+                    v-model="editedRecipe.recipeServings"
+                    type="text"
+                  >
+                  </ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col>
+                <div
+                  v-for="(ingredient, index) in editedRecipe.recipeIngredients"
+                  :key="index"
+                  class="flex"
+                >
+                  <ion-input
+                    type="text"
+                    v-model="ingredient.qty"
+                    class="w-10"
+                  ></ion-input>
+
+                  <ion-input
+                    v-model="ingredient.unit"
+                    class="w-10 text-center"
+                  ></ion-input>
+
+                  <ion-textarea
+                    v-model="ingredient.name"
+                    class="break-words w-full"
+                    :auto-grow="true"
+                  ></ion-textarea>
+                </div>
+              </ion-col>
+              <ion-item lines="none">
+                <button @click.prevent="addNewIngredient()">
+                  <ion-icon color="success" :icon="addCircleOutline"></ion-icon>
+                </button>
+              </ion-item>
+              <ion-item lines="none">
+                <button @click.prevent="removeLastIngredient()">
+                  <ion-icon
+                    color="danger"
+                    :icon="removeCircleOutline"
+                  ></ion-icon>
+                </button>
+              </ion-item>
+            </ion-row>
+
+            <ion-row>
+              <ion-col>
+                <div
+                  v-for="(ins, index) in editedRecipe.recipeInstructions"
+                  :key="index"
+                >
+                  <ion-textarea v-model="ins.instruction"></ion-textarea>
+                </div>
+              </ion-col>
+
+              <ion-item lines="none">
+                <button @click.prevent="addNewStep()">
+                  <ion-icon color="success" :icon="addCircleOutline"></ion-icon>
+                </button>
+              </ion-item>
+
+              <ion-item lines="none">
+                <button @click.prevent="removeLastStep()">
+                  <ion-icon
+                    color="danger"
+                    :icon="removeCircleOutline"
+                  ></ion-icon>
+                </button>
+              </ion-item>
+            </ion-row>
             <button>Update</button>
           </form>
         </ion-grid>
@@ -63,6 +144,8 @@ import {
   IonCol,
   IonItem,
   IonIcon,
+  IonInput,
+  IonTextarea,
   toastController,
 } from "@ionic/vue";
 import { addCircleOutline, removeCircleOutline } from "ionicons/icons";
@@ -77,16 +160,17 @@ export default {
     IonCol,
     IonItem,
     IonIcon,
+    IonInput,
+    IonTextarea,
   },
 
   data() {
     return {
       addCircleOutline,
       removeCircleOutline,
-      editedIngredients: 0,
-      editedInstructions: 0,
+      editedIngredients: {},
+      editedInstructions: {},
       isLoading: false,
-      currentRecipe: {},
       editedRecipe: {
         name: "",
         photo: null,
@@ -145,50 +229,27 @@ export default {
     },
 
     addNewIngredient() {
-      this.editedRecipe.recipeIngredients.push({});
+      this.editedRecipe.recipeIngredients.push({ qty: "", unit: "", name: "" });
+      this.editedIngredients++;
     },
     addNewStep() {
-      this.editedRecipe.recipeInstructions.push({});
+      this.editedRecipe.recipeInstructions.push({ instruction: "" });
+      this.editedInstructions++;
     },
-    removeLastIngredient(ingredient) {
-      const index = this.editedRecipe.recipeIngredients.indexOf(ingredient);
-      if (index > -1) {
-        this.editedRecipe.recipeIngredients.splice(index, 1);
-      }
+    removeLastIngredient() {
+      this.editedRecipe.recipeIngredients.pop();
+      this.editedIngredients--;
     },
-    removeLastStep(step) {
-      const index = this.editedRecipe.recipeInstructions.indexOf(step);
-      if (index > -1) {
-        this.editedRecipe.recipeInstructions.splice(index, 1);
-      }
+    removeLastStep() {
+      this.editedRecipe.recipeInstructions.pop();
+      this.editedInstructions--;
     },
-
-    // async takePicture() {
-    //   const image = await Camera.getPhoto({
-    //     quality: 100,
-    //     allowEditing: true,
-    //     source: CameraSource.Camera,
-    //     resultType: CameraResultType.Base64,
-    //   });
-    //   if (image?.base64String) {
-    //     const userId = firebase.auth().currentUser.uid;
-    //     const guid = uuidv4();
-    //     const filePath = `${userId}/images/${guid}.${image.format}`;
-
-    //     const storageRef = firebase.storage().ref();
-    //     await storageRef
-    //       .child(filePath)
-    //       .putString(image.base64String, "base64");
-    //     return (this.photo = await storageRef.child(filePath).getDownloadURL());
-    //   }
-    // },
   },
   async mounted() {
-    const recipeID = this.$route.params.id;
-    const currentRecipe = await this.getRecipeByID(recipeID);
-    this.editedRecipe = { ...currentRecipe };
-    this.editedIngredients = this.editedRecipe.recipeIngredients.length;
-    this.editedInstructions = this.editedRecipe.recipeInstructions.length;
+    const targetRecipe = await this.getRecipeByID(this.$route.params.id);
+    this.editedRecipe = { ...targetRecipe };
+    this.editedIngredients = this.editedRecipe.recipeIngredients;
+    this.editedInstructions = this.editedRecipe.recipeInstructions;
   },
 };
 </script>

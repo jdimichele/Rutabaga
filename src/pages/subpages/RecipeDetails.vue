@@ -8,7 +8,7 @@
             <div class="relative">
               <img
                 class="max-w-full rounded-t-lg"
-                :src="this.currentRecipe[0].recipePhoto"
+                :src="currentRecipe.recipePhoto"
               />
               <div class="absolute top-2 right-3">
                 <button class="">
@@ -26,14 +26,14 @@
               </div>
               <div class="absolute bottom-2 left-4 pb-5">
                 <h1 class="md:text-4xl text-2xl text-white">
-                  {{ this.currentRecipe[0].recipeName }}
+                  {{ currentRecipe.recipeName }}
                 </h1>
               </div>
               <div
                 class="inline-flex absolute bottom-3 left-5 text-white text-sm"
               >
-                {{ this.currentRecipe[0].recipeTime }} minutes
-                {{ this.currentRecipe[0].recipeServings }} servings
+                {{ currentRecipe.recipeTime }} minutes
+                {{ currentRecipe.recipeServings }} servings
               </div>
             </div>
           </ion-row>
@@ -41,7 +41,7 @@
           <ion-row class="flex justify-between m-2">
             <h6 class="underline font-bold text-md text-white">Ingredients:</h6>
             <ion-badge class="bg-rut-generic-mauve p-1">
-              {{ this.currentRecipe[0].recipeCategory }}
+              {{ currentRecipe.recipeCategory }}
             </ion-badge>
           </ion-row>
 
@@ -53,9 +53,9 @@
               >
                 <div class="break-words ml-2">
                   <p>
-                    {{ this.currentRecipe[0].recipeIngredients[index].qty }}
-                    {{ this.currentRecipe[0].recipeIngredients[index].unit }}
-                    {{ this.currentRecipe[0].recipeIngredients[index].name }}
+                    {{ currentRecipe.recipeIngredients[index].qty }}
+                    {{ currentRecipe.recipeIngredients[index].unit }}
+                    {{ currentRecipe.recipeIngredients[index].name }}
                   </p>
                 </div>
               </ion-list>
@@ -74,7 +74,7 @@
                   <h5 class="pb-1 text-white">Step {{ index + 1 }}:</h5>
                   <p class="ml-1">
                     {{
-                      this.currentRecipe[0].recipeInstructions[index]
+                      currentRecipe.recipeInstructions[index]
                         .instruction
                     }}
                   </p>
@@ -124,12 +124,11 @@ export default {
       isLoading: false,
       currentRecipe: null,
       currentIngredients: null,
-      currentStepCounter: null,
       currentInstructions: null,
     };
   },
   computed: {
-    ...mapGetters("recipes", ["allRecipes"]),
+    ...mapGetters("recipes", ["getRecipeByID"]),
   },
   methods: {
     editRecipeDetails() {
@@ -140,11 +139,9 @@ export default {
     },
   },
   async mounted() {
-    this.currentRecipe = await this.allRecipes.filter((recipe) => {
-      return recipe.recipeID === this.$route.params.id;
-    });
-    this.currentIngredients = this.currentRecipe[0].recipeIngredients.length;
-    this.currentInstructions = this.currentRecipe[0].recipeInstructions.length;
+    this.currentRecipe = await this.getRecipeByID(this.$route.params.id);
+    this.currentIngredients = this.currentRecipe.recipeIngredients;
+    this.currentInstructions = this.currentRecipe.recipeInstructions;
   },
 };
 </script>
