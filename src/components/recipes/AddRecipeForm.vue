@@ -106,11 +106,11 @@
                 <ion-list
                   v-for="(ingredient, index) in ingredients"
                   :key="index"
-                  class="md:flex md:items-stretch"
+                  class="flex md:flex md:items-stretch"
                 >
-                  <ion-item class="md:mx-2">
+                  <ion-item class="w-20 md:mx-2">
                     <ion-input
-                      placeholder="Quantity"
+                      placeholder="Qty"
                       type="text"
                       id="ingredients"
                       required
@@ -119,9 +119,9 @@
                     </ion-input>
                   </ion-item>
 
-                  <ion-item class="md:mx-2">
+                  <ion-item class="w-24 md:mx-2">
                     <ion-select
-                      placeholder="Unit of Measurement"
+                      placeholder="Units"
                       interface="action-sheet"
                       v-model="ingredient.unit"
                     >
@@ -135,7 +135,7 @@
                     </ion-select>
                   </ion-item>
 
-                  <ion-item class="md:mx-2">
+                  <ion-item class="w-32 md:mx-2">
                     <ion-input
                       placeholder="Name"
                       type="text"
@@ -181,7 +181,7 @@
                 >
                   <ion-item class="mx-2">
                     <ion-input
-                      class="px-1"
+                      class="px-1 w-64"
                       type="text"
                       id="ingredients"
                       required
@@ -211,7 +211,7 @@
           </ion-col>
         </ion-row>
 
-        <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+        <ion-fab class="bottom mt-20" horizontal="center">
           <ion-button class="submitButton" type="submit">
             <ion-icon :icon="add"></ion-icon>
           </ion-button>
@@ -389,8 +389,11 @@ ion-grid {
   margin-bottom: 0;
   display: block;
   width: 56px;
+  left: 0;
+  right: 0;
+  bottom: 10px;
   height: 56px;
-  position: relative;
+  position: absolute;
   font-size: 14px;
   text-align: center;
   text-overflow: ellipsis;

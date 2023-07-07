@@ -112,20 +112,13 @@
                 </div>
               </ion-col>
 
-              <ion-item lines="none">
-                <button @click.prevent="addNewStep()">
-                  <ion-icon color="success" :icon="addCircleOutline"></ion-icon>
-                </button>
-              </ion-item>
+              <button @click.prevent="addNewStep()">
+                <ion-icon color="success" :icon="addCircleOutline"></ion-icon>
+              </button>
 
-              <ion-item lines="none">
-                <button @click.prevent="removeLastStep()">
-                  <ion-icon
-                    color="danger"
-                    :icon="removeCircleOutline"
-                  ></ion-icon>
-                </button>
-              </ion-item>
+              <button @click.prevent="removeLastStep()">
+                <ion-icon color="danger" :icon="removeCircleOutline"></ion-icon>
+              </button>
             </ion-row>
             <button>Update</button>
           </form>
