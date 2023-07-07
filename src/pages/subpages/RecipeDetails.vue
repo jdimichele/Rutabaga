@@ -73,10 +73,7 @@
                 <div class="break-words ml-2">
                   <h5 class="pb-1 text-white">Step {{ index + 1 }}:</h5>
                   <p class="ml-1">
-                    {{
-                      currentRecipe.recipeInstructions[index]
-                        .instruction
-                    }}
+                    {{ currentRecipe.recipeInstructions[index].instruction }}
                   </p>
                 </div>
               </ion-list>
@@ -103,7 +100,7 @@ import {
   IonIcon,
 } from "@ionic/vue";
 import { createOutline, sparklesOutline } from "ionicons/icons";
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "RecipeDetails",
@@ -122,6 +119,7 @@ export default {
       createOutline,
       sparklesOutline,
       isLoading: false,
+      isFavorite: false,
       currentRecipe: null,
       currentIngredients: null,
       currentInstructions: null,
@@ -131,11 +129,21 @@ export default {
     ...mapGetters("recipes", ["getRecipeByID"]),
   },
   methods: {
+    ...mapActions("recipes", ["addToFavorites", "removeFromFavorites"]),
+
     editRecipeDetails() {
       this.$router.push({
         name: "EditRecipe",
         params: { id: this.$route.params.id },
       });
+    },
+    toggleFavorite() {
+      this.isFavorite = !this.isFavorite;
+      if (this.isFavorite) {
+        this.addToFavorites(this.currentRecipe);
+      } else {
+        this.removeFromFavorites(this.currentRecipe);
+      }
     },
   },
   async mounted() {

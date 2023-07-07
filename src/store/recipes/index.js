@@ -7,6 +7,7 @@ export default {
   state() {
     return {
       allRecipes: [],
+      favorites: [],
       recipeID: null,
       userId: null,
       recipeName: null,
@@ -30,6 +31,15 @@ export default {
       state.recipeCategory = payload.recipeCategory;
       state.recipeIngredients = payload.recipeIngredients;
       state.recipeInstructions = payload.recipeInstructions;
+    },
+    addToFavorites(state, recipe) {
+      state.favorites.push(recipe);
+    },
+    removeFromFavorites(state, recipe) {
+      const index = state.favorites.findIndex((r) => r.id === recipe.id);
+      if (index !== -1) {
+        state.favorites.splice(index, 1);
+      }
     },
   },
 
@@ -150,6 +160,13 @@ export default {
       }
     },
 
+    addToFavorites({ commit }, recipe) {
+      commit("addToFavorites", recipe);
+    },
+    removeFromFavorites({ commit }, recipe) {
+      commit("removeFromFavorites", recipe);
+    },
+
     async loadRecentlyViewed() {},
   },
   getters: {
@@ -174,6 +191,9 @@ export default {
     },
     hasRecipes(state) {
       return state.allRecipes && state.allRecipes.length > 0;
+    },
+    getFavorites: (state) => {
+      return state.favorites;
     },
     shouldUpdate(state) {
       const lastFetch = state.lastFetch;
