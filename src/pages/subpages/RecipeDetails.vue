@@ -11,15 +11,15 @@
                 :src="currentRecipe.recipePhoto"
               />
               <div class="absolute top-2 right-3">
-                <button class="">
+                <button @click="toggleFavorite">
                   <ion-icon
-                    class="text-white mr-2 hover:text-yellow-500 text-2xl md:text-4xl"
-                    :icon="sparklesOutline"
+                    class="text-white mr-2 hover:text-yellow-500 text-2xl md:text-4xl {isFavorite === true ? text-yellow-500 : text-white}"
+                    :icon="isRecipeFavorite ? sparkles : sparklesOutline"
                   ></ion-icon>
                 </button>
                 <button @click="editRecipeDetails">
                   <ion-icon
-                    class="text-white text-2xl md:text-4xl"
+                    class="text-white text-2xl md:text-4xl hover:text-rut-generic-green"
                     :icon="createOutline"
                   ></ion-icon>
                 </button>
@@ -99,7 +99,7 @@ import {
   IonCol,
   IonIcon,
 } from "@ionic/vue";
-import { createOutline, sparklesOutline } from "ionicons/icons";
+import { createOutline, sparklesOutline, sparkles } from "ionicons/icons";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
@@ -118,15 +118,22 @@ export default {
     return {
       createOutline,
       sparklesOutline,
-      isLoading: false,
+      sparkles,
       isFavorite: false,
+      isLoading: false,
       currentRecipe: null,
       currentIngredients: null,
       currentInstructions: null,
     };
   },
   computed: {
-    ...mapGetters("recipes", ["getRecipeByID"]),
+    ...mapGetters("recipes", ["getRecipeByID", "getFavorites"]),
+    isRecipeFavorite() {
+      const currentRecipeID = this.$route.params.id;
+      return this.getFavorites.some(
+        (recipe) => recipe.recipeID === currentRecipeID
+      );
+    },
   },
   methods: {
     ...mapActions("recipes", ["addToFavorites", "removeFromFavorites"]),
@@ -138,16 +145,23 @@ export default {
       });
     },
     toggleFavorite() {
-      this.isFavorite = !this.isFavorite;
-      if (this.isFavorite) {
-        this.addToFavorites(this.currentRecipe);
+      const currentRecipeID = this.$route.params.id;
+
+      if (this.isRecipeFavorite) {
+        this.removeFromFavorites(currentRecipeID).then(
+          () => (this.isFavorite = false)
+        );
       } else {
-        this.removeFromFavorites(this.currentRecipe);
+        this.addToFavorites(currentRecipeID).then(
+          () => (this.isFavorite = true)
+        );
       }
     },
   },
   async mounted() {
+    this.isLoading = true;
     this.currentRecipe = await this.getRecipeByID(this.$route.params.id);
+    this.isLoading = false;
     this.currentIngredients = this.currentRecipe.recipeIngredients;
     this.currentInstructions = this.currentRecipe.recipeInstructions;
   },

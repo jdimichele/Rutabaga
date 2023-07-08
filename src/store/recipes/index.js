@@ -160,15 +160,61 @@ export default {
       }
     },
 
-    addToFavorites({ commit }, recipe) {
-      commit("addToFavorites", recipe);
+    async addToFavorites({ commit }, recipeID) {
+      try {
+        const userId = firebase.auth().currentUser.uid;
+        const recipeRef = db
+          .collection("users")
+          .doc(userId)
+          .collection("recipes")
+          .doc(recipeID);
+        const favoritesRef = db
+          .collection("users")
+          .doc(userId)
+          .collection("favorites")
+          .doc(recipeID);
+
+        const recipeDoc = await recipeRef.get();
+        if (recipeDoc.exists) {
+          const recipeData = recipeDoc.data();
+          if (recipeData) {
+            await favoritesRef.set({ ...recipeData });
+            commit("addToFavorites", { ...recipeData });
+          }
+        }
+      } catch (error) {
+        console.error("Failed to add recipe to favorites collection: ", error);
+      }
     },
-    removeFromFavorites({ commit }, recipe) {
-      commit("removeFromFavorites", recipe);
+
+    async removeFromFavorites({ commit }, recipeID) {
+      try {
+        const userId = firebase.auth().currentUser.uid;
+        const favoritesRef = db
+          .collection("users")
+          .doc(userId)
+          .collection("favorites")
+          .doc(recipeID);
+
+        const favoritesDoc = await favoritesRef.get();
+        if (favoritesDoc.exists) {
+          const favoritesData = favoritesDoc.data();
+          if (favoritesData) {
+            await favoritesRef.delete({ ...favoritesData });
+            commit("removeFromFavorites", { ...favoritesData });
+          }
+        }
+      } catch (error) {
+        console.error(
+          "Failed to remove recipe to favorites collection: ",
+          error
+        );
+      }
     },
 
     async loadRecentlyViewed() {},
   },
+
   getters: {
     allRecipes(state) {
       return state.allRecipes;
