@@ -13,13 +13,14 @@
               <div class="absolute top-2 right-3">
                 <button @click="toggleFavorite">
                   <ion-icon
-                    class="text-white mr-2 hover:text-yellow-500 text-2xl md:text-4xl {isFavorite === true ? text-yellow-500 : text-white}"
+                    class="text-white mr-2 hover:text-yellow-500 text-2xl md:text-4xl"
+                    :class="{ 'text-yellow-500': isRecipeFavorite }"
                     :icon="isRecipeFavorite ? sparkles : sparklesOutline"
                   ></ion-icon>
                 </button>
                 <button @click="editRecipeDetails">
                   <ion-icon
-                    class="text-white text-2xl md:text-4xl hover:text-rut-generic-green"
+                    class="text-white text-2xl md:text-4xl"
                     :icon="createOutline"
                   ></ion-icon>
                 </button>
@@ -119,7 +120,7 @@ export default {
       createOutline,
       sparklesOutline,
       sparkles,
-      isFavorite: false,
+      isFavorite: null,
       isLoading: false,
       currentRecipe: null,
       currentIngredients: null,
@@ -128,12 +129,8 @@ export default {
   },
   computed: {
     ...mapGetters("recipes", ["getRecipeByID", "getFavorites"]),
-    isRecipeFavorite() {
-      const currentRecipeID = this.$route.params.id;
-      return this.getFavorites.some(
-        (recipe) => recipe.recipeID === currentRecipeID
-      );
-    },
+    // isRecipeFavorite() {
+    // },
   },
   methods: {
     ...mapActions("recipes", ["addToFavorites", "removeFromFavorites"]),
@@ -164,6 +161,8 @@ export default {
     this.isLoading = false;
     this.currentIngredients = this.currentRecipe.recipeIngredients;
     this.currentInstructions = this.currentRecipe.recipeInstructions;
+    
+    this.isFavorite = this.isRecipeFavorite;
   },
 };
 </script>
