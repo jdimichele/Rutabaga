@@ -15,8 +15,9 @@
         <div class="loginForm">
           <form @submit.prevent="login" v-on:keyup.enter="login">
             <ion-item>
-              <ion-label for="email" position="floating">Email:</ion-label>
               <ion-input
+                label="Email:"
+                label-placement="floating"
                 type="email"
                 id="email"
                 v-model="email"
@@ -24,10 +25,9 @@
               ></ion-input>
             </ion-item>
             <ion-item>
-              <ion-label for="password" position="floating"
-                >Password:</ion-label
-              >
               <ion-input
+                label="Password:"
+                label-placement="floating"
                 type="password"
                 id="password"
                 v-model="password"
@@ -44,14 +44,7 @@
 </template>
 
 <script>
-import {
-  IonPage,
-  IonItem,
-  IonCard,
-  IonInput,
-  IonLabel,
-  IonButton,
-} from "@ionic/vue";
+import { IonPage, IonItem, IonCard, IonInput, IonButton } from "@ionic/vue";
 import BaseLogo from "../../components/ui/BaseLogo.vue";
 
 export default {
@@ -60,7 +53,6 @@ export default {
     IonItem,
     IonButton,
     IonCard,
-    IonLabel,
     IonInput,
     BaseLogo,
   },
