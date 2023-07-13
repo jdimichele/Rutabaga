@@ -145,6 +145,7 @@ export default {
     },
     toggleFavorite() {
       const currentRecipeID = this.$route.params.id;
+      console.log(this.isRecipeFavorite)
 
       if (this.isRecipeFavorite) {
         this.removeFromFavorites(currentRecipeID).then(
@@ -163,7 +164,7 @@ export default {
     this.isLoading = false;
     this.currentIngredients = this.currentRecipe.recipeIngredients;
     this.currentInstructions = this.currentRecipe.recipeInstructions;
-    this.isRecipeFavorite;
+
   },
 };
 </script>
