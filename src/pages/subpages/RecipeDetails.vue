@@ -129,8 +129,10 @@ export default {
   },
   computed: {
     ...mapGetters("recipes", ["getRecipeByID", "getFavorites"]),
-    // isRecipeFavorite() {
-    // },
+    isRecipeFavorite() {
+      const currentRecipeID = this.$route.params.id;
+      return this.getFavorites.some((recipe) => recipe.recipeID === currentRecipeID);
+    },
   },
   methods: {
     ...mapActions("recipes", ["addToFavorites", "removeFromFavorites"]),
@@ -161,8 +163,7 @@ export default {
     this.isLoading = false;
     this.currentIngredients = this.currentRecipe.recipeIngredients;
     this.currentInstructions = this.currentRecipe.recipeInstructions;
-    
-    this.isFavorite = this.isRecipeFavorite;
+    this.isRecipeFavorite;
   },
 };
 </script>

@@ -36,7 +36,7 @@ export default {
       state.favorites.push(recipe);
     },
     removeFromFavorites(state, recipe) {
-      const index = state.favorites.findIndex((r) => r.id === recipe.id);
+      const index = state.favorites.findIndex((r) => r.id === recipe.recipeID);
       if (index !== -1) {
         state.favorites.splice(index, 1);
       }
@@ -163,25 +163,14 @@ export default {
     async addToFavorites({ commit }, recipeID) {
       try {
         const userId = firebase.auth().currentUser.uid;
-        const recipeRef = db
-          .collection("users")
-          .doc(userId)
-          .collection("recipes")
-          .doc(recipeID);
         const favoritesRef = db
           .collection("users")
           .doc(userId)
           .collection("favorites")
           .doc(recipeID);
 
-        const recipeDoc = await recipeRef.get();
-        if (recipeDoc.exists) {
-          const recipeData = recipeDoc.data();
-          if (recipeData) {
-            await favoritesRef.set({ ...recipeData });
-            commit("addToFavorites", { ...recipeData });
-          }
-        }
+        await favoritesRef.set({ recipeID });
+        commit("addToFavorites", { recipeID });
       } catch (error) {
         console.error("Failed to add recipe to favorites collection: ", error);
       }
@@ -196,14 +185,8 @@ export default {
           .collection("favorites")
           .doc(recipeID);
 
-        const favoritesDoc = await favoritesRef.get();
-        if (favoritesDoc.exists) {
-          const favoritesData = favoritesDoc.data();
-          if (favoritesData) {
-            await favoritesRef.delete({ ...favoritesData });
-            commit("removeFromFavorites", { ...favoritesData });
-          }
-        }
+        await favoritesRef.delete();
+        commit("removeFromFavorites", { recipeID });
       } catch (error) {
         console.error(
           "Failed to remove recipe to favorites collection: ",
