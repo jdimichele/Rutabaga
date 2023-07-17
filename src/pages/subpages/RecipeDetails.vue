@@ -164,7 +164,6 @@ export default {
     this.isLoading = false;
     this.currentIngredients = this.currentRecipe.recipeIngredients;
     this.currentInstructions = this.currentRecipe.recipeInstructions;
-
   },
 };
 </script>
