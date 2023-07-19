@@ -1,7 +1,7 @@
 <template>
   <ion-page>
     <base-header title="Favorites"></base-header>
-    <ion-content fullscreen="true">
+    <ion-content :fullscreen="true">
       <favorites-list></favorites-list>
     </ion-content>
   </ion-page>

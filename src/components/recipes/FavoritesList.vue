@@ -1,11 +1,7 @@
 <template>
   <div>
     <ul>
-      <li v-if="favoriteRecipes.length === 1">
-        {{ favoriteRecipes.recipeName }}
-      </li>
       <li
-        v-else
         v-for="favorite in favoriteRecipes"
         :key="favorite.recipeID"
         @click="openRecipeDetails(favorite.recipeID)"
@@ -19,9 +15,7 @@
 <script>
 export default {
   data() {
-    return {
-      search: "",
-    };
+    return {};
   },
   methods: {
     openRecipeDetails(targetID) {

@@ -4,17 +4,17 @@
       <div class="logo">
         <base-logo></base-logo>
       </div>
-      <ion-card class="loginCard">
-        <div class="loginText">
+      <ion-card class=" m-auto items-center p-7">
+        <div class="text-center">
           <h3>Sign in below to get started.</h3>
           <p>
             Don't have an account?
             <router-link to="/register">Register here.</router-link>
           </p>
         </div>
-        <div class="loginForm">
+        <div>
           <form @submit.prevent="login" v-on:keyup.enter="login">
-            <ion-item>
+            <div>
               <ion-input
                 label="Email:"
                 label-placement="floating"
@@ -22,9 +22,11 @@
                 id="email"
                 v-model="email"
                 placeholder="george@google.com"
+                class="custom"
+                mode="md"
               ></ion-input>
-            </ion-item>
-            <ion-item>
+            </div>
+            <div>
               <ion-input
                 label="Password:"
                 label-placement="floating"
@@ -32,8 +34,10 @@
                 id="password"
                 v-model="password"
                 placeholder="******"
+                class="custom"
+                mode="md"
               ></ion-input>
-            </ion-item>
+            </div>
             <div class="error" v-show="error">{{ this.errorMessage }}</div>
             <ion-button class="loginButton" type="submit">Sign In</ion-button>
           </form>
@@ -44,13 +48,12 @@
 </template>
 
 <script>
-import { IonPage, IonItem, IonCard, IonInput, IonButton } from "@ionic/vue";
+import { IonPage, IonCard, IonInput, IonButton } from "@ionic/vue";
 import BaseLogo from "../../components/ui/BaseLogo.vue";
 
 export default {
   components: {
     IonPage,
-    IonItem,
     IonButton,
     IonCard,
     IonInput,
@@ -85,24 +88,18 @@ export default {
   display: grid;
   place-content: center;
 }
-.loginForm {
-  text-align: center;
-}
-.loginCard {
+/* .loginCard {
   justify-items: center;
   padding: 30px;
   margin: auto;
-}
-.loginText {
-  text-align: center;
-}
+} */
 
 .loginButton {
   margin: 30px;
   width: 200px;
   --background: #7a3750;
 }
-ion-item {
+ion-input.custom {
   --highlight-color-focused: #7a3750;
 }
 </style>
