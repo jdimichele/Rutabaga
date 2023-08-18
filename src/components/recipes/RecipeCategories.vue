@@ -28,11 +28,25 @@
       </ion-accordion>
 
       <ion-accordion>
+        <recipe-category-item :categoryName="'Dips'"></recipe-category-item>
+      </ion-accordion>
+
+      <ion-accordion>
+        <recipe-category-item
+          :categoryName="'Dressings'"
+        ></recipe-category-item>
+      </ion-accordion>
+
+      <ion-accordion>
         <recipe-category-item :categoryName="'Drinks'"></recipe-category-item>
       </ion-accordion>
 
       <ion-accordion>
         <recipe-category-item :categoryName="'Lunch'"></recipe-category-item>
+      </ion-accordion>
+
+      <ion-accordion>
+        <recipe-category-item :categoryName="'Sauces'"></recipe-category-item>
       </ion-accordion>
 
       <ion-accordion>
@@ -45,6 +59,10 @@
 
       <ion-accordion>
         <recipe-category-item :categoryName="'Soups'"></recipe-category-item>
+      </ion-accordion>
+
+      <ion-accordion>
+        <recipe-category-item :categoryName="'Staples'"></recipe-category-item>
       </ion-accordion>
 
       <ion-accordion>

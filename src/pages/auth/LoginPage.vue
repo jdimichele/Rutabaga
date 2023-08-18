@@ -88,11 +88,6 @@ export default {
   display: grid;
   place-content: center;
 }
-/* .loginCard {
-  justify-items: center;
-  padding: 30px;
-  margin: auto;
-} */
 
 .loginButton {
   margin: 30px;

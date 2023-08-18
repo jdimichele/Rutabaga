@@ -82,11 +82,17 @@
                 <ion-select-option value="Brunch">Brunch</ion-select-option>
                 <ion-select-option value="Dessert">Dessert</ion-select-option>
                 <ion-select-option value="Dinner">Dinner</ion-select-option>
+                <ion-select-option value="Dips">Dips</ion-select-option>
+                <ion-select-option value="Dressings"
+                  >Dressings</ion-select-option
+                >
                 <ion-select-option value="Drinks">Drinks</ion-select-option>
                 <ion-select-option value="Lunch">Lunch</ion-select-option>
+                <ion-select-option value="Sauces">Sauces</ion-select-option>
                 <ion-select-option value="Sides">Sides</ion-select-option>
                 <ion-select-option value="Snacks">Snacks</ion-select-option>
                 <ion-select-option value="Soups">Soups</ion-select-option>
+                <ion-select-option value="Staples">Staples</ion-select-option>
                 <ion-select-option value="Vegan">Vegan</ion-select-option>
                 <ion-select-option value="Vegetarian"
                   >Vegetarian</ion-select-option
