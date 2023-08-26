@@ -8,7 +8,7 @@
       <ion-card-content>
         <span>{{ servings }} servings</span>
         <ion-badge class="bg-rut-generic-mauve float-right">{{
-          category
+          course
         }}</ion-badge>
       </ion-card-content>
     </div>
@@ -25,7 +25,7 @@ export default {
     IonCardTitle,
     IonCardContent,
   },
-  props: ["id", "name", "photo", "servings", "category"],
+  props: ["id", "name", "photo", "servings", "course"],
   data() {
     return {
       targetRecipeID: null,

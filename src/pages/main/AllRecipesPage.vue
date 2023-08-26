@@ -13,7 +13,7 @@
         </ion-row>
         <ion-row>
           <ion-col size-md="7" size-sm="5">
-            <recipe-categories></recipe-categories>
+            <recipe-courses></recipe-courses>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -24,7 +24,7 @@
 <script>
 import { IonPage, IonGrid, IonRow, IonCol, IonContent } from "@ionic/vue";
 import RecipesList from "@/components/recipes/RecipesList.vue";
-import RecipeCategories from "@/components/recipes/RecipeCategories.vue";
+import RecipeCourses from "@/components/recipes/RecipeCourses.vue";
 
 export default {
   components: {
@@ -34,11 +34,9 @@ export default {
     IonCol,
     IonContent,
     RecipesList,
-    RecipeCategories,
+    RecipeCourses,
   },
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

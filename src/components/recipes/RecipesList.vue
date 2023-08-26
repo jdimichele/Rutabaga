@@ -11,7 +11,7 @@
         :id="recipe.recipeID"
         :name="recipe.recipeName"
         :photo="recipe.recipePhoto"
-        :category="recipe.recipeCategory"
+        :course="recipe.recipeCourse"
         :servings="recipe.recipeServings"
       ></recipe-list-item>
     </div>

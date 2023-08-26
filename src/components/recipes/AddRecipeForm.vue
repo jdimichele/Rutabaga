@@ -66,12 +66,12 @@
             </ion-item>
 
             <ion-item>
-              <ion-label position="floating">Category:</ion-label>
+              <ion-label position="floating">Course:</ion-label>
               <ion-select
-                placeholder="Which category does this recipe belong to?"
+                placeholder="Which course does this recipe belong to?"
                 interface="action-sheet"
                 required
-                v-model="category"
+                v-model="course"
               >
                 <ion-select-option value="Appetizers"
                   >Appetizers</ion-select-option
@@ -290,7 +290,7 @@ export default {
       photo: null,
       time: "",
       servings: "",
-      category: "",
+      course: "",
       ingredients: [
         {
           qty: "",
@@ -313,7 +313,7 @@ export default {
         photo: this.photo,
         time: this.time,
         servings: this.servings,
-        category: this.category,
+        course: this.course,
         ingredients: this.ingredients,
         instructions: this.instructions,
       };

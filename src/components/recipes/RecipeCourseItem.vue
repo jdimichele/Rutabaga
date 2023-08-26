@@ -1,6 +1,6 @@
 <template>
-  <ion-item slot="header" @click.prevent="getRecipesByCategory(categoryName)">
-    <ion-label>{{ categoryName }}</ion-label>
+  <ion-item slot="header" @click.prevent="getRecipesByCourse(courseName)">
+    <ion-label>{{ courseName }}</ion-label>
   </ion-item>
   <div class="" slot="content">
     <ul>
@@ -28,16 +28,16 @@ export default {
     IonItem,
     IonLabel,
   },
-  props: ["categoryName"],
+  props: ["courseName"],
   data() {
     return {
-      category: null,
+      course: null,
     };
   },
 
   methods: {
-    getRecipesByCategory(categoryName) {
-      this.category = categoryName;
+    getRecipesByCourse(courseName) {
+      this.course = courseName;
     },
     openRecipeDetails(targetID) {
       this.$router.push({
@@ -49,7 +49,7 @@ export default {
 
   computed: {
     recipes() {
-      return this.$store.getters["recipes/allRecipesByCategory"](this.category);
+      return this.$store.getters["recipes/allRecipesByCourse"](this.course);
     },
   },
 };

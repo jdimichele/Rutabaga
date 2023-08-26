@@ -27,9 +27,9 @@
               <ion-col>
                 <ion-item>
                   <ion-input
-                    label="Category:"
+                    label="Course:"
                     label-placement="stacked"
-                    v-model="editedRecipe.recipeCategory"
+                    v-model="editedRecipe.recipeCourse"
                     type="text"
                   ></ion-input>
                 </ion-item>
@@ -169,7 +169,7 @@ export default {
         photo: null,
         time: "",
         servings: "",
-        category: "",
+        course: "",
         ingredients: [
           {
             qty: "",
@@ -197,7 +197,7 @@ export default {
         photo: this.editedRecipe.recipePhoto,
         time: this.editedRecipe.recipeTime,
         servings: this.editedRecipe.recipeServings,
-        category: this.editedRecipe.recipeCategory,
+        course: this.editedRecipe.recipeCourse,
         ingredients: this.editedRecipe.recipeIngredients,
         instructions: this.editedRecipe.recipeInstructions,
       };

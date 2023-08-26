@@ -14,7 +14,7 @@ export default {
       recipePhoto: null,
       recipeTime: null,
       recipeServings: null,
-      recipeCategory: null,
+      recipeCourse: null,
       recipeIngredients: null,
       recipeInstructions: null,
     };
@@ -28,7 +28,7 @@ export default {
       state.recipePhoto = payload.recipePhoto;
       state.recipeTime = payload.recipeTime;
       state.recipeServings = payload.recipeServings;
-      state.recipeCategory = payload.recipeCategory;
+      state.recipeCourse = payload.recipeCourse;
       state.recipeIngredients = payload.recipeIngredients;
       state.recipeInstructions = payload.recipeInstructions;
     },
@@ -61,7 +61,7 @@ export default {
         photo: data.photo,
         time: data.time,
         servings: data.servings,
-        category: data.category,
+        course: data.course,
         ingredients: data.ingredients,
         instructions: data.instructions,
       };
@@ -73,7 +73,7 @@ export default {
         recipePhoto: recipeData.photo,
         recipeTime: recipeData.time,
         recipeServings: recipeData.servings,
-        recipeCategory: recipeData.category,
+        recipeCourse: recipeData.course,
         recipeIngredients: recipeData.ingredients,
         recipeInstructions: recipeData.instructions,
       };
@@ -95,7 +95,7 @@ export default {
             recipePhoto: doc.data().photo,
             recipeTime: doc.data().time,
             recipeServings: doc.data().servings,
-            recipeCategory: doc.data().category,
+            recipeCourse: doc.data().course,
             recipeIngredients: doc.data().ingredients,
             recipeInstructions: doc.data().instructions,
           };
@@ -202,9 +202,9 @@ export default {
     allRecipes(state) {
       return state.allRecipes;
     },
-    allRecipesByCategory: (state) => (category) => {
+    allRecipesByCourse: (state) => (course) => {
       return state.allRecipes.filter(
-        (recipe) => recipe.recipeCategory === category
+        (recipe) => recipe.recipeCourse === course
       );
     },
     getRecipeByName: (state) => (name) => {
