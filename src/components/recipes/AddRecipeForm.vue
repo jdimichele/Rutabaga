@@ -1,22 +1,35 @@
 <template>
+  <div class="m-2">
+    <ion-segment value="overview" swipe-gesture="true" mode="ios">
+      <ion-segment-button value="overview" type="button"
+        >Overview</ion-segment-button
+      >
+      <ion-segment-button value="ingredients" type="button"
+        >Ingredients</ion-segment-button
+      >
+      <ion-segment-button value="instructions" type="button"
+        >Instructions</ion-segment-button
+      >
+    </ion-segment>
+  </div>
   <ion-content>
     <ion-grid>
       <form class="md:p-10" @submit.prevent="submitRecipe">
         <ion-row>
           <ion-col>
             <ion-item class="rounded-t-lg">
-              <ion-button
-                class="photoButton"
+              <ion-icon
+                class="w-full"
                 @click.prevent="takePicture"
                 v-model="photo"
-              >
-                <ion-icon :icon="cameraOutline"></ion-icon>
-              </ion-button>
-              <!-- <div v-else>
+                :icon="cameraOutline"
+              ></ion-icon>
+              <!-- 
+                At some point in the future, need to display current image user has uploaded using the following:
+                <div v-if="!photo"> </div>
+                <div v-else>
                 {{ this.newImage }}
-              </div> 
-            
-                            v-if="!photo"-->
+              </div> -->
             </ion-item>
           </ion-col>
         </ion-row>
@@ -242,6 +255,8 @@ import {
   IonGrid,
   IonRow,
   IonCol,
+  IonSegment,
+  IonSegmentButton,
   toastController,
 } from "@ionic/vue";
 import {
@@ -278,6 +293,8 @@ export default {
     IonGrid,
     IonRow,
     IonCol,
+    IonSegment,
+    IonSegmentButton,
   },
   emits: ["save-recipe"],
   data() {
@@ -409,32 +426,6 @@ ion-grid {
   font-kerning: none;
   --background: #7a3750;
 }
-.photoButton {
-  --transition: background-color, opacity 100ms linear;
-  --ripple-color: currentColor;
-  --border-radius: 50%;
-  --border-width: 0;
-  --border-style: none;
-  --border-color: initial;
-  --padding-top: 0;
-  --padding-end: 0;
-  --padding-bottom: 0;
-  --padding-start: 0;
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-  width: 56px;
-  height: 56px;
-  position: relative;
-  font-size: 14px;
-  text-align: center;
-  text-overflow: ellipsis;
-  text-transform: none;
-  white-space: nowrap;
-  -webkit-font-kerning: none;
-  font-kerning: none;
-  --background: #7a3750;
-}
 
 ion-icon {
   margin: 0;
@@ -446,5 +437,15 @@ ion-icon {
 }
 ion-item {
   --highlight-color-focused: #7a3750;
+}
+ion-segment-button::part(indicator-background) {
+  background: #7a3750;
+}
+ion-segment-button.ios::part(native) {
+  color: #7a3750;
+}
+
+.segment-button-checked.ios::part(native) {
+  color: #fff;
 }
 </style>
