@@ -25,11 +25,12 @@
                 :icon="cameraOutline"
               ></ion-icon>
               <!-- 
-                At some point in the future, need to display current image user has uploaded using the following:
-                <div v-if="!photo"> </div>
-                <div v-else>
+              At some point in the future, need to display current image user has uploaded using the following:
+              <div v-if="!photo"> </div>
+              <div v-else>
                 {{ this.newImage }}
-              </div> -->
+              </div> 
+            -->
             </ion-item>
           </ion-col>
         </ion-row>
