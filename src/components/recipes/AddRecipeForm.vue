@@ -1,13 +1,22 @@
 <template>
   <div class="m-2">
     <ion-segment value="overview" swipe-gesture="true" mode="ios">
-      <ion-segment-button value="overview" type="button"
+      <ion-segment-button
+        @click.prevent="switchToSegment('overview')"
+        value="overview"
+        type="button"
         >Overview</ion-segment-button
       >
-      <ion-segment-button value="ingredients" type="button"
+      <ion-segment-button
+        @click.prevent="switchToSegment('ingredients')"
+        value="ingredients"
+        type="button"
         >Ingredients</ion-segment-button
       >
-      <ion-segment-button value="instructions" type="button"
+      <ion-segment-button
+        @click.prevent="switchToSegment('instructions')"
+        value="instructions"
+        type="button"
         >Instructions</ion-segment-button
       >
     </ion-segment>
@@ -15,221 +24,222 @@
   <ion-content>
     <ion-grid>
       <form class="md:p-10" @submit.prevent="submitRecipe">
-        <ion-row>
-          <ion-col>
-            <ion-item class="rounded-t-lg">
-              <ion-icon
-                class="w-full"
-                @click.prevent="takePicture"
-                v-model="photo"
-                :icon="cameraOutline"
-              ></ion-icon>
-              <!-- 
+        <div v-show="this.segment === 'overview'">
+          <ion-row>
+            <ion-col>
+              <ion-item class="rounded-t-lg">
+                <ion-icon
+                  class="w-full"
+                  @click.prevent="takePicture"
+                  v-model="photo"
+                  :icon="cameraOutline"
+                ></ion-icon>
+                <!-- 
               At some point in the future, need to display current image user has uploaded using the following:
               <div v-if="!photo"> </div>
               <div v-else>
                 {{ this.newImage }}
               </div> 
             -->
-            </ion-item>
-          </ion-col>
-        </ion-row>
+              </ion-item>
+            </ion-col>
+          </ion-row>
 
-        <ion-row>
-          <ion-col>
-            <ion-item>
-              <ion-label position="floating">Name:</ion-label>
-              <ion-input
-                type="text"
-                id="name"
-                required
-                v-model="name"
-              ></ion-input>
-            </ion-item>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="floating">Name:</ion-label>
+                <ion-input
+                  placeholder="Gabagool"
+                  type="text"
+                  id="name"
+                  required
+                  v-model="name"
+                ></ion-input>
+              </ion-item>
 
-            <ion-item>
-              <ion-label position="floating">Time:</ion-label>
-              <ion-input
-                placeholder="25 minutes"
-                type="text"
-                id="time"
-                required
-                v-model="time"
-              ></ion-input>
-            </ion-item>
-          </ion-col>
-        </ion-row>
+              <ion-item>
+                <ion-label position="floating">Time:</ion-label>
+                <ion-input
+                  placeholder="25 minutes"
+                  type="text"
+                  id="time"
+                  required
+                  v-model="time"
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
 
-        <ion-row>
-          <ion-col>
-            <ion-item>
-              <ion-label position="floating">Servings:</ion-label>
-              <ion-select
-                placeholder="How many servings?"
-                interface="action-sheet"
-                required
-                v-model="servings"
-              >
-                <ion-select-option value="1">1</ion-select-option>
-                <ion-select-option value="2">2</ion-select-option>
-                <ion-select-option value="3">3</ion-select-option>
-                <ion-select-option value="4">4</ion-select-option>
-                <ion-select-option value="5">5</ion-select-option>
-                <ion-select-option value="6">6</ion-select-option>
-              </ion-select>
-            </ion-item>
-
-            <ion-item>
-              <ion-label position="floating">Course:</ion-label>
-              <ion-select
-                placeholder="Which course does this recipe belong to?"
-                interface="action-sheet"
-                required
-                v-model="course"
-              >
-                <ion-select-option value="Appetizers"
-                  >Appetizers</ion-select-option
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="floating">Servings:</ion-label>
+                <ion-input
+                  placeholder="How many servings?"
+                  interface="action-sheet"
+                  required
+                  v-model="servings"
                 >
-                <ion-select-option value="Breakfast"
-                  >Breakfast</ion-select-option
-                >
-                <ion-select-option value="Brunch">Brunch</ion-select-option>
-                <ion-select-option value="Dessert">Dessert</ion-select-option>
-                <ion-select-option value="Dinner">Dinner</ion-select-option>
-                <ion-select-option value="Dips">Dips</ion-select-option>
-                <ion-select-option value="Dressings"
-                  >Dressings</ion-select-option
-                >
-                <ion-select-option value="Drinks">Drinks</ion-select-option>
-                <ion-select-option value="Lunch">Lunch</ion-select-option>
-                <ion-select-option value="Sauces">Sauces</ion-select-option>
-                <ion-select-option value="Sides">Sides</ion-select-option>
-                <ion-select-option value="Snacks">Snacks</ion-select-option>
-                <ion-select-option value="Soups">Soups</ion-select-option>
-                <ion-select-option value="Staples">Staples</ion-select-option>
-                <ion-select-option value="Vegan">Vegan</ion-select-option>
-                <ion-select-option value="Vegetarian"
-                  >Vegetarian</ion-select-option
-                >
-              </ion-select>
-            </ion-item>
-          </ion-col>
-        </ion-row>
+                </ion-input>
+              </ion-item>
 
-        <ion-row>
-          <ion-col>
-            <ion-item lines="none">
-              <ion-label position="stacked" class="py-1"
-                >Ingredients:</ion-label
-              >
-              <div class="py-2 md:py-3">
-                <ion-list
-                  v-for="(ingredient, index) in ingredients"
-                  :key="index"
-                  class="flex md:flex md:items-stretch"
+              <ion-item class="rounded-b-lg">
+                <ion-label position="floating">Course:</ion-label>
+                <ion-select
+                  placeholder="Which course does this recipe belong to?"
+                  interface="action-sheet"
+                  required
+                  v-model="course"
                 >
-                  <ion-item class="w-20 md:mx-2">
-                    <ion-input
-                      placeholder="Qty"
-                      type="text"
-                      id="ingredients"
-                      required
-                      v-model="ingredient.qty"
-                    >
-                    </ion-input>
-                  </ion-item>
+                  <ion-select-option value="Appetizers"
+                    >Appetizers</ion-select-option
+                  >
+                  <ion-select-option value="Breakfast"
+                    >Breakfast</ion-select-option
+                  >
+                  <ion-select-option value="Brunch">Brunch</ion-select-option>
+                  <ion-select-option value="Dessert">Dessert</ion-select-option>
+                  <ion-select-option value="Dinner">Dinner</ion-select-option>
+                  <ion-select-option value="Dips">Dips</ion-select-option>
+                  <ion-select-option value="Dressings"
+                    >Dressings</ion-select-option
+                  >
+                  <ion-select-option value="Drinks">Drinks</ion-select-option>
+                  <ion-select-option value="Lunch">Lunch</ion-select-option>
+                  <ion-select-option value="Sauces">Sauces</ion-select-option>
+                  <ion-select-option value="Sides">Sides</ion-select-option>
+                  <ion-select-option value="Snacks">Snacks</ion-select-option>
+                  <ion-select-option value="Soups">Soups</ion-select-option>
+                  <ion-select-option value="Staples">Staples</ion-select-option>
+                  <ion-select-option value="Vegan">Vegan</ion-select-option>
+                  <ion-select-option value="Vegetarian"
+                    >Vegetarian</ion-select-option
+                  >
+                </ion-select>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </div>
 
-                  <ion-item class="w-24 md:mx-2">
-                    <ion-select
-                      placeholder="Units"
-                      interface="action-sheet"
-                      v-model="ingredient.unit"
-                    >
-                      <ion-select-option value="tsp">tsp</ion-select-option>
-                      <ion-select-option value="Tbsp">Tbsp</ion-select-option>
-                      <ion-select-option value="g">g</ion-select-option>
-                      <ion-select-option value="oz">oz</ion-select-option>
-                      <ion-select-option value="cup">cup</ion-select-option>
-                      <ion-select-option value="gal">gal</ion-select-option>
-                      <ion-select-option value="lbs">lbs</ion-select-option>
-                    </ion-select>
-                  </ion-item>
-
-                  <ion-item class="w-32 md:mx-2">
-                    <ion-input
-                      placeholder="Name"
-                      type="text"
-                      id="ingredients"
-                      required
-                      v-model="ingredient.name"
-                    >
-                    </ion-input>
-                  </ion-item>
-                  <ion-item lines="none">
-                    <button @click.prevent="addNewIngredient(ingredient)">
-                      <ion-icon
-                        color="success"
-                        :icon="addCircleOutline"
-                      ></ion-icon>
-                    </button>
-                  </ion-item>
-                  <ion-item lines="none">
-                    <button @click.prevent="removeLastIngredient(ingredient)">
-                      <ion-icon
-                        color="danger"
-                        :icon="removeCircleOutline"
-                      ></ion-icon>
-                    </button>
-                  </ion-item>
-                </ion-list>
-              </div>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-
-        <ion-row>
-          <ion-col>
-            <ion-item class="rounded-b-lg">
-              <ion-label position="stacked" class="py-1"
-                >Instructions:</ion-label
-              >
-              <div class="py-1">
-                <ion-list
-                  class="flex sm:items-stretch"
-                  v-for="(step, index) in instructions"
-                  :key="index"
+        <div v-show="this.segment === 'ingredients'">
+          <ion-row>
+            <ion-col>
+              <ion-item lines="none" class="rounded-lg">
+                <ion-label position="stacked" class="py-1"
+                  >Ingredients:</ion-label
                 >
-                  <ion-item class="mx-2">
-                    <ion-input
-                      class="px-1 w-64"
-                      type="text"
-                      id="ingredients"
-                      required
-                      v-model="step.instruction"
-                    >
-                    </ion-input>
-                  </ion-item>
-                  <ion-item lines="none">
-                    <button @click.prevent="addNewStep(step)">
-                      <ion-icon
-                        color="success"
-                        :icon="addCircleOutline"
-                      ></ion-icon>
-                    </button>
-                  </ion-item>
-                  <ion-item lines="none">
-                    <button @click.prevent="removeLastStep(step)">
-                      <ion-icon
-                        color="danger"
-                        :icon="removeCircleOutline"
-                      ></ion-icon>
-                    </button>
-                  </ion-item>
-                </ion-list>
-              </div>
-            </ion-item>
-          </ion-col>
-        </ion-row>
+                <div class="py-2 md:py-3">
+                  <ion-list
+                    v-for="(ingredient, index) in ingredients"
+                    :key="index"
+                    class="flex md:flex md:items-stretch"
+                  >
+                    <ion-item class="w-20 md:mx-2">
+                      <ion-input
+                        placeholder="Qty"
+                        type="text"
+                        id="ingredients"
+                        required
+                        v-model="ingredient.qty"
+                      >
+                      </ion-input>
+                    </ion-item>
+
+                    <ion-item class="w-24 md:mx-2">
+                      <ion-select
+                        placeholder="Units"
+                        interface="action-sheet"
+                        v-model="ingredient.unit"
+                      >
+                        <ion-select-option value="tsp">tsp</ion-select-option>
+                        <ion-select-option value="Tbsp">Tbsp</ion-select-option>
+                        <ion-select-option value="g">g</ion-select-option>
+                        <ion-select-option value="oz">oz</ion-select-option>
+                        <ion-select-option value="cup">cup</ion-select-option>
+                        <ion-select-option value="gal">gal</ion-select-option>
+                        <ion-select-option value="lbs">lbs</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+
+                    <ion-item class="w-32 md:mx-2">
+                      <ion-input
+                        placeholder="Name"
+                        type="text"
+                        id="ingredients"
+                        required
+                        v-model="ingredient.name"
+                      >
+                      </ion-input>
+                    </ion-item>
+                    <ion-item lines="none">
+                      <button @click.prevent="addNewIngredient(ingredient)">
+                        <ion-icon
+                          color="success"
+                          :icon="addCircleOutline"
+                        ></ion-icon>
+                      </button>
+                    </ion-item>
+                    <ion-item lines="none">
+                      <button @click.prevent="removeLastIngredient(ingredient)">
+                        <ion-icon
+                          color="danger"
+                          :icon="removeCircleOutline"
+                        ></ion-icon>
+                      </button>
+                    </ion-item>
+                  </ion-list>
+                </div>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </div>
+
+        <div v-show="this.segment === 'instructions'">
+          <ion-row>
+            <ion-col>
+              <ion-item class="rounded-lg">
+                <ion-label position="stacked" class="py-1"
+                  >Instructions:</ion-label
+                >
+                <div class="py-1">
+                  <ion-list
+                    class="flex sm:items-stretch"
+                    v-for="(step, index) in instructions"
+                    :key="index"
+                  >
+                    <ion-item class="mx-2">
+                      <ion-input
+                        class="px-1 w-64"
+                        type="text"
+                        id="ingredients"
+                        required
+                        v-model="step.instruction"
+                      >
+                      </ion-input>
+                    </ion-item>
+                    <ion-item lines="none">
+                      <button @click.prevent="addNewStep(step)">
+                        <ion-icon
+                          color="success"
+                          :icon="addCircleOutline"
+                        ></ion-icon>
+                      </button>
+                    </ion-item>
+                    <ion-item lines="none">
+                      <button @click.prevent="removeLastStep(step)">
+                        <ion-icon
+                          color="danger"
+                          :icon="removeCircleOutline"
+                        ></ion-icon>
+                      </button>
+                    </ion-item>
+                  </ion-list>
+                </div>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </div>
 
         <ion-fab class="bottom mt-20" horizontal="center">
           <ion-button class="submitButton" type="submit">
@@ -304,6 +314,7 @@ export default {
       cameraOutline,
       addCircleOutline,
       removeCircleOutline,
+      segment: "overview",
       name: "",
       photo: null,
       time: "",
@@ -323,6 +334,7 @@ export default {
       ],
     };
   },
+
   // Possible future idea: IF the quantity is more than 1, we add an 's' to the end of the unit.
   methods: {
     async submitRecipe() {
@@ -386,6 +398,9 @@ export default {
         position: position,
       });
       await toast.present();
+    },
+    switchToSegment(value) {
+      this.segment = value;
     },
   },
 };
