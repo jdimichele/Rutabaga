@@ -152,6 +152,7 @@ export default {
   background-image: url(../../../public/assets/background.png);
   height: 100%;
 }
+
 .registerContainer {
   display: grid;
   place-content: center;
@@ -172,6 +173,10 @@ export default {
   --background: #7a3750;
 }
 ion-item {
+  --highlight-color-focused: #7a3750;
+}
+ion-input.custom {
+  color: white;
   --highlight-color-focused: #7a3750;
 }
 </style>

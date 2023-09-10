@@ -10,6 +10,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        'login-page': "url('/public/assets/background.png')"
+      },
       colors: {
         "rut-generic-mauve": "#7a3750",
         "rut-generic-green": "#6b932e",

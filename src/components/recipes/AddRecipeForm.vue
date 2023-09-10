@@ -436,6 +436,10 @@ ion-segment-button::part(indicator-background) {
 ion-segment-button.ios::part(native) {
   color: #7a3750;
 }
+ion-input.custom {
+  color: white;
+  --highlight-color-focused: #7a3750;
+}
 
 .segment-button-checked.ios::part(native) {
   color: #fff;

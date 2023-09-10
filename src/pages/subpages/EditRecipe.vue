@@ -72,23 +72,18 @@
                   <ion-input
                     type="text"
                     v-model="ingredient.detail"
-                    class="w-10"
+                    class="w-72"
                   ></ion-input>
                 </div>
               </ion-col>
-              <ion-item lines="none">
-                <button @click.prevent="addNewIngredient()">
-                  <ion-icon color="success" :icon="addCircleOutline"></ion-icon>
-                </button>
-              </ion-item>
-              <ion-item lines="none">
-                <button @click.prevent="removeLastIngredient()">
-                  <ion-icon
-                    color="danger"
-                    :icon="removeCircleOutline"
-                  ></ion-icon>
-                </button>
-              </ion-item>
+
+              <button @click.prevent="addNewIngredient()">
+                <ion-icon color="success" :icon="addCircleOutline"></ion-icon>
+              </button>
+
+              <button @click.prevent="removeLastIngredient()">
+                <ion-icon color="danger" :icon="removeCircleOutline"></ion-icon>
+              </button>
             </ion-row>
 
             <ion-row>
@@ -97,7 +92,10 @@
                   v-for="(ins, index) in editedRecipe.recipeInstructions"
                   :key="index"
                 >
-                  <ion-textarea v-model="ins.instruction"></ion-textarea>
+                  <ion-textarea
+                    class="w-72"
+                    v-model="ins.instruction"
+                  ></ion-textarea>
                 </div>
               </ion-col>
 
@@ -109,7 +107,11 @@
                 <ion-icon color="danger" :icon="removeCircleOutline"></ion-icon>
               </button>
             </ion-row>
-            <button>Update</button>
+            <button
+              class="m-8 w-52 h-10 rounded-lg bg-rut-generic-mauve text-lg text-white font-bold"
+            >
+              Update
+            </button>
           </form>
         </ion-grid>
       </base-card>
@@ -233,3 +235,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+ion-input.custom {
+  color: white;
+  --highlight-color-focused: #7a3750;
+}
+</style>
