@@ -71,20 +71,9 @@
                 >
                   <ion-input
                     type="text"
-                    v-model="ingredient.qty"
+                    v-model="ingredient.detail"
                     class="w-10"
                   ></ion-input>
-
-                  <ion-input
-                    v-model="ingredient.unit"
-                    class="w-10 text-center"
-                  ></ion-input>
-
-                  <ion-textarea
-                    v-model="ingredient.name"
-                    class="break-words w-full"
-                    :auto-grow="true"
-                  ></ion-textarea>
                 </div>
               </ion-col>
               <ion-item lines="none">
@@ -172,9 +161,7 @@ export default {
         course: "",
         ingredients: [
           {
-            qty: "",
-            unit: "",
-            name: "",
+            detail: "",
           },
         ],
         instructions: [
@@ -222,7 +209,7 @@ export default {
     },
 
     addNewIngredient() {
-      this.editedRecipe.recipeIngredients.push({ qty: "", unit: "", name: "" });
+      this.editedRecipe.recipeIngredients.push({ detail: "" });
       this.editedIngredients++;
     },
     addNewStep() {

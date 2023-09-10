@@ -54,9 +54,7 @@
               >
                 <div class="break-words ml-2">
                   <p>
-                    {{ currentRecipe.recipeIngredients[index].qty }}
-                    {{ currentRecipe.recipeIngredients[index].unit }}
-                    {{ currentRecipe.recipeIngredients[index].name }}
+                    {{ currentRecipe.recipeIngredients[index].detail }}
                   </p>
                 </div>
               </ion-list>
@@ -131,7 +129,9 @@ export default {
     ...mapGetters("recipes", ["getRecipeByID", "getFavorites"]),
     isRecipeFavorite() {
       const currentRecipeID = this.$route.params.id;
-      return this.getFavorites.some((recipe) => recipe.recipeID === currentRecipeID);
+      return this.getFavorites.some(
+        (recipe) => recipe.recipeID === currentRecipeID
+      );
     },
   },
   methods: {
@@ -145,13 +145,13 @@ export default {
     },
     toggleFavorite() {
       const currentRecipeID = this.$route.params.id;
-      console.log(this.isRecipeFavorite)
+      console.log(this.isRecipeFavorite);
 
       if (this.isRecipeFavorite) {
         this.removeFromFavorites(currentRecipeID).then(
           () => (this.isFavorite = false)
         );
-      } else {
+      } else if (!this.isRecipeFavorite) {
         this.addToFavorites(currentRecipeID).then(
           () => (this.isFavorite = true)
         );
