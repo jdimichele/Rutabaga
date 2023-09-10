@@ -34,6 +34,7 @@
                   v-model="photo"
                   :icon="cameraOutline"
                 ></ion-icon>
+                {{ this.cPhoto }}
                 <!-- 
               At some point in the future, need to display current image user has uploaded using the following:
               <div v-if="!photo"> </div>
@@ -315,6 +316,7 @@ export default {
       addCircleOutline,
       removeCircleOutline,
       segment: "overview",
+      cPhoto: null,
       name: "",
       photo: null,
       time: "",
@@ -358,7 +360,9 @@ export default {
         allowEditing: true,
         source: CameraSource.Camera,
         resultType: CameraResultType.Base64,
+        saveToGallery: true,
       });
+
       if (image?.base64String) {
         const userId = firebase.auth().currentUser.uid;
         const guid = uuidv4();
