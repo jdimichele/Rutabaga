@@ -34,7 +34,6 @@
                   v-model="photo"
                   :icon="cameraOutline"
                 ></ion-icon>
-                {{ this.cPhoto }}
                 <!-- 
               At some point in the future, need to display current image user has uploaded using the following:
               <div v-if="!photo"> </div>
@@ -136,43 +135,18 @@
                     :key="index"
                     class="flex md:flex md:items-stretch"
                   >
-                    <ion-item class="w-20 md:mx-2">
+                    <ion-item class="md:mx-2">
                       <ion-input
-                        placeholder="Qty"
+                        class="px-1 w-64"
+                        placeholder="1lb Garlic Cloves"
                         type="text"
                         id="ingredients"
                         required
-                        v-model="ingredient.qty"
+                        v-model="ingredient.detail"
                       >
                       </ion-input>
                     </ion-item>
 
-                    <ion-item class="w-24 md:mx-2">
-                      <ion-select
-                        placeholder="Units"
-                        interface="action-sheet"
-                        v-model="ingredient.unit"
-                      >
-                        <ion-select-option value="tsp">tsp</ion-select-option>
-                        <ion-select-option value="Tbsp">Tbsp</ion-select-option>
-                        <ion-select-option value="g">g</ion-select-option>
-                        <ion-select-option value="oz">oz</ion-select-option>
-                        <ion-select-option value="cup">cup</ion-select-option>
-                        <ion-select-option value="gal">gal</ion-select-option>
-                        <ion-select-option value="lbs">lbs</ion-select-option>
-                      </ion-select>
-                    </ion-item>
-
-                    <ion-item class="w-32 md:mx-2">
-                      <ion-input
-                        placeholder="Name"
-                        type="text"
-                        id="ingredients"
-                        required
-                        v-model="ingredient.name"
-                      >
-                      </ion-input>
-                    </ion-item>
                     <ion-item lines="none">
                       <button @click.prevent="addNewIngredient(ingredient)">
                         <ion-icon
@@ -316,7 +290,6 @@ export default {
       addCircleOutline,
       removeCircleOutline,
       segment: "overview",
-      cPhoto: null,
       name: "",
       photo: null,
       time: "",
@@ -324,9 +297,7 @@ export default {
       course: "",
       ingredients: [
         {
-          qty: "",
-          unit: "",
-          name: "",
+          detail: "",
         },
       ],
       instructions: [
@@ -358,9 +329,9 @@ export default {
       const image = await Camera.getPhoto({
         quality: 100,
         allowEditing: true,
+        saveToGallery: true,
         source: CameraSource.Camera,
         resultType: CameraResultType.Base64,
-        saveToGallery: true,
       });
 
       if (image?.base64String) {
@@ -399,6 +370,7 @@ export default {
       const toast = await toastController.create({
         message: "Recipe Added!",
         duration: 1500,
+        color: "dark",
         position: position,
       });
       await toast.present();

@@ -2,7 +2,6 @@
   <base-card>
     <ion-title class="my-2.5 text-center">Courses:</ion-title>
     <ion-accordion-group>
-      <!-- Removing :multiple="true" for the time being until the PM says otherwise. -->
       <ion-accordion>
         <recipe-course-item
           :courseName="'Appetizers'"
