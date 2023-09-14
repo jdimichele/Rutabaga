@@ -1,5 +1,6 @@
 <template>
   <ion-content>
+    <ion-item button :detail="false" router-link="/profile">Settings</ion-item>
     <ion-item>
       <ion-toggle v-model="themeToggle" @click="toggleDarkTheme"
         >Toggle Theme</ion-toggle

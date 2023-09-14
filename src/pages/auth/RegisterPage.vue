@@ -1,87 +1,84 @@
 <template>
-  <ion-page class="registerPage">
-    <div class="registerContainer">
-      <div class="logo">
+  <ion-page class="h-full bg-login-page">
+    <div class="grid place-content-center">
+      <div>
         <base-logo></base-logo>
       </div>
-      <ion-card class="registerCard">
-        <div class="registerText">
+      <ion-card class="justify-items-center">
+        <div class="text-center">
           <p>
             Already have an account?
             <router-link to="/login">Login here.</router-link>
           </p>
         </div>
-          <div class="registerForm">
-            <form @submit.prevent="register" v-on:keyup.enter="register">
-              <ion-item>
-                <ion-label for="text" position="floating"
-                  >First Name:</ion-label
-                >
-                <ion-input
-                  type="text"
-                  id="firstName"
-                  v-model.trim="firstName"
-                  placeholder="George"
-                ></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-label for="text" position="floating">Last Name:</ion-label>
-                <ion-input
-                  type="text"
-                  id="lastName"
-                  v-model.trim="lastName"
-                  placeholder="Google"
-                ></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-label for="username" position="floating"
-                  >Username:</ion-label
-                >
-                <ion-input
-                  type="text"
-                  id="username"
-                  v-model="username"
-                  placeholder="TheOGGoogle"
-                ></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-label for="email" position="floating">Email:</ion-label>
-                <ion-input
-                  type="email"
-                  id="email"
-                  v-model="email"
-                  placeholder="george@google.com"
-                ></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-label for="password" position="floating"
-                  >Password:</ion-label
-                >
-                <ion-input
-                  type="password"
-                  id="password"
-                  v-model="password"
-                  placeholder="******"
-                ></ion-input>
-              </ion-item>
-              <div class="error" v-show="error">{{ this.errorMessage }}</div>
-              <ion-button class="registerButton" type="submit">Register</ion-button>
-            </form>
-          </div>
+        <div class="pt-2 px-9 pb-0">
+          <form @submit.prevent="register" v-on:keyup.enter="register">
+            <ion-item>
+              <ion-input
+                label="First Name:"
+                label-placement="floating"
+                type="text"
+                id="firstName"
+                v-model.trim="firstName"
+                placeholder="George"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input
+                label="Last Name:"
+                label-placement="floating"
+                type="text"
+                id="lastName"
+                v-model.trim="lastName"
+                placeholder="Google"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input
+                label="Username:"
+                label-placement="floating"
+                type="text"
+                id="username"
+                v-model="username"
+                placeholder="TheOGGoogle"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input
+                label="Email:"
+                label-placement="floating"
+                type="email"
+                id="email"
+                v-model="email"
+                placeholder="george@google.com"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input
+                label="Password:"
+                label-placement="floating"
+                type="password"
+                id="password"
+                v-model="password"
+                placeholder="******"
+              ></ion-input>
+            </ion-item>
+            <div class="error" v-show="error">{{ this.errorMessage }}</div>
+            <button
+              class="m-8 w-52 h-10 rounded-lg bg-rut-generic-mauve text-lg text-white font-bold"
+              type="submit"
+            >
+              Register
+            </button>
+          </form>
+        </div>
       </ion-card>
     </div>
   </ion-page>
 </template>
 
 <script>
-import {
-  IonPage,
-  IonItem,
-  IonCard,
-  IonInput,
-  IonLabel,
-  IonButton,
-} from "@ionic/vue";
+import { IonPage, IonItem, IonCard, IonInput } from "@ionic/vue";
 import BaseLogo from "../../components/ui/BaseLogo.vue";
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -91,9 +88,7 @@ export default {
   components: {
     IonPage,
     IonItem,
-    IonButton,
     IonCard,
-    IonLabel,
     IonInput,
     BaseLogo,
   },
@@ -148,34 +143,7 @@ export default {
 </script>
 
 <style scoped>
-.registerPage {
-  background-image: url(../../../public/assets/background.png);
-  height: 100%;
-}
-
-.registerContainer {
-  display: grid;
-  place-content: center;
-}
-.registerForm {
-  padding: 10px 35px 0 35px;
-}
-.registerCard {
-  justify-items: center;
-}
-.registerText {
-  text-align: center;
-}
-
-.registerButton {
-  margin: 30px;
-  width: 200px;
-  --background: #7a3750;
-}
-ion-item {
-  --highlight-color-focused: #7a3750;
-}
-ion-input.custom {
+ion-input {
   color: white;
   --highlight-color-focused: #7a3750;
 }

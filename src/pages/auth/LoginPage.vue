@@ -1,7 +1,7 @@
 <template>
   <ion-page class="h-full bg-login-page">
-    <div class="loginContainer grid place-content-center">
-      <div class="logo">
+    <div class="grid place-content-center">
+      <div>
         <base-logo></base-logo>
       </div>
       <ion-card class="m-auto items-center p-7">
@@ -84,7 +84,7 @@ export default {
 </script>
 
 <style scoped>
-ion-input.custom {
+ion-input {
   color: white;
   --highlight-color-focused: #7a3750;
 }
