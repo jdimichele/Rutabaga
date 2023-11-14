@@ -2,15 +2,19 @@
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
-        <ion-button color="medium" @click="cancel">Cancel</ion-button>
+        <ion-button color="medium" @click="modalToggle('cancel')"
+          >Cancel</ion-button
+        >
       </ion-buttons>
       <ion-title>Modal</ion-title>
       <ion-buttons slot="end">
-        <ion-button @click="confirm" :strong="true">Save</ion-button>
+        <ion-button @click="modalToggle('save')" :strong="true"
+          >Save</ion-button
+        >
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
-  <ion-content>cum</ion-content>
+  <ion-content>List of Courses here!</ion-content>
 </template>
 
 <script>
@@ -20,21 +24,29 @@ import {
   IonButtons,
   IonButton,
   IonTitle,
+  IonHeader,
   modalController,
 } from "@ionic/vue";
 
 export default {
-  components: { IonContent, IonToolbar, IonButtons, IonButton, IonTitle },
+  components: {
+    IonContent,
+    IonToolbar,
+    IonButtons,
+    IonButton,
+    IonTitle,
+    IonHeader,
+  },
+  data() {
+    return {};
+  },
 
   methods: {
-    cancel() {
-      if (this.modalState === "cancel") {
+    modalToggle(state) {
+      if (state === "save") {
+        modalController.dismiss(null, "save");
+      } else if (state === "cancel") {
         modalController.dismiss(null, "cancel");
-      }
-    },
-    save() {
-      if (this.modalState === "save") {
-        modalController.dismiss("save");
       }
     },
   },

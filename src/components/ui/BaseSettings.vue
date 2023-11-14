@@ -1,6 +1,6 @@
 <template>
   <ion-content>
-    <ion-item button :detail="false" @onClick="openConfig">Configure</ion-item>
+    <ion-item button :detail="false" @click="openConfig">Configure</ion-item>
     <ion-item>
       <ion-toggle v-model="themeToggle" @click="toggleDarkTheme"
         >Toggle Theme</ion-toggle
@@ -56,12 +56,6 @@ export default {
       });
 
       modal.present();
-
-      // const { data, role } = await modal.onWillDismiss();
-
-      // if (role === "confirm") {
-      //   // message.value = `Hello, ${data}!`;
-      // }
     },
     toggleWakeLock() {
       if (this.wakeLockEnabled) {
