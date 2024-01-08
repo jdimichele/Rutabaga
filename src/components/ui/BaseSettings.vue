@@ -1,6 +1,6 @@
 <template>
   <ion-content>
-    <ion-item button :detail="false" @click="openConfig">Configure</ion-item>
+    <ion-item button :detail="false" @click="openSettings">Configure</ion-item>
     <ion-item>
       <ion-toggle v-model="themeToggle" @click="toggleDarkTheme"
         >Toggle Theme</ion-toggle
@@ -20,8 +20,7 @@
 </template>
 
 <script>
-import { IonContent, IonItem, IonToggle, modalController } from "@ionic/vue";
-import UserConfigPage from "../../pages/auth/UserConfigPage.vue";
+import { IonContent, IonItem, IonToggle } from "@ionic/vue";
 
 export default {
   name: "BaseSettings",
@@ -50,12 +49,9 @@ export default {
       }
       return this.themeToggle;
     },
-    async openConfig() {
-      const modal = await modalController.create({
-        component: UserConfigPage,
-      });
 
-      modal.present();
+    async openSettings() {
+      this.$router.push("/user-settings");
     },
     toggleWakeLock() {
       if (this.wakeLockEnabled) {

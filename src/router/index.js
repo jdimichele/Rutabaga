@@ -53,6 +53,12 @@ const routes = [
         component: () => import("@/pages/main/SearchPage.vue"),
         meta: { requiresAuth: true },
       },
+      {
+        path: "/user-settings",
+        name: "user-settings",
+        component: () => import("@/pages/auth/UserSettingsPage.vue"),
+        meta: { requiresAuth: true },
+      },
     ],
   },
   {
