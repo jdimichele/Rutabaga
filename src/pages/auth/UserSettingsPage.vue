@@ -1,48 +1,40 @@
 <template>
-  <!-- <ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-button color="medium" @click="modalToggle('cancel')"
-          >Cancel</ion-button
-        >
-      </ion-buttons>
-      <ion-title slot="middle">Settings</ion-title>
-      <ion-buttons slot="end">
-        <ion-button @click="modalToggle('save')" :strong="true"
-          >Save</ion-button
-        >
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content></ion-content> -->
   <ion-page>
-    <base-header title="Search"></base-header>
+    <base-header title="Settings"></base-header>
     <ion-content :fullscreen="true">
-      <search-recipes-item></search-recipes-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <user-courses></user-courses>
+          </ion-col>
+          <ion-col>
+            <user-categories></user-categories>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-content>
   </ion-page>
 </template>
 
 <script>
-import { IonPage, IonContent } from "@ionic/vue";
+import { IonPage, IonContent, IonGrid, IonRow, IonCol } from "@ionic/vue";
+import UserCategories from "../../components/user-settings/UserCategories.vue";
+import UserCourses from "../../components/user-settings/UserCourses.vue";
 
 export default {
   components: {
     IonContent,
     IonPage,
+    IonGrid,
+    IonRow,
+    IonCol,
+    UserCategories,
+    UserCourses,
   },
   data() {
     return {};
   },
 
-  methods: {
-    // modalToggle(state) {
-    //   if (state === "save") {
-    //     modalController.dismiss(null, "save");
-    //   } else if (state === "cancel") {
-    //     modalController.dismiss(null, "cancel");
-    //   }
-    // },
-  },
+  methods: {},
 };
 </script>
