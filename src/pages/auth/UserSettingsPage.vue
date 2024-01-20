@@ -7,6 +7,8 @@
           <ion-col>
             <user-courses></user-courses>
           </ion-col>
+        </ion-row>
+        <ion-row>
           <ion-col>
             <user-categories></user-categories>
           </ion-col>
