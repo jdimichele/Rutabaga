@@ -17,8 +17,14 @@
         </button>
       </div>
 
-      <div v-for="course in recipeCourses" :key="course" class="flex">
-        {{ course }}
+      <div>
+        <div v-for="course in userCourses" :key="course" class="flex">
+          {{ course }}
+
+          <button @click.prevent="deleteCourse(course)" class="p-2">
+            <ion-icon color="danger" :icon="removeCircleOutline"></ion-icon>
+          </button>
+        </div>
       </div>
     </ion-card-content>
   </ion-card>
@@ -33,8 +39,8 @@ import {
   IonInput,
   IonIcon,
 } from "@ionic/vue";
-import { addCircleOutline } from "ionicons/icons";
-import { mapActions, mapGetters, mapState } from "vuex";
+import { addCircleOutline, removeCircleOutline } from "ionicons/icons";
+import { mapActions, mapState } from "vuex";
 
 export default {
   components: {
@@ -48,18 +54,23 @@ export default {
   data() {
     return {
       addCircleOutline,
-      newCourse: null,
+      removeCircleOutline,
+      newCourse: "",
     };
   },
   computed: {
-    ...mapState("recipes", ["recipeCourses"]),
-    ...mapGetters("recipes", ["getCourses"]),
+    ...mapState("recipes", ["userCourses"]),
   },
   methods: {
-    ...mapActions("recipes", ["addCourse", "loadCourses"]),
+    ...mapActions("recipes", ["addCourse", "loadCourses", "deleteCourse"]),
+
     addNewCourse() {
       this.addCourse(this.newCourse);
-      this.course = null;
+      this.newCourse = "";
+    },
+
+    removeCourse(course) {
+      this.deleteCourse(course);
     },
   },
   mounted() {

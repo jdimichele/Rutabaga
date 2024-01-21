@@ -10,6 +10,7 @@ export default {
       favorites: [],
       recipeID: null,
       userId: null,
+      userCourses: [],
       recipeName: null,
       recipePhoto: null,
       recipeTime: null,
@@ -23,18 +24,24 @@ export default {
     addRecipeToAllRecipes(state, newRecipe) {
       state.allRecipes.push(newRecipe);
     },
-    addRecipeCourse(state, course) {
-      state.recipeCourses.push(course);
+    addUserCourse(state, course) {
+      state.userCourses.push(course);
     },
-    setRecipeCourses(state, courses){
-      state.recipeCourses = courses;
+    setUserCourses(state, courses) {
+      state.userCourses = courses;
+    },
+    removeCourse(state, course) {
+      const index = state.userCourses.indexOf(course);
+      if (index !== -1) {
+        state.userCourses.splice(index, 1);
+      }
     },
     setCurrentRecipeState(state, payload) {
       state.recipeName = payload.recipeName;
       state.recipePhoto = payload.recipePhoto;
       state.recipeTime = payload.recipeTime;
       state.recipeServings = payload.recipeServings;
-      state.recipeCourse = payload.recipeCourse;
+      state.recipeCourses = payload.recipeCourses;
       state.recipeIngredients = payload.recipeIngredients;
       state.recipeInstructions = payload.recipeInstructions;
     },
@@ -213,9 +220,32 @@ export default {
         await coursesRef.add({
           name: course,
         });
-        commit("addRecipeCourse", course);
+        commit("addUserCourse", course);
       } catch (error) {
         console.error("Failed to add course:", error);
+      }
+    },
+
+    async deleteCourse({ commit }, course) {
+      try {
+        const userId = firebase.auth().currentUser.uid;
+        const coursesRef = db
+          .collection("users")
+          .doc(userId)
+          .collection("courses");
+
+        const querySnapshot = await coursesRef
+          .where("name", "==", course)
+          .get();
+        if (!querySnapshot.empty) {
+          const docId = querySnapshot.docs[0].id;
+          await coursesRef.doc(docId).delete();
+          commit("removeCourse", course);
+        } else {
+          console.warn("Course not found in Firebase.");
+        }
+      } catch (error) {
+        console.error("Error deleting course from Firebase: ", error);
       }
     },
 
@@ -233,7 +263,7 @@ export default {
         querySnapshot.forEach((doc) => {
           courses.push(doc.data().name);
         });
-        commit("setRecipeCourses", courses);
+        commit("setUserCourses", courses);
       } catch (error) {
         console.error("Failed to load courses:", error);
       }
@@ -278,7 +308,7 @@ export default {
       return (currentTimestamp - lastFetch) / 1000 > 60; // We subtract the current time from the lastFetch time, divide it by 1000 for milliseconds and see if it's been longer than 60 seconds.
     },
     getCourses(state) {
-      return state.recipeCourses;
+      return state.userCourses;
     },
   },
 };
