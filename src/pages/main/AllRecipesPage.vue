@@ -2,36 +2,27 @@
   <ion-page>
     <base-header title="All Recipes"></base-header>
     <ion-content>
-      <ion-grid :fixed="true">
-        <ion-row>
-          <ion-col size-md="7" size-sm="5">Last Viewed:</ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size-md="7" size-sm="5">
-            <recipes-list></recipes-list>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size-md="7" size-sm="5">
-            <recipe-courses></recipe-courses>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+      <div class="grid grid-cols-1 sm:grid-cols-2">
+        <!-- <div>Last Viewed:</div> -->
+        <div>
+          <recipes-list></recipes-list>
+        </div>
+        <div>
+          <recipe-courses></recipe-courses>
+        </div>
+      </div>
     </ion-content>
   </ion-page>
 </template>
 
 <script>
-import { IonPage, IonGrid, IonRow, IonCol, IonContent } from "@ionic/vue";
+import { IonPage, IonContent } from "@ionic/vue";
 import RecipesList from "@/components/recipes/RecipesList.vue";
 import RecipeCourses from "@/components/recipes/RecipeCourses.vue";
 
 export default {
   components: {
     IonPage,
-    IonGrid,
-    IonRow,
-    IonCol,
     IonContent,
     RecipesList,
     RecipeCourses,
