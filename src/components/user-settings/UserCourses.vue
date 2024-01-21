@@ -6,25 +6,28 @@
     <ion-card-content>
       <div class="inline-flex">
         <div>
-          <ion-input
+          <input
             placeholder="Add New"
-            class=""
+            type="text"
+            class="h-10 w-full border border-white rounded-lg focus:border-rut-generic-mauve focus:ring-rut-generic-mauve px-2"
             v-model="newCourse"
-          ></ion-input>
+          />
         </div>
         <button @click.prevent="addNewCourse()" class="p-2">
           <ion-icon color="success" :icon="addCircleOutline"></ion-icon>
         </button>
       </div>
 
-      <div>
-        <div v-for="course in userCourses" :key="course" class="flex">
-          {{ course }}
+      <div class="py-5">
+        <ul class="ml-2">
+          <li v-for="course in userCourses" :key="course" class="flex">
+            {{ course }}
 
-          <button @click.prevent="deleteCourse(course)" class="p-2">
-            <ion-icon color="danger" :icon="removeCircleOutline"></ion-icon>
-          </button>
-        </div>
+            <button @click.prevent="deleteCourse(course)" class="p-2">
+              <ion-icon color="danger" :icon="removeCircleOutline"></ion-icon>
+            </button>
+          </li>
+        </ul>
       </div>
     </ion-card-content>
   </ion-card>
@@ -36,7 +39,6 @@ import {
   IonCardHeader,
   IonCardTitle,
   IonCardContent,
-  IonInput,
   IonIcon,
 } from "@ionic/vue";
 import { addCircleOutline, removeCircleOutline } from "ionicons/icons";
@@ -48,7 +50,6 @@ export default {
     IonCardHeader,
     IonCardTitle,
     IonCardContent,
-    IonInput,
     IonIcon,
   },
   data() {
