@@ -14,7 +14,7 @@ export default {
       recipePhoto: null,
       recipeTime: null,
       recipeServings: null,
-      recipeCourse: null,
+      recipeCourses: [],
       recipeIngredients: null,
       recipeInstructions: null,
     };
@@ -22,6 +22,12 @@ export default {
   mutations: {
     addRecipeToAllRecipes(state, newRecipe) {
       state.allRecipes.push(newRecipe);
+    },
+    addRecipeCourse(state, course) {
+      state.recipeCourses.push(course);
+    },
+    setRecipeCourses(state, courses){
+      state.recipeCourses = courses;
     },
     setCurrentRecipeState(state, payload) {
       state.recipeName = payload.recipeName;
@@ -104,6 +110,7 @@ export default {
       });
       // Possible security rule for Firestore: allow read, write: if request.auth != null && request.auth.uid == resource.data.author;
     },
+
     async fetchRecipe({ commit }, recipeID) {
       try {
         const userId = firebase.auth().currentUser.uid;
@@ -195,6 +202,43 @@ export default {
       }
     },
 
+    async addCourse({ commit }, course) {
+      try {
+        const userId = firebase.auth().currentUser.uid;
+        const coursesRef = db
+          .collection("users")
+          .doc(userId)
+          .collection("courses");
+
+        await coursesRef.add({
+          name: course,
+        });
+        commit("addRecipeCourse", course);
+      } catch (error) {
+        console.error("Failed to add course:", error);
+      }
+    },
+
+    async loadCourses({ commit }) {
+      try {
+        const userId = firebase.auth().currentUser.uid;
+        const coursesRef = db
+          .collection("users")
+          .doc(userId)
+          .collection("courses");
+
+        const querySnapshot = await coursesRef.get();
+
+        const courses = [];
+        querySnapshot.forEach((doc) => {
+          courses.push(doc.data().name);
+        });
+        commit("setRecipeCourses", courses);
+      } catch (error) {
+        console.error("Failed to load courses:", error);
+      }
+    },
+
     async loadRecentlyViewed() {},
   },
 
@@ -232,6 +276,9 @@ export default {
       }
       const currentTimestamp = new Date().getTime();
       return (currentTimestamp - lastFetch) / 1000 > 60; // We subtract the current time from the lastFetch time, divide it by 1000 for milliseconds and see if it's been longer than 60 seconds.
+    },
+    getCourses(state) {
+      return state.recipeCourses;
     },
   },
 };

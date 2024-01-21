@@ -7,16 +7,19 @@
       <div class="inline-flex">
         <div>
           <ion-input
-            placeholder="Appetizers"
-            fill="outline"
+            placeholder="Add New"
+            class=""
             v-model="newCourse"
           ></ion-input>
         </div>
-        <button @click.prevent="addNewIngredient()" class="p-2">
+        <button @click.prevent="addNewCourse()" class="p-2">
           <ion-icon color="success" :icon="addCircleOutline"></ion-icon>
         </button>
       </div>
-      <ion-list>{{ courses }}</ion-list>
+
+      <div v-for="course in recipeCourses" :key="course" class="flex">
+        {{ course }}
+      </div>
     </ion-card-content>
   </ion-card>
 </template>
@@ -28,10 +31,10 @@ import {
   IonCardTitle,
   IonCardContent,
   IonInput,
-  IonList,
   IonIcon,
 } from "@ionic/vue";
 import { addCircleOutline } from "ionicons/icons";
+import { mapActions, mapGetters, mapState } from "vuex";
 
 export default {
   components: {
@@ -40,15 +43,27 @@ export default {
     IonCardTitle,
     IonCardContent,
     IonInput,
-    IonList,
     IonIcon,
   },
   data() {
     return {
       addCircleOutline,
       newCourse: null,
-      courses: [],
     };
+  },
+  computed: {
+    ...mapState("recipes", ["recipeCourses"]),
+    ...mapGetters("recipes", ["getCourses"]),
+  },
+  methods: {
+    ...mapActions("recipes", ["addCourse", "loadCourses"]),
+    addNewCourse() {
+      this.addCourse(this.newCourse);
+      this.course = null;
+    },
+  },
+  mounted() {
+    this.loadCourses();
   },
 };
 </script>
