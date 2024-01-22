@@ -11,6 +11,7 @@ export default {
       recipeID: null,
       userId: null,
       userCourses: [],
+      userCategories: [],
       recipeName: null,
       recipePhoto: null,
       recipeTime: null,
@@ -34,6 +35,18 @@ export default {
       const index = state.userCourses.indexOf(course);
       if (index !== -1) {
         state.userCourses.splice(index, 1);
+      }
+    },
+    addUserCategory(state, category) {
+      state.userCategories.push(category);
+    },
+    setUserCategories(state, categories) {
+      state.userCategories = categories;
+    },
+    removeCategory(state, category) {
+      const index = state.userCategories.indexOf(category);
+      if (index !== -1) {
+        state.userCategories.splice(index, 1);
       }
     },
     setCurrentRecipeState(state, payload) {
@@ -269,6 +282,66 @@ export default {
       }
     },
 
+    async addCategory({ commit }, category) {
+      try {
+        const userId = firebase.auth().currentUser.uid;
+        const categoriesRef = db
+          .collection("users")
+          .doc(userId)
+          .collection("categories");
+
+        await categoriesRef.add({
+          name: category,
+        });
+        commit("addUserCategory", category);
+      } catch (error) {
+        console.error("Failed to add category:", error);
+      }
+    },
+
+    async deleteCategory({ commit }, category) {
+      try {
+        const userId = firebase.auth().currentUser.uid;
+        const categoriesRef = db
+          .collection("users")
+          .doc(userId)
+          .collection("categories");
+
+        const querySnapshot = await categoriesRef
+          .where("name", "==", category)
+          .get();
+        if (!querySnapshot.empty) {
+          const docId = querySnapshot.docs[0].id;
+          await categoriesRef.doc(docId).delete();
+          commit("removeCategory", category);
+        } else {
+          console.warn("Category not found in Firebase.");
+        }
+      } catch (error) {
+        console.error("Error deleting category from Firebase: ", error);
+      }
+    },
+
+    async loadCategories({ commit }) {
+      try {
+        const userId = firebase.auth().currentUser.uid;
+        const categoriesRef = db
+          .collection("users")
+          .doc(userId)
+          .collection("categories");
+
+        const querySnapshot = await categoriesRef.get();
+
+        const categories = [];
+        querySnapshot.forEach((doc) => {
+          categories.push(doc.data().name);
+        });
+        commit("setUserCategories", categories);
+      } catch (error) {
+        console.error("Failed to load categories:", error);
+      }
+    },
+
     async loadRecentlyViewed() {},
   },
 
@@ -309,6 +382,9 @@ export default {
     },
     getCourses(state) {
       return state.userCourses;
+    },
+    getCategories(state) {
+      return state.userCategories;
     },
   },
 };
