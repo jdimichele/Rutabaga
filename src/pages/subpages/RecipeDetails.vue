@@ -42,7 +42,10 @@
           <ion-row class="flex justify-between m-2">
             <h6 class="underline font-bold text-md text-white">Ingredients:</h6>
             <ion-badge class="bg-rut-generic-mauve p-1">
-              {{ currentRecipe.recipeCourse }}
+              {{ currentRecipe.recipeCourses }}
+            </ion-badge>
+            <ion-badge class="bg-rut-generic-green p-1">
+              {{ currentRecipe.recipeCategories }}
             </ion-badge>
           </ion-row>
 

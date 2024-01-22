@@ -15,6 +15,8 @@ export default {
     IonApp,
     IonRouterOutlet,
   },
+  methods: {
+  },
   created() {
     firebase.auth().onAuthStateChanged((user) => {
       this.$store.commit("auth/updateUser", user);

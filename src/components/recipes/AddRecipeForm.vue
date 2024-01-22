@@ -48,8 +48,9 @@
           <ion-row>
             <ion-col>
               <ion-item>
-                <ion-label position="floating">Name:</ion-label>
                 <ion-input
+                  label="Name:"
+                  label-placement="floating"
                   placeholder="Gabagool"
                   type="text"
                   id="name"
@@ -59,8 +60,9 @@
               </ion-item>
 
               <ion-item>
-                <ion-label position="floating">Time:</ion-label>
                 <ion-input
+                  label="Time:"
+                  label-placement="floating"
                   placeholder="25 minutes"
                   type="text"
                   id="time"
@@ -74,8 +76,9 @@
           <ion-row>
             <ion-col>
               <ion-item>
-                <ion-label position="floating">Servings:</ion-label>
                 <ion-input
+                  label="Servings:"
+                  label-placement="floating"
                   placeholder="How many servings?"
                   interface="action-sheet"
                   required
@@ -84,37 +87,42 @@
                 </ion-input>
               </ion-item>
 
-              <ion-item class="rounded-b-lg">
-                <ion-label position="floating">Course:</ion-label>
+              <ion-item>
                 <ion-select
+                  label="Course:"
+                  label-placement="stacked"
                   placeholder="Which course does this recipe belong to?"
                   interface="action-sheet"
                   required
                   v-model="course"
                 >
-                  <ion-select-option value="Appetizers"
-                    >Appetizers</ion-select-option
+                  <ion-select-option
+                    value="course"
+                    v-for="courseOption in userCourses"
+                    :key="courseOption"
+                    >{{ courseOption }}</ion-select-option
                   >
-                  <ion-select-option value="Breakfast"
-                    >Breakfast</ion-select-option
-                  >
-                  <ion-select-option value="Brunch">Brunch</ion-select-option>
-                  <ion-select-option value="Dessert">Dessert</ion-select-option>
-                  <ion-select-option value="Dinner">Dinner</ion-select-option>
-                  <ion-select-option value="Dips">Dips</ion-select-option>
-                  <ion-select-option value="Dressings"
-                    >Dressings</ion-select-option
-                  >
-                  <ion-select-option value="Drinks">Drinks</ion-select-option>
-                  <ion-select-option value="Lunch">Lunch</ion-select-option>
-                  <ion-select-option value="Sauces">Sauces</ion-select-option>
-                  <ion-select-option value="Sides">Sides</ion-select-option>
-                  <ion-select-option value="Snacks">Snacks</ion-select-option>
-                  <ion-select-option value="Soups">Soups</ion-select-option>
-                  <ion-select-option value="Staples">Staples</ion-select-option>
-                  <ion-select-option value="Vegan">Vegan</ion-select-option>
-                  <ion-select-option value="Vegetarian"
-                    >Vegetarian</ion-select-option
+                </ion-select>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-item class="rounded-b-lg">
+                <ion-select
+                  label="Category:"
+                  label-placement="stacked"
+                  placeholder="Which category does this recipe belong to?"
+                  interface="action-sheet"
+                  required
+                  v-model="categories"
+                >
+                  <ion-select-option
+                    value="categories"
+                    v-for="categoryOption in userCategories"
+                    :key="categoryOption"
+                    >{{ categoryOption }}</ion-select-option
                   >
                 </ion-select>
               </ion-item>
@@ -148,7 +156,10 @@
                     </ion-item>
 
                     <ion-item lines="none">
-                      <button @click.prevent="addNewIngredient(ingredient)">
+                      <button
+                        type="button"
+                        @click.prevent="addNewIngredient(ingredient)"
+                      >
                         <ion-icon
                           color="success"
                           :icon="addCircleOutline"
@@ -156,7 +167,10 @@
                       </button>
                     </ion-item>
                     <ion-item lines="none">
-                      <button @click.prevent="removeLastIngredient(ingredient)">
+                      <button
+                        type="button"
+                        @click.prevent="removeLastIngredient(ingredient)"
+                      >
                         <ion-icon
                           color="danger"
                           :icon="removeCircleOutline"
@@ -194,7 +208,7 @@
                       </ion-input>
                     </ion-item>
                     <ion-item lines="none">
-                      <button @click.prevent="addNewStep(step)">
+                      <button type="button" @click.prevent="addNewStep(step)">
                         <ion-icon
                           color="success"
                           :icon="addCircleOutline"
@@ -202,7 +216,10 @@
                       </button>
                     </ion-item>
                     <ion-item lines="none">
-                      <button @click.prevent="removeLastStep(step)">
+                      <button
+                        type="button"
+                        @click.prevent="removeLastStep(step)"
+                      >
                         <ion-icon
                           color="danger"
                           :icon="removeCircleOutline"
@@ -255,6 +272,7 @@ import { Camera, CameraResultType, CameraSource } from "@capacitor/camera";
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
+import { mapState, mapActions } from "vuex";
 
 function uuidv4() {
   return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
@@ -294,7 +312,8 @@ export default {
       photo: null,
       time: "",
       servings: "",
-      course: "",
+      course: [],
+      categories: [],
       ingredients: [
         {
           detail: "",
@@ -308,8 +327,13 @@ export default {
     };
   },
 
+  computed: {
+    ...mapState("recipes", ["userCourses", "userCategories"]),
+  },
+
   // Possible future idea: IF the quantity is more than 1, we add an 's' to the end of the unit.
   methods: {
+    ...mapActions("recipes", ["loadCourses", "loadCategories"]),
     async submitRecipe() {
       const recipeForm = {
         name: this.name,
@@ -317,11 +341,13 @@ export default {
         time: this.time,
         servings: this.servings,
         course: this.course,
+        categories: this.categories,
         ingredients: this.ingredients,
         instructions: this.instructions,
       };
       this.$emit("save-recipe", recipeForm);
       this.presentToast("middle");
+      await this.$nextTick();
       setTimeout(() => this.$router.push("/recipes"), 1700);
     },
 
@@ -377,6 +403,26 @@ export default {
     },
     switchToSegment(value) {
       this.segment = value;
+    },
+  },
+  mounted() {
+    this.loadCourses();
+    this.loadCategories();
+    console.log("userCourses:", this.userCourses);
+    console.log("userCategories:", this.userCategories);
+  },
+  watch: {
+    course: {
+      handler(newVal, oldVal) {
+        console.log("course changed:", newVal);
+      },
+      deep: true,
+    },
+    categories: {
+      handler(newVal, oldVal) {
+        console.log("categories changed:", newVal);
+      },
+      deep: true,
     },
   },
 };

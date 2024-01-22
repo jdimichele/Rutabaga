@@ -16,8 +16,8 @@
 
 <script>
 import { IonPage, IonContent } from "@ionic/vue";
-import UserCategories from "../../components/user-settings/UserCategories.vue";
 import UserCourses from "../../components/user-settings/UserCourses.vue";
+import UserCategories from "../../components/user-settings/UserCategories.vue";
 
 export default {
   components: {

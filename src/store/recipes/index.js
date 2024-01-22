@@ -17,6 +17,7 @@ export default {
       recipeTime: null,
       recipeServings: null,
       recipeCourses: [],
+      recipeCategories: [],
       recipeIngredients: null,
       recipeInstructions: null,
     };
@@ -55,6 +56,7 @@ export default {
       state.recipeTime = payload.recipeTime;
       state.recipeServings = payload.recipeServings;
       state.recipeCourses = payload.recipeCourses;
+      state.recipeCategories = payload.recipeCategories;
       state.recipeIngredients = payload.recipeIngredients;
       state.recipeInstructions = payload.recipeInstructions;
     },
@@ -88,6 +90,7 @@ export default {
         time: data.time,
         servings: data.servings,
         course: data.course,
+        categories: data.categories,
         ingredients: data.ingredients,
         instructions: data.instructions,
       };
@@ -100,6 +103,7 @@ export default {
         recipeTime: recipeData.time,
         recipeServings: recipeData.servings,
         recipeCourse: recipeData.course,
+        recipeCategories: recipeData.categories,
         recipeIngredients: recipeData.ingredients,
         recipeInstructions: recipeData.instructions,
       };
@@ -122,6 +126,7 @@ export default {
             recipeTime: doc.data().time,
             recipeServings: doc.data().servings,
             recipeCourse: doc.data().course,
+            recipeCategories: doc.data().categories,
             recipeIngredients: doc.data().ingredients,
             recipeInstructions: doc.data().instructions,
           };
