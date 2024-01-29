@@ -24,7 +24,7 @@
   <ion-content>
     <ion-grid>
       <form class="md:p-10" @submit.prevent="submitRecipe">
-        <div v-show="this.segment === 'overview'">
+        <div v-show="segment === 'overview'">
           <ion-row>
             <ion-col>
               <ion-item class="rounded-t-lg">
@@ -97,10 +97,9 @@
                   v-model="course"
                 >
                   <ion-select-option
-                    value="course"
-                    v-for="courseOption in userCourses"
-                    :key="courseOption"
-                    >{{ courseOption }}</ion-select-option
+                    v-for="course in userCourses"
+                    :key="course"
+                    >{{ course }}</ion-select-option
                   >
                 </ion-select>
               </ion-item>
@@ -119,10 +118,9 @@
                   v-model="categories"
                 >
                   <ion-select-option
-                    value="categories"
-                    v-for="categoryOption in userCategories"
-                    :key="categoryOption"
-                    >{{ categoryOption }}</ion-select-option
+                    v-for="categories in userCategories"
+                    :key="categories"
+                    >{{ categories }}</ion-select-option
                   >
                 </ion-select>
               </ion-item>
@@ -130,7 +128,7 @@
           </ion-row>
         </div>
 
-        <div v-show="this.segment === 'ingredients'">
+        <div v-show="segment === 'ingredients'">
           <ion-row>
             <ion-col>
               <ion-item lines="none" class="rounded-lg">
@@ -184,7 +182,7 @@
           </ion-row>
         </div>
 
-        <div v-show="this.segment === 'instructions'">
+        <div v-show="segment === 'instructions'">
           <ion-row>
             <ion-col>
               <ion-item class="rounded-lg">
@@ -410,20 +408,6 @@ export default {
     this.loadCategories();
     console.log("userCourses:", this.userCourses);
     console.log("userCategories:", this.userCategories);
-  },
-  watch: {
-    course: {
-      handler(newVal, oldVal) {
-        console.log("course changed:", newVal);
-      },
-      deep: true,
-    },
-    categories: {
-      handler(newVal, oldVal) {
-        console.log("categories changed:", newVal);
-      },
-      deep: true,
-    },
   },
 };
 </script>

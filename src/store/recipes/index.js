@@ -79,7 +79,7 @@ export default {
         .doc(userId)
         .collection("recipes")
         .doc();
-      const timestamp = await Date.now();
+      const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
       const recipeData = {
         recipeID: dataBase.id,
