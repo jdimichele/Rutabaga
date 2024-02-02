@@ -406,8 +406,6 @@ export default {
   mounted() {
     this.loadCourses();
     this.loadCategories();
-    console.log("userCourses:", this.userCourses);
-    console.log("userCategories:", this.userCategories);
   },
 };
 </script>
