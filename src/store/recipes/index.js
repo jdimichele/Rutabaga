@@ -185,7 +185,6 @@ export default {
 
           commit("setCurrentRecipeState", updatedRecipe);
           dispatch("loadAllRecipes");
-          console.log("Recipe updated successfully!");
         }
       } catch (error) {
         console.error("Failed to update recipes:", error);
