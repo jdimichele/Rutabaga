@@ -3,15 +3,11 @@
     <ion-title class="my-2.5 text-center">Courses:</ion-title>
     <ion-accordion-group>
       <ion-accordion>
-        <recipe-course-item
-          :courseName="'Appetizers'"
-        ></recipe-course-item>
+        <recipe-course-item :courseName="'Appetizers'"></recipe-course-item>
       </ion-accordion>
 
       <ion-accordion>
-        <recipe-course-item
-          :courseName="'Breakfast'"
-        ></recipe-course-item>
+        <recipe-course-item :courseName="'Breakfast'"></recipe-course-item>
       </ion-accordion>
 
       <ion-accordion>
@@ -55,9 +51,7 @@
       </ion-accordion>
 
       <ion-accordion>
-        <recipe-course-item
-          :courseName="'Vegetarian'"
-        ></recipe-course-item>
+        <recipe-course-item :courseName="'Vegetarian'"></recipe-course-item>
       </ion-accordion>
     </ion-accordion-group>
   </base-card>
