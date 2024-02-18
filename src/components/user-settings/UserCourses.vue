@@ -7,7 +7,7 @@
       <div class="inline-flex">
         <div>
           <input
-            placeholder="Add New"
+            placeholder="Add a New Course"
             type="text"
             class="h-10 w-full border border-white rounded-lg focus:border-rut-generic-mauve focus:ring-rut-generic-mauve px-2"
             v-model="newCourse"
