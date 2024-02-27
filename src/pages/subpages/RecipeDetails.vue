@@ -41,15 +41,17 @@
 
           <ion-row class="flex justify-between m-2">
             <h6 class="underline font-bold text-md text-white">Ingredients:</h6>
-            <div>
-              <ion-badge class="bg-rut-generic-mauve p-1">
-                {{ currentRecipe.recipeCourses }}
-              </ion-badge>
-            </div>
-            <div>
-              <ion-badge class="bg-rut-generic-green p-1">
-                {{ currentRecipe.recipeCategories }}
-              </ion-badge>
+            <div class="inline-flex">
+              <div class="pr-2">
+                <ion-badge class="bg-rut-generic-mauve p-1">
+                  {{ currentRecipe.recipeCourses }}
+                </ion-badge>
+              </div>
+              <div>
+                <ion-badge class="bg-rut-generic-green p-1">
+                  {{ currentRecipe.recipeCategories }}
+                </ion-badge>
+              </div>
             </div>
           </ion-row>
 

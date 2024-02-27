@@ -102,7 +102,7 @@ export default {
         recipePhoto: recipeData.photo,
         recipeTime: recipeData.time,
         recipeServings: recipeData.servings,
-        recipeCourse: recipeData.course,
+        recipeCourses: recipeData.course,
         recipeCategories: recipeData.categories,
         recipeIngredients: recipeData.ingredients,
         recipeInstructions: recipeData.instructions,
@@ -125,7 +125,7 @@ export default {
             recipePhoto: doc.data().photo,
             recipeTime: doc.data().time,
             recipeServings: doc.data().servings,
-            recipeCourse: doc.data().course,
+            recipeCourses: doc.data().course,
             recipeCategories: doc.data().categories,
             recipeIngredients: doc.data().ingredients,
             recipeInstructions: doc.data().instructions,
@@ -355,7 +355,7 @@ export default {
     },
     allRecipesByCourse: (state) => (course) => {
       return state.allRecipes.filter(
-        (recipe) => recipe.recipeCourse === course
+        (recipe) => recipe.recipeCourses === course
       );
     },
     getRecipeByName: (state) => (name) => {
