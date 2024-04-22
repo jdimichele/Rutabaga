@@ -9,14 +9,7 @@
           categories!
         </h3>
       </div>
-      <div>
-        <ul>
-          <li v-for="course in getCourses" :key="course">
-            {{ course }}
-          </li>
-        </ul>
-      </div>
-      <ion-accordion v-for="course in getCourses" :key="course">
+      <ion-accordion v-for="course in userCourses" :key="course">
         <recipe-course-item :courseName="`${course}`"></recipe-course-item>
       </ion-accordion>
     </ion-accordion-group>
@@ -25,7 +18,7 @@
 
 <script>
 import { IonAccordion, IonAccordionGroup, IonTitle } from "@ionic/vue";
-import { mapGetters } from "vuex";
+import { mapState } from "vuex";
 import RecipeCourseItem from "./RecipeCourseItem.vue";
 
 export default {
@@ -36,9 +29,9 @@ export default {
     RecipeCourseItem,
   },
   computed: {
-    ...mapGetters("recipes", ["getCourses"]),
+    ...mapState("recipes", ["userCourses"]),
     hasCourses() {
-      return this.$store.getters["recipes/getCourses"];
+      return this.$store.getters["recipes/userCourses"];
     },
   },
 };
