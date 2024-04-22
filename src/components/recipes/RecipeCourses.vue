@@ -18,7 +18,7 @@
 
 <script>
 import { IonAccordion, IonAccordionGroup, IonTitle } from "@ionic/vue";
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 import RecipeCourseItem from "./RecipeCourseItem.vue";
 
 export default {
@@ -28,11 +28,17 @@ export default {
     IonTitle,
     RecipeCourseItem,
   },
+  methods: {
+    ...mapActions("recipes", ["loadCourses"]),
+  },
   computed: {
     ...mapState("recipes", ["userCourses"]),
     hasCourses() {
       return this.$store.getters["recipes/userCourses"];
     },
+  },
+  mounted() {
+    this.loadCourses();
   },
 };
 </script>
