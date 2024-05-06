@@ -64,48 +64,90 @@
 
             <ion-row>
               <ion-col>
-                <div
-                  v-for="(ingredient, index) in editedRecipe.recipeIngredients"
-                  :key="index"
-                  class="flex"
-                >
-                  <ion-input
-                    type="text"
-                    v-model="ingredient.detail"
-                    class="w-72"
-                  ></ion-input>
+                <h6 class="underline font-bold text-md text-white">
+                  Ingredients:
+                </h6>
+                <div class="py-2 md:px-3">
+                  <ion-list
+                    v-for="(
+                      ingredient, index
+                    ) in editedRecipe.recipeIngredients"
+                    :key="index"
+                    class="flex md:flex md:items-stretch"
+                  >
+                    <ion-item class="md:mx-2">
+                      <ion-input
+                        class="px-1 w-64 md:mx-2"
+                        type="text"
+                        v-model="ingredient.detail"
+                      ></ion-input>
+                    </ion-item>
+
+                    <ion-item lines="none">
+                      <button type="button" @click.prevent="addNewIngredient()">
+                        <ion-icon
+                          color="success"
+                          :icon="addCircleOutline"
+                        ></ion-icon>
+                      </button>
+                    </ion-item>
+                    <ion-item lines="none">
+                      <button
+                        type="button"
+                        @click.prevent="removeLastIngredient()"
+                      >
+                        <ion-icon
+                          color="danger"
+                          :icon="removeCircleOutline"
+                        ></ion-icon>
+                      </button>
+                    </ion-item>
+                  </ion-list>
                 </div>
               </ion-col>
-
-              <button @click.prevent="addNewIngredient()">
-                <ion-icon color="success" :icon="addCircleOutline"></ion-icon>
-              </button>
-
-              <button @click.prevent="removeLastIngredient()">
-                <ion-icon color="danger" :icon="removeCircleOutline"></ion-icon>
-              </button>
             </ion-row>
 
             <ion-row>
               <ion-col>
-                <div
-                  v-for="(ins, index) in editedRecipe.recipeInstructions"
-                  :key="index"
-                >
-                  <ion-textarea
-                    class="w-72"
-                    v-model="ins.instruction"
-                  ></ion-textarea>
+                <h6 class="underline font-bold text-md text-white">
+                  Instructions:
+                </h6>
+                <div class="py-2 md:px-3">
+                  <ion-list
+                    v-for="(ins, index) in editedRecipe.recipeInstructions"
+                    :key="index"
+                    class="flex md:flex md:items-stretch"
+                  >
+                    <ion-item class="md:mx-2">
+                      <ion-input
+                        class="px-1 w-64 md:mx-2"
+                        type="text"
+                        v-model="ins.instruction"
+                      ></ion-input>
+                    </ion-item>
+
+                    <ion-item lines="none">
+                      <button type="button" @click.prevent="addNewIngredient()">
+                        <ion-icon
+                          color="success"
+                          :icon="addCircleOutline"
+                        ></ion-icon>
+                      </button>
+                    </ion-item>
+                    <ion-item lines="none">
+                      <button
+                        type="button"
+                        @click.prevent="removeLastIngredient(ingredient)"
+                      >
+                        <ion-icon
+                          color="danger"
+                          :icon="removeCircleOutline"
+                        ></ion-icon>
+                      </button>
+                    </ion-item>
+                  </ion-list>
                 </div>
               </ion-col>
-
-              <button @click.prevent="addNewStep()">
-                <ion-icon color="success" :icon="addCircleOutline"></ion-icon>
-              </button>
-
-              <button @click.prevent="removeLastStep()">
-                <ion-icon color="danger" :icon="removeCircleOutline"></ion-icon>
-              </button>
             </ion-row>
             <button
               class="m-8 w-52 h-10 rounded-lg bg-rut-generic-mauve text-lg text-white font-bold"
@@ -129,7 +171,7 @@ import {
   IonItem,
   IonIcon,
   IonInput,
-  IonTextarea,
+  //IonTextarea,
   toastController,
 } from "@ionic/vue";
 import { addCircleOutline, removeCircleOutline } from "ionicons/icons";
@@ -145,7 +187,7 @@ export default {
     IonItem,
     IonIcon,
     IonInput,
-    IonTextarea,
+    //IonTextarea,
   },
 
   data() {
