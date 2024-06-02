@@ -7,8 +7,15 @@
           <ion-row>
             <div class="relative">
               <img
+                v-if="currentRecipe.recipePhoto"
                 class="max-w-full rounded-t-lg"
                 :src="currentRecipe.recipePhoto"
+              />
+              <img
+                v-else
+                class="max-w-full rounded-t-lg"
+                src="../../../resources/bunger.webp"
+                alt="Default image of Bunger, from Bugsnax, that serves as the default image when the user hasn't uploaded one themselves."
               />
               <div class="absolute top-2 right-3">
                 <button @click="toggleFavorite">

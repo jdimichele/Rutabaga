@@ -5,7 +5,7 @@
       <base-loading v-if="isLoading"></base-loading>
       <base-card v-if="editedRecipe">
         <ion-grid>
-          <div class="absolute top-2 right-3">
+          <div class="absolute top-2 right-3 z-10">
             <button @click.prevent="showDeleteModal" id="delete-modal">
               <ion-icon
                 class="text-white mr-2 hover:text-red-500 text-2xl md:text-4xl"
@@ -18,8 +18,15 @@
             <ion-row>
               <div class="relative">
                 <img
+                  v-if="editedRecipe.recipePhoto"
                   class="max-w-full rounded-t-lg"
                   :src="editedRecipe.recipePhoto"
+                />
+                <img
+                  v-else
+                  class="max-w-full rounded-t-lg"
+                  src="../../../resources/bunger.webp"
+                  alt="Default image of Bunger, from Bugsnax, that serves as the default image when the user hasn't uploaded one themselves."
                 />
               </div>
             </ion-row>
@@ -304,10 +311,7 @@ export default {
       await this.$store.dispatch("recipes/deleteRecipe", recipeID);
       this.isLoading = false;
       this.showDeleteToast("middle");
-      setTimeout(
-        () => this.$router.push("/recipes"),
-        1700
-      );
+      setTimeout(() => this.$router.push("/recipes"), 1700);
     },
 
     async showDeleteToast(position) {
