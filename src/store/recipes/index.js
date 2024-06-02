@@ -26,6 +26,11 @@ export default {
     addRecipeToAllRecipes(state, newRecipe) {
       state.allRecipes.push(newRecipe);
     },
+    removeRecipe(state, recipeID) {
+      state.allRecipes = state.allRecipes.filter(
+        (recipe) => recipe.recipeID !== recipeID
+      );
+    },
     addUserCourse(state, course) {
       state.userCourses.push(course);
     },
@@ -188,6 +193,22 @@ export default {
         }
       } catch (error) {
         console.error("Failed to update recipes:", error);
+      }
+    },
+
+    async deleteRecipe({ commit }, recipeID) {
+      try {
+        const userId = firebase.auth().currentUser.uid;
+        const recipeRef = db
+          .collection("users")
+          .doc(userId)
+          .collection("recipes")
+          .doc(recipeID);
+
+        await recipeRef.delete();
+        commit("removeRecipe", recipeID);
+      } catch (error) {
+        console.error("Failed to delete recipe: ", error);
       }
     },
 

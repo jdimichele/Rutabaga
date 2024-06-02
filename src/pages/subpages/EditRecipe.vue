@@ -5,11 +5,23 @@
       <base-loading v-if="isLoading"></base-loading>
       <base-card v-if="editedRecipe">
         <ion-grid>
+          <div class="absolute top-2 right-3">
+            <button @click.prevent="showDeleteModal" id="delete-modal">
+              <ion-icon
+                class="text-white mr-2 hover:text-red-500 text-2xl md:text-4xl"
+                :icon="trashBinOutline"
+              >
+              </ion-icon>
+            </button>
+          </div>
           <form @submit.prevent="submitUpdatedRecipe">
             <ion-row>
-              <ion-col>
-                <img class="rounded-t-lg" :src="editedRecipe.recipePhoto" />
-              </ion-col>
+              <div class="relative">
+                <img
+                  class="max-w-full rounded-t-lg"
+                  :src="editedRecipe.recipePhoto"
+                />
+              </div>
             </ion-row>
 
             <ion-row>
@@ -149,11 +161,13 @@
                 </div>
               </ion-col>
             </ion-row>
-            <button
-              class="m-8 w-52 h-10 rounded-lg bg-rut-generic-mauve text-lg text-white font-bold"
-            >
-              Update
-            </button>
+            <div class="flex justify-center items-center">
+              <button
+                class="m-8 w-52 h-10 rounded-lg bg-rut-generic-mauve text-lg text-white font-bold"
+              >
+                Update
+              </button>
+            </div>
           </form>
         </ion-grid>
       </base-card>
@@ -173,8 +187,13 @@ import {
   IonInput,
   //IonTextarea,
   toastController,
+  alertController,
 } from "@ionic/vue";
-import { addCircleOutline, removeCircleOutline } from "ionicons/icons";
+import {
+  addCircleOutline,
+  removeCircleOutline,
+  trashBinOutline,
+} from "ionicons/icons";
 import { mapGetters } from "vuex";
 
 export default {
@@ -192,6 +211,7 @@ export default {
 
   data() {
     return {
+      trashBinOutline,
       addCircleOutline,
       removeCircleOutline,
       editedIngredients: {},
@@ -238,16 +258,61 @@ export default {
       await this.$store.dispatch("recipes/updateRecipe", updatedRecipe);
 
       this.isLoading = false;
-      this.presentToast("middle");
+      this.showUpdateToast("middle");
       setTimeout(
         () => this.$router.push("/recipes/" + this.$route.params.id),
         1700
       );
     },
 
-    async presentToast(position) {
+    async showUpdateToast(position) {
       const toast = await toastController.create({
         message: "Recipe updated!",
+        duration: 1500,
+        position: position,
+      });
+      await toast.present();
+    },
+
+    async showDeleteModal() {
+      const alert = await alertController.create({
+        header: "Delete Recipe",
+        message: "Are you sure you want to delete this recipe?",
+        buttons: [
+          {
+            text: "Cancel",
+            role: "cancel",
+            handler: () => {
+              console.log("Recipe delete canceled.");
+            },
+          },
+          {
+            text: "Delete",
+            role: "destructive",
+            handler: async () => {
+              await this.deleteRecipe();
+            },
+          },
+        ],
+      });
+      await alert.present();
+    },
+
+    async deleteRecipe() {
+      this.isLoading = true;
+      const recipeID = this.editedRecipe.recipeID;
+      await this.$store.dispatch("recipes/deleteRecipe", recipeID);
+      this.isLoading = false;
+      this.showDeleteToast("middle");
+      setTimeout(
+        () => this.$router.push("/recipes"),
+        1700
+      );
+    },
+
+    async showDeleteToast(position) {
+      const toast = await toastController.create({
+        message: "Recipe successfully deleted.",
         duration: 1500,
         position: position,
       });
