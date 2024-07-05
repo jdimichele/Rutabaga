@@ -4,6 +4,7 @@
   </ion-app>
 </template>
 
+<<<<<<< HEAD
 <script>
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -38,4 +39,8 @@ export default {
     // },
   },
 };
+=======
+<script setup lang="ts">
+import { IonApp, IonRouterOutlet } from '@ionic/vue';
+>>>>>>> b35fc98 (Initial commit)
 </script>
