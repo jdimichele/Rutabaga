@@ -75,7 +75,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc && vite build",
+    "build": "vite build",
     "preview": "vite preview",
     "test:e2e": "cypress run",
     "test:unit": "vitest",
@@ -97,18 +97,20 @@
     "@capacitor/cli": "6.1.0",
     "@vitejs/plugin-legacy": "^5.0.0",
     "@vitejs/plugin-vue": "^4.0.0",
-    "@vue/eslint-config-typescript": "^12.0.0",
     "@vue/test-utils": "^2.3.0",
     "cypress": "^13.5.0",
     "eslint": "^8.35.0",
     "eslint-plugin-vue": "^9.9.0",
     "jsdom": "^22.1.0",
-    "terser": "^5.4.0",
-    "typescript": "^5.1.6",
+    "terser": "^5.31.1",
     "vite": "~5.2.0",
+<<<<<<< HEAD
     "vitest": "^0.34.6",
     "vue-tsc": "^2.0.22"
 >>>>>>> b35fc98 (Initial commit)
+=======
+    "vitest": "^0.34.6"
+>>>>>>> 7d81db9 (Initial commit. Note: Due to Vue CLI being deprecated and constant webpack issues, I've)
   },
   "description": "An Ionic project"
 }

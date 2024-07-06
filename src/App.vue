@@ -5,6 +5,7 @@
 </template>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <script>
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -41,6 +42,9 @@ export default {
 };
 =======
 <script setup lang="ts">
+=======
+<script setup>
+>>>>>>> 7d81db9 (Initial commit. Note: Due to Vue CLI being deprecated and constant webpack issues, I've)
 import { IonApp, IonRouterOutlet } from '@ionic/vue';
 >>>>>>> b35fc98 (Initial commit)
 </script>
