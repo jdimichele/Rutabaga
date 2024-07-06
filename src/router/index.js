@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { createRouter, createWebHistory } from "@ionic/vue-router";
 import TabsPage from "../pages/main/TabsPage.vue";
 import firebase from "firebase/app";
@@ -92,3 +93,26 @@ router.beforeEach(async (to, from, next) => {
 });
 
 export default router;
+=======
+import { createRouter, createWebHistory } from '@ionic/vue-router';
+import HomePage from '../views/HomePage.vue'
+
+const routes = [
+  {
+    path: '/',
+    redirect: '/home'
+  },
+  {
+    path: '/home',
+    name: 'Home',
+    component: HomePage
+  }
+]
+
+const router = createRouter({
+  history: createWebHistory(import.meta.env.BASE_URL),
+  routes
+})
+
+export default router
+>>>>>>> 7d81db9 (Initial commit. Note: Due to Vue CLI being deprecated and constant webpack issues, I've)
