@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+<<<<<<< HEAD
       "filename" : "icon@40.png",
       "idiom" : "iphone",
       "scale" : "2x",
@@ -106,6 +107,11 @@
       "filename" : "icon@1024.png",
       "idiom" : "ios-marketing",
       "scale" : "1x",
+=======
+      "filename" : "AppIcon-512@2x.png",
+      "idiom" : "universal",
+      "platform" : "ios",
+>>>>>>> 708e7dc (Initial commit of Vue 3's npm create revamp and CLI deprecation.)
       "size" : "1024x1024"
     }
   ],

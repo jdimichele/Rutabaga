@@ -11,6 +11,7 @@ install! 'cocoapods', :disable_input_output_paths => true
 def capacitor_pods
   pod 'Capacitor', :path => '../../node_modules/@capacitor/ios'
   pod 'CapacitorCordova', :path => '../../node_modules/@capacitor/ios'
+<<<<<<< HEAD
   pod 'CapacitorApp', :path => '../../node_modules/@capacitor/app'
   pod 'CapacitorCamera', :path => '../../node_modules/@capacitor/camera'
   pod 'CapacitorFilesystem', :path => '../../node_modules/@capacitor/filesystem'
@@ -21,6 +22,11 @@ def capacitor_pods
 end
 
 target 'Rutabaga' do
+=======
+end
+
+target 'App' do
+>>>>>>> 708e7dc (Initial commit of Vue 3's npm create revamp and CLI deprecation.)
   capacitor_pods
   # Add your Pods here
 end
