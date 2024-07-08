@@ -24,6 +24,12 @@ firestore.rules
 =======
 >>>>>>> b35fc98 (Initial commit)
 
+firebase.js
+.firebaserc
+firebase.json
+firestore.indexes.json
+firestore.rules
+
 *.log
 log.txt
 npm-debug.log*
