@@ -11,7 +11,11 @@
 import { defineComponent } from "vue";
 import { IonContent, IonPage } from "@ionic/vue";
 import BaseHeader from "../../components/ui/BaseHeader.vue";
+<<<<<<< HEAD
 import AddRecipeForm from "@/components/recipes/AddRecipeForm.vue";
+=======
+import AddRecipeForm from "../../components/recipes/AddRecipeForm.vue";
+>>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
 
 export default defineComponent({
   components: {

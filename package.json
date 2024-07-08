@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "Rutabaga",
 <<<<<<< HEAD
   "version": "0.0.1",
@@ -70,6 +71,9 @@
     "vue-template-compiler": "^2.7.16",
     "webpack": "^5.92.1"
 =======
+=======
+  "name": "rutabaga",
+>>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
   "private": true,
   "version": "0.0.1",
   "type": "module",
@@ -83,28 +87,33 @@
   },
   "dependencies": {
     "@capacitor/app": "6.0.0",
+    "@capacitor/camera": "^6.0.1",
     "@capacitor/core": "6.1.0",
     "@capacitor/haptics": "6.0.0",
     "@capacitor/ios": "6.1.0",
     "@capacitor/keyboard": "6.0.1",
     "@capacitor/status-bar": "6.0.0",
+    "@ionic/pwa-elements": "^3.3.0",
     "@ionic/vue": "^8.0.0",
     "@ionic/vue-router": "^8.0.0",
+    "@vitejs/plugin-vue": "^5.0.5",
     "firebase": "^10.12.3",
     "ionicons": "^7.0.0",
     "vue": "^3.3.0",
-    "vue-router": "^4.2.0"
+    "vue-router": "^4.2.0",
+    "vuex": "^4.0.2",
+    "wakelock-lazy-polyfill": "^1.0.0"
   },
   "devDependencies": {
     "@capacitor/cli": "6.1.0",
-    "@vitejs/plugin-legacy": "^5.0.0",
-    "@vitejs/plugin-vue": "^4.0.0",
     "@vue/test-utils": "^2.3.0",
     "cypress": "^13.5.0",
     "eslint": "^8.35.0",
     "eslint-plugin-vue": "^9.9.0",
     "jsdom": "^22.1.0",
+    "tailwindcss": "^3.4.4",
     "terser": "^5.31.1",
+<<<<<<< HEAD
     "vite": "~5.2.0",
 <<<<<<< HEAD
     "vitest": "^0.34.6",
@@ -113,6 +122,9 @@
 =======
     "vitest": "^0.34.6"
 >>>>>>> 7d81db9 (Initial commit. Note: Due to Vue CLI being deprecated and constant webpack issues, I've)
+=======
+    "vite": "5.3.3"
+>>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
   },
   "description": "An Ionic project"
 }
