@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 import firebase from "firebase/app";
 import "firebase/auth";
 import { db } from "../../firebase.js";
+=======
+import { doc } from "firebase/firestore";
+import { db, auth } from "../../firebase.js";
+>>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
 import router from "../../router";
 
 export default {
@@ -39,9 +44,13 @@ export default {
   },
   actions: {
     async login(context, { email, password }) {
+<<<<<<< HEAD
       const response = await firebase
         .auth()
         .signInWithEmailAndPassword(email, password);
+=======
+      const response = await auth().signInWithEmailAndPassword(email, password);
+>>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
       if (response) {
         context.commit("setUser", response.user);
         router.push("/recipes");
@@ -50,14 +59,22 @@ export default {
       }
     },
     async getCurrentUser({ commit }) {
+<<<<<<< HEAD
       const dataBase = await db
         .collection("users")
         .doc(firebase.auth().currentUser.uid);
+=======
+      const dataBase = await doc(db, "users" + auth().currentUser.uid);
+>>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
       const dbResults = await dataBase.get();
       commit("setProfileInfo", dbResults);
     },
     async logout(context) {
+<<<<<<< HEAD
       firebase.auth().signOut;
+=======
+      auth().signOut;
+>>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
       context.commit("setUser", null);
     },
   },

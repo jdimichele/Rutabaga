@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 import firebase from "firebase/app";
 import "firebase/auth";
 import { db } from "../../firebase.js";
+=======
+import { db, auth } from "../../firebase.js";
+>>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
 
 export default {
   namespaced: true,
@@ -78,13 +82,21 @@ export default {
 
   actions: {
     async addRecipe(context, data) {
+<<<<<<< HEAD
       const userId = firebase.auth().currentUser.uid;
+=======
+      const userId = auth().currentUser.uid;
+>>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
       const dataBase = await db
         .collection("users")
         .doc(userId)
         .collection("recipes")
         .doc();
+<<<<<<< HEAD
       const timestamp = firebase.firestore.FieldValue.serverTimestamp();
+=======
+      const timestamp = FieldValue.serverTimestamp();
+>>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
 
       const recipeData = {
         recipeID: dataBase.id,
@@ -116,7 +128,11 @@ export default {
     },
 
     async loadAllRecipes({ state }) {
+<<<<<<< HEAD
       const userId = firebase.auth().currentUser.uid;
+=======
+      const userId = auth().currentUser.uid;
+>>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
       const dataBase = await db
         .collection("users")
         .doc(userId)
@@ -143,7 +159,11 @@ export default {
 
     async fetchRecipe({ commit }, recipeID) {
       try {
+<<<<<<< HEAD
         const userId = firebase.auth().currentUser.uid;
+=======
+        const userId = auth().currentUser.uid;
+>>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
         const recipeRef = db
           .collection("users")
           .doc(userId)
@@ -164,7 +184,11 @@ export default {
 
     async updateRecipe({ commit, dispatch }, updatedRecipe) {
       try {
+<<<<<<< HEAD
         const userId = firebase.auth().currentUser.uid;
+=======
+        const userId = auth().currentUser.uid;
+>>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
         const recipeRef = db
           .collection("users")
           .doc(userId)
@@ -198,7 +222,11 @@ export default {
 
     async deleteRecipe({ commit }, recipeID) {
       try {
+<<<<<<< HEAD
         const userId = firebase.auth().currentUser.uid;
+=======
+        const userId = auth().currentUser.uid;
+>>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
         const recipeRef = db
           .collection("users")
           .doc(userId)
@@ -214,7 +242,11 @@ export default {
 
     async addToFavorites({ commit }, recipeID) {
       try {
+<<<<<<< HEAD
         const userId = firebase.auth().currentUser.uid;
+=======
+        const userId = auth().currentUser.uid;
+>>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
         const favoritesRef = db
           .collection("users")
           .doc(userId)
@@ -230,7 +262,11 @@ export default {
 
     async removeFromFavorites({ commit }, recipeID) {
       try {
+<<<<<<< HEAD
         const userId = firebase.auth().currentUser.uid;
+=======
+        const userId = auth().currentUser.uid;
+>>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
         const favoritesRef = db
           .collection("users")
           .doc(userId)
@@ -249,7 +285,11 @@ export default {
 
     async addCourse({ commit }, course) {
       try {
+<<<<<<< HEAD
         const userId = firebase.auth().currentUser.uid;
+=======
+        const userId = auth().currentUser.uid;
+>>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
         const coursesRef = db
           .collection("users")
           .doc(userId)
@@ -266,7 +306,11 @@ export default {
 
     async deleteCourse({ commit }, course) {
       try {
+<<<<<<< HEAD
         const userId = firebase.auth().currentUser.uid;
+=======
+        const userId = auth().currentUser.uid;
+>>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
         const coursesRef = db
           .collection("users")
           .doc(userId)
@@ -289,7 +333,11 @@ export default {
 
     async loadCourses({ commit }) {
       try {
+<<<<<<< HEAD
         const userId = firebase.auth().currentUser.uid;
+=======
+        const userId = auth().currentUser.uid;
+>>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
         const coursesRef = db
           .collection("users")
           .doc(userId)
@@ -326,7 +374,11 @@ export default {
 
     async deleteCategory({ commit }, category) {
       try {
+<<<<<<< HEAD
         const userId = firebase.auth().currentUser.uid;
+=======
+        const userId = auth().currentUser.uid;
+>>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
         const categoriesRef = db
           .collection("users")
           .doc(userId)
@@ -349,7 +401,11 @@ export default {
 
     async loadCategories({ commit }) {
       try {
+<<<<<<< HEAD
         const userId = firebase.auth().currentUser.uid;
+=======
+        const userId = auth().currentUser.uid;
+>>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
         const categoriesRef = db
           .collection("users")
           .doc(userId)

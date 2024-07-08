@@ -17,8 +17,13 @@
 
 <script>
 import { IonPage, IonContent } from "@ionic/vue";
+<<<<<<< HEAD
 import RecipesList from "@/components/recipes/RecipesList.vue";
 import RecipeCourses from "@/components/recipes/RecipeCourses.vue";
+=======
+import RecipesList from "../../components/recipes/RecipesList.vue";
+import RecipeCourses from "../../components/recipes/RecipeCourses.vue";
+>>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
 
 export default {
   components: {

@@ -267,9 +267,14 @@ import {
   removeCircleOutline,
 } from "ionicons/icons";
 import { Camera, CameraResultType, CameraSource } from "@capacitor/camera";
+<<<<<<< HEAD
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
+=======
+import { auth, db } from "../../firebase.js";
+import { collection, addDoc } from "firebase/firestore";
+>>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
 import { mapState, mapActions } from "vuex";
 
 function uuidv4() {
@@ -359,7 +364,11 @@ export default {
       });
 
       if (image?.base64String) {
+<<<<<<< HEAD
         const userId = firebase.auth().currentUser.uid;
+=======
+        const userId = auth().currentUser.uid;
+>>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
         const guid = uuidv4();
         const filePath = `${userId}/images/${guid}.${image.format}`;
 
