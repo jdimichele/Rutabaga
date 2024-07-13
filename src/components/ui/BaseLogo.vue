@@ -1,7 +1,7 @@
 <template>
   <div>
     <ion-img
-      src="../../../public/assets/icon/icon.png"
+      src="/assets/icon/icon.png"
       class="logo"
     ></ion-img>
     <ion-title size="large">Rutabaga</ion-title>
