@@ -38,6 +38,9 @@ export default {
     addRecipeToAllRecipes(state, newRecipe) {
       state.allRecipes.push(newRecipe);
     },
+    setAllRecipes(state, recipes) {
+      state.allRecipes = recipes;
+    },
     removeRecipe(state, recipeID) {
       state.allRecipes = state.allRecipes.filter(
         (recipe) => recipe.recipeID !== recipeID
@@ -123,28 +126,33 @@ export default {
       context.commit("addRecipeToAllRecipes", newRecipe);
     },
 
-    async loadAllRecipes({ state }) {
-      const userId = auth.currentUser.uid;
-      const recipesRef = doc(collection(db, "users", userId, "recipes"));
-      const recipesQuery = await getDocs(recipesRef);
-      recipesQuery.forEach((doc) => {
-        if (!state.allRecipes.some((recipe) => recipe.recipeID === doc.id)) {
+    async loadAllRecipes({ commit }) {
+      try {
+        const userId = auth.currentUser.uid;
+        const recipesRef = collection(db, "users", userId, "recipes");
+        const recipesQuery = await getDocs(recipesRef);
+
+        const recipes = [];
+        recipesQuery.forEach((doc) => {
           const data = doc.data();
           const recipe = {
-            recipeID: doc.data().recipeID,
-            recipeName: doc.data().name,
-            recipePhoto: doc.data().photo,
-            recipeTime: doc.data().time,
-            recipeServings: doc.data().servings,
-            recipeCourses: doc.data().course,
-            recipeCategories: doc.data().categories,
-            recipeIngredients: doc.data().ingredients,
-            recipeInstructions: doc.data().instructions,
+            recipeID: doc.id,
+            recipeName: data.name,
+            recipePhoto: data.photo,
+            recipeTime: data.time,
+            recipeServings: data.servings,
+            recipeCourses: data.course,
+            recipeCategories: data.categories,
+            recipeIngredients: data.ingredients,
+            recipeInstructions: data.instructions,
           };
-          state.allRecipes.push(recipe);
-        }
-      });
-      // Possible security rule for Firestore: allow read, write: if request.auth != null && request.auth.uid == resource.data.author;
+          recipes.push(recipe);
+        });
+
+        commit("setAllRecipes", recipes);
+      } catch (error) {
+        console.error("Error loading recipes:", error);
+      }
     },
 
     async fetchRecipe({ commit }, recipeID) {
