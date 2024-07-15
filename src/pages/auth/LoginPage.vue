@@ -1,5 +1,5 @@
 <template>
-  <ion-page class="h-full bg-login-page bg-auto sm:bg-cover md:bg-contain lg:bg-auto xl:bg-cover">
+  <ion-page class=" h-full bg-login-page bg-auto sm:bg-cover md:bg-contain lg:bg-auto xl:bg-cover">
     <div class="grid place-content-center">
       <div>
         <base-logo></base-logo>
