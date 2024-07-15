@@ -1,5 +1,6 @@
-import { doc } from "firebase/firestore";
 import { db, auth } from "../../firebase.js";
+import { doc, getDoc } from "firebase/firestore";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import router from "../../router";
 
 export default {
@@ -38,7 +39,7 @@ export default {
   },
   actions: {
     async login(context, { email, password }) {
-      const response = await auth().signInWithEmailAndPassword(email, password);
+      const response = await signInWithEmailAndPassword(auth, email, password);
       if (response) {
         context.commit("setUser", response.user);
         router.push("/recipes");
@@ -47,12 +48,16 @@ export default {
       }
     },
     async getCurrentUser({ commit }) {
-      const dataBase = await doc(db, "users" + auth().currentUser.uid);
-      const dbResults = await dataBase.get();
-      commit("setProfileInfo", dbResults);
+      const dataBase = doc(db, "users", auth.currentUser.uid);
+      const userDoc = await getDoc(dataBase);
+      if (userDoc.exists()) {
+        commit("setProfileInfo", userDoc);
+      } else {
+        console.error("User not found.");
+      }
     },
     async logout(context) {
-      auth().signOut;
+      await signOut(auth);
       context.commit("setUser", null);
     },
   },

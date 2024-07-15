@@ -2,8 +2,6 @@ import { createRouter, createWebHistory } from "@ionic/vue-router";
 import TabsPage from "../pages/main/TabsPage.vue";
 import { auth } from "../firebase.js";
 
-// import store from "../store/index.js";
-
 const routes = [
   {
     path: "/",
