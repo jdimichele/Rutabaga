@@ -38,7 +38,7 @@
                 mode="md"
               ></ion-input>
             </div>
-            <div class="error" v-show="error">{{ this.errorMessage }}</div>
+            <div class="error" v-if="error">{{ this.errorMessage }}</div>
             <button
               class="m-8 w-52 h-10 rounded-lg bg-rut-generic-mauve text-lg text-white font-bold"
               type="submit"

@@ -32,15 +32,13 @@
                   class="w-full"
                   @click.prevent="takePicture"
                   v-model="photo"
+                  v-if="!photo"
                   :icon="cameraOutline"
                 ></ion-icon>
-                <!-- 
-              At some point in the future, need to display current image user has uploaded using the following:
-              <div v-if="!photo"> </div>
-              <div v-else>
-                {{ this.newImage }}
-              </div> 
-            -->
+
+                <div v-else="photo" class="mt-2">
+                  <img :src="photo" style="max-width: 100%; height: auto" />
+                </div>
               </ion-item>
             </ion-col>
           </ion-row>
@@ -238,6 +236,9 @@
         </ion-fab>
       </form>
     </ion-grid>
+    <div v-if="isLoading" class="">
+      <base-loading></base-loading>
+    </div>
   </ion-content>
 </template>
 
@@ -267,8 +268,13 @@ import {
   removeCircleOutline,
 } from "ionicons/icons";
 import { Camera, CameraResultType, CameraSource } from "@capacitor/camera";
-import { auth, db } from "../../firebase.js";
-import { collection, addDoc } from "firebase/firestore";
+import { auth } from "../../firebase.js";
+import {
+  getStorage,
+  ref,
+  uploadString,
+  getDownloadURL,
+} from "firebase/storage";
 import { mapState, mapActions } from "vuex";
 
 function uuidv4() {
@@ -304,6 +310,7 @@ export default {
       cameraOutline,
       addCircleOutline,
       removeCircleOutline,
+      isLoading: false,
       segment: "overview",
       name: "",
       photo: null,
@@ -350,7 +357,7 @@ export default {
 
     async takePicture() {
       const image = await Camera.getPhoto({
-        quality: 100,
+        quality: 80,
         allowEditing: true,
         saveToGallery: true,
         source: CameraSource.Camera,
@@ -358,15 +365,20 @@ export default {
       });
 
       if (image?.base64String) {
-        const userId = auth().currentUser.uid;
+        this.isLoading = true;
+
+        const userId = auth.currentUser.uid;
         const guid = uuidv4();
         const filePath = `${userId}/images/${guid}.${image.format}`;
 
-        const storageRef = firebase.storage().ref();
-        await storageRef
-          .child(filePath)
-          .putString(image.base64String, "base64");
-        return (this.photo = await storageRef.child(filePath).getDownloadURL());
+        const storageBucket = getStorage();
+        const storageRef = ref(storageBucket, filePath);
+        await uploadString(storageRef, image.base64String, "base64");
+
+        this.isLoading = false;
+
+        this.photo = await getDownloadURL(storageRef);
+        return this.photo;
       }
     },
 
