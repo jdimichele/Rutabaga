@@ -236,7 +236,11 @@
         </ion-fab>
       </form>
     </ion-grid>
-    <div v-if="isLoading" class="">
+
+    <div
+      v-if="isLoading"
+      class="fixed top-0 left-0 z-50 w-screen h-screen flex items-center justify-center"
+    >
       <base-loading></base-loading>
     </div>
   </ion-content>
@@ -350,6 +354,8 @@ export default {
         instructions: this.instructions,
       };
       this.$emit("save-recipe", recipeForm);
+      this.clearForm();
+
       this.presentToast("middle");
       await this.$nextTick();
       setTimeout(() => this.$router.push("/recipes"), 1700);
@@ -412,6 +418,18 @@ export default {
     },
     switchToSegment(value) {
       this.segment = value;
+    },
+
+    clearForm() {
+      this.segment = "overview";
+      this.name = "";
+      this.photo = null;
+      this.time = "";
+      this.servings = "";
+      this.course = [];
+      this.categories = [];
+      this.ingredients = [];
+      this.instructions = [];
     },
   },
   mounted() {
