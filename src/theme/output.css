@@ -761,7 +761,7 @@ video {
 }
 
 .bg-login-page {
-  background-image: url('public/assets/background.png');
+  background-image: url('/assets/background.png');
 }
 
 .bg-auto {

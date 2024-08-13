@@ -12,7 +12,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'login-page': "url('public/assets/background.png')"
+        'login-page': "url('/assets/background.png')"
       },
       colors: {
         "rut-generic-mauve": "#7a3750",
