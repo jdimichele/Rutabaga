@@ -1,41 +1,23 @@
 {
   "images" : [
     {
-<<<<<<< HEAD
-      "filename" : "LaunchScreen.png",
-      "idiom" : "universal",
-=======
       "idiom" : "universal",
       "filename" : "splash-2732x2732-2.png",
->>>>>>> 708e7dc (Initial commit of Vue 3's npm create revamp and CLI deprecation.)
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-<<<<<<< HEAD
-=======
       "filename" : "splash-2732x2732-1.png",
->>>>>>> 708e7dc (Initial commit of Vue 3's npm create revamp and CLI deprecation.)
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-<<<<<<< HEAD
-=======
       "filename" : "splash-2732x2732.png",
->>>>>>> 708e7dc (Initial commit of Vue 3's npm create revamp and CLI deprecation.)
       "scale" : "3x"
     }
   ],
   "info" : {
-<<<<<<< HEAD
-    "author" : "xcode",
-    "version" : 1
-  }
-}
-=======
     "version" : 1,
     "author" : "xcode"
   }
 }
->>>>>>> 708e7dc (Initial commit of Vue 3's npm create revamp and CLI deprecation.)

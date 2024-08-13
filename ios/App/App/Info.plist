@@ -5,11 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-<<<<<<< HEAD
-	<string>Rutabaga</string>
-=======
         <string>Rutabaga</string>
->>>>>>> 708e7dc (Initial commit of Vue 3's npm create revamp and CLI deprecation.)
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -26,19 +22,8 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-<<<<<<< HEAD
-	<key>NSCameraUsageDescription</key>
-	<string></string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string></string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string></string>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen.storyboard</string>
-=======
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
->>>>>>> 708e7dc (Initial commit of Vue 3's npm create revamp and CLI deprecation.)
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>

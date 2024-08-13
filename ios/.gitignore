@@ -1,9 +1,6 @@
 App/build
 App/Pods
-<<<<<<< HEAD
-=======
 App/output
->>>>>>> 708e7dc (Initial commit of Vue 3's npm create revamp and CLI deprecation.)
 App/App/public
 DerivedData
 xcuserdata
@@ -14,7 +11,3 @@ capacitor-cordova-ios-plugins
 # Generated Config files
 App/App/capacitor.config.json
 App/App/config.xml
-<<<<<<< HEAD
-
-=======
->>>>>>> 708e7dc (Initial commit of Vue 3's npm create revamp and CLI deprecation.)

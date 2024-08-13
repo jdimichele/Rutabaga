@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
+    "./src/**/*.{vue,js,ts,jsx,tsx}",
     "./src/**/*.{html,js,vue}",
     "./index.html",
     "./src/components/**/*.{html,js,vue}",
@@ -11,7 +12,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'login-page': "url('/public/assets/background.png')"
+        'login-page': "url('/assets/background.png')"
       },
       colors: {
         "rut-generic-mauve": "#7a3750",

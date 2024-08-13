@@ -1,11 +1,7 @@
 <template>
   <div>
     <ion-img
-<<<<<<< HEAD
-      :src="require('../../../public/assets/icon/icon.png')"
-=======
-      src="../../../public/assets/icon/icon.png"
->>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
+      src="/assets/icon/icon.png"
       class="logo"
     ></ion-img>
     <ion-title size="large">Rutabaga</ion-title>

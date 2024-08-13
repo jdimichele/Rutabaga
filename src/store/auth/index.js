@@ -1,11 +1,6 @@
-<<<<<<< HEAD
-import firebase from "firebase/app";
-import "firebase/auth";
-import { db } from "../../firebase.js";
-=======
-import { doc } from "firebase/firestore";
 import { db, auth } from "../../firebase.js";
->>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
+import { doc, getDoc } from "firebase/firestore";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import router from "../../router";
 
 export default {
@@ -44,13 +39,7 @@ export default {
   },
   actions: {
     async login(context, { email, password }) {
-<<<<<<< HEAD
-      const response = await firebase
-        .auth()
-        .signInWithEmailAndPassword(email, password);
-=======
-      const response = await auth().signInWithEmailAndPassword(email, password);
->>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
+      const response = await signInWithEmailAndPassword(auth, email, password);
       if (response) {
         context.commit("setUser", response.user);
         router.push("/recipes");
@@ -59,22 +48,16 @@ export default {
       }
     },
     async getCurrentUser({ commit }) {
-<<<<<<< HEAD
-      const dataBase = await db
-        .collection("users")
-        .doc(firebase.auth().currentUser.uid);
-=======
-      const dataBase = await doc(db, "users" + auth().currentUser.uid);
->>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
-      const dbResults = await dataBase.get();
-      commit("setProfileInfo", dbResults);
+      const dataBase = doc(db, "users", auth.currentUser.uid);
+      const userDoc = await getDoc(dataBase);
+      if (userDoc.exists()) {
+        commit("setProfileInfo", userDoc);
+      } else {
+        console.error("User not found.");
+      }
     },
     async logout(context) {
-<<<<<<< HEAD
-      firebase.auth().signOut;
-=======
-      auth().signOut;
->>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
+      await signOut(auth);
       context.commit("setUser", null);
     },
   },

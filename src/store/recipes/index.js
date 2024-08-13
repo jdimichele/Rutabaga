@@ -1,10 +1,18 @@
-<<<<<<< HEAD
-import firebase from "firebase/app";
-import "firebase/auth";
-import { db } from "../../firebase.js";
-=======
 import { db, auth } from "../../firebase.js";
->>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
+import {
+  collection,
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc,
+  deleteDoc,
+  query,
+  where,
+  getDocs,
+  addDoc,
+  serverTimestamp,
+} from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
 
 export default {
   namespaced: true,
@@ -29,6 +37,9 @@ export default {
   mutations: {
     addRecipeToAllRecipes(state, newRecipe) {
       state.allRecipes.push(newRecipe);
+    },
+    setAllRecipes(state, recipes) {
+      state.allRecipes = recipes;
     },
     removeRecipe(state, recipeID) {
       state.allRecipes = state.allRecipes.filter(
@@ -82,24 +93,12 @@ export default {
 
   actions: {
     async addRecipe(context, data) {
-<<<<<<< HEAD
-      const userId = firebase.auth().currentUser.uid;
-=======
-      const userId = auth().currentUser.uid;
->>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
-      const dataBase = await db
-        .collection("users")
-        .doc(userId)
-        .collection("recipes")
-        .doc();
-<<<<<<< HEAD
-      const timestamp = firebase.firestore.FieldValue.serverTimestamp();
-=======
-      const timestamp = FieldValue.serverTimestamp();
->>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
+      const userId = auth.currentUser.uid;
+      const recipeRef = doc(collection(db, "users", userId, "recipes"));
+      const timestamp = serverTimestamp();
 
       const recipeData = {
-        recipeID: dataBase.id,
+        recipeID: recipeRef.id,
         userId: userId,
         date: timestamp,
         name: data.name,
@@ -111,7 +110,7 @@ export default {
         ingredients: data.ingredients,
         instructions: data.instructions,
       };
-      await dataBase.set(recipeData);
+      await setDoc(recipeRef, recipeData);
 
       const newRecipe = {
         recipeID: recipeData.recipeID,
@@ -127,49 +126,40 @@ export default {
       context.commit("addRecipeToAllRecipes", newRecipe);
     },
 
-    async loadAllRecipes({ state }) {
-<<<<<<< HEAD
-      const userId = firebase.auth().currentUser.uid;
-=======
-      const userId = auth().currentUser.uid;
->>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
-      const dataBase = await db
-        .collection("users")
-        .doc(userId)
-        .collection("recipes");
-      const dbResults = await dataBase.get();
-      dbResults.forEach((doc) => {
-        if (!state.allRecipes.some((recipe) => recipe.recipeID === doc.id)) {
-          const data = {
-            recipeID: doc.data().recipeID,
-            recipeName: doc.data().name,
-            recipePhoto: doc.data().photo,
-            recipeTime: doc.data().time,
-            recipeServings: doc.data().servings,
-            recipeCourses: doc.data().course,
-            recipeCategories: doc.data().categories,
-            recipeIngredients: doc.data().ingredients,
-            recipeInstructions: doc.data().instructions,
+    async loadAllRecipes({ commit }) {
+      try {
+        const userId = auth.currentUser.uid;
+        const recipesRef = collection(db, "users", userId, "recipes");
+        const recipesQuery = await getDocs(recipesRef);
+
+        const recipes = [];
+        recipesQuery.forEach((doc) => {
+          const data = doc.data();
+          const recipe = {
+            recipeID: doc.id,
+            recipeName: data.name,
+            recipePhoto: data.photo,
+            recipeTime: data.time,
+            recipeServings: data.servings,
+            recipeCourses: data.course,
+            recipeCategories: data.categories,
+            recipeIngredients: data.ingredients,
+            recipeInstructions: data.instructions,
           };
-          state.allRecipes.push(data);
-        }
-      });
-      // Possible security rule for Firestore: allow read, write: if request.auth != null && request.auth.uid == resource.data.author;
+          recipes.push(recipe);
+        });
+
+        commit("setAllRecipes", recipes);
+      } catch (error) {
+        console.error("Error loading recipes:", error);
+      }
     },
 
     async fetchRecipe({ commit }, recipeID) {
       try {
-<<<<<<< HEAD
-        const userId = firebase.auth().currentUser.uid;
-=======
-        const userId = auth().currentUser.uid;
->>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
-        const recipeRef = db
-          .collection("users")
-          .doc(userId)
-          .collection("recipes")
-          .doc(recipeID);
-        const recipeDoc = await recipeRef.get();
+        const userId = auth.currentUser.uid;
+        const recipeRef = doc(db, "users", userId, "recipes", recipeID);
+        const recipeDoc = await getDoc(recipeRef);
 
         if (recipeDoc.exists) {
           const recipeData = recipeDoc.data();
@@ -184,18 +174,16 @@ export default {
 
     async updateRecipe({ commit, dispatch }, updatedRecipe) {
       try {
-<<<<<<< HEAD
-        const userId = firebase.auth().currentUser.uid;
-=======
-        const userId = auth().currentUser.uid;
->>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
-        const recipeRef = db
-          .collection("users")
-          .doc(userId)
-          .collection("recipes")
-          .doc(updatedRecipe.recipeID);
+        const userId = auth.currentUser.uid;
+        const recipeRef = doc(
+          db,
+          "users",
+          userId,
+          "recipes",
+          updatedRecipe.recipeID
+        );
 
-        const originalRecipeSnapshot = await recipeRef.get();
+        const originalRecipeSnapshot = await getDoc(recipeRef);
 
         if (originalRecipeSnapshot.exists) {
           const originalRecipe = originalRecipeSnapshot.data();
@@ -210,7 +198,7 @@ export default {
             }
           }
 
-          await recipeRef.update(updateFields);
+          await updateDoc(recipeRef, updateFields);
 
           commit("setCurrentRecipeState", updatedRecipe);
           dispatch("loadAllRecipes");
@@ -222,18 +210,10 @@ export default {
 
     async deleteRecipe({ commit }, recipeID) {
       try {
-<<<<<<< HEAD
-        const userId = firebase.auth().currentUser.uid;
-=======
-        const userId = auth().currentUser.uid;
->>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
-        const recipeRef = db
-          .collection("users")
-          .doc(userId)
-          .collection("recipes")
-          .doc(recipeID);
+        const userId = auth.currentUser.uid;
+        const recipeRef = doc(db, "users", userId, "recipes", recipeID);
 
-        await recipeRef.delete();
+        await deleteDoc(recipeRef);
         commit("removeRecipe", recipeID);
       } catch (error) {
         console.error("Failed to delete recipe: ", error);
@@ -242,18 +222,10 @@ export default {
 
     async addToFavorites({ commit }, recipeID) {
       try {
-<<<<<<< HEAD
-        const userId = firebase.auth().currentUser.uid;
-=======
-        const userId = auth().currentUser.uid;
->>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
-        const favoritesRef = db
-          .collection("users")
-          .doc(userId)
-          .collection("favorites")
-          .doc(recipeID);
+        const userId = auth.currentUser.uid;
+        const favoritesRef = doc(db, "users", userId, "favorites", recipeID);
 
-        await favoritesRef.set({ recipeID });
+        await setDoc(favoritesRef, { recipeID });
         commit("addToFavorites", { recipeID });
       } catch (error) {
         console.error("Failed to add recipe to favorites collection: ", error);
@@ -262,18 +234,10 @@ export default {
 
     async removeFromFavorites({ commit }, recipeID) {
       try {
-<<<<<<< HEAD
-        const userId = firebase.auth().currentUser.uid;
-=======
-        const userId = auth().currentUser.uid;
->>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
-        const favoritesRef = db
-          .collection("users")
-          .doc(userId)
-          .collection("favorites")
-          .doc(recipeID);
+        const userId = auth.currentUser.uid;
+        const favoritesRef = doc(db, "users", userId, "favorites", recipeID);
 
-        await favoritesRef.delete();
+        await deleteDoc(favoritesRef);
         commit("removeFromFavorites", { recipeID });
       } catch (error) {
         console.error(
@@ -285,19 +249,10 @@ export default {
 
     async addCourse({ commit }, course) {
       try {
-<<<<<<< HEAD
-        const userId = firebase.auth().currentUser.uid;
-=======
-        const userId = auth().currentUser.uid;
->>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
-        const coursesRef = db
-          .collection("users")
-          .doc(userId)
-          .collection("courses");
+        const userId = auth.currentUser.uid;
+        const coursesRef = collection(db, "users", userId, "courses");
 
-        await coursesRef.add({
-          name: course,
-        });
+        await addDoc(coursesRef, { name: course });
         commit("addUserCourse", course);
       } catch (error) {
         console.error("Failed to add course:", error);
@@ -306,22 +261,15 @@ export default {
 
     async deleteCourse({ commit }, course) {
       try {
-<<<<<<< HEAD
-        const userId = firebase.auth().currentUser.uid;
-=======
-        const userId = auth().currentUser.uid;
->>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
-        const coursesRef = db
-          .collection("users")
-          .doc(userId)
-          .collection("courses");
+        const userId = auth.currentUser.uid;
+        const coursesRef = collection(db, "users", userId, "courses");
 
-        const querySnapshot = await coursesRef
-          .where("name", "==", course)
-          .get();
+        const querySnapshot = await getDocs(
+          query(coursesRef, where("name", "==", course))
+        );
         if (!querySnapshot.empty) {
           const docId = querySnapshot.docs[0].id;
-          await coursesRef.doc(docId).delete();
+          await deleteDoc(doc(coursesRef, docId));
           commit("removeCourse", course);
         } else {
           console.warn("Course not found in Firebase.");
@@ -333,17 +281,9 @@ export default {
 
     async loadCourses({ commit }) {
       try {
-<<<<<<< HEAD
-        const userId = firebase.auth().currentUser.uid;
-=======
-        const userId = auth().currentUser.uid;
->>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
-        const coursesRef = db
-          .collection("users")
-          .doc(userId)
-          .collection("courses");
-
-        const querySnapshot = await coursesRef.get();
+        const userId = auth.currentUser.uid;
+        const coursesRef = collection(db, "users", userId, "courses");
+        const querySnapshot = await getDocs(coursesRef);
 
         const courses = [];
         querySnapshot.forEach((doc) => {
@@ -357,15 +297,10 @@ export default {
 
     async addCategory({ commit }, category) {
       try {
-        const userId = firebase.auth().currentUser.uid;
-        const categoriesRef = db
-          .collection("users")
-          .doc(userId)
-          .collection("categories");
+        const userId = auth.currentUser.uid;
+        const categoriesRef = collection(db, "users", userId, "categories");
 
-        await categoriesRef.add({
-          name: category,
-        });
+        await addDoc(categoriesRef, { name: category });
         commit("addUserCategory", category);
       } catch (error) {
         console.error("Failed to add category:", error);
@@ -374,22 +309,15 @@ export default {
 
     async deleteCategory({ commit }, category) {
       try {
-<<<<<<< HEAD
-        const userId = firebase.auth().currentUser.uid;
-=======
-        const userId = auth().currentUser.uid;
->>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
-        const categoriesRef = db
-          .collection("users")
-          .doc(userId)
-          .collection("categories");
+        const userId = auth.currentUser.uid;
+        const categoriesRef = collection(db, "users", userId, "categories");
+        const querySnapshot = await getDocs(categoriesRef);
 
-        const querySnapshot = await categoriesRef
-          .where("name", "==", category)
-          .get();
-        if (!querySnapshot.empty) {
-          const docId = querySnapshot.docs[0].id;
-          await categoriesRef.doc(docId).delete();
+        const categoryDoc = querySnapshot.docs.find(
+          (doc) => doc.data().name === category
+        );
+        if (categoryDoc) {
+          await deleteDoc(categoryDoc.ref);
           commit("removeCategory", category);
         } else {
           console.warn("Category not found in Firebase.");
@@ -401,17 +329,9 @@ export default {
 
     async loadCategories({ commit }) {
       try {
-<<<<<<< HEAD
-        const userId = firebase.auth().currentUser.uid;
-=======
-        const userId = auth().currentUser.uid;
->>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
-        const categoriesRef = db
-          .collection("users")
-          .doc(userId)
-          .collection("categories");
-
-        const querySnapshot = await categoriesRef.get();
+        const userId = auth.currentUser.uid;
+        const categoriesRef = collection(db, "users", userId, "categories");
+        const querySnapshot = await getDocs(categoriesRef);
 
         const categories = [];
         querySnapshot.forEach((doc) => {
@@ -455,11 +375,10 @@ export default {
     shouldUpdate(state) {
       const lastFetch = state.lastFetch;
       if (!lastFetch) {
-        // IF there is no timestamp, we should update.
         return true;
       }
       const currentTimestamp = new Date().getTime();
-      return (currentTimestamp - lastFetch) / 1000 > 60; // We subtract the current time from the lastFetch time, divide it by 1000 for milliseconds and see if it's been longer than 60 seconds.
+      return (currentTimestamp - lastFetch) / 1000 > 60;
     },
     getCourses(state) {
       return state.userCourses;

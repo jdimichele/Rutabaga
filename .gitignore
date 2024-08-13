@@ -12,17 +12,6 @@
 Thumbs.db
 UserInterfaceState.xcuserstate
 $RECYCLE.BIN/
-<<<<<<< HEAD
-.env
-firebase.js
-.firebaserc
-firebase.json
-firestore.indexes.json
-firestore.rules
-
-
-=======
->>>>>>> b35fc98 (Initial commit)
 
 firebase.js
 .firebaserc
@@ -39,20 +28,11 @@ npm-debug.log*
 /.sass-cache
 /.sourcemaps
 /.versions
-<<<<<<< HEAD
-/.vscode
-=======
 /.vscode/*
 !/.vscode/extensions.json
->>>>>>> b35fc98 (Initial commit)
 /coverage
 /dist
 /node_modules
 /platforms
 /plugins
 /www
-<<<<<<< HEAD
-
-resources/ios/**/*
-=======
->>>>>>> b35fc98 (Initial commit)

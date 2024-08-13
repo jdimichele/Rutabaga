@@ -5,8 +5,4 @@ service firebase.storage {
       allow read, write: if false;
     }
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)

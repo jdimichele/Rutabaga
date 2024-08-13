@@ -3,10 +3,5 @@
   "integrations": {
     "capacitor": {}
   },
-<<<<<<< HEAD
-  "type": "vue"
-}
-=======
   "type": "vue-vite"
 }
->>>>>>> b35fc98 (Initial commit)

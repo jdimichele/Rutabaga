@@ -80,13 +80,7 @@
 <script>
 import { IonPage, IonItem, IonCard, IonInput } from "@ionic/vue";
 import BaseLogo from "../../components/ui/BaseLogo.vue";
-<<<<<<< HEAD
-import firebase from "firebase/app";
-import "firebase/auth";
-import { db } from "../../firebase.js";
-=======
 import { db, auth } from "../../firebase.js";
->>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
 
 export default {
   components: {
@@ -120,11 +114,7 @@ export default {
         this.error = false;
         this.errorMessage = "";
 
-<<<<<<< HEAD
-        const firebaseAuth = await firebase.auth();
-=======
         const firebaseAuth = await auth();
->>>>>>> 3548129 (Due to Vue's new npm create script and the deprecation of Vue CLI,)
         const createUser = await firebaseAuth.createUserWithEmailAndPassword(
           this.email,
           this.password
