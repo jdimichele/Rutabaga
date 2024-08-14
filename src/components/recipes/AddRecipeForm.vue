@@ -421,7 +421,7 @@ export default {
     },
 
     clearForm() {
-      this.segment = "overview";
+      this.switchToSegment("overview");
       this.name = "";
       this.photo = null;
       this.time = "";

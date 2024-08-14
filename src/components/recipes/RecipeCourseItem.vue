@@ -5,15 +5,15 @@
   <div class="" slot="content">
     <ul>
       <li
-        class="py-1"
+        class="my-2"
         v-for="recipe in recipes"
         :key="recipe.recipeID"
         @click="openRecipeDetails(recipe.recipeID)"
       >
-        <p class="text-center">
-          <span class="ml-1 float-left">{{ recipe.recipeName }}</span>
-          <span class="inline-block">{{ recipe.recipeServings }} servings</span>
-          <span class="mr-1 float-right">{{ recipe.recipeTime }} minutes</span>
+      <!-- rgb(148, 148, 148) -->
+        <p class="rounded-lg bg-slate-800 text-white">
+          <span class="ml-1">{{ recipe.recipeName }}</span>
+          <!-- <span class="mr-1 float-right">{{ recipe.recipeTime }} minutes</span> -->
         </p>
       </li>
     </ul>

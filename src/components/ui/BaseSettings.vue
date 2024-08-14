@@ -2,7 +2,7 @@
   <ion-content>
     <ion-item button :detail="false" @click="openSettings">Configure</ion-item>
     <ion-item>
-      <ion-toggle v-model="themeToggle" @click="toggleDarkTheme"
+      <ion-toggle v-model="themeToggle" @click="toggleTheme"
         >Toggle Theme</ion-toggle
       >
     </ion-item>
@@ -31,7 +31,7 @@ export default {
   },
   data() {
     return {
-      themeToggle: "dark",
+      themeToggle: false,
       wakeLockEnabled: false,
       wakeLock: null,
     };
@@ -41,13 +41,16 @@ export default {
       this.$store.dispatch("auth/logout");
       this.$router.replace("/login");
     },
-    toggleDarkTheme(event) {
-      if (event && this.themeToggle === "dark") {
-        var toggle = this.themeToggle;
-        toggle = "light";
-        document.body.classList.toggle(toggle, event.detail.checked);
+    toggleTheme(event) {
+      const isDarkMode = event.detail.checked;
+      this.themeToggle = isDarkMode;
+      document.body.classList.toggle("dark", isDarkMode);
+
+      if (!isDarkMode) {
+        document.body.classList.remove("dark");
       }
-      return this.themeToggle;
+
+      localStorage.setItem("isDarkMode", isDarkMode);
     },
 
     async openSettings() {

@@ -1,10 +1,7 @@
 <template>
   <base-card>
     <ion-title class="title">Recently Added Recipes:</ion-title>
-    <div v-if="isLoading">
-      <ion-loading></ion-loading>
-    </div>
-    <div v-else-if="hasRecipes">
+    <div v-if="hasRecipes">
       <recipe-list-item
         v-for="(recipe, index) in allRecipes"
         :key="index"
@@ -14,6 +11,9 @@
         :course="recipe.recipeCourses"
         :servings="recipe.recipeServings"
       ></recipe-list-item>
+    </div>
+    <div v-else="!hasRecipes">
+      <h3>No recent recipes added, yet!</h3>
     </div>
   </base-card>
 </template>
