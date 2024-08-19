@@ -93,6 +93,9 @@ export default {
         state.favorites.splice(index, 1);
       }
     },
+    setFavorites(state, favorites) {
+      state.favorites = favorites;
+    },
   },
 
   actions: {
@@ -252,6 +255,23 @@ export default {
         commit("removeFromFavorites", recipeID);
       } catch (error) {
         console.error("Failed to remove recipe from favorites:", error);
+      }
+    },
+
+    async loadFavorites({ commit }) {
+      try {
+        const userId = auth.currentUser.uid;
+        const favoritesRef = collection(db, "users", userId, "favorites");
+        const favoritesQuery = await getDocs(favoritesRef);
+
+        const favorites = [];
+        favoritesQuery.forEach((doc) => {
+          favorites.push(doc.data());
+        });
+
+        commit("setFavorites", favorites);
+      } catch (error) {
+        console.error("Failed to load favorite recipes: ", error);
       }
     },
 

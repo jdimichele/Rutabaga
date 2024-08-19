@@ -33,5 +33,8 @@ export default {
       return this.getFavoriteRecipes;
     },
   },
+  mounted() {
+    this.$store.dispatch("recipes/loadFavorites");
+  },
 };
 </script>
