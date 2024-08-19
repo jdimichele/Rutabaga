@@ -19,9 +19,6 @@
 import { mapGetters } from "vuex";
 
 export default {
-  data() {
-    return {};
-  },
   methods: {
     openRecipeDetails(targetID) {
       this.$router.push({
