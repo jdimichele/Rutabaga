@@ -13,6 +13,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   data() {
     return {};
@@ -26,9 +28,9 @@ export default {
     },
   },
   computed: {
+    ...mapGetters("recipes", ["getRecipeByID", "getFavoriteRecipes"]),
     favoriteRecipes() {
-      console.log(this.favoriteRecipes);
-      return this.$store.getters["recipes/getFavorites"];
+      return this.getFavoriteRecipes;
     },
   },
 };

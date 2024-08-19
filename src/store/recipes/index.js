@@ -81,10 +81,14 @@ export default {
       state.recipeInstructions = payload.recipeInstructions;
     },
     addToFavorites(state, recipe) {
-      state.favorites.push(recipe);
+      if (!state.favorites.some((fav) => fav.recipeID === recipe.recipeID)) {
+        state.favorites.push(recipe);
+      }
     },
-    removeFromFavorites(state, recipe) {
-      const index = state.favorites.findIndex((r) => r.id === recipe.recipeID);
+    removeFromFavorites(state, recipeID) {
+      const index = state.favorites.findIndex(
+        (recipe) => recipe.recipeID === recipeID
+      );
       if (index !== -1) {
         state.favorites.splice(index, 1);
       }
@@ -220,13 +224,20 @@ export default {
       }
     },
 
-    async addToFavorites({ commit }, recipeID) {
+    async addToFavorites({ commit, state }, recipeID) {
       try {
         const userId = auth.currentUser.uid;
-        const favoritesRef = doc(db, "users", userId, "favorites", recipeID);
+        const recipeRef = doc(db, "users", userId, "recipes", recipeID);
+        const recipeDoc = await getDoc(recipeRef);
 
-        await setDoc(favoritesRef, { recipeID });
-        commit("addToFavorites", { recipeID });
+        if (recipeDoc.exists) {
+          const recipeData = recipeDoc.data();
+
+          const favoritesRef = doc(db, "users", userId, "favorites", recipeID);
+          await setDoc(favoritesRef, { recipeID });
+
+          commit("addToFavorites", { recipeID, ...recipeData });
+        }
       } catch (error) {
         console.error("Failed to add recipe to favorites collection: ", error);
       }
@@ -238,12 +249,9 @@ export default {
         const favoritesRef = doc(db, "users", userId, "favorites", recipeID);
 
         await deleteDoc(favoritesRef);
-        commit("removeFromFavorites", { recipeID });
+        commit("removeFromFavorites", recipeID);
       } catch (error) {
-        console.error(
-          "Failed to remove recipe to favorites collection: ",
-          error
-        );
+        console.error("Failed to remove recipe from favorites:", error);
       }
     },
 
@@ -369,8 +377,12 @@ export default {
     hasRecipes(state) {
       return state.allRecipes && state.allRecipes.length > 0;
     },
-    getFavorites: (state) => {
-      return state.favorites;
+    getFavoriteRecipes(state) {
+      return state.favorites
+        .map((fav) =>
+          state.allRecipes.find((recipe) => recipe.recipeID === fav.recipeID)
+        )
+        .filter((recipe) => recipe !== undefined);
     },
     shouldUpdate(state) {
       const lastFetch = state.lastFetch;

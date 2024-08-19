@@ -142,10 +142,10 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("recipes", ["getRecipeByID", "getFavorites"]),
+    ...mapGetters("recipes", ["getRecipeByID", "getFavoriteRecipes"]),
     isRecipeFavorite() {
       const currentRecipeID = this.$route.params.id;
-      return this.getFavorites.some(
+      return this.getFavoriteRecipes.some(
         (recipe) => recipe.recipeID === currentRecipeID
       );
     },
@@ -159,18 +159,13 @@ export default {
         params: { id: this.$route.params.id },
       });
     },
-    toggleFavorite() {
+    async toggleFavorite() {
       const currentRecipeID = this.$route.params.id;
-      console.log(this.isRecipeFavorite);
 
       if (this.isRecipeFavorite) {
-        this.removeFromFavorites(currentRecipeID).then(
-          () => (this.isFavorite = false)
-        );
-      } else if (!this.isRecipeFavorite) {
-        this.addToFavorites(currentRecipeID).then(
-          () => (this.isFavorite = true)
-        );
+        await this.removeFromFavorites(currentRecipeID);
+      } else {
+        await this.addToFavorites(currentRecipeID);
       }
     },
   },

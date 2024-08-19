@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <img :src="'/assets/kazooLoading.gif'" alt="Kazoo!" />
+    <img class="rounded-md" :src="'/assets/kazooLoading.gif'" alt="Kazoo!" />
   </div>
 </template>
 
