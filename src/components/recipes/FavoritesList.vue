@@ -9,6 +9,9 @@
         {{ favorite.recipeName }}
       </li>
     </ul>
+    <div v-show="!favoriteRecipes">
+      <h3>No favorited recipes... Yet!</h3>
+    </div>
   </div>
 </template>
 
