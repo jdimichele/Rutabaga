@@ -4,7 +4,7 @@
     <ion-content>
       <div class="grid grid-cols-1 sm:grid-cols-2">
         <!-- <div>Last Viewed:</div> -->
-        <div>
+        <div class=" self-center">
           <recipes-list></recipes-list>
         </div>
         <div>

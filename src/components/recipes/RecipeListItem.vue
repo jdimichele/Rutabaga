@@ -1,8 +1,8 @@
 <template>
   <ion-card @click="openRecipeDetails">
-    <div class="flex">
-      <img class="rounded-t-lg object-scale-down" :src="photo" />
-      <div class="rounded-b-lg overflow-hidden">
+    <div class="container mx-auto">
+      <img class="rounded-t-lg max-h-80 w-fit" :src="photo" />
+      <div class="rounded-b-lg max-h-20">
         <ion-card-title class="pl-4 pt-1">
           {{ name }}
         </ion-card-title>

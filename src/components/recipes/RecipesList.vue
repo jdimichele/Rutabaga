@@ -1,5 +1,5 @@
 <template>
-  <base-card>
+  <base-card class="sm:mx-20">
     <ion-title class="title">Recently Added Recipes:</ion-title>
     <div v-if="hasRecipes">
       <recipe-list-item
