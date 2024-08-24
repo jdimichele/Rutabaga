@@ -12,11 +12,12 @@
 Thumbs.db
 UserInterfaceState.xcuserstate
 $RECYCLE.BIN/
-firebase.js
+
+/src/firebase.js
 .firebaserc
-firebase.json
-firestore.indexes.json
-firestore.rules
+.firebase.json
+.firestore.indexes.json
+.firestore.rules
 
 *.log
 log.txt
