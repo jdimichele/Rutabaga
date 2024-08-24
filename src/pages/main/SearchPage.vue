@@ -47,7 +47,7 @@ export default {
   },
   methods: {
     async handleSubmit() {
-      this.recipe = await fetchRecipe(this.recipeUrl); // Correctly use this.recipe and this.recipeUrl
+      this.recipe = await fetchRecipe(this.recipeUrl);
       if (this.recipe) {
         console.log(this.recipe);
       }
@@ -56,8 +56,7 @@ export default {
 };
 </script>
 
-<!-- import { ref } from 'vue';
-import { scrapeRecipe } from './scraper'; // Import the scraping function
+<!--
 import { getFirestore, doc, setDoc } from 'firebase/firestore';
 
 export default {
