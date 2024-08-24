@@ -1,5 +1,12 @@
 {
   "projects": {
     "default": "rutabaga-d932a"
-  }
-} 
+  },
+  "targets": {},
+  "etags": {
+    "rutabaga-d932a": {
+      "extensionInstances": {}
+    }
+  },
+  "dataconnectEmulatorConfig": {}
+}
