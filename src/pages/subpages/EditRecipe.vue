@@ -146,7 +146,7 @@
                     </ion-item>
 
                     <ion-item lines="none">
-                      <button type="button" @click.prevent="addNewIngredient()">
+                      <button type="button" @click.prevent="addNewStep()">
                         <ion-icon
                           color="success"
                           :icon="addCircleOutline"
@@ -156,7 +156,7 @@
                     <ion-item lines="none">
                       <button
                         type="button"
-                        @click.prevent="removeLastIngredient(ingredient)"
+                        @click.prevent="removeLastStep(instruction)"
                       >
                         <ion-icon
                           color="danger"

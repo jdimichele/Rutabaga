@@ -24,6 +24,7 @@ ion-title {
   margin-bottom: 25px;
   font-size: 48px;
   text-align: center;
+  font-family: yoshi;
   --color: white;
 }
 .logo {

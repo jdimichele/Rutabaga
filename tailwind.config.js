@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: [
     "./src/**/*.{vue,js,ts,jsx,tsx}",
     "./src/**/*.{html,js,vue}",
@@ -8,11 +8,15 @@ module.exports = {
     "./src/pages/*.{html,js,vue}",
     "./src/App.vue",
     "./src/main.js",
+    "./node_modules/@ionic/vue/**/*.js",
   ],
   theme: {
     extend: {
+      fontFamily: {
+        yoshi: ["yoshi"],
+      },
       backgroundImage: {
-        'login-page': "url('/assets/background.png')"
+        "login-page": "url('/assets/background.png')",
       },
       colors: {
         "rut-generic-mauve": "#7a3750",
