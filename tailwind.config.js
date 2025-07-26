@@ -56,5 +56,16 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities({
+        ".highlight-focus-mauve": {
+          "--highlight-color-focused": "#7a3750",
+        },
+        ".highlight-focus-green": {
+          "--highlight-color-focused": "#6b932e",
+        },
+      });
+    },
+  ],
 };

@@ -1,5 +1,7 @@
 <template>
-  <ion-page class="h-full bg-login-page bg-auto sm:bg-cover md:bg-contain lg:bg-auto xl:bg-cover">
+  <ion-page
+    class="h-full bg-login-page bg-auto sm:bg-cover md:bg-contain lg:bg-auto xl:bg-cover"
+  >
     <div class="grid place-content-center">
       <div>
         <base-logo></base-logo>
@@ -16,13 +18,14 @@
           <form @submit.prevent="login" v-on:keyup.enter="login">
             <div>
               <ion-input
-                label="Email:"
+                label="Username:"
                 label-placement="floating"
-                type="email"
-                id="email"
-                v-model="email"
-                placeholder="george@google.com"
-                class="custom"
+                type="username"
+                id="username"
+                v-model="emailOrUsername"
+                placeholder="BigFanOfBaking28"
+                class="text-white"
+                style="--highlight-color-focused: #7a3750;"
                 mode="md"
               ></ion-input>
             </div>
@@ -34,11 +37,11 @@
                 id="password"
                 v-model="password"
                 placeholder="******"
-                class="custom"
+                class="text-white"
+                style="--highlight-color-focused: #7a3750;"
                 mode="md"
               ></ion-input>
             </div>
-            <div class="error" v-if="error">{{ this.errorMessage }}</div>
             <button
               class="m-8 w-52 h-10 rounded-lg bg-rut-generic-mauve text-lg text-white font-bold"
               type="submit"
@@ -48,6 +51,9 @@
           </form>
         </div>
       </ion-card>
+      <div class="text-center text-red-600 font-medium mt-3" v-show="errorMessage">
+        {{ errorMessage }}
+      </div>
     </div>
   </ion-page>
 </template>
@@ -65,27 +71,24 @@ export default {
   },
   data() {
     return {
-      email: "",
+      emailOrUsername: "",
       password: "",
-      isLoading: false,
-      error: null,
       errorMessage: "",
+      error: false,
     };
   },
   methods: {
-    login() {
-      this.$store.dispatch("auth/login", {
-        email: this.email,
-        password: this.password,
-      });
+    async login() {
+      try {
+        this.$store.dispatch("auth/login", {
+          identifier: this.emailOrUsername,
+          password: this.password,
+        });
+      } catch (error) {
+        error = true;
+        this.errorMessage = error.message || "Login failed, please try again.";
+      }
     },
   },
 };
 </script>
-
-<style scoped>
-ion-input {
-  color: white;
-  --highlight-color-focused: #7a3750;
-}
-</style>

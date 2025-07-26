@@ -1,5 +1,7 @@
 <template>
-  <ion-page class="h-full bg-login-page bg-auto sm:bg-cover md:bg-contain lg:bg-auto xl:bg-cover">
+  <ion-page
+    class="h-full bg-login-page bg-auto sm:bg-cover md:bg-contain lg:bg-auto xl:bg-cover"
+  >
     <div class="grid place-content-center">
       <div>
         <base-logo></base-logo>
@@ -80,7 +82,6 @@
 <script>
 import { IonPage, IonItem, IonCard, IonInput } from "@ionic/vue";
 import BaseLogo from "../../components/ui/BaseLogo.vue";
-import { db, auth } from "../../firebase.js";
 
 export default {
   components: {
@@ -105,36 +106,31 @@ export default {
   methods: {
     async register() {
       if (
-        this.firstName !== "" &&
-        this.lastName !== "" &&
-        this.username !== "" &&
-        this.email !== "" &&
-        this.password !== ""
+        this.firstName &&
+        this.lastName &&
+        this.username &&
+        this.email &&
+        this.password
       ) {
         this.error = false;
         this.errorMessage = "";
 
-        const firebaseAuth = await auth();
-        const createUser = await firebaseAuth.createUserWithEmailAndPassword(
-          this.email,
-          this.password
-        );
-        const result = await createUser;
-        const dataBase = db.collection("users").doc(result.user.uid);
-
-        await dataBase.set({
-          firstName: this.firstName,
-          lastName: this.lastName,
-          username: this.username,
-          email: this.email,
-        });
-
-        this.$router.push("/recipes");
-
-        return;
+        try {
+          await this.$store.dispatch("auth/register", {
+            firstName: this.firstName,
+            lastName: this.lastName,
+            username: this.username,
+            email: this.email,
+            password: this.password,
+          });
+        } catch (err) {
+          this.error = true;
+          this.errorMessage = err.message;
+        }
+      } else {
+        this.error = true;
+        this.errorMessage = "Please fill out all fields before submitting.";
       }
-      this.error = true;
-      this.errorMessage = "Please fill out all fields before submitting.";
     },
   },
 };

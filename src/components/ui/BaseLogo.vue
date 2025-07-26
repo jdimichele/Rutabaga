@@ -4,7 +4,7 @@
       src="/assets/icon/icon.png"
       class="logo"
     ></ion-img>
-    <ion-title size="large">Rutabaga</ion-title>
+    <ion-title class="yoshi-title">Rutabaga</ion-title>
   </div>
 </template>
 
@@ -19,14 +19,6 @@ export default {
 </script>
 
 <style scoped>
-ion-title {
-  margin-top: 25px;
-  margin-bottom: 25px;
-  font-size: 48px;
-  text-align: center;
-  font-family: yoshi;
-  --color: white;
-}
 .logo {
   display: block;
   margin-left: auto;
