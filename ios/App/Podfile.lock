@@ -1,16 +1,16 @@
 PODS:
-  - Capacitor (6.1.2):
+  - Capacitor (7.4.2):
     - CapacitorCordova
-  - CapacitorApp (6.0.0):
+  - CapacitorApp (7.0.1):
     - Capacitor
-  - CapacitorCamera (6.0.2):
+  - CapacitorCamera (7.0.1):
     - Capacitor
-  - CapacitorCordova (6.1.2)
-  - CapacitorHaptics (6.0.0):
+  - CapacitorCordova (7.4.2)
+  - CapacitorHaptics (7.0.1):
     - Capacitor
-  - CapacitorKeyboard (6.0.1):
+  - CapacitorKeyboard (7.0.1):
     - Capacitor
-  - CapacitorStatusBar (6.0.0):
+  - CapacitorStatusBar (7.0.1):
     - Capacitor
 
 DEPENDENCIES:
@@ -39,13 +39,13 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/status-bar"
 
 SPEC CHECKSUMS:
-  Capacitor: 679f9673fdf30597493a6362a5d5bf233d46abc2
-  CapacitorApp: 9d53aec7101f7b030a950c5bdc4df8612576b279
-  CapacitorCamera: ed022171dbf3853e68eec877b4d78995378af6b7
-  CapacitorCordova: f48c89f96c319101cd2f0ce8a2b7449b5fb8b3dd
-  CapacitorHaptics: 9ebc9363f0e9b8eb4295088a0b474530acf1859b
-  CapacitorKeyboard: 5f32a712adf41e07a61caafb82cf29fb6d8ba123
-  CapacitorStatusBar: 2e4369f99166125435641b1908d05f561eaba6f6
+  Capacitor: 156d98aba46ec01dde72c4bbb92fa626837cad29
+  CapacitorApp: d63334c052278caf5d81585d80b21905c6f93f39
+  CapacitorCamera: eb8687d8687fed853598ec9460d94bcd5e16babe
+  CapacitorCordova: 5e58d04631bc5094894ac106e2bf1da18a9e6151
+  CapacitorHaptics: 70e47470fa1a6bd6338cd102552e3846b7f9a1b3
+  CapacitorKeyboard: 969647d0ca2e5c737d7300088e2517aa832434e2
+  CapacitorStatusBar: 275cbf2f4dfc00388f519ef80c7ec22edda342c9
 
 PODFILE CHECKSUM: 3d364089fbea25a4a6298746022e532616ef4206
 
