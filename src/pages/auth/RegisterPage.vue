@@ -82,6 +82,9 @@
 <script>
 import { IonPage, IonItem, IonCard, IonInput } from "@ionic/vue";
 import BaseLogo from "../../components/ui/BaseLogo.vue";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import { auth, db } from "../../firebase.js";
 
 export default {
   components: {
@@ -104,34 +107,44 @@ export default {
     };
   },
   methods: {
-    async register() {
-      if (
-        this.firstName &&
-        this.lastName &&
-        this.username &&
-        this.email &&
-        this.password
-      ) {
-        this.error = false;
-        this.errorMessage = "";
+async register() {
+  if (
+    this.firstName &&
+    this.lastName &&
+    this.username &&
+    this.email &&
+    this.password
+  ) {
+    this.error = false;
+    this.errorMessage = "";
 
-        try {
-          await this.$store.dispatch("auth/register", {
-            firstName: this.firstName,
-            lastName: this.lastName,
-            username: this.username,
-            email: this.email,
-            password: this.password,
-          });
-        } catch (err) {
-          this.error = true;
-          this.errorMessage = err.message;
-        }
-      } else {
-        this.error = true;
-        this.errorMessage = "Please fill out all fields before submitting.";
-      }
-    },
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        this.email,
+        this.password
+      );
+
+      const user = userCredential.user;
+
+      await setDoc(doc(db, "users", user.uid), {
+        firstName: this.firstName,
+        lastName: this.lastName,
+        username: this.username,
+        email: this.email,
+      });
+
+      this.$router.push("/recipes");
+    } catch (err) {
+      this.error = true;
+      this.errorMessage = err.message || "Registration failed.";
+      console.error("Registration error:", err);
+    }
+  } else {
+    this.error = true;
+    this.errorMessage = "Please fill out all fields before submitting.";
+  }
+}
   },
 };
 </script>

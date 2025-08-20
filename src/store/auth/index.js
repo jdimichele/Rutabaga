@@ -2,18 +2,12 @@ import { db, auth } from "../../firebase.js";
 import {
   doc,
   getDoc,
-  setDoc,
   getDocs,
   collection,
   where,
   query,
 } from "firebase/firestore";
-import {
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  signOut,
-} from "firebase/auth";
-import router from "../../router";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 export default {
   namespaced: true,
@@ -55,71 +49,39 @@ export default {
     async logout(context) {
       await signOut(auth);
       context.commit("setUser", null);
+      context.commit("setLoggedIn", false);
     },
 
-    async register(_, { firstName, lastName, username, email, password }) {
-      // Checking for duplicate names here.
-      const usersRef = collection(db, "users");
-      const q = query(usersRef, where("username", "==", username));
-      const querySnapshot = await getDocs(q);
-
-      if (!querySnapshot.empty) {
-        throw new Error("Oops, looks like this username is already taken!");
+    async login({ commit }, { identifier, password }) {
+      if (!identifier || !password) {
+        throw new Error("Both identifier and password are required.");
       }
 
-      // Now actually registering.
-      const userCred = await createUserWithEmailAndPassword(
+      let email = identifier;
+
+      // If the identifier does NOT contain an @, treat it as a username
+      if (!identifier.includes("@")) {
+        const usersRef = collection(db, "users");
+        const q = query(usersRef, where("username", "==", identifier));
+        const querySnapshot = await getDocs(q);
+
+        if (querySnapshot.empty) {
+          throw new Error("No account found with that username.");
+        }
+
+        const userData = querySnapshot.docs[0].data();
+        email = userData.email;
+      }
+
+      // Now login using Firebase Auth
+      const userCredential = await signInWithEmailAndPassword(
         auth,
         email,
         password
       );
-      const user = userCred.user;
-
-      await setDoc(doc(db, "users", user.uid), {
-        firstName,
-        lastName,
-        username,
-        email,
-      });
-
-      router.push("/recipes");
-    },
-
-    async login({ commit }, payload) {
-      if (!payload || !payload.identifier || !payload.password) {
-        throw new Error("Both identifier and password are required.");
-      }
-
-      try {
-        let email = payload.identifier;
-
-        // If not an email, treat as username and look up
-        if (!email.includes("@")) {
-          const usersRef = collection(db, "users");
-          const q = query(usersRef, where("username", "==", email));
-          const querySnapshot = await getDocs(q);
-
-          if (querySnapshot.empty) {
-            throw new Error("Username not found.");
-          }
-
-          email = querySnapshot.docs[0].data().email;
-        }
-
-        const response = await signInWithEmailAndPassword(
-          auth,
-          email,
-          payload.password
-        );
-
-        if (response) {
-          commit("setUser", response.user);
-          router.push("/recipes");
-        }
-      } catch (error) {
-        console.error("Login failed:", error.message);
-        throw error;
-      }
+      const user = userCredential.user;
+      commit("setUser", user);
+      commit("setLoggedIn", true);
     },
 
     async getCurrentUser({ commit }) {

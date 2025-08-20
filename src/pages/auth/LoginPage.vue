@@ -25,7 +25,7 @@
                 v-model="emailOrUsername"
                 placeholder="BigFanOfBaking28"
                 class="text-white"
-                style="--highlight-color-focused: #7a3750;"
+                style="--highlight-color-focused: #7a3750"
                 mode="md"
               ></ion-input>
             </div>
@@ -38,7 +38,7 @@
                 v-model="password"
                 placeholder="******"
                 class="text-white"
-                style="--highlight-color-focused: #7a3750;"
+                style="--highlight-color-focused: #7a3750"
                 mode="md"
               ></ion-input>
             </div>
@@ -51,7 +51,10 @@
           </form>
         </div>
       </ion-card>
-      <div class="text-center text-red-600 font-medium mt-3" v-show="errorMessage">
+      <div
+        class="text-center text-red-600 font-medium mt-3"
+        v-show="errorMessage"
+      >
         {{ errorMessage }}
       </div>
     </div>
@@ -80,13 +83,18 @@ export default {
   methods: {
     async login() {
       try {
-        this.$store.dispatch("auth/login", {
+        await this.$store.dispatch("auth/login", {
           identifier: this.emailOrUsername,
           password: this.password,
         });
+
+        await this.$store.dispatch("auth/getCurrentUser");
+
+        this.$router.push("/recipes");
       } catch (error) {
-        error = true;
+        this.error = true;
         this.errorMessage = error.message || "Login failed, please try again.";
+        console.error("Login error:", error);
       }
     },
   },
