@@ -77,8 +77,21 @@ const router = createRouter({
   routes,
 });
 
+const getCurrentUser = () => {
+  return new Promise((resolve) => {
+    if (auth.currentUser) {
+      resolve(auth.currentUser);
+      return;
+    }
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      unsubscribe();
+      resolve(user);
+    });
+  });
+};
+
 router.beforeEach(async (to, from, next) => {
-  let user = auth.currentUser;
+  const user = await getCurrentUser();
   if (to.matched.some((res) => res.meta.requiresAuth)) {
     if (user) {
       return next();

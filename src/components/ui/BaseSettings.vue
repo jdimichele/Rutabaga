@@ -34,7 +34,7 @@ export default {
   },
   data() {
     return {
-      themeToggle: localStorage.getItem("isDarkMode") === "true",
+      themeToggle: localStorage.getItem("isDarkMode") !== "false",
       wakeLockEnabled: localStorage.getItem("wakeLockEnabled") === "true",
       wakeLock: null,
     };
@@ -66,8 +66,7 @@ export default {
 
     toggleTheme(event) {
       const isDark = event.detail.checked;
-      this.themeToggle = isDark;
-      document.body.classList.toggle("dark", isDark);
+      document.documentElement.classList.toggle("dark", isDark);
       localStorage.setItem("isDarkMode", isDark);
     },
 
@@ -111,10 +110,10 @@ export default {
     },
 
     async handleVisibiltyChange() {
-      if(document.visibilityState === "visible" && this.wakeLockEnabled) {
+      if (document.visibilityState === "visible" && this.wakeLockEnabled) {
         await this.activateWakeLock();
       }
-    }
+    },
   },
 };
 </script>

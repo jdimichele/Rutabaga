@@ -3,8 +3,12 @@
   <head>
     <meta charset="utf-8" />
     <title>Rutabaga</title>
-
     <base href="/" />
+    
+    <script>
+      const isDark = localStorage.getItem("isDarkMode") !== "false";
+      if (isDark) document.documentElement.classList.add("dark");
+    </script>
 
     <meta name="color-scheme" content="light dark" />
     <meta
@@ -13,20 +17,14 @@
     />
     <meta name="format-detection" content="telephone=no" />
     <meta name="msapplication-tap-highlight" content="no" />
-    <link href="/src/theme/output.css" rel="stylesheet">
+    <link href="/src/theme/output.css" rel="stylesheet" />
+    <link rel="shortcut icon" type="image/png" href="/assets/icon/icon.png" />
 
-    <link
-      rel="shortcut icon"
-      type="image/png"
-      href="/assets/icon/icon.png"
-    />
-
-    <!-- add to homescreen for ios -->
+    <!-- iOS PWA meta -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="Rutabaga" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   </head>
-
   <body>
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
