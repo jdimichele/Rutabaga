@@ -45,8 +45,9 @@
             <button
               class="m-8 w-52 h-10 rounded-lg bg-rut-generic-mauve text-lg text-white font-bold"
               type="submit"
+              :disabled="isLoading"
             >
-              Sign In
+              {{ isLoading ? "Signing in..." : "Sign In" }}
             </button>
           </form>
         </div>
@@ -78,19 +79,22 @@ export default {
       password: "",
       errorMessage: "",
       error: false,
+      isLoading: false,
     };
   },
   methods: {
     async login() {
+      if (this.isLoading) return;
+      this.isLoading = true;
+      this.errorMessage = "";
       try {
         await this.$store.dispatch("auth/login", {
           identifier: this.emailOrUsername,
           password: this.password,
         });
 
-        await this.$store.dispatch("auth/getCurrentUser");
-
         this.$router.push("/recipes");
+        this.isLoading = false;
       } catch (error) {
         this.error = true;
         this.errorMessage = error.message || "Login failed, please try again.";

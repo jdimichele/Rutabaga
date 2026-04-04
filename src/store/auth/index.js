@@ -80,40 +80,53 @@ export default {
         throw new Error("Both identifier and password are required.");
       }
 
-      let email = identifier.trim();
-
-      // If the identifier does NOT contain an @, treat it as a username
-      if (!email.includes("@")) {
-        const usersRef = collection(db, "users");
-        const q = query(usersRef, where("username", "==", email), limit(1));
-        const querySnapshot = await getDocs(q);
-
-        if (querySnapshot.empty) {
-          throw new Error("No account with that username found.");
-        }
-
-        const userData = querySnapshot.docs[0].data();
-
-        if (!userData.email) {
-          throw new Error(
-            "Some account information is incomplete. Please contact support.",
-          );
-        }
-
-        email = userData.email;
-      }
-
       try {
+        let email = identifier.trim();
+
+        if (!email.includes("@")) {
+          const usersRef = collection(db, "users");
+          const q = query(
+            usersRef,
+            where("username", "==", email.toLowerCase()),
+            limit(1),
+          );
+          const querySnapshot = await getDocs(q);
+          if (querySnapshot.empty) {
+            throw new Error("No account with that username found.");
+          }
+
+          const userData = querySnapshot.docs[0].data();
+
+          if (!userData.email) {
+            throw new Error(
+              "Account data is incomplete. Please contact support.",
+            );
+          }
+
+          email = userData.email;
+        }
+
         const userCredential = await signInWithEmailAndPassword(
           auth,
           email,
           password,
         );
         const user = userCredential.user;
+
         commit("setUser", user);
         commit("setLoggedIn", true);
+
+        await new Promise((resolve, reject) => {
+          const unsubscribe = auth.onAuthStateChanged((u) => {
+            if (u) {
+              unsubscribe();
+              resolve(u);
+            }
+          }, reject);
+        });
         await dispatch("getCurrentUser");
       } catch (err) {
+        console.error("Full error:", err.code, err.message);
         const friendly = getFriendlyError(err.code);
         const error = new Error(friendly);
         error.originalError = err;
@@ -123,7 +136,6 @@ export default {
 
     async getCurrentUser({ commit }) {
       if (!auth.currentUser) {
-        console.warn("getCurrentUser called with no authenticated user.");
         return;
       }
 

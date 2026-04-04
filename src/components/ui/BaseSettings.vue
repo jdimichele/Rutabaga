@@ -2,25 +2,27 @@
   <ion-content>
     <ion-item button :detail="false" @click="openSettings">Configure</ion-item>
     <ion-item>
-      <ion-toggle v-model="themeToggle" @click="toggleTheme"
-        >Toggle Theme</ion-toggle
-      >
+      <ion-label>Toggle Theme</ion-label>
+      <ion-toggle
+        :check="themeToggle"
+        :enable-on-off-labels="true"
+        @ionChange="toggleTheme"
+      ></ion-toggle>
     </ion-item>
     <ion-item>
+      <ion-label>Keep Awake</ion-label>
       <ion-toggle
+        :checked="wakeLockEnabled"
         :enable-on-off-labels="true"
-        v-model="wakeLockEnabled"
         @ionChange="toggleWakeLock"
-      >
-        Screen Lock</ion-toggle
-      >
+      ></ion-toggle>
     </ion-item>
     <ion-item button :detail="false" @click="logout">Logout</ion-item>
   </ion-content>
 </template>
 
 <script>
-import { IonContent, IonItem, IonToggle } from "@ionic/vue";
+import { IonContent, IonItem, IonLabel, IonToggle } from "@ionic/vue";
 
 export default {
   name: "BaseSettings",
@@ -28,94 +30,91 @@ export default {
     IonContent,
     IonItem,
     IonToggle,
+    IonLabel,
   },
   data() {
     return {
-      themeToggle: false,
-      wakeLockEnabled: false,
+      themeToggle: localStorage.getItem("isDarkMode") === "true",
+      wakeLockEnabled: localStorage.getItem("wakeLockEnabled") === "true",
       wakeLock: null,
     };
   },
+
+  mounted() {
+    document.body.classList.toggle("dark", this.themeToggle);
+
+    // Keep WakeLock preference on load.
+    if (this.wakeLockEnabled) {
+      this.activateWakeLock();
+    }
+    document.addEventListener("visibilitychange", this.handleVisibiltyChange);
+  },
+
+  beforeUnmount() {
+    document.removeEventListener(
+      "visibilitychange",
+      this.handleVisibiltyChange,
+    );
+  },
+
   methods: {
     logout() {
+      this.releaseWakeLock();
       this.$store.dispatch("auth/logout");
       this.$router.replace("/login");
     },
+
     toggleTheme(event) {
-      const isDarkMode = event.detail.checked;
-      this.themeToggle = isDarkMode;
-      document.body.classList.toggle("dark", isDarkMode);
-
-      if (!isDarkMode) {
-        document.body.classList.remove("dark");
-      }
-
-      localStorage.setItem("isDarkMode", isDarkMode);
+      const isDark = event.detail.checked;
+      this.themeToggle = isDark;
+      document.body.classList.toggle("dark", isDark);
+      localStorage.setItem("isDarkMode", isDark);
     },
 
     async openSettings() {
       this.$router.push("/user-settings");
     },
-    toggleWakeLock() {
+
+    toggleWakeLock(event) {
+      this.wakeLockEnabled = event.detail.checked;
+      localStorage.setItem("wakeLockEnabled", this.wakeLockEnabled);
       if (this.wakeLockEnabled) {
         this.activateWakeLock();
       } else {
         this.releaseWakeLock();
       }
     },
-    activateWakeLock() {
-      if ("wakeLock" in navigator) {
-        navigator.wakeLock
-          .request("screen")
-          .then((wakeLock) => {
-            console.log("Wake Lock active");
-            // You can store the wake lock in a component data property or Vuex store for later release.
-            this.wakeLock = wakeLock;
-          })
-          .catch((error) => {
-            console.error("Unable to acquire wake lock:", error);
-          });
-      } else {
-        console.warn("Wake Lock API not supported");
+
+    async activateWakeLock() {
+      if ((!"wakeLock") in navigator) {
+        console.warn("Wake Lock API is not support on this device! :(");
+        return;
+      }
+      try {
+        this.wakeLock = await navigator.wakeLock.request("screen");
+        console.log("Wake Lock now active!");
+      } catch (err) {
+        console.error("Unable to aquire Wake Lock: ", err);
       }
     },
-    releaseWakeLock() {
+
+    async releaseWakeLock() {
       if (this.wakeLock) {
-        this.wakeLock
-          .release()
-          .then(() => {
-            console.log("Wake Lock released");
-            // Reset the wake lock property to null or perform any additional cleanup.
-            this.wakeLock = null;
-          })
-          .catch((error) => {
-            console.error("Unable to release wake lock:", error);
-          });
+        try {
+          await this.wakeLock.release();
+          this.wakeLock = null;
+          console.log("Wake Lock now disabled!");
+        } catch (err) {
+          console.error("Unable to release Wake Lock: ", err);
+        }
       }
     },
+
+    async handleVisibiltyChange() {
+      if(document.visibilityState === "visible" && this.wakeLockEnabled) {
+        await this.activateWakeLock();
+      }
+    }
   },
 };
-
-// // Query for the toggle that is used to change between themes
-// const toggle = document.querySelector('#themeToggle');
-
-// // Listen for the toggle check/uncheck to toggle the dark class on the <body>
-// toggle.addEventListener('ionChange', (ev) => {
-//   document.body.classList.toggle('dark', ev.detail.checked);
-// });
-
-// const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-
-// // Listen for changes to the prefers-color-scheme media query
-// prefersDark.addListener((e) => checkToggle(e.matches));
-
-// // Called when the app loads
-// function loadApp() {
-//   checkToggle(prefersDark.matches);
-// }
-
-// // Called by the media query to check/uncheck the toggle
-// function checkToggle(shouldCheck) {
-//   toggle.checked = shouldCheck;
-// }
 </script>

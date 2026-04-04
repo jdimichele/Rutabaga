@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import {auth} from "./firebase.js";
+import { auth } from "./firebase.js";
 import { IonApp, IonRouterOutlet } from "@ionic/vue";
 
 export default {
@@ -14,27 +14,18 @@ export default {
     IonApp,
     IonRouterOutlet,
   },
-  methods: {
-  },
+  methods: {},
   created() {
+    const isDark = localStorage.getItem("isDarkMode") === "true";
+    document.body.classList.toggle("dark", isDark);
+    
     auth.onAuthStateChanged((user) => {
-      this.$store.commit("auth/updateUser", user);
-      if (user) {
+      this.$store.commit("auth/setUser", user);
+      this.$store.commit("auth/setLoggedIn", !!user);
+      if (user && !this.$store.state.auth.profileId) {
         this.$store.dispatch("auth/getCurrentUser");
       }
     });
-  },
-  computed: {
-    // didAutoLogout() {
-    //   return this.$store.getters.didAutoLogout;
-    // },
-  },
-  watch: {
-    // didAutoLogout(curValue, oldValue) {
-    //   if (curValue && curValue !== oldValue) {
-    //     this.$router.replace("/login");
-    //   }
-    // },
   },
 };
 </script>

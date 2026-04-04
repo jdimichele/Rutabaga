@@ -107,44 +107,56 @@ export default {
     };
   },
   methods: {
-async register() {
-  if (
-    this.firstName &&
-    this.lastName &&
-    this.username &&
-    this.email &&
-    this.password
-  ) {
-    this.error = false;
-    this.errorMessage = "";
-
-    try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        this.email,
+    async register() {
+      if (
+        this.firstName &&
+        this.lastName &&
+        this.username &&
+        this.email &&
         this.password
-      );
+      ) {
+        this.error = false;
+        this.errorMessage = "";
 
-      const user = userCredential.user;
+        try {
+          const userCredential = await createUserWithEmailAndPassword(
+            auth,
+            this.email,
+            this.password,
+          );
 
-      await setDoc(doc(db, "users", user.uid), {
-        firstName: this.firstName,
-        lastName: this.lastName,
-        username: this.username,
-        email: this.email,
-      });
+          const user = userCredential.user;
 
-      this.$router.push("/recipes");
-    } catch (err) {
-      this.error = true;
-      this.errorMessage = err.message || "Registration failed.";
-      console.error("Registration error:", err);
-    }
-  } else {
-    this.error = true;
-    this.errorMessage = "Please fill out all fields before submitting.";
-  }
-}
+          await setDoc(doc(db, "users", user.uid), {
+            firstName: this.firstName,
+            lastName: this.lastName,
+            username: this.username.toLowerCase(),
+            email: this.email,
+          });
+
+          this.$store.commit("auth/setUser", user);
+          this.$store.commit("auth/setLoggedIn", true);
+          this.$store.commit("auth/setProfileInfo", {
+            id: user.uid,
+            data: () => ({
+              firstName: this.firstName,
+              lastName: this.lastName,
+              username: this.username.toLowerCase(),
+              email: this.email,
+            }),
+          });
+          
+          this.$router.push("/recipes");
+        } catch (err) {
+          this.error = true;
+          this.errorMessage = err.message || "Registration failed.";
+          console.error("Registration error:", err);
+        }
+      } else {
+        this.error = true;
+        this.errorMessage = "Please fill out all fields before submitting.";
+      }
+    },
   },
 };
 </script>
