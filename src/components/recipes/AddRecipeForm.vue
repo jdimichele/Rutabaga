@@ -229,9 +229,16 @@
           </ion-row>
         </div>
 
-        <ion-fab class="bottom mt-20" horizontal="center">
-          <ion-button class="submitButton" type="submit">
-            <ion-icon :icon="add"></ion-icon>
+        <ion-fab slot="fixed" class="" vertical="bottom" horizontal="center">
+          <ion-button
+            class="submitButton"
+            :type="isLastSegment ? 'submit' : 'button'"
+            @click="!isLastSegment && handleFabClick()"
+          >
+            <ion-icon
+              :icon="isLastSegment ? checkmarkOutline : arrowForwardOutline"
+              slot="icon-only"
+            ></ion-icon>
           </ion-button>
         </ion-fab>
       </form>
@@ -270,6 +277,8 @@ import {
   addCircleOutline,
   cameraOutline,
   removeCircleOutline,
+  arrowForwardOutline,
+  checkmarkOutline,
 } from "ionicons/icons";
 import { Camera, CameraResultType, CameraSource } from "@capacitor/camera";
 import { auth } from "../../firebase.js";
@@ -314,12 +323,15 @@ export default {
       cameraOutline,
       addCircleOutline,
       removeCircleOutline,
+      arrowForwardOutline,
+      checkmarkOutline,
       isLoading: false,
       segment: "overview",
       name: "",
       photo: null,
       time: "",
       servings: "",
+      segments: ["overview", "ingredients", "instructions"],
       course: [],
       categories: [],
       ingredients: [
@@ -337,6 +349,9 @@ export default {
 
   computed: {
     ...mapState("recipes", ["userCourses", "userCategories"]),
+    isLastSegment() {
+      return this.segment === this.segments[this.segments.length - 1];
+    },
   },
 
   // Possible future idea: IF the quantity is more than 1, we add an 's' to the end of the unit.
@@ -430,6 +445,12 @@ export default {
       this.categories = [];
       this.ingredients = [];
       this.instructions = [];
+    },
+
+    handleFabClick() {
+      if (this.isLastSegment) return;
+      const currentIndex = this.segments.indexOf(this.segment);
+      this.segment = this.segments[currentIndex + 1];
     },
   },
   mounted() {
